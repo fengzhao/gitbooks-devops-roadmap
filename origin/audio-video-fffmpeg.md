@@ -30,7 +30,7 @@ make install
 
 FFmpeg 命令用法
 
-```text
+```bash
 ffmpeg [全局选项] {[输入文件选项] -i 输入文件路径/URL } {[输出文件选项] 输出文件路径/URL} 
 ```
 
