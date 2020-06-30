@@ -767,7 +767,17 @@ web:
 
 # 五、Kubernetes event 客户端
 
-镜像GitHub：https://github.com/getsentry/sentry-docs/issues/1330
+Github 地址：https://github.com/getsentry/sentry-kubernetes
+
+```bash
+helm repo add googleapis-incubator  https://kubernetes-charts-incubator.storage.googleapis.com
+
+helm upgrade --install sentry-kubernetes-events googleapis-incubator/sentry-kubernetes \
+--namespace tools \
+--set sentry.dsn=<your-dsn> \
+--set sentry.environment=test \
+--set sentry.release=test 
+```
 
 # 六、Sentry-cli客户端
 

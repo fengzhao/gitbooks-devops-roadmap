@@ -286,6 +286,7 @@
       * [ps](origin/linux-ps.md)
       * [top](origin/linux-top.md)
       * [ip/ifconfig](origin/linux-ip-ifconfig.md)
+    * [防火墙iptables](origin/linux-iptables.md)
 * 数据库
     * [MySQL](origin/mysql-basic.md)
       * 安装部署配置问题

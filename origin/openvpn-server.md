@@ -82,7 +82,37 @@ OpenVPN2.0后引入了用户名/口令组合的身份验证方式，它可以省
 
 # 四、OpenVPN配置
 
-
+```bash
+push "route 192.168.1.0 255.255.255.0"
+push "route 10.8.0.0 255.255.255.0"
+push "dhcp-option DNS 192.168.1.7"
+dev tun
+management 127.0.0.1 1195
+server 10.8.0.0 255.255.255.0
+client-config-dir ccd
+dh keys/ca..pm
+ca keys/ca.crt
+cert keys/server.crt
+key keys/server.key
+max-clients 5
+comp-lzo
+persist-tun
+persist-key
+verb 3
+#log-append /var/log/openvpn.log
+keepalive 10 60
+reneg-sec 0
+plugin /var/packages/VPNCenter/target/lib/radiusplugin.so /var/packages/VPNCenter/target/etc/openvpn/radiusplugin.cnf
+client-cert-not-required
+username-as-common-name
+duplicate-cn
+status /tmp/ovpn_status_2_result 30
+status-version 2
+proto tcp6-server
+port 19382
+cipher AES-256-CBC
+auth RSA-SHA256
+```
 
 
 
@@ -150,7 +180,7 @@ openvpn支持同时连接多个OpenVPN服务器，并且还带有一个服务组
 手动指定配置文件：
 
 ```bash
-openvpn --config client.ovpn --auth-user-pass
+openvpn --config client.ovpn --auth-user-pass --daemon
 ```
 
 命令行客户端缺少的一项主要功能是能够自动实现VPN服务器推送的DNS服务器，但是需要您安装DNS管理程序，例如resolvconf或openresolv，并且它可能与操作系统中的现有网络管理软件冲突，也可能不冲突。但在Ubuntu和Debian上，openvpn软件包随附了 **/etc/openvpn/update-resolv-conf** 脚本，该脚本处理这些操作系统的DNS实现。只需要在客户端配置文件中设置连接建立断开时执行它。
@@ -165,15 +195,79 @@ down /etc/openvpn/update-resolv-conf
 # 设置在连接断开时要执行的脚本路径
 ```
 
+# 六、访问限制策略
+
+默认配置下，所有客户端都可以访问服务端配置中的指定网络段。但是在实际使用场景中，需要限制指定客户端访问指定网络，限制其访问某些服务。例如：开发人员只允许访问开发网络段中的服务器，测试人员只能访问测试网络段的服务器资源等等。
+
+## 1、openVPN服务端配置文件添加
+
+```bash
+client-config-dir ccd
+```
+
+## 2、新建ccd目录及客户端文件
+
+新建ccd目录，在ccd目录下新建以用户名命名的文件。并且通过ifconfig-push分配地址，注意这里需要分配两个地址，一个是客户端本地地址，另一个是服务器的ip端点。
+
+```bash
+mkdir ccd
+echo ”ifconfig-push 10.8.0.9 10.8.0.10" >> ccd/vpn_test_user
+```
+
+每个端点的IP地址对的最后8位字节必须取自下面的集合
+
+```
+[1, 2]  [5, 6]  [9, 10]  [13, 14]  [17, 18] [21, 22]  [25, 26]  [29, 30]  [33, 34]  [37, 38] [41, 42]  [45, 46]  [49, 50]  [53, 54]  [57, 58] [61, 62]  [65, 66]  [69, 70]  [73, 74]  [77, 78] [81, 82]  [85, 86]  [89, 90]  [93, 94]  [97, 98] [101,102]  [105,106]  [109,110]  [113,114]  [117,118] [121,122]  [125,126]  [129,130]  [133,134]  [137,138] [141,142]  [145,146]  [149,150]  [153,154]  [157,158] [161,162]  [165,166]  [169,170]  [173,174]  [177,178] [181,182]  [185,186]  [189,190]  [193,194]  [197,198] [201,202]  [205,206]  [209,210]  [213,214]  [217,218] [221,222]  [225,226]  [229,230]  [233,234]  [237,238] [241,242]  [245,246]  [249,250]  [253,254]
+```
+
+客户端连接验证地址分配
+
+```
+utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+	inet 10.8.0.9 --> 10.8.0.10/32 utun2
+```
+
+## 3、配置iptables的限制
+
+①禁止`vpn_test_user`用户访问`192.168.1.5`
+
+```bash
+iptables -A FORWARD -s 10.8.0.10 -d 192.168.1.5 -j DROP
+```
+
+## 4、iptables规则的维护
+
+### ①查看添加的规则
+
+以number的方式查看规则，一条一条的出来，然后我们根据号码来删除哪一条规则
+
+```bash
+iptables -L FORWARD --line-numbers
+```
+
+### ②删除指定的规则
+
+```bash
+iptables -D FORWARD 1
+```
+
+### ③删除所有规则
+
+```
+iptables -F
+```
 
 
 
 
 
+# 参考
 
-
-
-
+1. http://www.fblinux.com/?p=1181
+2. http://www.linuxfly.org/post/86/
+3. https://www.aikaiyuan.com/11839.html
+4. https://www.hotbak.net/key/32f744eec5330289d21a981ecf2d595a_29.html
+5. https://lesca.me/archives/iptables-examples.html
 
 
 
