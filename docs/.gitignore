@@ -27,7 +27,6 @@ node_modules
 # Gitbook
 .idea/
 _book
-docs
 
 # MacOS
 *.DS_Store
