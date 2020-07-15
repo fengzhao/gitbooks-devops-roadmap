@@ -98,6 +98,50 @@ ENTRYPOINT ["tini", "--"]
 CMD ["/your/program", "-and", "-its", "arguments"]
 ```
 
+# 四、应用场景
+
+## 1、php-fpm进程的接管
+
+针对php应用，通常采用`nginx+php-fpm`的架构来处理请求。为了保证php-fpm进程出现意外故障能够自动恢复，通常使用supervisor进程管理工具进行守护。php-fpm的进程管理类也类似于nginx，由master，worker进程组成。master进程不处理请求，而是由worker进程处理！master进程只负责管理worker进程。
+
+master进程负责监听子进程的状态，子进程挂掉之后，会发信号给master进程，然后master进程重新启一个新的worker进程。
+
+```bash
+进程号 父进程号 进程
+21 		10 			master
+22		21				|----worker1
+23		21				|----worker2
+```
+
+使用Supervisor启动、守护php-fpm进程时的进程树
+
+```bash
+进程号 父进程号 进程
+10    9       supervisor
+21 		10 					|---master
+22		21								|----worker1
+23		21								|----worker2
+
+# 使用supervisor启动、守护的是php-fpm的master进程，然后master进程再根据配置启动对应数量的worker进程。
+```
+
+当php-fpm的master进程意外退出后的进程树
+
+```bash
+进程号 父进程号 进程
+10    9       supervisor
+22		1			  worker1
+23		1			  worker2 
+
+# 此时worker进程成为僵尸进程，被1号进程接管
+```
+
+此时supervisor检测到php-fpm master进程不存在就会在重新创建一个新的php-fpm master进程。但是会因为原先的php-fpm worker没有被杀掉，成为僵尸进程、依旧占用着端口而失败。本以为php-fpm会
+
+
+
+
+
 
 
 # 参考

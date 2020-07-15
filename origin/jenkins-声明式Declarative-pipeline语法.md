@@ -137,7 +137,51 @@ pipeline{
 
 - 在`stage`指令中至少包含一个用于执行命令的`steps`
 
-# 三、指令Directives
+# 三、Jenkins中的变量
+
+## 变量的来源
+
+- Jenkins内置的环境变量
+  - 构建任务相关的变量
+  - 构建状态相关的变量
+
+- 插件提供的环境变量
+
+- pipeline中environment指令定义的变量
+
+- 脚本自定义的变量
+
+## 变量的引用
+
+- $变量名
+- ${变量名}
+- ${env.变量名}
+
+
+
+
+
+## 变量的处理
+
+- ${变量名[0..7]}
+- 变量名.take(8)
+- ${变量名.replace(' and counting', '')}
+
+
+
+The issue here is caused by the way Jenkins interprets `$var` inside `sh` block:
+
+- if you use `"double quotes"`, `$var` in `sh "... $var ..."` will be interpreted as Jenkins variable;
+- if you use `'single quotes'`, `$var` in `sh '... $var ...'` will be interpreted as shell variable.
+
+
+
+## 参考
+
+1. https://stackoverflow.com/questions/16943665/how-to-get-git-short-hash-in-to-a-variable-in-jenkins-running-on-windows-2008
+2. https://stackoverflow.com/questions/44007034/conditional-environment-variables-in-jenkins-declarative-pipeline/53771302
+
+# 四、指令Directives
 
 
 
