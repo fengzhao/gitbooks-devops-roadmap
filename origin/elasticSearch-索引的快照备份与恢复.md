@@ -184,10 +184,11 @@ DELETE _snapshot/快照仓库名/快照名
 GET /_snapshot/快照仓库名/快照1,快照2/_status
 ```
 
-## 6、查看某一个快照状态
+## 6、查看某个快照状态
 
 ```bash
-GET _snapshot/快照仓库名/快照名/_status
+GET _snapshot/快照仓库名/快照/_status
+GET _snapshot/快照仓库名/快照_1,快照名_2/_status
 ```
 
 ## 7、恢复一个快照
@@ -245,7 +246,26 @@ curl -XGET "http://elasticsearch:9200/_cat/snapshots/pvc-snap-repo?h=id&s=id"
 # springboot2-demo-dev-2019.07.13-snapshot-2019.07.17
 ```
 
-# 七、更新
+# 七、常用脚本
+
+## 1、按月份快照索引
+
+```bash
+#!/bin/bash
+
+index_name=test-app
+for i in {1..12} ;do
+    month=2020-0$i
+    index=`curl -s -u elastic:*** -XGET "http://127.0.0.1:9200/_cat/indices/$index_name-$month*?h=i" | tr '\n' ','`
+    curl -u elastic:*** \
+         -XPUT "http://127.0.0.1:9200/_snapshot/***/collection-$index_name-$month?wait_for_completion=true" \
+         -H "Content-Type: application/json" \
+         -d '{"indices": "'$index'","ignore_unavailable": true,"include_global_state": false}'
+    curl -u elastic:***  -XDELETE "http://127.0.0.1:9200/$index_name-$month*"
+done
+```
+
+# 八、更新
 
 Elasticsearch 7.2.0新版本有了管理Snapshot Repository的新功能
 

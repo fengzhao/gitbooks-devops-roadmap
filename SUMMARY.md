@@ -1,4 +1,4 @@
-# Summary
+# **Summary**
 
 * [简介](README.md)
 
@@ -65,6 +65,7 @@
   * [helm charts编写规则](origin/Kubernetes-helm-charts编写规则.md)
 * 问题
   * [Service与SpringBoot应用启动参数冲突的问题排查及解决方案](origin/Service与SpringBoot应用启动参数冲突的问题排查及解决方案.md)
+  * [K8S上redis主从哨兵模式问题的解决方案](origin/k8s-redis-sentinel.md)
 * [辅助工具](origin/kubernetes-tools.md)
 
 ## Part Ⅲ：持续集成与持续部署
@@ -212,6 +213,7 @@
         * [while循环语句](origin/shell-while循环语句.md)
         * [until循环语句](origin/shell-until循环语句.md)
     * 字符串操作
+        * [字符的输出](origin/shell-print-string.md)
         * [字符串的截取拼接](origin/shell-字符串的截取拼接.md)
         * [字符串的包含判断关系](origin/shell-字符串的包含判断关系.md)
     * [自定义函数](origin/shell-自定义函数.md)
@@ -338,7 +340,7 @@
 * [经典面试题](origin/经典面试题.md)
 * [Aliyun CLI](origin/aliyun-cli.md)
 * [零散知识汇总](origin/others.md)
-* [音视频处理](origin/audio-video.md)
+* [音视频处理]()
     * [fffmpeg](origin/audio-video-fffmpeg.md)
 ## Part Ⅶ：大数据
 

@@ -54,7 +54,7 @@
 
 ## 3、基础配置
 
-### 连接隐藏wifi
+### ①连接隐藏wifi
 
 - 编辑`/etc/wpa_supplicant/wpa_supplicant.conf `
 
@@ -71,10 +71,19 @@
   # scan_ssid:连接隐藏WiFi时需要指定该值为1
   ```
 
-### CLI下配置Respbian
+### ②CLI下配置Respbian
 
 ```bash
 sudo raspi-config
 ```
 
 ![](../assets/raspberry-pi-7.png)
+
+### ③设置chromium浏览器代理
+
+```bash
+sudo echo -e 'export http_proxy="http://代理服务器地址:端口"\nexport https_proxy="https://代理服务器地址:端口"\nexport no_proxy="*.taobao.com,192.168.1.0/16"' >> /etc/environment
+```
+
+然后重启，打开chromium浏览器，安装`Proxy SwitchyOmega`插件。在`Proxy SwitchyOmega`插件中配置代理服务器。然后删除`/etc/environment`中新增的代理配置，重启。
+

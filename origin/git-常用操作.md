@@ -38,3 +38,15 @@ git config --global --get http.proxy
 git config --global --get https.proxy
 ```
 
+## 5、查看单个文件的修改历史
+
+```bash
+git log --pretty=oneline 文件名
+
+	5096d69f*** handle merge file conflict
+	a7593501*** fix: 同步 master docker 文件夹所有文件
+
+git show  a7593501***
+	
+```
+

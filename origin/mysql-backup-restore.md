@@ -687,12 +687,193 @@ MariaDB [(none)]> SHOW DATABASES;  #数据还原
 
 ## 1、阿里云RDS物理备份恢复
 
-### ①整个实例恢复
+### ①整个实例全库恢复
+
+**以恢复到ubuntu 18.04 MySQL 5.6中为例**
 
 - 在阿里云RSD实例的备份与恢复页面下载物理备份
-- 解压
 
-### ②ibd文件恢复单个或多个表
+- 解压(解压后文件很大，注意磁盘容量)
+
+  ```bash
+  tar -izxvf <数据备份文件名>.tar.gz -C /data/mysql/data
+  ```
+
+- 安装Percona XtraBackup和MySQL
+
+  注意Percona XtraBackup版本
+
+  - MySQL 5.6及之前的版本需要安装 Percona XtraBackup 2.3，安装指导请参见官方文档Percona XtraBackup 2.3。
+  - MySQL 5.7版本需要安装 Percona XtraBackup 2.4，安装指导请参见官方文档Percona XtraBackup 2.4。
+  - MySQL 8.0版本需要安装 Percona XtraBackup 8.0，安装指导请参见官方文档Percona XtraBackup 8.0。
+
+  ```bash
+  # 安装MySQL 5.6 
+  wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server_5.6.46-1debian8_amd64.deb
+  wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-client_5.6.46-1debian8_amd64.deb
+  wget https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.6.46-1debian8_amd64.deb
+  wget https://downloads.mysql.com/archives/get/p/23/file/mysql-client_5.6.46-1debian8_amd64.deb
+  dpkg -i mysql*
+  
+  # 安装Percona XtraBackup2.3
+  wget https://repo.percona.com/apt/percona-release_0.1-6.$(lsb_release -sc)_all.deb
+  dpkg -i percona-release_0.1-6.bionic_all.deb
+  apt-get update
+  apt-get install percona-xtrabackup
+  ```
+
+- 恢复解压后的备份文件
+
+  ```bash
+  ## MySQL 5.6/5.7
+  innobackupex --defaults-file=/data/mysql/data/backup-my.cnf --apply-log /data/mysql/data
+  ## MySQL 8.0
+  xtrabackup --prepare --target-dir=/data/mysql/data
+  xtrabackup --datadir=/var/lib/mysql --copy-back --target-dir=/home/mysql/data
+  ```
+
+  若系统返回如下类似结果，则说明备份文件已成功恢复到自建数据库
+
+  ![img](../assets/1590397157893-d5345494-e802-42a9-9e29-31266b7f86d2.jpeg)
+
+  ```bash
+  chown -R mysql.mysql /data/mysql/data
+  ```
+
+- 修改解压后默认的MySQL配置参数，并启动
+
+  修改/data/mysql/data/backup-my.cnf中的配置参数
+
+  注意：自建数据库不支持如下参数，需要注释掉。
+
+  ```bash
+  #innodb_log_checksum_algorithm
+  #innodb_fast_checksum
+  #innodb_log_block_size
+  #innodb_doublewrite_file
+  #rds_encrypt_data
+  #innodb_encrypt_algorithm
+  #redo_log_version
+  #master_key_id
+  #server_uuid
+  ```
+
+  修改过后的配置文件
+
+  ```bash
+  [mysqld]
+  innodb_checksum_algorithm=innodb
+  #innodb_log_checksum_algorithm=innodb
+  innodb_data_file_path=ibdata1:200M:autoextend
+  innodb_log_files_in_group=2
+  innodb_log_file_size=524288000
+  #innodb_fast_checksum=false
+  innodb_page_size=16384
+  #innodb_log_block_size=512
+  innodb_undo_directory=.
+  innodb_undo_tablespaces=0
+  #rds_encrypt_data=false
+  #innodb_encrypt_algorithm=aes_128_ecb
+  lower_case_table_names=1
+  log-bin=/data/mysql/logs/binlogs/mysql-bin.log
+  expire-logs-days=14
+  max-binlog-size=500M
+  server-id=1
+  binlog_format=ROW
+  binlog_row_image=FULL
+  slow_query_log=1
+  slow_query_log_file=/data/mysql/logs/slowlogs/slowquery.log
+  long_query_time=2
+  max_connections=500
+  interactive_timeout=1200
+  wait_timeout=1200
+  skip-grant-tables
+  ```
+
+  启动
+
+  ```bash
+  mysqld_safe --defaults-file=/data/mysql/data/backup-my.cnf --user=mysql --datadir=/data/mysql/data
+  ```
+
+- 修改root密码
+
+  注意：由于上一步中MySQL配置文件中添加`skip-grant-tables`,此时，是可以不用输入密码就可以登录
+
+  ```
+  mysql -u root -p
+  
+  mysql > use mysql 
+  mysql > update user set PASSWORD = PASSWORD('***新密码***') where user = 'root';
+  mysql > flush privileges;
+  ```
+
+  修改完成后，将配置文件中的`skip-grant-tables`删掉，重新部署启动。禁止跳过密码登录
+
+  注意：
+
+  - 如果原始数据库中，没有远程root用户登录用户权限，可在跳过密码验证阶段，使用navicat连接上后，直接在界面更新mysql.user的root用户localhost为root用户%的权限
+
+### ②单个表物理.ibd文件恢复
+
+MySQL 5.6 版本引入了可传输表空间(transportable tablespace) 的方法，可以通过导出 + 导入表空间的方式，实现物理拷贝表的功能。
+
+- **.frm文件**：保存了每个表的元数据，包括表结构的定义等，该文件与数据库引擎无关。
+
+- **.ibd文件**：InnoDB引擎开启了独立表空间(my.ini中配置innodb_file_per_table = 1)产生的存放该表的数据和索引的文件
+
+**以恢复到本地电脑MySQL 5.6中为例**
+
+#### 解压要恢复的表.ibd文件
+
+  ```
+# 查看压缩文件中的内容
+tar -tf 备份文件
+  
+# 解压指定库名表名的物理文件
+tar -zxvf 备份文件 库名/表名.ibd
+  ```
+
+#### 安装MySQL 5.6（MacOS）
+
+  ```
+# 安装
+brew install mysql@5.6
+# 启动
+/usr/local/opt/mysql@5.6/bin/mysql.server start
+# 登录
+mysql -uroot
+  ```
+
+#### 新建相同表结构 	(这个时候会生成 frm ， ibd 文件)
+
+  ```
+mysql> create database DB名（可随意）;
+mysql> use DB名 ;
+  
+# 获取源表的创建语句并创建表
+mysql> create table 表名 
+  ```
+
+#### 删除表空间
+
+  ```
+Alter table 表名  discard tablespace
+  ```
+
+#### 复制 ibd 文件到MySQL 文件目录下
+
+  ```
+mv 表名.ibd /usr/local/var/mysql/库名
+  ```
+
+#### 导入表空间
+
+  ```
+alter table 表名 import tablespace
+  ```
+
+登录本地数据库即可看到恢复的单个表的数据
 
 # 总结
 

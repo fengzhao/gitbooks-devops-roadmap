@@ -111,12 +111,12 @@ ansible-playbook 90.setup.yml
 
 # 三、安装k8s 1.18集群
 
-## 参考
+## 0、参考
 
 - https://github.com/easzlab/kubeasz/blob/master/docs/setup/00-planning_and_overall_intro.md
 - https://github.com/easzlab/kubeasz/blob/master/docs/setup/config_guide.md
 
-## 0、各节点基础OS配置
+## 1、各节点基础OS配置
 
 ```bash
 rm -rf anaconda-ks.cfg original-ks.cfg post-install.log
@@ -151,14 +151,14 @@ hostnamectl set-hostname --static node3.k8s118.curiouser.com
 reboot now
 ```
 
-## 1、Node1节点安装ansible
+## 2、Node1节点安装ansible
 
 ```bash
 pip install pip --upgrade -i https://mirrors.aliyun.com/pypi/simple/
 pip install ansible==2.6.18 netaddr==0.7.19 -i https://mirrors.aliyun.com/pypi/simple/
 ```
 
-## 2、Node1节点配置节点FQDN与IP的映射并打通SSH免密钥登录
+## 3、Node1节点配置节点FQDN与IP的映射并打通SSH免密钥登录
 
 ```bash
 echo "192.168.1.60 tools.k8s118.curiouser.com tools" >> /etc/hosts
@@ -173,7 +173,7 @@ ssh-copy-id node2
 ssh-copy-id node3
 ```
 
-## 3、Node1节点下载kubeasz中的安装准备工具脚本easzup
+## 4、Node1节点下载kubeasz中的安装准备工具脚本easzup
 
 ```bash
 export release=2.2.0
@@ -189,7 +189,7 @@ chmod +x ./easzup
 - 管理端 ansible 安装，但可以使用 kubeasz 容器运行 ansible 脚本
 - 其他更多 kubernetes 插件镜像
 
-## 4、配置k8s集群参数的主机清单
+## 5、配置k8s集群参数的主机清单
 
 模版配置：https://github.com/easzlab/kubeasz/blob/master/example/hosts.multi-node
 
@@ -236,7 +236,7 @@ ca_dir="/etc/kubernetes/ssl"
 base_dir="/etc/ansible"
 ```
 
-## 5、修改Ansible中K8S服务配置
+## 6、修改Ansible中K8S服务配置
 
 ### ⓪设置离线安装
 
@@ -343,13 +343,13 @@ metallb_vip_pool: "192.168.1.240/29"
 #prometheus_install: "no"
 ```
 
-## 6、执行ansible playbook
+## 7、执行ansible playbook
 
 ```
 ansible-playbook /etc/ansible/90.setup.yml
 ```
 
-## 7、验证
+## 8、验证
 
 ```bash
 kubectl get node -owide
