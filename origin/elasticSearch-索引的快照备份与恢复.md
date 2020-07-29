@@ -88,14 +88,14 @@ systemctl status elasticsearch
 ```bash
 PUT /_snapshot/快照仓库名
 {
-"type": "fs",
-"settings": {
+  "type": "fs",
+  "settings": {
     "compress": true,
     "location": "/data/es/Elastic-SnapShots"
-}
+  }
 }
 ## settings的其他参数：
-​
+
 # chunk_size
 Big files can be broken down into chunks during snapshotting if needed. The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k. Defaults to null (unlimited chunk size).
 #max_restore_bytes_per_sec
@@ -111,12 +111,12 @@ Makes repository read-only. Defaults to false.
 ```bash
 PUT _snapshot/快照仓库名
 {
-"type": "hdfs",
-"settings": {
+  "type": "hdfs",
+  "settings": {
     "uri": "hdfs://172.16.3.10:9000",
     "compress": true,
     "path": "elasticsearch/respositories"
-}
+  }
 }
 ##settings的其他参数：
 ​
@@ -195,6 +195,14 @@ GET _snapshot/快照仓库名/快照_1,快照名_2/_status
 
 ```bash
 POST _snapshot/快照仓库名/快照名/_restore
+
+# 当恢复快照中的索引名已存在时，可重命名要恢复的索引名
+POST _snapshot/快照仓库名/快照名/_restore
+{
+  "indices": "索引名", 
+  "rename_pattern": "索引名",
+  "rename_replacement": "索引名-2"
+}
 ```
 
 # 六、使用 `_cat` API格式化查询快照仓库中的的快照

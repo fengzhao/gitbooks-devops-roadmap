@@ -180,7 +180,7 @@
         * [问题总结](origin/elasticsearch-问题总结.md)
     * Kibana
 * Metrics
-    * Kubernetes的监控体系
+    * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
         * [kube-prometheus](origin/kube-prometheus.md)
     * Exporter
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
@@ -274,6 +274,7 @@
     * [htpasswd](origin/linux-htpasswd.md)
     * [YAML文本处理工具shyaml](origin/linux-shyaml.md)
     * [JSON文本处理工具jq](origin/linux-jq.md)
+    * [yaml文本处理工具yq](origin/yaml-yq.md)
     * [Curl命令详解](origin/linux-curl.md)
     * [rsync命令详解](origin/linux-rsync.md)
     * [LVM原理及使用](origin/linux-lvm.md)

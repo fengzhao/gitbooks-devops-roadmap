@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Network Policy容器流量管理 · Devops Roadmap</title>
+        <title>Kubernetes的监控体系 · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -106,10 +106,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="k8s-pressure-test.html" />
+    <link rel="next" href="kube-prometheus.html" />
     
-    
-    <link rel="prev" href="kubernetes-kubectl多集群上下文配置.html" />
     
 
     <style>
@@ -1057,7 +1055,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.4.4" data-path="kubernetes-NetworkPolicy.html">
+        <li class="chapter " data-level="3.4.4" data-path="kubernetes-NetworkPolicy.html">
             
                 <a href="kubernetes-NetworkPolicy.html">
             
@@ -2995,7 +2993,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="6.2.1" data-path="kubernete-prometheus.html">
+        <li class="chapter active" data-level="6.2.1" data-path="kubernete-prometheus.html">
             
                 <a href="kubernete-prometheus.html">
             
@@ -5901,7 +5899,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Network Policy容器流量管理</a>
+        <a href=".." >Kubernetes的监控体系</a>
     </h1>
 </div>
 
@@ -5916,302 +5914,36 @@
     
 					<section class="normal markdown-section">
 						
-						<h1 id="kubernetes-network-policy&#x5BB9;&#x5668;&#x7F51;&#x7EDC;&#x6D41;&#x91CF;&#x9650;&#x5236;">Kubernetes Network Policy&#x5BB9;&#x5668;&#x7F51;&#x7EDC;&#x6D41;&#x91CF;&#x9650;&#x5236;</h1>
-<h1 id="&#x4E00;&#x3001;overview">&#x4E00;&#x3001;Overview</h1>
-<p>Kubernetes&#x4F7F;&#x7528;&#x547D;&#x540D;&#x7A7A;&#x95F4;namesapce&#x505A;&#x591A;&#x79DF;&#x6237;&#x9694;&#x79BB;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x4E0D;&#x914D;&#x7F6E;&#x7F51;&#x7EDC;&#x7B56;&#x7565;&#xFF0C;namespace&#x7684;&#x9694;&#x79BB;&#x4E5F;&#x4EC5;&#x4EC5;&#x662F;&#x4F5C;&#x7528;&#x4E8E;&#x5728;kubernetes&#x7F16;&#x6392;&#x8C03;&#x5EA6;&#x65F6;&#x7684;&#x9694;&#x79BB;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x4E0D;&#x540C;namespace&#x4E0B;&#x7684;pod&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x76F8;&#x4E92;&#x8054;&#x901A;&#x7684;&#x3002;&#x6B64;&#x65F6;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;Kubernetes&#x63D0;&#x4F9B;&#x7684;networkPolicy,&#x7528;&#x4E8E;&#x9694;&#x79BB;&#x4E0D;&#x540C;&#x79DF;&#x6237;&#x5E94;&#x7528;&#x7684;&#x7F51;&#x7EDC;&#x6D41;&#x91CF;&#x6765;&#x51CF;&#x5C11;&#x653B;&#x51FB;&#x9762;&#x3002;&#x5B83;&#x4F7F;&#x7528;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x6A21;&#x62DF;&#x4F20;&#x7EDF;&#x7684;&#x5206;&#x6BB5;&#x7F51;&#x7EDC;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x7B56;&#x7565;&#x63A7;&#x5236;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x6D41;&#x91CF;&#x4EE5;&#x53CA;&#x6765;&#x81EA;&#x5916;&#x90E8;&#x7684;&#x6D41;&#x91CF;&#x3002;Kubernetes&#x4E2D;&#x7684;Network Policy&#x53EA;&#x5B9A;&#x4E49;&#x4E86;&#x89C4;&#x8303;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x5B9E;&#x73B0;&#x7559;&#x7ED9;&#x4E86;&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;</p>
-<p>Kubernetes v1.7+&#x7248;&#x672C;GA&#xFF0C;API&#x7248;&#x672C;&#x4E3A;<a href="http://networking.k8s.io/v1" _target="blank">http://networking.k8s.io/v1</a></p>
-<h1 id="&#x4E8C;&#x3001;&#x4F7F;&#x7528;calico&#x505A;network-policy">&#x4E8C;&#x3001;&#x4F7F;&#x7528;Calico&#x505A;Network policy</h1>
-<p>Network Policy&#x7684;&#x5B9E;&#x73B0;&#x4EF0;&#x8D56;CNI&#x63D2;&#x4EF6;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x76EE;&#x524D;&#x5DF2;&#x7ECF;&#x652F;&#x6301;&#x7684;cni&#x63D2;&#x4EF6;&#x5305;&#x62EC;&#xFF1A;</p>
-<ul>
-<li>Calico</li>
-<li>Kube-router</li>
-<li>Romana</li>
-<li>Weave Net</li>
-<li>trireme</li>
-</ul>
-<p>Calico&#x7684;NetworkPolicy&#x529F;&#x80FD;&#x652F;&#x6301;&#x4EE5;&#x4E0B;&#x7279;&#x6027;&#xFF1A;</p>
-<ul>
-<li>&#x652F;&#x6301;&#x591A;&#x79CD;endpoint: pods/containers, VMs</li>
-<li>&#x652F;&#x6301;&#x9650;&#x5236;&#x5165;&#x7AD9;&#x548C;&#x51FA;&#x7AD9;&#x7684;&#x6D41;&#x91CF;&#x8BBF;&#x95EE;</li>
-<li>&#x89C4;&#x5219;&#x7B56;&#x7565;&#x652F;&#x6301;:<ul>
-<li>&#x52A8;&#x4F5C;: allow, deny, log, pass</li>
-<li>&#x6E90;&#x548C;&#x76EE;&#x6807;&#x7684;&#x5339;&#x914D;&#x6807;&#x51C6;:<ul>
-<li>&#x7AEF;&#x53E3;: numbered, ports in a range, and Kubernetes named ports</li>
-<li>&#x534F;&#x8BAE;: TCP, UDP, ICMP, SCTP, UDPlite, ICMPv6, protocol numbers (1-255)</li>
-<li>HTTP attributes (if using Istio service mesh)</li>
-<li>ICMP attributes</li>
-<li>IP version (IPv4, IPv6)</li>
-<li>IP or CIDR</li>
-<li>Endpoint selectors (using label expression to select pods, VMs, host    - interfaces, and/or network sets)</li>
-<li>Namespace selectors</li>
-<li>Service account selectors</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Optional packet handling controls: disable connection tracking, apply before DNAT, apply to forwarded traffic and/or locally terminated traffic</li>
-</ul>
-<ol>
-<li><p>Preflight</p>
-<ul>
-<li>k8s&#x96C6;&#x7FA4;&#x7248;&#x672C;&#x5927;&#x4E8E;v1.3.0</li>
-<li>calico-cni&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;</li>
-</ul>
-</li>
-<li><p>kubelet&#x6DFB;&#x52A0;&#x914D;&#x7F6E;Flag</p>
-<p> &#x9700;&#x8981;&#x914D;&#x7F6E;kubelet &#x8BA9;pod&#x542F;&#x52A8;&#x65F6;&#x4F7F;&#x7528;calico&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#xFF0C;kubelet&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4F7F;&#x7528;calico&#x5728;&#x542F;&#x52A8;&#x65F6;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#xFF1A;</p>
-<pre class="language-"><code class="lang-yaml"> <span class="token punctuation">-</span><span class="token punctuation">-</span>network<span class="token punctuation">-</span>plugin=cni  
- <span class="token punctuation">-</span><span class="token punctuation">-</span>cni<span class="token punctuation">-</span>conf<span class="token punctuation">-</span>dir=/etc/cni/net.d <span class="token comment"># CNI&#x63D2;&#x4EF6;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x76EE;&#x5F55;,&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x9700;&#x8981;&#x7B26;&#x5408;CNI&#x89C4;&#x8303;</span>
- <span class="token punctuation">-</span><span class="token punctuation">-</span>cni<span class="token punctuation">-</span>bin<span class="token punctuation">-</span>dir=/opt/cni/bin <span class="token comment"># CNI&#x63D2;&#x4EF6;&#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;/opt/cni/bin</span>
-</code></pre>
-</li>
-<li><p>API Server&#x6DFB;&#x52A0;&#x914D;&#x7F6E;Flag</p>
-<pre class="language-"><code class="lang-yaml"><span class="token punctuation">-</span><span class="token punctuation">-</span>allow<span class="token punctuation">-</span>privileged=true <span class="token comment"># calico-node&#x7684;POD&#x9700;&#x8981;&#x4EE5;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x8FD0;&#x884C;&#x5728;&#x5404;node&#x4E0A;</span>
-</code></pre>
-</li>
-</ol>
-<h1 id="&#x4E09;&#x3001;&#x7B56;&#x7565;&#x89C4;&#x5219;&#x7684;&#x58F0;&#x660E;&#x914D;&#x7F6E;">&#x4E09;&#x3001;&#x7B56;&#x7565;&#x89C4;&#x5219;&#x7684;&#x58F0;&#x660E;&#x914D;&#x7F6E;</h1>
-<p>Network Policy&#x7B56;&#x7565;&#x89C4;&#x5219;&#x662F;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x6709;&#x54EA;&#x4E9B;POD&#xFF0C;&#x80FD;&#x88AB;&#x8C01;&#x8BBF;&#x95EE;&#xFF0C;&#x80FD;&#x8BBF;&#x95EE;&#x8C01;&#x7684;&#x3002;&#x76F8;&#x5E94;&#x5730;&#xFF0C;&#x5728;Network Policy&#x58F0;&#x660E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x6709;&#xFF1A;</p>
-<ul>
-<li><code>spec.podSelector</code>: &#x5B9A;&#x4E49;&#x8BE5;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x6709;&#x54EA;&#x4E9B;POD&#x9075;&#x5FAA;&#x672C;networkpolicy&#x7EA6;&#x675F;</li>
-<li><code>spec.ingress.from</code>: &#x5B9A;&#x4E49;&#x53D7;&#x672C;networkpolicy&#x7EA6;&#x675F;&#x7684;POD&#x7684;&#x5165;&#x7AD9;&#x89C4;&#x5219;</li>
-<li><code>spec.egress.to</code>&#xFF1A;&#x5B9A;&#x4E49;&#x53D7;&#x672C;networkpolicy&#x7EA6;&#x675F;&#x7684;POD&#x7684;&#x51FA;&#x7AD9;&#x89C4;&#x5219;</li>
-</ul>
-<p>spec.ingress.from&#x7684;&#x9009;&#x62E9;&#x5668;&#x6709;&#xFF1A;</p>
-<ol>
-<li><strong><code>podSelector</code></strong></li>
-<li><p><strong><code>namespaceSelector</code></strong></p>
-<pre class="language-"><code class="lang-yaml"> <span class="token punctuation">...</span>&#x4E0A;&#x6587;&#x7701;&#x7565;<span class="token punctuation">...</span>
- <span class="token key atrule">ingress</span><span class="token punctuation">:</span>
- <span class="token punctuation">-</span> <span class="token key atrule">from</span><span class="token punctuation">:</span>
-   <span class="token punctuation">-</span> <span class="token key atrule">namespaceSelector</span><span class="token punctuation">:</span>
-       <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-         <span class="token key atrule">user</span><span class="token punctuation">:</span> alice
-   <span class="token punctuation">-</span> <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-       <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-         <span class="token key atrule">role</span><span class="token punctuation">:</span> client
- <span class="token punctuation">...</span>&#x4E0B;&#x6587;&#x7701;&#x7565;<span class="token punctuation">...</span>
-</code></pre>
-</li>
-<li><p><strong><code>namespaceSelector&#x548C;podSelector</code></strong>&#xFF08;&#x6CE8;&#x610F;YAML&#x8BED;&#x6CD5;&#x7684;&#x533A;&#x522B;&#xFF09;</p>
-<pre class="language-"><code class="lang-yaml"> <span class="token punctuation">...</span>&#x4E0A;&#x6587;&#x7701;&#x7565;<span class="token punctuation">...</span>
- <span class="token key atrule">ingress</span><span class="token punctuation">:</span>
- <span class="token punctuation">-</span> <span class="token key atrule">from</span><span class="token punctuation">:</span>
-   <span class="token punctuation">-</span> <span class="token key atrule">namespaceSelector</span><span class="token punctuation">:</span>
-       <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-         <span class="token key atrule">user</span><span class="token punctuation">:</span> alice
-     <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-       <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-         <span class="token key atrule">role</span><span class="token punctuation">:</span> client
- <span class="token punctuation">...</span>&#x4E0B;&#x6587;&#x7701;&#x7565;<span class="token punctuation">...</span>
-</code></pre>
-</li>
-<li><p><strong><code>ipBlock</code></strong></p>
-</li>
-</ol>
-<h1 id="&#x56DB;&#x3001;&#x793A;&#x4F8B;&#x8BF4;&#x660E;">&#x56DB;&#x3001;&#x793A;&#x4F8B;&#x8BF4;&#x660E;</h1>
-<pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.k8s.io/v1
-<span class="token key atrule">kind</span><span class="token punctuation">:</span> NetworkPolicy
-<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>network<span class="token punctuation">-</span>policy
-  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> default
-<span class="token key atrule">spec</span><span class="token punctuation">:</span>
-  <span class="token comment"># POD&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x9009;&#x62E9;&#x9075;&#x5FAA;&#x672C;networkpolicy&#x7EA6;&#x675F;&#x7684;POD</span>
-  <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-      <span class="token key atrule">role</span><span class="token punctuation">:</span> db
-  <span class="token comment"># &#x6D41;&#x91CF;&#x8BBF;&#x95EE;&#x7B56;&#x7565;&#x7C7B;&#x578B;</span>
-  <span class="token key atrule">policyTypes</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> Ingress
-  <span class="token punctuation">-</span> Egress
-  <span class="token comment"># &#x6D41;&#x91CF;&#x8BBF;&#x95EE;&#x5165;&#x7AD9;&#x89C4;&#x5219;</span>
-  <span class="token key atrule">ingress</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> <span class="token key atrule">from</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">ipBlock</span><span class="token punctuation">:</span>
-        <span class="token key atrule">cidr</span><span class="token punctuation">:</span> 172.17.0.0/16
-        <span class="token key atrule">except</span><span class="token punctuation">:</span>
-        <span class="token punctuation">-</span> 172.17.1.0/24
-    <span class="token punctuation">-</span> <span class="token key atrule">namespaceSelector</span><span class="token punctuation">:</span>
-        <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-          <span class="token key atrule">project</span><span class="token punctuation">:</span> myproject
-    <span class="token punctuation">-</span> <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-        <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-          <span class="token key atrule">role</span><span class="token punctuation">:</span> frontend
-    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TCP
-      <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">6379</span>
-  <span class="token comment">#  POD&#x6D41;&#x91CF;&#x8BBF;&#x95EE;&#x51FA;&#x7AD9;&#x89C4;&#x5219;</span>
-  <span class="token key atrule">egress</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> <span class="token key atrule">to</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">ipBlock</span><span class="token punctuation">:</span>
-        <span class="token key atrule">cidr</span><span class="token punctuation">:</span> 10.0.0.0/24
-    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TCP
-      <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">5978</span>
-</code></pre>
-<p>&#x4E0A;&#x8FF0;&#x4F8B;&#x5B50;&#xFF0C;&#x7F51;&#x7EDC;&#x6D41;&#x91CF;&#x8BBF;&#x95EE;&#x7B56;&#x7565;&#x89C4;&#x5219;&#x53EF;&#x89E3;&#x91CA;&#x4E3A;&#xFF1A;</p>
-<p><strong>&quot;default&quot;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x6807;&#x7B7E;&#x4E3A;&quot;role=db&quot;&#x7684;POD&#x7684;&#x5165;&#x7AD9;&#x89C4;&#x5219;</strong>&#xFF1A;</p>
-<ol>
-<li>&#x5141;&#x8BB8;&#x88AB;&quot;default&quot;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x5E26;&#x6807;&#x7B7E;&quot;role=frontend&quot;&#x7684;POD&#x8BBF;&#x95EE;TCP 6379&#x7AEF;&#x53E3;</li>
-<li>&#x5141;&#x8BB8;&#x88AB;&#x6807;&#x7B7E;&#x4E3A;&quot;project=myproject&quot;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x6240;&#x6709;&#x7684;POD&#x8BBF;&#x95EE;TCP 6379&#x7AEF;&#x53E3;</li>
-<li>&#x5141;&#x8BB8;&#x88AB;IP&#x5730;&#x5740;&#x4E3A;172.17.0.0&#x2013;172.17.0.255&#x6216;172.17.2.0&#x2013;172.17.255.255&#x7684;POD&#x8BBF;&#x95EE;TCP 6379&#x7AEF;&#x53E3;</li>
-</ol>
-<p><strong>&quot;default&quot;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x6807;&#x7B7E;&#x4E3A;&quot;role=db&quot;&#x7684;POD&#x7684;&#x51FA;&#x7AD9;&#x89C4;&#x5219;</strong>&#xFF1A;</p>
-<ol>
-<li>&#x5141;&#x8BB8;&#x8BBF;&#x95EE;10.0.0.0/24&#x7F51;&#x6BB5;&#x7684;POD&#x7684;5978&#x7AEF;&#x53E3;</li>
-</ol>
-<h1 id="&#x4E94;&#x3001;&#x9ED8;&#x8BA4;&#x7B56;&#x7565;">&#x4E94;&#x3001;&#x9ED8;&#x8BA4;&#x7B56;&#x7565;</h1>
-<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;namespace&#x4E0B;&#x6CA1;&#x6709;network policy,&#x5219;&#x8BE5;namespace&#x4E0B;&#x6240;&#x6709;POD&#x7684;&#x5165;&#x7AD9;&#x89C4;&#x5219;&#x548C;&#x51FA;&#x7AD9;&#x89C4;&#x5219;&#x90FD;&#x662F;&#x5F00;&#x653E;&#x7684;&#x3002;network policy&#x53EA;&#x5F71;&#x54CD;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x88AB;Pod Selector&#x9009;&#x62E9;&#x7684;POD&#xFF0C;&#x5176;&#x4ED6;&#x4F9D;&#x65E7;&#x662F;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x3002;</p>
-<ol>
-<li><p>namespace&#x4E0B;&#x7684;&#x6240;&#x6709;pod&#xFF0C;&#x5165;&#x7AD9;&#x89C4;&#x5219;&#x4E3A;&#x5168;&#x90E8;&#x7981;&#x6B62;</p>
-<pre class="language-"><code class="lang-bash"> apiVersion: networking.k8s.io/v1
- kind: NetworkPolicy
- metadata:
-   name: default-deny
-   namespace: <span class="token builtin class-name">test</span>
- spec:
-   podSelector: <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   policyTypes:
-   - Ingress
-</code></pre>
-</li>
-<li><p>namespace&#x4E0B;&#x7684;&#x6240;&#x6709;pod&#xFF0C;&#x5165;&#x7AD9;&#x89C4;&#x5219;&#x4E3A;&#x5168;&#x90E8;&#x5F00;&#x653E;</p>
-<pre class="language-"><code class="lang-bash"> apiVersion: networking.k8s.io/v1
- kind: NetworkPolicy
- metadata:
-   name: allow-all
-   namespace: <span class="token builtin class-name">test</span>
- spec:
-   podSelector: <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   ingress:
-   - <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   policyTypes:
-   - Ingress
-</code></pre>
-</li>
-<li><p>namespace&#x4E0B;&#x7684;&#x6240;&#x6709;pod&#xFF0C;&#x51FA;&#x7AD9;&#x89C4;&#x5219;&#x4E3A;&#x5168;&#x90E8;&#x7981;&#x6B62;</p>
-<pre class="language-"><code class="lang-bash"> apiVersion: networking.k8s.io/v1
- kind: NetworkPolicy
- metadata:
-   name: default-deny
-   namespace: <span class="token builtin class-name">test</span>
- spec:
-   podSelector: <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   policyTypes:
-   - Egress
-</code></pre>
-</li>
-<li><p>namespace&#x4E0B;&#x7684;&#x6240;&#x6709;pod&#xFF0C;&#x51FA;&#x7AD9;&#x89C4;&#x5219;&#x4E3A;&#x5168;&#x90E8;&#x5F00;&#x653E;</p>
-<pre class="language-"><code class="lang-bash"> apiVersion: networking.k8s.io/v1
- kind: NetworkPolicy
- metadata:
-   name: allow-all
-   namespace: <span class="token builtin class-name">test</span>
- spec:
-   podSelector: <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   egress:
-   - <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   policyTypes:
-   - Egress
-</code></pre>
-</li>
-<li><p>&#x540C;namespace&#x7684;pod&#xFF0C;&#x5165;&#x7AD9;&#x548C;&#x51FA;&#x7AD9;&#x89C4;&#x5219;&#x4E3A;&#x5168;&#x90E8;&#x7981;&#x6B62;</p>
-<pre class="language-"><code class="lang-bash"> apiVersion: networking.k8s.io/v1
- kind: NetworkPolicy
- metadata:
-   name: default-deny
- spec:
-   podSelector: <span class="token punctuation">{</span><span class="token punctuation">}</span>
-   policyTypes:
-   - Ingress
-   - Egress
-</code></pre>
-</li>
-</ol>
-<h1 id="&#x516D;&#x3001;&#x573A;&#x666F;&#x6D4B;&#x8BD5;">&#x516D;&#x3001;&#x573A;&#x666F;&#x6D4B;&#x8BD5;</h1>
-<ul>
-<li><p>&#x9650;&#x5236;&#x670D;&#x52A1;&#x53EA;&#x80FD;&#x88AB;&#x5E26;&#x6709;&#x7279;&#x5B9A;label&#x7684;&#x5E94;&#x7528;&#x8BBF;&#x95EE;</p>
-<pre class="language-"><code class="lang-bash"> $ kubectl create ns test1
-
- $ kubectl -n test1 run nginx --image<span class="token operator">=</span>nginx
- $ kubectl -n test1 expose deployment nginx --port<span class="token operator">=</span><span class="token number">80</span>
-</code></pre>
-<pre class="language-"><code class="lang-yaml"> <span class="token key atrule">kind</span><span class="token punctuation">:</span> NetworkPolicy
- <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.k8s.io/v1
- <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-   <span class="token key atrule">namespace</span><span class="token punctuation">:</span> test1
-   <span class="token key atrule">name</span><span class="token punctuation">:</span> access<span class="token punctuation">-</span>nginx
- <span class="token key atrule">spec</span><span class="token punctuation">:</span>
-   <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-     <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-       <span class="token key atrule">run</span><span class="token punctuation">:</span> nginx
-   <span class="token key atrule">ingress</span><span class="token punctuation">:</span>
-   <span class="token punctuation">-</span> <span class="token key atrule">from</span><span class="token punctuation">:</span>
-     <span class="token punctuation">-</span> <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-         <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-           <span class="token key atrule">access</span><span class="token punctuation">:</span> <span class="token string">&quot;true&quot;</span>
-</code></pre>
-<pre class="language-"><code class="lang-bash"> <span class="token comment"># &#x521B;&#x5EFA;&#x6CA1;&#x6709;Label&#x7684;&#x4E34;&#x65F6;POD&#x53BB;&#x8BBF;&#x95EE;Nginx&#x7684;SVC</span>
- $ kubectl -n test1 run busybox --rm -ti --image<span class="token operator">=</span>busybox /bin/sh
-  / <span class="token comment"># wget http://nginx.test1.svc:80/  (&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;)</span>
-
- <span class="token comment"># &#x521B;&#x5EFA;&#x6CA1;&#x6709;Label&#x7684;&#x4E34;&#x65F6;POD&#x53BB;&#x8BBF;&#x95EE;Nginx&#x7684;SVC</span>
- $ kubectl -n test1 run busybox --labels<span class="token operator">=</span><span class="token string">&quot;access=true&quot;</span> --rm -ti --image<span class="token operator">=</span>busybox /bin/sh
-
-  / <span class="token comment"># wget http://nginx.test1.svc:80/</span>
-   Connecting to nginx.test1.svc:80 <span class="token punctuation">(</span><span class="token number">10.68</span>.86.216:80<span class="token punctuation">)</span>
-   saving to <span class="token string">&apos;index.html&apos;</span>
-   index.html           <span class="token number">100</span>% <span class="token operator">|</span> *********************************************************************************************************************<span class="token operator">|</span>   <span class="token number">612</span>  <span class="token number">0</span>:00:00 ETA
-   <span class="token string">&apos;index.html&apos;</span> saved
-</code></pre>
-</li>
-<li><p>&#x9650;&#x5236;&#x5E26;&quot;run=busybox&quot;&#x6807;&#x7B7E;&#x7684;Pod&#x53EA;&#x80FD;&#x8BBF;&#x95EE;www.baidu.com</p>
-<pre class="language-"><code class="lang-yaml">  <span class="token key atrule">kind</span><span class="token punctuation">:</span> NetworkPolicy
-  <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.k8s.io/v1
-  <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-    <span class="token key atrule">name</span><span class="token punctuation">:</span> busybox<span class="token punctuation">-</span>egress<span class="token punctuation">-</span>baidu<span class="token punctuation">-</span>a<span class="token punctuation">-</span>policy
-    <span class="token key atrule">namespace</span><span class="token punctuation">:</span> test1
-  <span class="token key atrule">spec</span><span class="token punctuation">:</span>
-    <span class="token key atrule">podSelector</span><span class="token punctuation">:</span>
-      <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
-        <span class="token key atrule">run</span><span class="token punctuation">:</span> busybox
-    <span class="token key atrule">egress</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">to</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">ipBlock</span><span class="token punctuation">:</span>
-          <span class="token key atrule">cidr</span><span class="token punctuation">:</span> 180.101.49.11/32
-    <span class="token punctuation">-</span> <span class="token key atrule">to</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">ipBlock</span><span class="token punctuation">:</span>
-          <span class="token key atrule">cidr</span><span class="token punctuation">:</span> 0.0.0.0/0
-      <span class="token key atrule">ports</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">protocol</span><span class="token punctuation">:</span> UDP
-        <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">53</span>
-</code></pre>
-<pre class="language-"><code class="lang-bash">  $ kubectl -n test1 run busybox --labels<span class="token operator">=</span><span class="token string">&quot;run=busybox&quot;</span> --rm -ti --image<span class="token operator">=</span>busybox /bin/sh
-
-  / <span class="token comment"># wget www.baidu.com</span>
-  Connecting to www.baidu.com <span class="token punctuation">(</span><span class="token number">180.101</span>.49.11:80<span class="token punctuation">)</span>
-  saving to <span class="token string">&apos;index.html&apos;</span>
-  index.html           <span class="token number">100</span>% <span class="token operator">|</span>*********************************************************************************************************************<span class="token operator">|</span>  <span class="token number">2381</span>  <span class="token number">0</span>:00:00 ETA
-  <span class="token string">&apos;index.html&apos;</span> saved
-  / <span class="token comment"># wget www.sohu.com</span>
-  Connecting to www.sohu.com <span class="token punctuation">(</span><span class="token number">101.227</span>.172.11:80<span class="token punctuation">)</span>
-  ^C
-  / <span class="token comment"># wget https://github.com</span>
-  Connecting to github.com <span class="token punctuation">(</span><span class="token number">13.250</span>.177.223:443<span class="token punctuation">)</span>
-  ^C
-  / <span class="token comment">#</span>
-</code></pre>
-</li>
-</ul>
-<h1 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;">&#x53C2;&#x8003;&#x94FE;&#x63A5;</h1>
-<ol>
-<li><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/#sctp-support" _target="blank">https://kubernetes.io/docs/concepts/services-networking/network-policies/#sctp-support</a></li>
-<li><a href="https://docs.projectcalico.org/v3.8/security/kubernetes-network-policy#best-practice-create-deny-all-default-network-policy" _target="blank">https://docs.projectcalico.org/v3.8/security/kubernetes-network-policy#best-practice-create-deny-all-default-network-policy</a></li>
-<li><a href="https://yq.aliyun.com/articles/640190" _target="blank">https://yq.aliyun.com/articles/640190</a></li>
-<li><a href="https://www.jianshu.com/p/c0d2618d2849" _target="blank">https://www.jianshu.com/p/c0d2618d2849</a> </li>
-</ol>
+						<h1 id="kubernetes&#x4E0B;&#x7684;&#x76D1;&#x63A7;&#x4F53;&#x7CFB;">Kubernetes&#x4E0B;&#x7684;&#x76D1;&#x63A7;&#x4F53;&#x7CFB;</h1>
+<h1 id="&#x4E00;&#x3001;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;">&#x4E00;&#x3001;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;</h1>
+<table>
+<thead>
+<tr>
+<th>&#x76D1;&#x63A7;&#x5BF9;&#x8C61;</th>
+<th>&#x793A;&#x4F8B;</th>
+<th>&#x76D1;&#x63A7;&#x4FE1;&#x606F;&#x66B4;&#x9732;&#x65B9;&#x5F0F;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k8s&#x4E3B;&#x673A;</td>
+<td>k8s&#x4F9D;&#x8D56;&#x7684;&#x4E3B;&#x673A;</td>
+<td>node exporter&#x4EE5;daemonset&#x5F62;&#x5F0F;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;</td>
+</tr>
+<tr>
+<td>K8s&#x4E0A;&#x7684;&#x4E2D;&#x95F4;&#x4EF6;</td>
+<td>redis&#x3001;mysql&#x3001;kafka&#x3001;mongo</td>
+<td>&#x6BCF;&#x79CD;&#x670D;&#x52A1;&#x81EA;&#x5E26;&#x5BF9;&#x5E94;&#x7684;exporter</td>
+</tr>
+<tr>
+<td>K8s&#x4E0A;&#x7684;&#x7CFB;&#x7EDF;&#x670D;&#x52A1;</td>
+<td>traefik</td>
+<td>traefik&#x81EA;&#x5E26;&#x66B4;&#x9732;metrics</td>
+</tr>
+</tbody>
+</table>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-06-16 21:35:29
+2020-07-24 16:42:18
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6240,12 +5972,8 @@
 
 		
 		
-		<a href="kubernetes-kubectl多集群上下文配置.html" class="navigation navigation-prev " aria-label="Previous page: kubectl多集群上下文配置">
-			<i class="fa fa-angle-left"></i>
-		</a>
 		
-		
-		<a href="k8s-pressure-test.html" class="navigation navigation-next " aria-label="Next page: k8s集群的压力测试">
+		<a href="kube-prometheus.html" class="navigation navigation-next navigation-unique" aria-label="Next page: kube-prometheus">
 			<i class="fa fa-angle-right"></i>
 		</a>
 		
@@ -6255,7 +5983,7 @@
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Network Policy容器流量管理","level":"3.4.4","depth":2,"next":{"title":"k8s集群的压力测试","level":"3.4.5","depth":2,"path":"origin/k8s-pressure-test.md","ref":"origin/k8s-pressure-test.md","articles":[]},"previous":{"title":"kubectl多集群上下文配置","level":"3.4.3","depth":2,"path":"origin/kubernetes-kubectl多集群上下文配置.md","ref":"origin/kubernetes-kubectl多集群上下文配置.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/kubernetes-NetworkPolicy.md","mtime":"2020-06-16T13:35:29.498Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-07-29T13:00:14.273Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Kubernetes的监控体系","level":"6.2.1","depth":2,"next":{"title":"kube-prometheus","level":"6.2.1.1","depth":3,"path":"origin/kube-prometheus.md","ref":"origin/kube-prometheus.md","articles":[]},"previous":{"title":"Metrics","level":"6.2","depth":1,"ref":"","articles":[{"title":"Kubernetes的监控体系","level":"6.2.1","depth":2,"path":"origin/kubernete-prometheus.md","ref":"origin/kubernete-prometheus.md","articles":[{"title":"kube-prometheus","level":"6.2.1.1","depth":3,"path":"origin/kube-prometheus.md","ref":"origin/kube-prometheus.md","articles":[]}]},{"title":"Exporter","level":"6.2.2","depth":2,"ref":"","articles":[{"title":"Ceph Exporter","level":"6.2.2.1","depth":3,"path":"origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md","ref":"origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/kubernete-prometheus.md","mtime":"2020-07-24T08:42:18.196Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-07-29T13:00:14.273Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>
