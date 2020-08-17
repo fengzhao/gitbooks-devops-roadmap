@@ -167,7 +167,7 @@ Ansible默认配置文件在`/home/tidb/tidb-ansible/ansible.cfg`
 `vi /home/tidb/tidb-ansible/host.ini`
 
 ```ini
-servers]
+[servers]
 192.168.6.1
 192.168.6.2
 192.168.6.3
@@ -185,7 +185,7 @@ ansible-playbook -i /home/tidb/tidb-ansible/hosts.ini create_users.yml -u root -
 ## 5、在部署目标机器上安装 NTP 服务
 
 ```bash
-ansible-playbook -i home/tidb/tidb-ansible/hosts.ini deploy_ntp.yml -u tidb -b
+ansible-playbook -i /home/tidb/tidb-ansible/hosts.ini deploy_ntp.yml -u tidb -b
 ```
 
 ## 6、格式化部署目标机器的数据盘以LVM2方式挂载到/data/tidb

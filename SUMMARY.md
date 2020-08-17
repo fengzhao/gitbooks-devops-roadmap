@@ -205,7 +205,7 @@
 * Shell
     * [变量](origin/shell-变量.md)
     * 运算判断
-        * [文件目录的判断](origin/shell-文件目录的判断.md)
+        * [文件路径及变量的判断](origin/shell-文件目录的判断.md)
         * [数值型的判断](origin/shell-数值型的判断.md)
     * 语句控制
         * [if判断](origin/shell-if判断.md)
@@ -217,6 +217,7 @@
         * [字符串的截取拼接](origin/shell-字符串的截取拼接.md)
         * [字符串的包含判断关系](origin/shell-字符串的包含判断关系.md)
     * [自定义函数](origin/shell-自定义函数.md)
+    * [常用bash脚本功能](origin/bash-scirpts.md)
 * Maven
     * Maven POM项目对象模型
     * [Mave Settings文件详解](origin/maven-Settings配置文件详解.md)
@@ -290,6 +291,7 @@
       * [top](origin/linux-top.md)
       * [ip/ifconfig](origin/linux-ip-ifconfig.md)
     * [防火墙iptables](origin/linux-iptables.md)
+      * [SNAT]
 * 数据库
     * [MySQL](origin/mysql-basic.md)
       * 安装部署配置问题
@@ -343,6 +345,8 @@
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
     * [fffmpeg](origin/audio-video-fffmpeg.md)
+* Python
+    * [环境搭建：安装配置](origin/python-basic.md)
 ## Part Ⅶ：大数据
 
 - Cloudera

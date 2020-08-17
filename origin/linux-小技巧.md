@@ -192,12 +192,17 @@ EOF' ;\
     currentTimeStamp=$((timeStamp*1000+`date "+%N"`/1000000)) #将current转换为时间戳，精确到毫秒
     echo $currentTimeStamp
 
-# 14、nohup手动后台运行进程
+# 14、nohup手动后台运行进程并记录进程号
 
 ```bash
-nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1  &
+nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 & echo $! > /data/app/run.pid
 
-# 2>&1是把标准错误（2）重定向到标准输出中（1），而标准输出又导入文件里面，所以标准错误和标准输出都会输出到文件。
+# 2>&1是把标准错误2重定向到标准输出1中，而标准输出又导入文件里面，所以标准错误和标准输出都会输出到文件。
+# 同时把启动的进程号pid输出到文件
+
+注意：
+	如果运行时的shell为zsh，将任务放置后台的命令由”&“变为”&!“。例如：nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 &! echo $! > /data/app/run.pid
+	参考：https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open
 ```
 
 # 15、生成文件的MD值
@@ -1016,3 +1021,21 @@ systemctl enable docker
 systemctl start docker
 docker info
 ```
+
+# 45 、生成随机字符串
+
+```bash
+# 根据时间戳加随机数计算md5值并取前10位
+echo $(date +%s)$RANDOM | md5sum | head -c 10
+
+head -c 16 /dev/random | base64
+
+openssl rand -hex 10
+
+cat /proc/sys/kernel/random/uuid| cksum |cut -f1 -d" " | base64
+
+head -n 5 /dev/urandom |sed 's/[^a-Z0-9]//g'|strings -n 4
+
+tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
+```
+
