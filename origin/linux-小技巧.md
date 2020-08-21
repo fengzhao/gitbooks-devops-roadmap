@@ -1039,3 +1039,60 @@ head -n 5 /dev/urandom |sed 's/[^a-Z0-9]//g'|strings -n 4
 tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 ```
 
+# 46、使用curl命令发送邮件
+
+```bash
+curl -s --ssl-reqd --write-out %{http_code} --output /dev/null \
+  --url "smtp://发件人SMTP服务器地址:发件人SMTP服务器端口" \
+  --user "发件人SMTP服务器用户名:发件人SMTP服务器密码" \
+  --mail-from 发件人邮箱地址 \
+  --mail-rcpt 收件人邮箱地址 \
+  --upload-file /tmp/emai-data.txt
+  
+# /tmp/emai-data.txt的内容
+
+FROM: 发件人邮箱地址
+To: 收件人邮箱地址
+CC: 抄送人邮箱地址
+Subject: 主题
+
+Content-Type: multipart/mixed; boundary=MixedBoundary
+
+--MixedBoundary
+Content-Type: multipart/related; boundary=AlternativeBoundary
+
+--AlternativeBoundary
+Content-Type: multipart/related; boundary=RelatedBoundary
+
+--RelatedBoundary
+Content-Type: text/html; charset=utf-8
+
+<html>
+<body>
+<h1>测试<h1>
+</body>
+</html>
+
+--RelatedBoundary--
+
+--AlternativeBoundary--
+
+--MixedBoundary
+Content-Type: text/plain; name=test.txt
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=test.txt
+
+[base64编码的附件内容]
+
+--MixedBoundary--
+```
+
+参考：
+
+1. https://skeletonkey.com/filemaker-18-smtp-curl/
+
+2. https://www.soliantconsulting.com/blog/html-email-filemaker/
+
+3. https://stackoverflow.com/questions/44728855/curl-send-html-email-with-embedded-image-and-attachment
+
+   

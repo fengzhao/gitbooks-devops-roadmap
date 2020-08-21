@@ -69,3 +69,60 @@ server{
 }
 ```
 
+# 三、配置HTTP基础认证
+
+Nginx 使用  `ngx_http_auth_basic_module`  模块支持 **HTTP基本身份验证** 功能 。
+
+## 1、安装httpd-tools
+
+yum
+
+```bash
+yum install -y httpd-tools
+```
+
+apt
+
+```bash
+apt install -y apache2-utils  
+```
+
+## 2、创建授权用户和密码
+
+```bash
+htpasswd -c -d /etc/nginx/basic-auth-pass-file test_user
+```
+
+htpasswd 其他操作参考：[htpasswd操作](linux-htpasswd.md)
+
+## 3、配置nginx
+
+```bash
+server {
+     # ...省略
+    auth_basic   "登录认证";  
+    auth_basic_user_file basic-auth-pass-file;
+
+    # ...省略
+    
+    # 或者只设置某些URL进行登录认证
+    # location /api {
+    #    auth_basic "登录认证";
+    #    auth_basic_user_file basic-auth-pass-file;
+    #}
+}
+```
+
+## 4、使用
+
+```bash
+# 浏览器中使用
+直接在浏览器中输入地址, 会弹出用户密码输入框, 输入即可访问
+
+# wget
+wget --http-user=test_user --http-passwd=*** http://****
+
+# curl
+curl -u test_user:**** -O http://****
+```
+

@@ -33,10 +33,6 @@
         * [Kubernetes的审计日志功能](origin/openshift-kubernetes的审计日志功能.md)
 
 * 工具应用部署
-    * Jenkins
-    * Gitlab
-    * Nexus
-    * logstash
     * [Elasticsearch容器化部署](origin/openshift-elasticsearch容器化部署.md)
     * [Kibana容器化部署](origin/openshift-Kibana容器化部署.md)
 * 业务应用部署

@@ -19,63 +19,58 @@ OpenVPN允许参与建立VPN的单点使用共享金钥，电子证书，或者�
 
 ## 2、使用脚本在Linux服务器搭建
 
-GitHub有个脚本项目专门安装OpenVPN server，地址：https://github.com/Nyr/openvpn-install 
+GitHub有个脚本项目专门安装OpenVPN server，地址：https://github.com/Nyr/openvpn-install ，但是功能过少。为了便于管理openvpn,基于此脚本进行了功能优化，github地址：https://github.com/RationalMonster/install-manage-openvpn ，以下为优化的功能点：
+
+- 汉化
+
+- 增加选择客户端分配IP地址池网段的功能
+
+- 增加用户名密码验证脚本
+- 增加配置SMTP发送邮件的功能
+- 增加创建用户后将用户名密码及配置文件等信息通过SMTP邮件服务发送到用户邮箱
+- 去除不必要的脚本代码
+
+首次运行该脚本是安装openvpn服务，再次运行可执行其他服务。
+
+![](../assets/openvpn-scripts-1.png)
+
+### 注意
+
+所有的iptables规则配置都是由systemD服务openvpn-iptables.service`(/etc/systemd/system/openvpn-iptables.service)`进行配置的。
 
 ```bash
-wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+[Unit]
+Before=network.target
+[Service]
+Type=oneshot
+ExecStart=/sbin/iptables -t nat -A POSTROUTING -s 10.8.6.0/24 ! -d 10.8.6.0/24 -j SNAT --to 192.168.1.2
+ExecStart=/sbin/iptables -I INPUT -p udp -d 192.168.1.2 --dport 30668 -j ACCEPT
+ExecStart=/sbin/iptables -I INPUT -p tcp -s 10.8.6.0/24 -d 192.168.1.2 --dport 9092 -j ACCEPT
+ExecStart=/sbin/iptables -I FORWARD -p tcp -s 10.8.6.0/24 -d 192.168.1.3 ! --destination-port 6443 -j DROP
+ExecStart=/sbin/iptables -A INPUT -s 10.8.6.0/24 -d 192.168.1.2 -j DROP
+ExecStart=/sbin/iptables -I INPUT -p tcp -s 10.8.6.166/32 -d 192.168.1.2 --dport 22 -j ACCEPT
+
+ExecStop=/sbin/iptables -D FORWARD -p tcp -s 10.8.6.0/24 -d 192.168.1.3 ! --destination-port 6443 -j DROP
+ExecStop=/sbin/iptables -t nat -D POSTROUTING -s 10.8.6.0/24 ! -d 10.8.6.0/24 -j SNAT --to 192.168.1.2
+ExecStop=/sbin/iptables -D INPUT -p udp -d 192.168.1.2 --dport 30668 -j ACCEPT
+ExecStop=/sbin/iptables -D INPUT -p tcp -s 10.8.6.0/24 -d 192.168.1.2 --dport 9092 -j ACCEPT
+ExecStop=/sbin/iptables -D INPUT -p tcp -s 10.8.6.166/32 -d 192.168.1.2 --dport 22 -j ACCEPT
+ExecStop=/sbin/iptables -D INPUT -s 10.8.6.0/24 -d 192.168.1.2 -j DROP
+
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
 ```
 
-![](../assets/image-20200807174603529.png)
 
 
 
 
+# 三、Openvpn Access Server
 
+OpenVPN 的商业收费版本 OpenVPN Access Server，其免费的 license 可以支持2个 VPN 用户的同时在线，
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Ubuntu 
+## 1、Ubuntu 
 
 ### ①APT
 
@@ -102,7 +97,7 @@ apt install -y liblzo2-2 bridge-utils net-tools python-pyrad python-serial libsa
 dpkg -i openvpn-as-bundled-clients-11.deb openvpn-as_2.8.5-f4ad562b-Ubuntu18_amd64.deb
 ```
 
-## 3、CentOS/Redhat
+## 2、CentOS/Redhat
 
 ### ①YUM
 
@@ -115,7 +110,7 @@ yum -y install openvpn-as
 
 
 
-## 4、使用OVA模版在ESXI上部署
+## 3、使用OVA模版在ESXI上部署
 
 - 官方文档：https://openvpn.net/vpn-server-resources/deploying-the-access-server-appliance-on-vmware-esxi/
 
@@ -137,7 +132,7 @@ yum -y install openvpn-as
 - 重新配置命令：/usr/local/openvpn_as/bin/ovpn-init
 - 已安装VM Tools，未安装curl
 
-## 5、安装后注意
+## 4、安装后注意
 
 ### ①修改时区为CST。默认时区为US(Pacific - Los Angeles)
 
@@ -181,7 +176,7 @@ netplan apply
 - 普通用户访问地址：https://openvpnas-ip:943 
 - 管理员访问地址 ：https://openvpnas-ip:943/admin （默认用户openvpn，密码初始没有，需设置）
 
-# 三、OpenVPN服务端配置
+# 四、OpenVPN服务端配置
 
 ```bash
 push "route 192.168.1.0 255.255.255.0"
@@ -217,7 +212,7 @@ auth RSA-SHA256
 
 
 
-# 四、客户端连接配置
+# 五、客户端连接配置
 
 不管是在Synology还是ESXI上安装的OpenVPN Server，都提供下载配置文件的连接。下载好配置文件后，可直接使用各个平台下的客户端直接导入打开
 
@@ -296,17 +291,17 @@ down /etc/openvpn/update-resolv-conf
 # 设置在连接断开时要执行的脚本路径
 ```
 
-# 五、访问限制策略
+# 六、openvpn功能设置
 
-默认配置下，所有客户端都可以访问服务端配置中的指定网络段。但是在实际使用场景中，需要限制指定客户端访问指定网络，限制其访问某些服务。例如：开发人员只允许访问开发网络段中的服务器，测试人员只能访问测试网络段的服务器资源等等。
+## 1、分配指定IP地址给客户端用户
 
-## 1、openVPN服务端配置文件添加
+### ①OpenVPN服务端配置文件添加
 
 ```bash
 client-config-dir ccd
 ```
 
-## 2、新建ccd目录及客户端文件
+### ②新建ccd目录及客户端文件
 
 新建ccd目录，在ccd目录下新建以用户名命名的文件。并且通过ifconfig-push分配地址，注意这里需要分配两个地址，一个是客户端本地地址，另一个是服务器的ip端点。
 
@@ -328,28 +323,128 @@ utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
 	inet 10.8.0.9 --> 10.8.0.10/32 utun2
 ```
 
-## 3、配置iptables的限制
+## 2、设置用户名密码加证书的方式登录认证
 
-①禁止`vpn_test_user`用户访问`192.168.1.5`
+### ①增加openvpn服务端配置
+
+在`/etc/openvpn/server/server.conf`中追加一下内容
 
 ```bash
-iptables -A FORWARD -s 10.8.0.10 -d 192.168.1.5 -j DROP
+# ....省略
+auth-user-pass-verify /etc/openvpn/server/checkpsw.sh via-env
+username-as-common-name
+script-security 3
+client-config-dir ccd
 ```
+
+### ②创建用户名密码验证脚本
+
+`/etc/openvpn/server/checkpsw.sh`
+
+```bash
+#!/bin/sh
+PASSFILE="/etc/openvpn/server/psw-file"
+LOG_FILE="/etc/openvpn/server/openvpn-password.log"
+TIME_STAMP=`date "+%Y-%m-%d %T"`
+
+if [ ! -r "${PASSFILE}" ]; then
+  echo "${TIME_STAMP}: Could not open password file \"${PASSFILE}\" for reading." >> ${LOG_FILE}
+  exit 1
+fi
+
+CORRECT_PASSWORD=`awk '!/^;/&&!/^#/&&$1=="'${username}'"{print $2;exit}' ${PASSFILE}`
+
+if [ "${CORRECT_PASSWORD}" = "" ]; then
+  echo "${TIME_STAMP}: User does not exist: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
+  exit 1
+fi
+
+if [ "${password}" = "${CORRECT_PASSWORD}" ]; then
+  echo "${TIME_STAMP}: Successful authentication: username=\"${username}\"." >> ${LOG_FILE}
+  exit 0
+fi
+
+echo "${TIME_STAMP}: Incorrect password: username=\"${username}\", password=\"${password}\"." >> ${LOG_FILE}
+exit 1
+```
+
+### ③创建用户密码文件
+
+新增`/etc/openvpn/server/psw-file`
+
+```bash
+# 一行一个账号
+用户名 密码
+```
+
+```bash
+$ chmod 400 /etc/openvpn/server/psw-file
+$ chown nobody.nobody /etc/openvpn/server/psw-file
+```
+
+### ④(可选)客户端openvpn配置文件追加配置
+
+```bash
+auth-user-pass
+```
+
+## 3、使用iptables限制用户的访问
+
+在客户端连接到openvpn服务端后，针对哪些客户端用户可以访问哪些网段的服务，一般是使用openvpn服务端所在服务器的iptables进行控制。有以下两种重要的常见场景都是使用iptables进行实现的：
+
+### ①场景一：作为局域网的网络入口跳板机，SNAT转发流量到其他内网服务器
+
+例如在一些公有云的服务器，由于公网IP太贵，不可能给每一台服务都分配，同时也不安全。只要给安装openvpn的服务器分配一个公网IP地址，然后就可以使用iptables的SNAT功能进行网络流量转发，就能访问openvpn所在内网其他服务器上的服务
+
+```bash
+iptables -t nat -A POSTROUTING -s 10.6.8.0/24 ! -d 10.6.8.0/24 -j SNAT --to 192.168.1.2
+# 上述配置通俗地解释为: 所有分配了IP地址为10.8.6.0/24的客户端用户访问192.168.1.0/24网段其他服务
+```
+
+![](../assets/openvpn-iptables-1.png)
+
+
+
+
+
+### ②场景二：细分指定用户只能访问特定的服务
+
+默认配置下，所有客户端都可以访问服务端配置中的指定网络段。但是在实际使用场景中，需要限制指定客户端访问指定网络，限制其访问某些服务。例如：只允许开发人员访问开发网络段中的服务器，测试人员只能访问测试网络段的服务器资源等等。
+
+```bash
+iptables -t nat -A POSTROUTING -s 10.6.8.0/24 ! -d 10.6.8.0/24 -j SNAT --to 192.168.1.2
+iptables -I INPUT -s 10.6.8.166/32 -d 192.168.1.0/24 -j ACCEPT
+iptables -I INPUT -s 10.6.8.0/24 -d 192.168.1.5-192.168.1.6 ! --dport 22 -j ACCEPT
+iptables -I FORWARD -p tcp -s 10.6.8.0/24 -d 192.168.1.7 ! --destination-port 6443 -j DROP  
+```
+
+
+
+![](../assets/openvpn-iptables-2.png)
+
+
+
+
 
 ## 4、iptables规则的维护
 
-### ①查看添加的规则
+### ①查看规则
 
 以number的方式查看规则，一条一条的出来，然后我们根据号码来删除哪一条规则
 
 ```bash
 iptables -L FORWARD --line-numbers
+iptables -L INPUT --line-numbers
+# 查看POSTROUTING链nat表中的规则
+iptables -L POSTROUTING -t nat
 ```
 
 ### ②删除指定的规则
 
 ```bash
 iptables -D FORWARD 1
+#删除指定链指定表中的规则
+iptables  -D POSTROUTING -t nat -s 10.8.6.0/24 ! -d 10.8.6.0/24 -j SNAT --to 192.168.1.2
 ```
 
 ### ③删除所有规则
