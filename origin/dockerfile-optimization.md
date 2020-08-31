@@ -203,11 +203,11 @@ RUN set -eux ; \
 
 >  镜像仓库地址/类型库/镜像名:版本号
 
-- - registry/runtime/Java:8.1.2
-  - registry/runtime/php-fpm-nginx:7.3-1.14
-  - registry/cicd/kubctl-helm:1.17-3.0
-  - registry/cicd/git-compose-docker:v1
-  - registry/applications/demo:git_commit_id
+- registry/runtime/Java:8.1.2
+- registry/runtime/php-fpm-nginx:7.3-1.14
+- registry/cicd/kubctl-helm:1.17-3.0
+- registry/cicd/git-compose-docker:v1
+- registry/applications/demo:git_commit_id
 
 ## 2、使用Makefile
 

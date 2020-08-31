@@ -352,7 +352,7 @@ TiKV 只接受 hex 格式的 token 文件，文件的长度必须是 2^n，并�
 ```ini
 [security]
 # Cipher file 的存储路径
-cipher-file = "/home/tidb/conf/cipher-file-256"
+cipher-file = "/data/tidb/conf/cipher-file-256"
 ```
 
 ## 4、初始化部署目标主机系统环境，修改内核参数
@@ -370,7 +370,7 @@ ansible-playbook deploy.yml
 分发TiKV 数据加密存储token文件到TiKV目标主机上
 
 ```bash
-ansible -i inventory.ini tikv_servers -m copy -a 'src=/home/tidb/tidb-ansible/cipher-file-256 dest=/home/tidb/conf/cipher-file-256 owner=tidb group=tidb'
+ansible -i inventory.ini tikv_servers -m copy -a 'src=/home/tidb/tidb-ansible/cipher-file-256 dest=/data/tidb/conf/cipher-file-256 owner=tidb group=tidb'
 ```
 
 ## 6、启动 TiDB 集群

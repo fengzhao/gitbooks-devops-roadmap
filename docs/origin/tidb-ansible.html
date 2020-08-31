@@ -3931,7 +3931,7 @@
                     
                         <b>7.8.</b>
                     
-                    压力测试
+                    性能压力测试
             
                 </span>
             
@@ -3971,6 +3971,21 @@
             
         </li>
     
+        <li class="chapter " data-level="7.8.1.2" data-path="benchmark-tools-sysbench.html">
+            
+                <a href="benchmark-tools-sysbench.html">
+            
+                    
+                        <b>7.8.1.2.</b>
+                    
+                    sysbench
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -4003,6 +4018,114 @@
                 </span>
             
 
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8.4" >
+            
+                <span>
+            
+                    
+                        <b>7.8.4.</b>
+                    
+                    服务器性能测试
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8.5" >
+            
+                <span>
+            
+                    
+                        <b>7.8.5.</b>
+                    
+                    中间件性能测试
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.8.5.1" >
+            
+                <span>
+            
+                    
+                        <b>7.8.5.1.</b>
+                    
+                    MySQL
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.8.5.1.1" data-path="sysbench-mysql.html">
+            
+                <a href="sysbench-mysql.html">
+            
+                    
+                        <b>7.8.5.1.1.</b>
+                    
+                    MySQL性能测试之sysbench
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8.5.2" >
+            
+                <span>
+            
+                    
+                        <b>7.8.5.2.</b>
+                    
+                    Redis
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.8.5.2.1" data-path="redis-benchmark.html">
+            
+                <a href="redis-benchmark.html">
+            
+                    
+                        <b>7.8.5.2.1.</b>
+                    
+                    Redis性能测试之redis-benchmark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -6326,7 +6449,7 @@ collect_bandwidth_limit <span class="token operator">=</span> <span class="token
 <p>&#x2462;&#x5728;TiKV&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/home/tidb/tidb-ansible/conf/tikv.yml</code>&#x4E2D;&#x6DFB;&#x52A0;&#x914D;&#x7F6E;</p>
 <pre class="language-"><code class="lang-ini"><span class="token selector">[security]</span>
 <span class="token comment"># Cipher file &#x7684;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;</span>
-<span class="token constant">cipher-file</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;/home/tidb/conf/cipher-file-256&quot;</span>
+<span class="token constant">cipher-file</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;/data/tidb/conf/cipher-file-256&quot;</span>
 </code></pre>
 <h2 id="4&#x3001;&#x521D;&#x59CB;&#x5316;&#x90E8;&#x7F72;&#x76EE;&#x6807;&#x4E3B;&#x673A;&#x7CFB;&#x7EDF;&#x73AF;&#x5883;&#xFF0C;&#x4FEE;&#x6539;&#x5185;&#x6838;&#x53C2;&#x6570;">4&#x3001;&#x521D;&#x59CB;&#x5316;&#x90E8;&#x7F72;&#x76EE;&#x6807;&#x4E3B;&#x673A;&#x7CFB;&#x7EDF;&#x73AF;&#x5883;&#xFF0C;&#x4FEE;&#x6539;&#x5185;&#x6838;&#x53C2;&#x6570;</h2>
 <pre class="language-"><code class="lang-bash">ansible-playbook bootstrap.yml
@@ -6335,7 +6458,7 @@ collect_bandwidth_limit <span class="token operator">=</span> <span class="token
 <pre class="language-"><code class="lang-bash">ansible-playbook deploy.yml
 </code></pre>
 <p>&#x5206;&#x53D1;TiKV &#x6570;&#x636E;&#x52A0;&#x5BC6;&#x5B58;&#x50A8;token&#x6587;&#x4EF6;&#x5230;TiKV&#x76EE;&#x6807;&#x4E3B;&#x673A;&#x4E0A;</p>
-<pre class="language-"><code class="lang-bash">ansible -i inventory.ini tikv_servers -m copy -a <span class="token string">&apos;src=/home/tidb/tidb-ansible/cipher-file-256 dest=/home/tidb/conf/cipher-file-256 owner=tidb group=tidb&apos;</span>
+<pre class="language-"><code class="lang-bash">ansible -i inventory.ini tikv_servers -m copy -a <span class="token string">&apos;src=/home/tidb/tidb-ansible/cipher-file-256 dest=/data/tidb/conf/cipher-file-256 owner=tidb group=tidb&apos;</span>
 </code></pre>
 <h2 id="6&#x3001;&#x542F;&#x52A8;-tidb-&#x96C6;&#x7FA4;">6&#x3001;&#x542F;&#x52A8; TiDB &#x96C6;&#x7FA4;</h2>
 <pre class="language-"><code class="lang-bash">ansible-playbook start.yml
@@ -6541,7 +6664,7 @@ ansible-playbook start.yml --tags<span class="token operator">=</span>prometheus
 ansible-playbook start.yml --tags<span class="token operator">=</span>prometheus
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-08-12 17:14:53
+2020-08-25 18:34:42
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6577,7 +6700,7 @@ ansible-playbook start.yml --tags<span class="token operator">=</span>prometheus
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"next":{"title":"K8S Operator容器化部署","level":"7.31.1.2","depth":3,"ref":"","articles":[]},"previous":{"title":"安装部署","level":"7.31.1","depth":2,"ref":"","articles":[{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},{"title":"K8S Operator容器化部署","level":"7.31.1.2","depth":3,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-ansible.md","mtime":"2020-08-12T09:14:53.550Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-08-21T01:28:08.657Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"next":{"title":"K8S Operator容器化部署","level":"7.31.1.2","depth":3,"ref":"","articles":[]},"previous":{"title":"安装部署","level":"7.31.1","depth":2,"ref":"","articles":[{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},{"title":"K8S Operator容器化部署","level":"7.31.1.2","depth":3,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-ansible.md","mtime":"2020-08-25T10:34:42.073Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-08-31T05:25:20.786Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

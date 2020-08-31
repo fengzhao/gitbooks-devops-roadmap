@@ -237,11 +237,18 @@
         * [Ceph RBD单节点安装](origin/ceph-rbd单节点安装.md)
         * [Ceph FileSystem单节点安装](origin/ceph-filesystem单节点安装.md)
     * 基础知识
-* 压力测试
+* 性能压力测试
     * 工具
         * [wrk](origin/wrk.md)
+        * [sysbench](origin/benchmark-tools-sysbench.md)
     * 接口测试
     * UI自动化测试
+    * 服务器性能测试
+    * 中间件性能测试
+        * MySQL
+            * [MySQL性能测试之sysbench](origin/sysbench-mysql.md)
+        * Redis
+            * [Redis性能测试之redis-benchmark](origin/redis-benchmark.md)
 * FastDFS
     * 安装
     * 使用

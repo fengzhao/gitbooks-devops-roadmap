@@ -195,13 +195,13 @@ EOF' ;\
 # 14、nohup手动后台运行进程并记录进程号
 
 ```bash
-nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 & echo $! > /data/app/run.pid
+nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 && echo $! > /data/app/run.pid
 
 # 2>&1是把标准错误2重定向到标准输出1中，而标准输出又导入文件里面，所以标准错误和标准输出都会输出到文件。
 # 同时把启动的进程号pid输出到文件
 
 注意：
-	如果运行时的shell为zsh，将任务放置后台的命令由”&“变为”&!“。例如：nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 &! echo $! > /data/app/run.pid
+	如果运行时的shell为zsh，将任务放置后台的命令由”&“变为”&!“。例如：nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 &! && echo $! > /data/app/run.pid
 	参考：https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open
 ```
 
@@ -523,14 +523,12 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 1. JDK安装包已下载在内网HTTP服务器中
 
 ```bash
-wget http://192.168.1.2/jdk/jdk-8u111-linux-x64.tar.gz;\
-tar -zxvf jdk-8u111-linux-x64.tar.gz -C /opt;\
-rm -rf jdk-8u111-linux-x64.tar.gz;\
-ln -s /opt/jdk1.8.0_111 /opt/jdk;\
-sed -i '$a export JAVA_HOME=/opt/jdk\nexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar\nexport PATH=$PATH:$JAVA_HOME/bin' /etc/profile;\
-source /etc/profile;\
-ln -s /opt/jdk/bin/java /usr/bin/java;\
-java -version;\
+curl -# http://192.168.1.7:32770/repository/public-resources/jdk-8u241-linux-x64.tar.gz | tar -zxC /opt/ && \
+ln -s `ls /opt |grep jdk1.8.0_241*| sed  "s:^:\`pwd\`/: "` /opt/jdk && \
+sed -i '$a export JAVA_HOME=/opt/jdk\nexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar\nexport PATH=$PATH:$JAVA_HOME/bin' /etc/profile && \
+source /etc/profile && \
+ln -s /opt/jdk/bin/java /usr/bin/java && \
+java -version && \
 javac -version
 ```
 
@@ -582,45 +580,45 @@ EOF' ;\
   yum install nginx -y
 ```
 
-# 28、安装单机版的Zookeeper
+# 28、安装最新stable单机Zookeeper
 
 **Prerequisite**：
 1. 已安装JDK
 
 ```bash
-version=3.4.14
-curl https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/zookeeper-$version.tar.gz -o /opt/zookeeper-$version.tar.gz 
-tar -zxvf /opt/zookeeper-*.tar.gz -C /opt/ ;\
-rm -rf /opt/zookeeper-*.tar.gz ;\
-ln -s /opt/zookeeper-$version/ /opt/zookeeper ;\
-sed -i '$a export ZOOKEEPER_HOME=/opt/zookeeper\nexport PATH=$PATH:$ZOOKEEPER_HOME/bin' /etc/profile ;\
-source /etc/profile ;\
-mv /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg  ;\
-sed -i -e '/dataDir/d' -e '/dataLogDir/d' /opt/zookeeper/conf/zoo.cfg ;\
-sed -i -e '$a dataDir=/data/zookeeper/data\ndataLogDir=/data/zookeeper/logs\nserver.1=127.0.0.1:2888:3888\nautopurge.purgeInterval=24\nautopurge.purgeInterval=5' /opt/zookeeper/conf/zoo.cfg ;\
-mkdir -p /data/zookeeper/{data,logs} ;\
-echo "1" > /data/zookeeper/data/myid ;\
-zkServer.sh start ;\
-zkServer.sh status ;\
+download_url=`echo https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/``curl -s -L https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/ |grep apache-zookeeper | awk -F ">" '{print $2}'|awk -F "\"" '{print $2}' | head -n 1` && \
+curl -# $download_url | tar -zxC /opt/ && \
+ln -s `ls /opt |grep apache-zookeeper-*bin*| sed  "s:^:\`pwd\`/: "` /opt/zookeeper && \
+sed -i '$a export ZOOKEEPER_HOME=/opt/zookeeper\nexport PATH=$PATH:$ZOOKEEPER_HOME/bin' /etc/profile && \
+source /etc/profile && \
+cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg  && \
+sed -i -e '/dataDir/d' -e '/dataLogDir/d' /opt/zookeeper/conf/zoo.cfg && \
+sed -i -e '$a dataDir=/data/zookeeper/data\ndataLogDir=/data/zookeeper/logs\nserver.1=127.0.0.1:2888:3888\nautopurge.purgeInterval=24\nautopurge.purgeInterval=5' /opt/zookeeper/conf/zoo.cfg && \
+mkdir -p /data/zookeeper/{data,logs} && \
+echo "1" > /data/zookeeper/data/myid && \
+zkServer.sh start && \
+zkServer.sh status && \
 jps -l
 ```
 
-# 29、安装单机版的Kafka
+# 29、安装最新stable单机的Kafka
 
 **Prerequisite**：
+
 1. 已安装Zookeeper
 
 ```bash
-version=2.12-2.2.0
-curl https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_$version.tgz -o /opt/kafka_$version.tgz ;\
-tar -zxvf /opt/kafka_$version.tgz -C /opt;\
-rm -rf /opt/kafka_$version.tgz ;\
-ln -s /opt/kafka_$version /opt/kafka ;\
-sed -i '$a export KAFKA_HOME=/opt/kafka\nexport PATH=$PATH:$KAFKA_HOME/bin' /etc/profile ;\
-source /etc/profile ;\
-sed -i -e 's/log.dirs=\/tmp\/kafka\/logs/log.dirs=\/data\/kafka\/logs/g' -e 's/log.retention.hours=168/log.retention.hours=1/g' -e '$a auto.create.topics.enable=true\ndelete.topic.enable=true'  /opt/kafka/config/server.properties ;\
-mkdir -p /data/kafka/{logs,data} ;\
-kafka-server-start.sh -daemon /opt/kafka/config/server.properties ;\
+download_d=`echo https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/``curl -sL https://mirrors.tuna.tsinghua.edu.cn/apache/kafka |grep \`date +%Y\` |grep "folder.gif" | tac | head -n 1 |awk -F ">" '{print $3}' |awk -F "/" '{print $1}'` && \
+download_url=`echo $download_d/``curl -sL $download_d |grep kafka_ | tac | head -n 1 | awk -F ">" '{print $2}' | awk -F "\"" '{print $2}'` && \
+curl -# $download_url | tar -zxC /opt/ && \
+ln -s `ls /opt |grep kafka_*| sed  "s:^:\`pwd\`/: "` /opt/kafka && \
+sed -i '$a export KAFKA_HOME=/opt/kafka\nexport PATH=$PATH:$KAFKA_HOME/bin' /etc/profile && \
+source /etc/profile && \
+cp /opt/kafka/config/server.properties /opt/kafka/config/server_bak.properties && \
+sed -i '/\#\ Log\ directory\ to\ use/iLOG_DIR=\/data\/kafka\/logs' /opt/kafka/bin/kafka-run-class.sh && \
+sed -i -e 's/log.dirs=\/tmp\/kafka-logs/log.dirs=\/data\/kafka\/data/g' -e 's/log.retention.hours=168/log.retention.hours=12/g' -e '$a auto.create.topics.enable=true\ndelete.topic.enable=true'  /opt/kafka/config/server.properties && \
+mkdir -p /data/kafka/{logs,data} && \
+kafka-server-start.sh -daemon /opt/kafka/config/server.properties && \
 jps -l
 ```
 
