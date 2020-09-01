@@ -298,7 +298,7 @@
 * 数据库
     * [MySQL](origin/mysql-basic.md)
       * 安装部署配置问题
-        * [常见配置操作](origin/mysql-common-operations.md)
+        * [常见操作及SQL](origin/mysql-common-operations.md)
         * [用户权限管理](origin/mysql-user-privileges.md)
         * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
       * 存储过程
@@ -361,5 +361,5 @@
 - TiDB
   - 安装部署
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
-    - K8S Operator容器化部署
+    - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
   - [DM(Data Migration)及Ansible部署](origin/tidb-ansible-dm.md)

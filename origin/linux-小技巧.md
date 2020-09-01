@@ -593,12 +593,15 @@ sed -i '$a export ZOOKEEPER_HOME=/opt/zookeeper\nexport PATH=$PATH:$ZOOKEEPER_HO
 source /etc/profile && \
 cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg  && \
 sed -i -e '/dataDir/d' -e '/dataLogDir/d' /opt/zookeeper/conf/zoo.cfg && \
-sed -i -e '$a dataDir=/data/zookeeper/data\ndataLogDir=/data/zookeeper/logs\nserver.1=127.0.0.1:2888:3888\nautopurge.purgeInterval=24\nautopurge.purgeInterval=5' /opt/zookeeper/conf/zoo.cfg && \
+sed -i -e '$a dataDir=/data/zookeeper/data\ndataLogDir=/data/zookeeper/logs\nserver.1=127.0.0.1:2888:3888\nautopurge.purgeInterval=24\nautopurge.purgeInterval=5\nadmin.enableServer=true\nadmin.enableServer=true
+admin.serverPort=9990'  /opt/zookeeper/conf/zoo.cfg && \
 mkdir -p /data/zookeeper/{data,logs} && \
 echo "1" > /data/zookeeper/data/myid && \
 zkServer.sh start && \
 zkServer.sh status && \
 jps -l
+
+# admin server 访问地址：http://主机IP地址:9990/commands
 ```
 
 # 29、安装最新stable单机的Kafka

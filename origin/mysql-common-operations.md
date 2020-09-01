@@ -505,17 +505,59 @@ sql>load data infile '/var/lib/mysql-files/UserData.csv'
 
      
 
-# 17、修改表或字段的字符集
+# 17、查看数据库或表容量大小
 
-- 修改表的字符集
-
-  ```sql
-  
-  ```
-
-- 修改表中字段的字符集
+- ### 查看所有数据库容量大小
 
   ```sql
-  
+  select 
+  	table_schema as '数据库',
+  	sum(table_rows) as '记录数',
+  	sum(truncate(data_length/1024/1024, 2)) as '数据容量(MB)',
+  	sum(truncate(index_length/1024/1024, 2)) as '索引容量(MB)'
+  from information_schema.tables
+  group by table_schema
+  order by sum(data_length) desc, sum(index_length) desc;
   ```
+
+- ### 查看所有数据库各表容量大小
+
+  ```bash
+  select 
+  	table_schema as '数据库',
+  	table_name as '表名',
+  	table_rows as '记录数',
+  	truncate(data_length/1024/1024, 2) as '数据容量(MB)',
+  	truncate(index_length/1024/1024, 2) as '索引容量(MB)'
+  from information_schema.tables
+  order by data_length desc, index_length desc;
+  ```
+
+- ### 查看指定数据库容量大小
+
+  ```bash
+  select 
+  	table_schema as '数据库',
+  	sum(table_rows) as '记录数',
+  	sum(truncate(data_length/1024/1024, 2)) as '数据容量(MB)',
+  	sum(truncate(index_length/1024/1024, 2)) as '索引容量(MB)'
+  from information_schema.tables
+  where table_schema='mysql';
+  ```
+
+- ### 查看指定数据库各表容量大小
+
+  ```bash
+  select 
+  	table_schema as '数据库',
+  	table_name as '表名',
+  	table_rows as '记录数',
+  	truncate(data_length/1024/1024, 2) as '数据容量(MB)',
+  	truncate(index_length/1024/1024, 2) as '索引容量(MB)'
+  from information_schema.tables
+  where table_schema='mysql'
+  order by data_length desc, index_length desc;
+  ```
+
+  
 
