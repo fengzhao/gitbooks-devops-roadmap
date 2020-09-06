@@ -72,12 +72,14 @@ echo "tidb ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 passwd tidb
 ```
 
-### ②所有节点关闭系统 swap
+### ②所有节点关闭系统 swap、关闭透明大页
 
 ```bash
 echo "vm.swappiness = 0">> /etc/sysctl.conf
 swapoff -a && swapon -a
 sysctl -p
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+echo never > /sys/kernel/mm/transparent_hugepage/defrag
 ```
 
 ### ③打通tools节点的tidb用户到所有节点tidb用户的免秘钥登录
@@ -90,8 +92,6 @@ ssh-copy-id -i node1.tidb4.curiouser.com
 ssh-copy-id -i node2.tidb4.curiouser.com
 ssh-copy-id -i node3.tidb4.curiouser.com
 ```
-
-
 
 # 三、集群安装
 
@@ -120,31 +120,36 @@ tiup list tidb
 global:
   user: "tidb"
   ssh_port: 22
-  deploy_dir: "/data/tidb/bin"
-  data_dir: "/data/tidb/data"
   arch: "amd64"
   resource_control:
     memory_limit: "6G"
     cpu_quota: "200%"
-monitored:
-  node_exporter_port: 9100
-  blackbox_exporter_port: 9115
-  deploy_dir: "/data/tidb/bin/monitored-9100"
-  data_dir: "/data/tidb/data/tidb-data-monitored-9100"
-  log_dir: "/data/tidb/logs/monitored-9100"
 
 server_configs:
   tidb:
+    oom-action: "cancel"
+    mem-quota-query: 25769803776
+    log.query-log-max-len: 4096
+    log.file.log-rotate: true
+    log.file.max-size: 300
+    log.file.max-days: 7
+    log.file.max-backups: 14
     log.slow-threshold: 300
     binlog.enable: true
     binlog.ignore-error: true
   tikv:
+    global.log-rotation-timespan: "168h"
     readpool.unified.max-thread-count: 12
     readpool.storage.use-unified-pool: false
     readpool.coprocessor.use-unified-pool: true
+    coprocessor.split-region-on-table: false
     storage.block-cache.capacity: "16GB"
     raftstore.capacity: "10GB"
   pd:
+    log.file.max-size: 300
+    log.file.max-days: 28
+    log.file.max-backups: 14
+    log.file.log-rotate: true
     replication.location-labels: ["host"]
     schedule.leader-schedule-limit: 4
     schedule.region-schedule-limit: 2048
@@ -158,61 +163,83 @@ server_configs:
 
 pd_servers:
   - host: 192.168.1.71
+    ssh_port: 22
+    name: pd-1
+    client_port: 2379
+    peer_port: 2380
+    deploy_dir: /data/tidb/pd-2379
+    data_dir: /data/tidb/pd-2379/data
+    log_dir: /data/tidb/pd-2379/logs
   - host: 192.168.1.72
+    ssh_port: 22
+    name: pd-2
+    client_port: 2379
+    peer_port: 2380
+    deploy_dir: /data/tidb/pd-2379
+    data_dir: /data/tidb/pd-2379/data
+    log_dir: /data/tidb/pd-2379/logs
   - host: 192.168.1.73
+    ssh_port: 22
+    name: pd-3
+    client_port: 2379
+    peer_port: 2380
+    deploy_dir: /data/tidb/pd-2379
+    data_dir: /data/tidb/pd-2379/data
+    log_dir: /data/tidb/pd-2379/logs
 
 tidb_servers:
   - host: 192.168.1.71
     port: 4000
     status_port: 10080
-    deploy_dir: "/data/tidb/bin/tidb-4000"
-    log_dir: "/data/tidb/logs/tidb-4000"
+    deploy_dir: "/data/tidb/tidb-4000"
+    log_dir: "/data/tidb/tidb-4000/logs"
     numa_node: "0"
   - host: 192.168.1.72
     port: 4000
     status_port: 10080
-    deploy_dir: "/data/tidb/bin/tidb-4000"
-    log_dir: "/data/tidb/logs/tidb-4000"
+    deploy_dir: "/data/tidb/tidb-4000"
+    log_dir: "/data/tidb/tidb-4000/logs"
     numa_node: "0"
   - host: 192.168.1.73
     port: 4000
     status_port: 10080
-    deploy_dir: "/data/tidb/bin/tidb-4000"
-    log_dir: "/data/tidb/logs/tidb-4000"
+    deploy_dir: "/data/tidb/tidb-4000"
+    log_dir: "/data/tidb/tidb-4000/logs"
     numa_node: "0"
 
 tikv_servers:
   - host: 192.168.1.71
     port: 20160
     status_port: 20180
-    deploy_dir: "/data/tidb/bin/tikv-20160"
-    data_dir: "/data/tidb/data/tikv-20160"
-    log_dir: "/data/tidb/logs/tikv-20160"
+    deploy_dir: "/data/tidb/tikv-20160"
+    data_dir: "/data/tidb/tikv-20160/data"
+    log_dir: "/data/tidb/tikv-20160/logs"
     numa_node: "0"
     config:
       server.labels: { host: "tikv1" }
   - host: 192.168.1.72
     port: 20160
     status_port: 20180
-    deploy_dir: "/data/tidb/bin/tikv-20160"
-    data_dir: "/data/tidb/data/tikv-20160"
-    log_dir: "/data/tidb/logs/tikv-20160"
+    deploy_dir: "/data/tidb/tikv-20160"
+    data_dir: "/data/tidb/tikv-20160/data"
+    log_dir: "/data/tidb/tikv-20160/logs"
     numa_node: "0"
     config:
       server.labels: { host: "tikv2" }
   - host: 192.168.1.73
     port: 20160
     status_port: 20180
-    deploy_dir: "/data/tidb/bin/tikv-20160"
-    data_dir: "/data/tidb/data/tikv-20160"
-    log_dir: "/data/tidb/logs/tikv-20160"
+    deploy_dir: "/data/tidb/tikv-20160"
+    data_dir: "/data/tidb/tikv-20160/data"
+    log_dir: "/data/tidb/tikv-20160/logs"
     numa_node: "0"
     config:
       server.labels: { host: "tikv3" }
 tiflash_servers:
   - host: 192.168.1.70
-    data_dir: "/data/tidb/data/tiflash-9000"
-    deploy_dir: "/data/tidb/bin/tiflash-9000"
+    data_dir: "/data/tidb/tiflash-9000/data"
+    deploy_dir: "/data/tidb/tiflash-9000"
+    log_dir: "/data/tidb/tiflash-9000/logs"
     ssh_port: 22
     tcp_port: 9000
     http_port: 8123
@@ -230,9 +257,9 @@ pump_servers:
   - host: 192.168.1.70
     ssh_port: 22
     port: 8250
-    deploy_dir: "/data/tidb/bin/pump-8249"
-    data_dir: "/data/tidb/data/pump-8249"
-    log_dir: "/data/tidb/logs/pump-8249"
+    deploy_dir: "/data/tidb/pump-8249"
+    data_dir: "/data/tidb/pump-8249/data"
+    log_dir: "/data/tidb/pump-8249/logs"
     numa_node: "0"
     # The following configs are used to overwrite the `server_configs.drainer` values.
     config:
@@ -242,11 +269,11 @@ tispark_masters:
     ssh_port: 22
     port: 7077
     web_port: 8080
-    deploy_dir: "/data/tidb/bin/tispark-master-7077"
+    deploy_dir: "/data/tidb/tispark-master-7077"
     java_home: "/opt/jdk"
     spark_config:
       spark.driver.memory: "2g"
-      spark.eventLog.enabled: "False"
+      spark.eventLog.enabled: "True"
       spark.tispark.grpc.framesize: 268435456
       spark.tispark.grpc.timeout_in_sec: 100
       spark.tispark.meta.reload_period_in_sec: 60
@@ -264,38 +291,45 @@ tispark_workers:
     ssh_port: 22
     port: 7078
     web_port: 8081
-    deploy_dir: "/data/tidb/bin//tispark-worker-7078"
+    deploy_dir: "/data/tidb/tispark-worker-7078"
     java_home: "/opt/jdk"
 
 cdc_servers:
   - host: 192.168.1.70
     ssh_port: 22
     port: 8300
-    deploy_dir: "/data/tidb/bin/cdc-8300"
-    log_dir: "/tidb-deploy/cdc-8300/log"
+    deploy_dir: "/data/tidb/cdc-8300"
+    log_dir: "/data/tidb/cdc-8300/logs"
+
+monitored:
+  node_exporter_port: 9100
+  blackbox_exporter_port: 9115
+  deploy_dir: "/data/tidb/monitored-9100"
+  data_dir: "/data/tidb/monitored-9100/data"
+  log_dir: "/data/tidb/monitored-9100/logs"
 
 monitoring_servers:
   - host: 192.168.1.70
     ssh_port: 22
     port: 9090
-    deploy_dir: "/data/tidb/bin/prometheus-9090"
-    data_dir: "/data/tidb/data/prometheus-9090"
-    log_dir: "/data/tidb/logs/prometheus-9090"
+    deploy_dir: "/data/tidb/prometheus-9090"
+    data_dir: "/data/tidb/prometheus-9090/data"
+    log_dir: "/data/tidb/prometheus-9090/logs"
 
 grafana_servers:
   - host: 192.168.1.70
     ssh_port: 22
     port: 3000
-    deploy_dir: "/data/tidb/bin/grafana-3000"
+    deploy_dir: "/data/tidb/grafana-3000"
 
-alertmanager_servers:
-  - host: 192.168.1.70
-    ssh_port: 22
-    web_port: 9093
-    cluster_port: 9094
-    deploy_dir: "/data/tidb/bin/alertmanager-9093"
-    data_dir: "/data/tidb/data/alertmanager-9093"
-    log_dir: "/data/tidb/logs/alertmanager-9093"
+# alertmanager_servers:
+#   - host: 192.168.1.70
+#     ssh_port: 22
+#     web_port: 9093
+#     cluster_port: 9094
+#     deploy_dir: "/data/tidb/alertmanager-9093"
+#     data_dir: "/data/tidb/alertmanager-9093/data"
+#     log_dir: "/data/tidb/alertmanager-9093/logs"
 ```
 
 ## 4、查集群拓扑配置文件语法
@@ -349,13 +383,23 @@ tiup cluster display 集群名字
 tiup cluster display 集群名字 --dashboard
 ```
 
-
-
 ## 9、其他信息
 
-- Grafana默认用户名密码为：`admin/admin`
+### ①Grafana默认用户名密码
 
-- 监控Dashboard默认用户名密码为：``root 密码为空``
+`admin/admin`
+
+### ②监控Dashboard默认用户名密码
+
+`root 密码为空`
+
+### ③组件拓扑配置文件样例
+
+- 全配置参数模版：https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml
+
+- TiDB：https://github.com/pingcap/tidb/blob/master/config/config.toml.example
+- PD：https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml
+- TiKV：https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml
 
 ## 10、集群其他操作
 
@@ -375,7 +419,7 @@ tiup cluster display 集群名字 --dashboard
 
    - 如果配置的生效范围为该组件全局，则配置到 `server_configs`。例如：
 
-     ```text
+     ```yaml
      server_configs:
        tidb:
          log.slow-threshold: 300
@@ -383,7 +427,7 @@ tiup cluster display 集群名字 --dashboard
 
    - 如果配置的生效范围为某个节点，则配置到具体节点的 `config` 中。例如：
 
-     ```text
+     ```yaml
      tidb_servers:
      - host: 10.0.1.11
          port: 4000
@@ -391,7 +435,7 @@ tiup cluster display 集群名字 --dashboard
              log.slow-threshold: 300
      ```
 
-   参数的格式参考 [TiUP 配置参数模版](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml)。**配置项层次结构使用 `.` 表示**。关于组件的更多配置参数说明，可参考 [tidb `config.toml.example`](https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example)、[tikv `config.toml.example`](https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml) 和 [pd `config.toml.example`](https://github.com/pingcap/pd/blob/v4.0.0-rc/conf/config.toml)。
+   参数的格式参考 [TiUP 配置参数模版](https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml)。**配置项层次结构使用 `.` 表示**。
 
 3. 执行 `reload` 命令滚动分发配置、重启相应组件：
 
@@ -401,7 +445,7 @@ tiup cluster display 集群名字 --dashboard
 
 **示例**：如果要调整 tidb-server 中事务大小限制参数 `txn-total-size-limit` 为 `1G`，该参数位于 [performance](https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example) 模块下，调整后的配置如下：
 
-```text
+```yaml
 server_configs:
   tidb:
     performance.txn-total-size-limit: 1073741824

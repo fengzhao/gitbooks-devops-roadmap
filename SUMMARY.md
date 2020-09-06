@@ -363,3 +363,5 @@
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
     - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
   - [DM(Data Migration)及Ansible部署](origin/tidb-ansible-dm.md)
+  - [使用TiDB-Dumpling从TiDB导出数据](origin/tidb-dumpling-export.md)
+  - [使用TIDB-Lightning导入数据到TIDB](origin/tidb-lighting-import.md)

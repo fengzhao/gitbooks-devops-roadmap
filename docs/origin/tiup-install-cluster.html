@@ -5993,6 +5993,36 @@
             
         </li>
     
+        <li class="chapter " data-level="7.31.3" data-path="tidb-dumpling-export.html">
+            
+                <a href="tidb-dumpling-export.html">
+            
+                    
+                        <b>7.31.3.</b>
+                    
+                    使用TiDB-Dumpling从TiDB导出数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.31.4" data-path="tidb-lighting-import.html">
+            
+                <a href="tidb-lighting-import.html">
+            
+                    
+                        <b>7.31.4.</b>
+                    
+                    使用TIDB-Lightning导入数据到TIDB
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -6303,10 +6333,12 @@
 <span class="token builtin class-name">echo</span> <span class="token string">&quot;tidb ALL=(ALL) NOPASSWD: ALL&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sudoers
 <span class="token function">passwd</span> tidb
 </code></pre>
-<h3 id="&#x2461;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5173;&#x95ED;&#x7CFB;&#x7EDF;-swap">&#x2461;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5173;&#x95ED;&#x7CFB;&#x7EDF; swap</h3>
+<h3 id="&#x2461;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5173;&#x95ED;&#x7CFB;&#x7EDF;-swap&#x3001;&#x5173;&#x95ED;&#x900F;&#x660E;&#x5927;&#x9875;">&#x2461;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5173;&#x95ED;&#x7CFB;&#x7EDF; swap&#x3001;&#x5173;&#x95ED;&#x900F;&#x660E;&#x5927;&#x9875;</h3>
 <pre class="language-"><code class="lang-bash"><span class="token builtin class-name">echo</span> <span class="token string">&quot;vm.swappiness = 0&quot;</span><span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
 swapoff -a <span class="token operator">&amp;&amp;</span> <span class="token function">swapon</span> -a
 sysctl -p
+<span class="token builtin class-name">echo</span> never <span class="token operator">&gt;</span> /sys/kernel/mm/transparent_hugepage/enabled
+<span class="token builtin class-name">echo</span> never <span class="token operator">&gt;</span> /sys/kernel/mm/transparent_hugepage/defrag
 </code></pre>
 <h3 id="&#x2462;&#x6253;&#x901A;tools&#x8282;&#x70B9;&#x7684;tidb&#x7528;&#x6237;&#x5230;&#x6240;&#x6709;&#x8282;&#x70B9;tidb&#x7528;&#x6237;&#x7684;&#x514D;&#x79D8;&#x94A5;&#x767B;&#x5F55;">&#x2462;&#x6253;&#x901A;tools&#x8282;&#x70B9;&#x7684;tidb&#x7528;&#x6237;&#x5230;&#x6240;&#x6709;&#x8282;&#x70B9;tidb&#x7528;&#x6237;&#x7684;&#x514D;&#x79D8;&#x94A5;&#x767B;&#x5F55;</h3>
 <pre class="language-"><code class="lang-bash"><span class="token function">su</span> - tidb 
@@ -6333,31 +6365,36 @@ tiup --binary cluster
 <span class="token key atrule">global</span><span class="token punctuation">:</span>
   <span class="token key atrule">user</span><span class="token punctuation">:</span> <span class="token string">&quot;tidb&quot;</span>
   <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
-  <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin&quot;</span>
-  <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data&quot;</span>
   <span class="token key atrule">arch</span><span class="token punctuation">:</span> <span class="token string">&quot;amd64&quot;</span>
   <span class="token key atrule">resource_control</span><span class="token punctuation">:</span>
     <span class="token key atrule">memory_limit</span><span class="token punctuation">:</span> <span class="token string">&quot;6G&quot;</span>
     <span class="token key atrule">cpu_quota</span><span class="token punctuation">:</span> <span class="token string">&quot;200%&quot;</span>
-<span class="token key atrule">monitored</span><span class="token punctuation">:</span>
-  <span class="token key atrule">node_exporter_port</span><span class="token punctuation">:</span> <span class="token number">9100</span>
-  <span class="token key atrule">blackbox_exporter_port</span><span class="token punctuation">:</span> <span class="token number">9115</span>
-  <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/monitored-9100&quot;</span>
-  <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/tidb-data-monitored-9100&quot;</span>
-  <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/monitored-9100&quot;</span>
 
 <span class="token key atrule">server_configs</span><span class="token punctuation">:</span>
   <span class="token key atrule">tidb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">oom-action</span><span class="token punctuation">:</span> <span class="token string">&quot;cancel&quot;</span>
+    <span class="token key atrule">mem-quota-query</span><span class="token punctuation">:</span> <span class="token number">25769803776</span>
+    <span class="token key atrule">log.query-log-max-len</span><span class="token punctuation">:</span> <span class="token number">4096</span>
+    <span class="token key atrule">log.file.log-rotate</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">log.file.max-size</span><span class="token punctuation">:</span> <span class="token number">300</span>
+    <span class="token key atrule">log.file.max-days</span><span class="token punctuation">:</span> <span class="token number">7</span>
+    <span class="token key atrule">log.file.max-backups</span><span class="token punctuation">:</span> <span class="token number">14</span>
     <span class="token key atrule">log.slow-threshold</span><span class="token punctuation">:</span> <span class="token number">300</span>
     <span class="token key atrule">binlog.enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
     <span class="token key atrule">binlog.ignore-error</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
   <span class="token key atrule">tikv</span><span class="token punctuation">:</span>
+    <span class="token key atrule">global.log-rotation-timespan</span><span class="token punctuation">:</span> <span class="token string">&quot;168h&quot;</span>
     <span class="token key atrule">readpool.unified.max-thread-count</span><span class="token punctuation">:</span> <span class="token number">12</span>
     <span class="token key atrule">readpool.storage.use-unified-pool</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
     <span class="token key atrule">readpool.coprocessor.use-unified-pool</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">coprocessor.split-region-on-table</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
     <span class="token key atrule">storage.block-cache.capacity</span><span class="token punctuation">:</span> <span class="token string">&quot;16GB&quot;</span>
     <span class="token key atrule">raftstore.capacity</span><span class="token punctuation">:</span> <span class="token string">&quot;10GB&quot;</span>
   <span class="token key atrule">pd</span><span class="token punctuation">:</span>
+    <span class="token key atrule">log.file.max-size</span><span class="token punctuation">:</span> <span class="token number">300</span>
+    <span class="token key atrule">log.file.max-days</span><span class="token punctuation">:</span> <span class="token number">28</span>
+    <span class="token key atrule">log.file.max-backups</span><span class="token punctuation">:</span> <span class="token number">14</span>
+    <span class="token key atrule">log.file.log-rotate</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
     <span class="token key atrule">replication.location-labels</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;host&quot;</span><span class="token punctuation">]</span>
     <span class="token key atrule">schedule.leader-schedule-limit</span><span class="token punctuation">:</span> <span class="token number">4</span>
     <span class="token key atrule">schedule.region-schedule-limit</span><span class="token punctuation">:</span> <span class="token number">2048</span>
@@ -6371,61 +6408,83 @@ tiup --binary cluster
 
 <span class="token key atrule">pd_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.71
+    <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> pd<span class="token punctuation">-</span><span class="token number">1</span>
+    <span class="token key atrule">client_port</span><span class="token punctuation">:</span> <span class="token number">2379</span>
+    <span class="token key atrule">peer_port</span><span class="token punctuation">:</span> <span class="token number">2380</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span><span class="token number">2379</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/data
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/logs
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.72
+    <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> pd<span class="token punctuation">-</span><span class="token number">2</span>
+    <span class="token key atrule">client_port</span><span class="token punctuation">:</span> <span class="token number">2379</span>
+    <span class="token key atrule">peer_port</span><span class="token punctuation">:</span> <span class="token number">2380</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span><span class="token number">2379</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/data
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/logs
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.73
+    <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> pd<span class="token punctuation">-</span><span class="token number">3</span>
+    <span class="token key atrule">client_port</span><span class="token punctuation">:</span> <span class="token number">2379</span>
+    <span class="token key atrule">peer_port</span><span class="token punctuation">:</span> <span class="token number">2380</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span><span class="token number">2379</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/data
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> /data/tidb/pd<span class="token punctuation">-</span>2379/logs
 
 <span class="token key atrule">tidb_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.71
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">4000</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">10080</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tidb-4000&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tidb-4000&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.72
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">4000</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">10080</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tidb-4000&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tidb-4000&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.73
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">4000</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">10080</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tidb-4000&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tidb-4000&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tidb-4000/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
 
 <span class="token key atrule">tikv_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.71
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">20160</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">20180</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tikv-20160&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/tikv-20160&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tikv-20160&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/data&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
     <span class="token key atrule">config</span><span class="token punctuation">:</span>
       <span class="token key atrule">server.labels</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> <span class="token string">&quot;tikv1&quot;</span> <span class="token punctuation">}</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.72
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">20160</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">20180</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tikv-20160&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/tikv-20160&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tikv-20160&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/data&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
     <span class="token key atrule">config</span><span class="token punctuation">:</span>
       <span class="token key atrule">server.labels</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> <span class="token string">&quot;tikv2&quot;</span> <span class="token punctuation">}</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.73
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">20160</span>
     <span class="token key atrule">status_port</span><span class="token punctuation">:</span> <span class="token number">20180</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tikv-20160&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/tikv-20160&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/tikv-20160&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/data&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tikv-20160/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
     <span class="token key atrule">config</span><span class="token punctuation">:</span>
       <span class="token key atrule">server.labels</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> <span class="token string">&quot;tikv3&quot;</span> <span class="token punctuation">}</span>
 <span class="token key atrule">tiflash_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/tiflash-9000&quot;</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tiflash-9000&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tiflash-9000/data&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tiflash-9000&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tiflash-9000/logs&quot;</span>
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">tcp_port</span><span class="token punctuation">:</span> <span class="token number">9000</span>
     <span class="token key atrule">http_port</span><span class="token punctuation">:</span> <span class="token number">8123</span>
@@ -6443,9 +6502,9 @@ tiup --binary cluster
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8250</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/pump-8249&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/pump-8249&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/pump-8249&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/pump-8249&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/pump-8249/data&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/pump-8249/logs&quot;</span>
     <span class="token key atrule">numa_node</span><span class="token punctuation">:</span> <span class="token string">&quot;0&quot;</span>
     <span class="token comment"># The following configs are used to overwrite the `server_configs.drainer` values.</span>
     <span class="token key atrule">config</span><span class="token punctuation">:</span>
@@ -6455,11 +6514,11 @@ tiup --binary cluster
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">7077</span>
     <span class="token key atrule">web_port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/tispark-master-7077&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tispark-master-7077&quot;</span>
     <span class="token key atrule">java_home</span><span class="token punctuation">:</span> <span class="token string">&quot;/opt/jdk&quot;</span>
     <span class="token key atrule">spark_config</span><span class="token punctuation">:</span>
       <span class="token key atrule">spark.driver.memory</span><span class="token punctuation">:</span> <span class="token string">&quot;2g&quot;</span>
-      <span class="token key atrule">spark.eventLog.enabled</span><span class="token punctuation">:</span> <span class="token string">&quot;False&quot;</span>
+      <span class="token key atrule">spark.eventLog.enabled</span><span class="token punctuation">:</span> <span class="token string">&quot;True&quot;</span>
       <span class="token key atrule">spark.tispark.grpc.framesize</span><span class="token punctuation">:</span> <span class="token number">268435456</span>
       <span class="token key atrule">spark.tispark.grpc.timeout_in_sec</span><span class="token punctuation">:</span> <span class="token number">100</span>
       <span class="token key atrule">spark.tispark.meta.reload_period_in_sec</span><span class="token punctuation">:</span> <span class="token number">60</span>
@@ -6477,38 +6536,45 @@ tiup --binary cluster
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">7078</span>
     <span class="token key atrule">web_port</span><span class="token punctuation">:</span> <span class="token number">8081</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin//tispark-worker-7078&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/tispark-worker-7078&quot;</span>
     <span class="token key atrule">java_home</span><span class="token punctuation">:</span> <span class="token string">&quot;/opt/jdk&quot;</span>
 
 <span class="token key atrule">cdc_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8300</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/cdc-8300&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/tidb-deploy/cdc-8300/log&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/cdc-8300&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/cdc-8300/logs&quot;</span>
+
+<span class="token key atrule">monitored</span><span class="token punctuation">:</span>
+  <span class="token key atrule">node_exporter_port</span><span class="token punctuation">:</span> <span class="token number">9100</span>
+  <span class="token key atrule">blackbox_exporter_port</span><span class="token punctuation">:</span> <span class="token number">9115</span>
+  <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/monitored-9100&quot;</span>
+  <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/monitored-9100/data&quot;</span>
+  <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/monitored-9100/logs&quot;</span>
 
 <span class="token key atrule">monitoring_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">9090</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/prometheus-9090&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/prometheus-9090&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/prometheus-9090&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/prometheus-9090&quot;</span>
+    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/prometheus-9090/data&quot;</span>
+    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/prometheus-9090/logs&quot;</span>
 
 <span class="token key atrule">grafana_servers</span><span class="token punctuation">:</span>
   <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
     <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
     <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">3000</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/grafana-3000&quot;</span>
+    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/grafana-3000&quot;</span>
 
-<span class="token key atrule">alertmanager_servers</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 192.168.1.70
-    <span class="token key atrule">ssh_port</span><span class="token punctuation">:</span> <span class="token number">22</span>
-    <span class="token key atrule">web_port</span><span class="token punctuation">:</span> <span class="token number">9093</span>
-    <span class="token key atrule">cluster_port</span><span class="token punctuation">:</span> <span class="token number">9094</span>
-    <span class="token key atrule">deploy_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/bin/alertmanager-9093&quot;</span>
-    <span class="token key atrule">data_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/data/alertmanager-9093&quot;</span>
-    <span class="token key atrule">log_dir</span><span class="token punctuation">:</span> <span class="token string">&quot;/data/tidb/logs/alertmanager-9093&quot;</span>
+<span class="token comment"># alertmanager_servers:</span>
+<span class="token comment">#   - host: 192.168.1.70</span>
+<span class="token comment">#     ssh_port: 22</span>
+<span class="token comment">#     web_port: 9093</span>
+<span class="token comment">#     cluster_port: 9094</span>
+<span class="token comment">#     deploy_dir: &quot;/data/tidb/alertmanager-9093&quot;</span>
+<span class="token comment">#     data_dir: &quot;/data/tidb/alertmanager-9093/data&quot;</span>
+<span class="token comment">#     log_dir: &quot;/data/tidb/alertmanager-9093/logs&quot;</span>
 </code></pre>
 <h2 id="4&#x3001;&#x67E5;&#x96C6;&#x7FA4;&#x62D3;&#x6251;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BED;&#x6CD5;">4&#x3001;&#x67E5;&#x96C6;&#x7FA4;&#x62D3;&#x6251;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BED;&#x6CD5;</h2>
 <pre class="language-"><code class="lang-bash">tiup cluster check &#x96C6;&#x7FA4;&#x62D3;&#x6251;&#x914D;&#x7F6E;&#x6587;&#x4EF6;
@@ -6538,11 +6604,18 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <pre class="language-"><code class="lang-bash">tiup cluster display &#x96C6;&#x7FA4;&#x540D;&#x5B57; --dashboard
 </code></pre>
 <h2 id="9&#x3001;&#x5176;&#x4ED6;&#x4FE1;&#x606F;">9&#x3001;&#x5176;&#x4ED6;&#x4FE1;&#x606F;</h2>
+<h3 id="&#x2460;grafana&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;">&#x2460;Grafana&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;</h3>
+<p><code>admin/admin</code></p>
+<h3 id="&#x2461;&#x76D1;&#x63A7;dashboard&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;">&#x2461;&#x76D1;&#x63A7;Dashboard&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;</h3>
+<p><code>root &#x5BC6;&#x7801;&#x4E3A;&#x7A7A;</code></p>
+<h3 id="&#x2462;&#x7EC4;&#x4EF6;&#x62D3;&#x6251;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6837;&#x4F8B;">&#x2462;&#x7EC4;&#x4EF6;&#x62D3;&#x6251;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6837;&#x4F8B;</h3>
 <ul>
-<li><p>Grafana&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;&#x4E3A;&#xFF1A;<code>admin/admin</code></p>
+<li><p>&#x5168;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#x6A21;&#x7248;&#xFF1A;<a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml" _target="blank">https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml</a></p>
 </li>
-<li><p>&#x76D1;&#x63A7;Dashboard&#x9ED8;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x5BC6;&#x7801;&#x4E3A;&#xFF1A;<code>root &#x5BC6;&#x7801;&#x4E3A;&#x7A7A;</code></p>
+<li><p>TiDB&#xFF1A;<a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example" _target="blank">https://github.com/pingcap/tidb/blob/master/config/config.toml.example</a></p>
 </li>
+<li>PD&#xFF1A;<a href="https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml" _target="blank">https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml</a></li>
+<li>TiKV&#xFF1A;<a href="https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml" _target="blank">https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml</a></li>
 </ul>
 <h2 id="10&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;">10&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;</h2>
 <h3 id="&#x2460;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;">&#x2460;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;</h3>
@@ -6556,21 +6629,21 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <p>&#x9996;&#x5148;&#x786E;&#x5B9A;&#x914D;&#x7F6E;&#x7684;&#x751F;&#x6548;&#x8303;&#x56F4;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x751F;&#x6548;&#x8303;&#x56F4;&#xFF1A;</p>
 <ul>
 <li><p>&#x5982;&#x679C;&#x914D;&#x7F6E;&#x7684;&#x751F;&#x6548;&#x8303;&#x56F4;&#x4E3A;&#x8BE5;&#x7EC4;&#x4EF6;&#x5168;&#x5C40;&#xFF0C;&#x5219;&#x914D;&#x7F6E;&#x5230; <code>server_configs</code>&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
-<pre class="language-"><code class="lang-text">server_configs:
-  tidb:
-    log.slow-threshold: 300
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">server_configs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">tidb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">log.slow-threshold</span><span class="token punctuation">:</span> <span class="token number">300</span>
 </code></pre>
 </li>
 <li><p>&#x5982;&#x679C;&#x914D;&#x7F6E;&#x7684;&#x751F;&#x6548;&#x8303;&#x56F4;&#x4E3A;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x5219;&#x914D;&#x7F6E;&#x5230;&#x5177;&#x4F53;&#x8282;&#x70B9;&#x7684; <code>config</code> &#x4E2D;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
-<pre class="language-"><code class="lang-text">tidb_servers:
-- host: 10.0.1.11
-    port: 4000
-    config:
-        log.slow-threshold: 300
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">tidb_servers</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span> 10.0.1.11
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">4000</span>
+    <span class="token key atrule">config</span><span class="token punctuation">:</span>
+        <span class="token key atrule">log.slow-threshold</span><span class="token punctuation">:</span> <span class="token number">300</span>
 </code></pre>
 </li>
 </ul>
-<p>&#x53C2;&#x6570;&#x7684;&#x683C;&#x5F0F;&#x53C2;&#x8003; <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml" _target="blank">TiUP &#x914D;&#x7F6E;&#x53C2;&#x6570;&#x6A21;&#x7248;</a>&#x3002;<strong>&#x914D;&#x7F6E;&#x9879;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x4F7F;&#x7528; <code>.</code> &#x8868;&#x793A;</strong>&#x3002;&#x5173;&#x4E8E;&#x7EC4;&#x4EF6;&#x7684;&#x66F4;&#x591A;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF0C;&#x53EF;&#x53C2;&#x8003; <a href="https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example" _target="blank">tidb <code>config.toml.example</code></a>&#x3001;<a href="https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml" _target="blank">tikv <code>config.toml.example</code></a> &#x548C; <a href="https://github.com/pingcap/pd/blob/v4.0.0-rc/conf/config.toml" _target="blank">pd <code>config.toml.example</code></a>&#x3002;</p>
+<p>&#x53C2;&#x6570;&#x7684;&#x683C;&#x5F0F;&#x53C2;&#x8003; <a href="https://github.com/pingcap/tiup/blob/master/examples/topology.example.yaml" _target="blank">TiUP &#x914D;&#x7F6E;&#x53C2;&#x6570;&#x6A21;&#x7248;</a>&#x3002;<strong>&#x914D;&#x7F6E;&#x9879;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x4F7F;&#x7528; <code>.</code> &#x8868;&#x793A;</strong>&#x3002;</p>
 </li>
 <li><p>&#x6267;&#x884C; <code>reload</code> &#x547D;&#x4EE4;&#x6EDA;&#x52A8;&#x5206;&#x53D1;&#x914D;&#x7F6E;&#x3001;&#x91CD;&#x542F;&#x76F8;&#x5E94;&#x7EC4;&#x4EF6;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster reload <span class="token variable">${cluster-name}</span> <span class="token punctuation">[</span>-N <span class="token operator">&lt;</span>nodes<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>-R <span class="token operator">&lt;</span>roles<span class="token operator">&gt;</span><span class="token punctuation">]</span>
@@ -6578,9 +6651,9 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 </li>
 </ol>
 <p><strong>&#x793A;&#x4F8B;</strong>&#xFF1A;&#x5982;&#x679C;&#x8981;&#x8C03;&#x6574; tidb-server &#x4E2D;&#x4E8B;&#x52A1;&#x5927;&#x5C0F;&#x9650;&#x5236;&#x53C2;&#x6570; <code>txn-total-size-limit</code> &#x4E3A; <code>1G</code>&#xFF0C;&#x8BE5;&#x53C2;&#x6570;&#x4F4D;&#x4E8E; <a href="https://github.com/pingcap/tidb/blob/v4.0.0-rc/config/config.toml.example" _target="blank">performance</a> &#x6A21;&#x5757;&#x4E0B;&#xFF0C;&#x8C03;&#x6574;&#x540E;&#x7684;&#x914D;&#x7F6E;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre class="language-"><code class="lang-text">server_configs:
-  tidb:
-    performance.txn-total-size-limit: 1073741824
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">server_configs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">tidb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">performance.txn-total-size-limit</span><span class="token punctuation">:</span> <span class="token number">1073741824</span>
 </code></pre>
 <p>&#x7136;&#x540E;&#x6267;&#x884C; <code>tiup cluster reload ${cluster-name} -R tidb</code> &#x547D;&#x4EE4;&#x6EDA;&#x52A8;&#x91CD;&#x542F;&#x3002;</p>
 <h3 id="&#x2461;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;">&#x2461;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;</h3>
@@ -6629,7 +6702,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <pre class="language-"><code class="lang-bash">tiup cluster destroy &#x96C6;&#x7FA4;&#x540D;&#x5B57;
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-08-31 20:26:58
+2020-09-02 22:55:59
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6673,7 +6746,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.31.1.2","depth":3,"next":{"title":"DM(Data Migration)及Ansible部署","level":"7.31.2","depth":2,"path":"origin/tidb-ansible-dm.md","ref":"origin/tidb-ansible-dm.md","articles":[]},"previous":{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2020-08-31T12:26:58.093Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-09-01T05:43:07.826Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.31.1.2","depth":3,"next":{"title":"DM(Data Migration)及Ansible部署","level":"7.31.2","depth":2,"path":"origin/tidb-ansible-dm.md","ref":"origin/tidb-ansible-dm.md","articles":[]},"previous":{"title":"Ansible二进制部署管理","level":"7.31.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2020-09-02T14:55:59.401Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-09-06T09:41:43.801Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>
