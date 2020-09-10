@@ -297,21 +297,18 @@
       * [SNAT]
 * 数据库
     * [MySQL](origin/mysql-basic.md)
-      * 安装部署配置问题
+      * 运维
         * [常见操作及SQL](origin/mysql-common-operations.md)
         * [用户权限管理](origin/mysql-user-privileges.md)
         * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
-      * 存储过程
+        * 备份与恢复
+          * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
+          * [MysqlDump详解](origin/mysql-dumper.md)
+      * 基础概念
         * [存储过程语法](origin/mysql-procedure-grammar.md)
         * [常用存储过程](origin/mysql-procedure.md)
-      * [事物隔离级别](origin/mysql-transaction.md)
-      * [临时表](origin/mysql-temporary.md)
-      * 备份与恢复
-        * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
-        * [MysqlDump详解](origin/mysql-dumper.md)
-    * SQLServer
-    * ETCD
-    * PostgreSQL
+        * [事物隔离级别](origin/mysql-transaction.md)
+        * [临时表](origin/mysql-temporary.md)
 * 负载均衡与代理
     * Nginx
     * HAProxy

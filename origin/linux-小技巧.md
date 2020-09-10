@@ -1040,7 +1040,13 @@ head -n 5 /dev/urandom |sed 's/[^a-Z0-9]//g'|strings -n 4
 tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 ```
 
-# 46、使用curl命令发送邮件
+# 46、ssh目录的权限问题
+
+- `.ssh目录`的权限应为**700**
+
+- `.ssh目录下文件`的权限应为**600**
+
+# 47、使用curl命令发送邮件
 
 ```bash
 curl -s --ssl-reqd --write-out %{http_code} --output /dev/null \

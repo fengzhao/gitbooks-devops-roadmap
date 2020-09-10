@@ -51,12 +51,12 @@ ansible-playbook 90.setup.yml
 `kubeasz`创建集群主要在以下两个地方进行配置：
 
 - ansible hosts 文件（模板在examples目录）：集群主要节点定义和主要参数配置、全局变量
-- roles/xxx/defaults/main.yml 文件：其他参数配置或者部分组件附加参数
-  - 配置 lb 节点负载均衡算法：修改 roles/lb/defaults/main.yml 变量 BALANCE_ALG: "roundrobin"
-  - 配置 docker 国内镜像加速站点：修改 roles/docker/defaults/main.yml 相关变量
-  - 配置 apiserver 支持公网域名：修改 roles/kube-master/defaults/main.yml 相关变量
-  - 配置 flannel 使用镜像版本：修改 roles/flannel/defaults/main.yml 相关变量
-  - 配置选择不同 addon 组件：修改roles/cluster-addon/defaults/main.yml
+- `roles/xxx/defaults/main.yml `文件：其他参数配置或者部分组件附加参数
+  - 配置 lb 节点负载均衡算法：修改` roles/lb/defaults/main.yml` 变量 BALANCE_ALG: "roundrobin"
+  - 配置 docker 国内镜像加速站点：修改 `roles/docker/defaults/main.yml `相关变量
+  - 配置 apiserver 支持公网域名：修改` roles/kube-master/defaults/main.yml` 相关变量
+  - 配置 flannel 使用镜像版本：修改` roles/flannel/defaults/main.yml `相关变量
+  - 配置选择不同 addon 组件：修改`roles/cluster-addon/defaults/main.yml`
 
 作为 kubeasz 项目的推荐命令行脚本，easzctl 十分轻量、简单；（后续会不断完善补充）
 
@@ -508,6 +508,9 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add traefik https://containous.github.io/traefik-helm-chart
 helm repo add harbor https://helm.goharbor.io
 helm repo add aliyun https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+helm repo add elastic https://helm.elastic.co
+helm repo add kong https://charts.konghq.com
+helm repo add pingcap https://charts.pingcap.org/
 helm repo list
 helm repo update
 ```
@@ -1243,3 +1246,64 @@ ansible-playbook /etc/ansible/24.restore.yml
 
 - https://github.com/coreos/etcd/blob/master/Documentation/op-guide/recovery.md
 
+# 八、升级
+
+### 快速k8s版本升级
+
+快速升级是指只升级`k8s`版本，比较常见如`Bug修复` `重要特性发布`时使用。
+
+- 首先去官网release下载待升级的k8s版本，例如`https://dl.k8s.io/v1.11.5/kubernetes-server-linux-amd64.tar.gz`
+
+- 解压下载的tar.gz文件，找到如下
+
+  ```
+  kube*
+  ```
+
+  开头的二进制，复制替换ansible控制端目录
+
+  ```
+  /etc/ansible/bin
+  ```
+
+  对应文件
+
+  - kube-apiserver
+  - kube-controller-manager
+  - kubectl
+  - kubelet
+  - kube-proxy
+  - kube-scheduler
+
+- 在ansible控制端执行`ansible-playbook -t upgrade_k8s 22.upgrade.yml`即可完成k8s 升级，不会中断业务应用
+
+如果使用 easzctl 命令行，可按如下执行：
+
+- 首先确认待升级的集群（如果有多集群的话） `easzctl checkout <cluster_name>`
+- 执行升级 `easzctl upgrade`
+
+### 其他升级说明
+
+其他升级是指升级k8s组件包括：`etcd版本` `docker版本`，一般不需要用到，以下仅作说明。
+
+- 1.下载所有组件相关新的二进制解压并替换 `/etc/ansible/bin/` 目录下文件
+
+- 2.升级 etcd: `ansible-playbook -t upgrade_etcd 02.etcd.yml`，**注意：etcd 版本只能升级不能降低！**
+
+- 3.升级 docker （建议使用k8s官方支持的docker稳定版本）
+
+  - 如果可以接受短暂业务中断，执行 `ansible-playbook -t upgrade_docker 03.docker.yml`
+
+  - 如果要求零中断升级，执行
+
+     
+
+    ```
+    ansible-playbook -t download_docker 03.docker.yml
+    ```
+
+    ，然后手动执行如下
+
+    - 待升级节点，先应用`kubectl cordon`和`kubectl drain`命令迁移业务pod
+    - 待升级节点执行 `systemctl restart docker`
+    - 恢复节点可调度 `kubectl uncordon`
