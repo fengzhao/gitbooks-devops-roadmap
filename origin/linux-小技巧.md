@@ -1027,7 +1027,7 @@ docker info
 
 ```bash
 # 根据时间戳加随机数计算md5值并取前10位
-echo $(date +%s)$RANDOM | md5sum | head -c 10
+echo $(date +%s)$RANDOM | md5sum | base64 | head -c 10
 
 head -c 16 /dev/random | base64
 
@@ -1103,3 +1103,65 @@ Content-Disposition: attachment; filename=test.txt
 3. https://stackoverflow.com/questions/44728855/curl-send-html-email-with-embedded-image-and-attachment
 
    
+
+# 48、split按行或大小切割大文件
+
+**split命令** 可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。
+
+### 选项
+
+```shell
+-a, --suffix-length=N   指定后缀长度(默认为2)
+    --additional-suffix=SUFFIX  append an additional SUFFIX to file names
+-b, --bytes=SIZE        put SIZE bytes per output file
+-C, --line-bytes=SIZE   put at most SIZE bytes of lines per output file
+-d, --numeric-suffixes[=FROM]  使用数字作为后缀(默认起始值为0)
+-e, --elide-empty-files  do not generate empty output files with '-n'
+    --filter=COMMAND    write to shell COMMAND; file name is $FILE
+-l, --lines=NUMBER      值为每一输出档的行数大小。
+-n, --number=CHUNKS     generate CHUNKS output files; see explanation below
+-u, --unbuffered        immediately copy input to output with '-n r/...'
+      --verbose		在每个输出文件打开前输出文件特征
+      --help		显示此帮助信息并退出
+      --version		显示版本信息并退出
+
+SIZE is an integer and optional unit (example: 10M is 10*1024*1024).  Units are K, M, G, T, P, E, Z, Y (powers of 1024) or KB, MB, ... (powers of 1000).
+
+CHUNKS may be:
+N       split into N files based on size of input
+K/N     output Kth of N to stdout
+l/N     split into N files without splitting lines
+l/K/N   output Kth of N to stdout without splitting lines
+r/N     like 'l' but use round robin distribution
+r/K/N   likewise but only output Kth of N to stdout
+
+```
+
+### 实例
+
+使用split命令将date.file文件分割成大小为10KB的小文件：
+
+```shell
+# split -b 10k date.file 
+date.file  xaa  xab  xac  xad  xae  xaf  xag  xah  xai  xaj
+```
+
+文件被分割成多个带有字母的后缀文件，如果想用数字后缀可使用-d参数，同时可以使用-a length来指定后缀的长度：
+
+```shell
+# split -b 10k date.file -d -a 3
+date.file  x000  x001  x002  x003  x004  x005  x006  x007  x008  x009
+```
+
+为分割后的文件指定文件名的前缀：
+
+```shell
+# split -b 10k date.file -d -a 3 split_file
+date.file  split_file000  split_file001  split_file002  split_file003  split_file004  split_file005  split_file006  split_file007  split_file008  split_file009
+```
+
+使用-l选项根据文件的行数来分割文件，例如把文件分割成每个包含10行的小文件：
+
+```shell
+split -l 10 date.file
+```

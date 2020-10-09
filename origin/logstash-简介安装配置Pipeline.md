@@ -787,3 +787,11 @@ Logstash插件默认仓库地址是：http://rubygems.org
 
 编辑/usr/share/logstash/Gemfile，将`source "https://rubygems.org"`改为`source "https://my.private.repository"`
 
+# 十一、监控信息
+
+## 1、查看pipeline运行监控信息
+
+```bash
+curl -XGET 'http://logstash实例地址:9600/_node/stats/pipelines/pipeline实例名?pretty'
+```
+

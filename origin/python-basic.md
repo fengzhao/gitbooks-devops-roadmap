@@ -62,6 +62,6 @@ pip install -U pip
 
 
 ```bash
-thon -m pip install -U pip
+pthon -m pip install -U pip
 ```
 
