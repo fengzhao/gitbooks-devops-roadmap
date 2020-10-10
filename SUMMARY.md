@@ -170,6 +170,7 @@
             * [插件管理](origin/elasticsearch-插件管理.md)
             * [通讯加密](origin/elasticsearch-ssl-tls.md)
             * [索引快照清理策略](origin/elasticsearch-index-clean-snapshots.md)
+            * [官方示例数据集](origin/elasticsearch-sample-data.md)
         * 性能
             * [测试](origin/elasticsearch-pressuretest.md)
             * [优化](origin/elasticsearch-optimizing.md)
@@ -270,8 +271,8 @@
     * [Windows进程守护工具NSSM](origin/windows-nssm.md)
     * [Windows 无人值守部署服务](origin/windows-deployment-service-aik.md)
 * Linux
-    * [比较两个文件的不同](origin/linux-diff.md)
     * [Linux小技巧](origin/linux-小技巧.md)
+    * [比较两个文件的不同](origin/linux-diff.md)
     * [基础服务安装](origin/linux-baseserver.md)
     * [Linux后台启动进程](origin/linux-daemon.md)
     * [文本处理](origin/linux-文本处理.md)
@@ -364,3 +365,8 @@
   - [DM(Data Migration)及Ansible部署](origin/tidb-ansible-dm.md)
   - [使用TiDB-Dumpling从TiDB导出数据](origin/tidb-dumpling-export.md)
   - [使用TIDB-Lightning导入数据到TIDB](origin/tidb-lighting-import.md)
+
+## Part VIII: golang学习笔记
+
+- [基础语法](origin/golang-basic.md)
+

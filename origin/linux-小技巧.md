@@ -1165,3 +1165,99 @@ date.file  split_file000  split_file001  split_file002  split_file003  split_fil
 ```shell
 split -l 10 date.file
 ```
+
+# 49、journalctl查看内核日志和应用日志
+
+Systemd统一管理所有Unit的启动日志。带来的好处就是，可以只用journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件是/etc/systemd/journald.conf。该工具是从message这个文件里读取信息。
+
+## ①查看所有日志
+
+```bash
+
+```
+
+## ②查看内核日志（不显示应用日志）
+
+```bash
+journalctl -k
+```
+
+## ③查看系统本次启动的日志
+
+```bash
+# 查看系统本次启动的日志
+journalctl  -b
+journalctl  -b  -0
+# 查看上一次启动的日志
+需更改设置,如上次系统崩溃，需要查看日志时，就要看上一次的启动日志。
+journalctl  -b -1
+```
+
+## ④查看指定时间的日志
+
+```bash
+journalctl --since="2018-10-3018:17:16"
+
+journalctl --since "20 minago"
+
+journalctl --since yesterday
+
+journalctl --since "2020-09-23 22:50:00" --until "2020-09-23 23:20:00"
+
+journalctl --since 09:00 --until"1 hour ago"
+
+journalctl --since"15:15" --until now
+```
+
+## ⑤显示尾部的最新10行日志
+
+```bash
+journalctl  -n
+```
+
+## ⑥显示尾部指定行数的日志
+
+```bash
+journalctl -n 20
+```
+
+## ⑦实时滚动显示最新日志
+
+```bash
+journalctl   -f
+```
+
+## ⑧查看某个Unit的日志
+
+```bash
+journalctl  -u nginx.service
+# 只显示今天的
+journalctl  -u nginx.service  --since  today
+# 实时滚动显示
+journalctl  -u nginx.service  -f
+# 合并显示多个Unit的日志
+journalctl  -u nginx.service  -u php-fpm.service  --since today
+```
+
+## ⑨指定用户的日志
+
+```bash
+journalctl _UID=33  --since today
+```
+
+## ⑩设置/显示日志文件配置
+
+```bash
+# 显示日志占据的硬盘空间
+journalctl  --disk-usage
+# 指定日志文件占据的最大空间
+journalctl   --vacuum-size=1G
+# 指定日志文件保存多久
+journalctl   --vacuum-time=1years
+```
+
+## ⑪
+
+```bash
+
+```
