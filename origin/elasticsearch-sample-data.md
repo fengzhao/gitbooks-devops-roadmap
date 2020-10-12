@@ -134,7 +134,7 @@ PUT /logstash-2015.05.20
 
 ## ③账号数据不需要任何映射，直接用ElasticSearch的bulk API导入数据
 
-## ④Curl导入
+## ④Curl命令导入
 
 ```bash
 curl -X PUT "localhost:9200/shakespeare?pretty" -H 'Content-Type: application/json' -d'
@@ -234,12 +234,143 @@ curl -u elastic:密码 -H 'Content-Type: application/x-ndjson' \
 ```bash
 GET _cat/indices/bank,shakespeare,logstash-2015*?v
 health status index               pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   bank                  5   1       1000            0    418.2kb        418.2kb
-yellow open   shakespeare           5   1     111396            0     17.6mb         17.6mb
-yellow open   logstash-2015.05.18   5   1       4631            0     15.6mb         15.6mb
-yellow open   logstash-2015.05.19   5   1       4624            0     15.7mb         15.7mb
-yellow open   logstash-2015.05.20   5   1       4750            0     16.4mb         16.4mb
+green open   bank                  5   1       1000            0    418.2kb        418.2kb
+green open   shakespeare           5   1     111396            0     17.6mb         17.6mb
+green open   logstash-2015.05.18   5   1       4631            0     15.6mb         15.6mb
+green open   logstash-2015.05.19   5   1       4624            0     15.7mb         15.7mb
+green open   logstash-2015.05.20   5   1       4750            0     16.4mb         16.4mb
 ```
+
+# 四、数据查询
+
+## 1、只显示某些字段
+
+```bash
+GET /bank/_search
+{
+  "query": { "match_all": {} },
+  "_source": ["account_number", "balance"]
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match_all": {} },
+  "_source": ["account_number", "balance"]
+}'
+```
+
+## 2、查询某字段值为20的Doc 
+
+```json
+GET /bank/_search
+{
+  "query": { "match": { "account_number": 20 } }
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "account_number": 20 } }
+}'
+```
+
+## 3、查询某字段包含"mill"的Doc
+
+```json
+GET /bank/_search
+{
+  "query": { "match": { "address": "mill" } }
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "address": "mill" } }
+}'
+```
+
+## 4、查询某字段包含"mill"或"lane"的Doc
+
+```json
+GET /bank/_search
+{
+  "query": { "match": { "address": "mill lane" } }
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": { "match": { "address": "mill lane" } }
+}'
+```
+
+```json
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+' 
+```
+
+```json
+GET /bank/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}
+# 或者
+curl -X GET "localhost:9200/bank/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "address": "mill" } },
+        { "match": { "address": "lane" } }
+      ]
+    }
+  }
+}'
+```
+
+# 五、数据搜索及可视化
+
+## 1、创建索引模式
+
+![](../assets/elasticsearch-sample-data-1.png)
+
+## 2、Discover中搜索数据
+
+![](../assets/elasticsearch-sample-data-2.png)
+
+![](../assets/elasticsearch-sample-data-2-1.png)
+
+## 3、可视化数据
+
+### 饼图显示bank数据各个收入范围的年龄分布
+
+![](../assets/elasticsearch-sample-data-3.png)
 
 # 参考
 

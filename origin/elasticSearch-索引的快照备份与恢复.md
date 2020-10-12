@@ -160,9 +160,9 @@ PUT /_snapshot/my_backup/snapshot_1?wait_for_completion=true
 ```bash
 PUT /_snapshot/快照仓库名/快照名?wait_for_completion=true
 {
-"indices": "index-A,index-B",
-"ignore_unavailable": true,
-"include_global_state": false
+  "indices": "index-A,index-B",
+  "ignore_unavailable": true,
+  "include_global_state": false
 }
 ```
 ## 3、查看仓库中所有的快照

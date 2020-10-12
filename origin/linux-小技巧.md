@@ -1173,7 +1173,7 @@ Systemd统一管理所有Unit的启动日志。带来的好处就是，可以只
 ## ①查看所有日志
 
 ```bash
-
+journalctl
 ```
 
 ## ②查看内核日志（不显示应用日志）
@@ -1256,8 +1256,3 @@ journalctl   --vacuum-size=1G
 journalctl   --vacuum-time=1years
 ```
 
-## ⑪
-
-```bash
-
-```
