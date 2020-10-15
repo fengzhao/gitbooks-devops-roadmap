@@ -6,17 +6,41 @@
 
 ![](../assets/raspberry-pi-1.png)
 
+![](../assets/raspberry-pi-1-1.png)
+
 ## GPIO引脚定义
 
 ![img](../assets/raspberry-pi-2.png)
 
+![](../assets/raspberry-pi-4.png)
+
+![](../assets/raspberry-pi-5.png)
+
+在实际使用中，我们应该熟悉树莓派接口的两种命名方案:
+
+- **WiringPi 编号**：功接线的引脚号（如TXD、PWM0等等）
+- **BCM编号**：是 Broadcom 针脚号，也即是通常称的GPIO
+- **物理编号**（Physical – Number）：PCB板上针脚的物理位置对应的编号（1~40）
+
+### I2C接口
+
+I2C是由Philips公司开发的一种简单、双向二线制同步串行总线。它只需要两根线即可在连接于总线上的器件之间传送信息。树莓派通过I2C接口可控制多个传感器和组件。它们的通信是通过SDA(数据引脚)和SCL(时钟速度引脚)来完成的。每个从设备都有一个唯一的地址，允许与许多设备间快速通信。ID_EEPROM引脚也是I2C协议，它用于与HATs通信。
+
+### SPI接口
+
+SPI是串行外设接口，用于控制具有主从关系的组件，采用从进主出和主进从出的方式工作，树莓派上SPI由SCLK、MOSI、MISO接口组成，SCLK用于控制数据速度，MOSI将数据从树莓派发送到所连接的设备，而MISO则相反。
+
+### UART接口
+
+有使用Arduino的朋友一定听说过UART或Serial，通用异步收/发器接口用于将Arduino连接到为其编程的计算机上，也用于其他设备与 RX 和 TX 引脚之间的通信。如果树莓派在 raspi-config 中启用了串口终端，则可以使用这些引脚通过电脑来控制树莓派，也可以直接用于控制Arduino。
+
+### PWM接口
+
+在树莓派上，所有的引脚都可以实现软件PWM，而GPIO12、GPIO13、GPIO18、GPIO19可以实现硬件脉宽调制。
+
 ## 各型号配置对比
 
 ![](../assets/raspberry-pi-3.png)
-
-## 各型号性能对比
-
-![](../assets/raspberry-pi-4.png)
 
 # 二、基础配置
 
@@ -46,11 +70,10 @@
 
   - 树莓派开启VNC服务，然后重启
 
-    ![](../assets/raspberry-pi-5.png)
+    ![](../assets/raspberry-pi-6.jpg)
 
   - chrome安装VNC Viewer插件进行连接，插件地址：https://www.realvnc.com/en/connect/download/viewer/chrome/
 
-    ![](../assets/raspberry-pi-6.png)
 
 ## 3、基础配置
 
@@ -86,4 +109,14 @@ sudo echo -e 'export http_proxy="http://代理服务器地址:端口"\nexport ht
 ```
 
 然后重启，打开chromium浏览器，安装`Proxy SwitchyOmega`插件。在`Proxy SwitchyOmega`插件中配置代理服务器。然后删除`/etc/environment`中新增的代理配置，重启。
+
+### ④设置apt镜像源为阿里云镜像源
+
+```bash
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+echo -e "deb https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib\ndeb-src https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib" > /etc/apt/sources.list
+apt update
+```
+
+
 
