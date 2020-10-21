@@ -80,3 +80,27 @@ fi
 
 参考：https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
 
+# 6、换算秒为分钟、小时
+
+```bash
+#!/bin/bash
+
+a=60100
+swap_seconds ()
+{
+    SEC=$1
+    (( SEC < 60 )) && echo -e "持续时间: $SEC秒\c"
+    (( SEC >= 60 && SEC < 3600 )) && echo -e "持续时间: $(( SEC / 60 ))分钟$(( SEC % 60 ))秒\c"
+    (( SEC > 3600 )) && echo -e "持续时间: $(( SEC / 3600 ))小时$(( (SEC % 3600) / 60 ))分钟$(( (SEC % 3600) % 60 ))秒\c"
+}
+
+b=`swap_seconds $a`
+echo $b
+```
+
+输出
+
+```bash
+持续时间: 16小时41分钟40秒
+```
+

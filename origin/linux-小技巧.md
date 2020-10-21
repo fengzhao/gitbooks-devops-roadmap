@@ -995,6 +995,10 @@ echo -e "test\ndasdasd" > test
 # 44、安装Docker
 
 ```bash
+sudo curl -sSL https://get.docker.com | sh
+```
+
+```bash
 yum install -y yum-utils
 yum-config-manager \
     --add-repo \
@@ -1046,7 +1050,30 @@ tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 
 - `.ssh目录下文件`的权限应为**600**
 
-# 47、使用curl命令发送邮件
+# 47、常见包管理器的阿里云镜像源设置
+
+## npm 
+
+```bash
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+npm config get registry 
+```
+
+## Python
+
+```bash
+mkdir ~/.pip
+echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host=mirrors.aliyun.com\n" > ~/.pip/pip.conf
+```
+
+## APT
+
+```bash
+
+```
+
+# 48、使用curl命令发送邮件
 
 ```bash
 curl -s --ssl-reqd --write-out %{http_code} --output /dev/null \
@@ -1104,7 +1131,7 @@ Content-Disposition: attachment; filename=test.txt
 
    
 
-# 48、split按行或大小切割大文件
+# 49、split按行或大小切割大文件
 
 **split命令** 可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。
 
@@ -1166,7 +1193,7 @@ date.file  split_file000  split_file001  split_file002  split_file003  split_fil
 split -l 10 date.file
 ```
 
-# 49、journalctl查看内核日志和应用日志
+# 50、journalctl查看内核日志和应用日志
 
 Systemd统一管理所有Unit的启动日志。带来的好处就是，可以只用journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件是/etc/systemd/journald.conf。该工具是从message这个文件里读取信息。
 
@@ -1186,11 +1213,11 @@ journalctl -k
 
 ```bash
 # 查看系统本次启动的日志
-journalctl  -b
-journalctl  -b  -0
+journalctl -b
+journalctl -b  -0
 # 查看上一次启动的日志
 需更改设置,如上次系统崩溃，需要查看日志时，就要看上一次的启动日志。
-journalctl  -b -1
+journalctl -b -1
 ```
 
 ## ④查看指定时间的日志
@@ -1212,7 +1239,7 @@ journalctl --since"15:15" --until now
 ## ⑤显示尾部的最新10行日志
 
 ```bash
-journalctl  -n
+journalctl -n
 ```
 
 ## ⑥显示尾部指定行数的日志
@@ -1224,19 +1251,19 @@ journalctl -n 20
 ## ⑦实时滚动显示最新日志
 
 ```bash
-journalctl   -f
+journalctl -f
 ```
 
 ## ⑧查看某个Unit的日志
 
 ```bash
-journalctl  -u nginx.service
+journalctl -u nginx.service
 # 只显示今天的
-journalctl  -u nginx.service  --since  today
+journalctl -u nginx.service  --since  today
 # 实时滚动显示
-journalctl  -u nginx.service  -f
+journalctl -u nginx.service  -f
 # 合并显示多个Unit的日志
-journalctl  -u nginx.service  -u php-fpm.service  --since today
+journalctl -u nginx.service  -u php-fpm.service  --since today
 ```
 
 ## ⑨指定用户的日志
@@ -1249,10 +1276,16 @@ journalctl _UID=33  --since today
 
 ```bash
 # 显示日志占据的硬盘空间
-journalctl  --disk-usage
+journalctl --disk-usage
 # 指定日志文件占据的最大空间
-journalctl   --vacuum-size=1G
+journalctl --vacuum-size=1G
 # 指定日志文件保存多久
-journalctl   --vacuum-time=1years
+journalctl --vacuum-time=1years
+```
+
+# 51、read提示字符中的换行
+
+```bash
+read -p $'第一行内容\n第二行内容:' 变量
 ```
 

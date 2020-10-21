@@ -64,8 +64,6 @@ WantedBy=multi-user.target
 
 
 
-
-
 # 三、Openvpn Access Server
 
 OpenVPN 的商业收费版本 OpenVPN Access Server，其免费的 license 可以支持2个 VPN 用户的同时在线，
@@ -452,6 +450,186 @@ iptables  -D POSTROUTING -t nat -s 10.8.6.0/24 ! -d 10.8.6.0/24 -j SNAT --to 192
 ```
 iptables -F
 ```
+
+
+
+## 5、远程管理OpenVPN（简单密码认证）
+
+服务端配置文件`/etc/openvpn/server/server.conf`追加`management 服务器IP地址 7505 密码文件`(不要使用localhost)，然后重启openvpn服务。
+
+```bash
+echo $(date +%s)$RANDOM | md5sum | base64 | head -c 10 > /etc/openvpn/server/management-psw-file
+echo "management 服务器IP地址 7505 /etc/openvpn/server/management-psw-file" >> /etc/openvpn/server/server.conf
+systemctl restart openvpn-server@server.service
+systemctl status openvpn-server@server.service
+netstat -lanp|grep 7505
+```
+
+此时就可以远程使用`Telnet`与openvpn进程进行交互。（详细信息参考：https://openvpn.net/community-resources/management-interface/）
+
+```bash
+$ telnet 远程openvpn服务器IP地址 7505 
+# ENTER PASSWORD: 输入管理端口的密码
+>INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
+# 输入‘help’命令查看命令
+help
+```
+
+命令
+
+```bash
+auth-retry t           : Auth failure retry mode (none,interact,nointeract).
+bytecount n            : Show bytes in/out, update every n secs (0=off).
+echo [on|off] [N|all]  : Like log, but only show messages in echo buffer.
+exit|quit              : 退出当前会话
+forget-passwords       : Forget passwords entered so far.
+help                   : 打印帮助信息
+hold [on|off|release]  : Set/show hold flag to on/off state, or release current hold and start tunnel.
+kill cn                : 杀掉通用名为cn的客户端
+kill IP:port           : 杀掉来自指定ip和端口的客户端。
+load-stats             : 显示全局状态信息
+log [on|off] [N|all]   : 打开/关闭时实的日志显示 + 显示最后N条或者'所有' 历史日志.
+mute [n]               : Set log mute level to n, or show level if n is absent.
+needok type action     : Enter confirmation for NEED-OK request of 'type',where action = 'ok' or 'cancel'.
+needstr type action    : Enter confirmation for NEED-STR request of 'type',where action is reply string.
+net                    : (Windows only) Show network info and routing table.
+password type p        : Enter password p for a queried OpenVPN password.
+remote type [host port] : Override remote directive, type=ACCEPT|MOD|SKIP.
+proxy type [host port flags] : Enter dynamic proxy server info.
+pid                    : 显示openvpn的进程号
+pkcs11-id-count        : Get number of available PKCS#11 identities.
+pkcs11-id-get index    : Get PKCS#11 identity at index.
+client-auth CID KID    : Authenticate client-id/key-id CID/KID (MULTILINE)
+client-auth-nt CID KID : Authenticate client-id/key-id CID/KID
+client-deny CID KID R [CR] : Deny auth client-id/key-id CID/KID with log reason text R and optional 
+															client reason text CR
+client-kill CID [M]    : Kill client instance CID with message M (def=RESTART)
+env-filter [level]     : Set env-var filter level
+client-pf CID          : Define packet filter for client CID (MULTILINE)
+rsa-sig                : Enter an RSA signature in response to >RSA_SIGN challenge
+                         Enter signature base64 on subsequent lines followed by END
+certificate            : Enter a client certificate in response to >NEED-CERT challenge
+                         Enter certificate base64 on subsequent lines followed by END
+signal s               : 发送信号给openvpn进程, s = SIGHUP|SIGTERM|SIGUSR1|SIGUSR2.
+                           SIGUSR1 – 有条件的重启，非root用户重启OpenVPN进程
+                           SIGHUP – 重启
+                           SIGUSR2 – 输出连接状态到log文件或者系统log
+                           SIGTERM, SIGINT – 退出
+state [on|off] [N|all] : 跟log一样,但是静态显示。
+status [n]             : 显示现在进程的状态信息。格式：#n.
+test n                 : Produce n lines of output for testing/debugging.
+username type u        : Enter username u for a queried OpenVPN username.
+verb [n]               : Set log verbosity level to n, or show if n is absent.
+version                : 显示openvpn版本信息
+```
+
+## 6、客户端连接状态钉钉通知
+
+openvpn服务端配置文件`/etc/openvpn/server/server.conf`中追加以下内容，然后重启openvpn服务。
+
+```bash
+-----省略-------
+auth-user-pass-verify openvpn-utils.sh via-env
+-----省略-------
+client-connect openvpn-utils.sh
+client-disconnect openvpn-utils.sh
+```
+
+此时客户连接或断开了openvpn服务端都会执行对应的脚本，可在脚本中通过`curl`命令发送信息到对应webhook的钉钉机器人。由于已经有一个用于验证用户名密码的脚本(`/etc/openvpn/server/server.conf`中的`auth-user-pass-verify openvpn-utils.sh via-env`)，可在其中通过判断调用脚本时的openvpn指令类型来添加功能。示例：
+
+在`/etc/openvpn/server/openvpn-utils.sh`添加用于发送钉钉通知的逻辑。至于脚本中要使用到的变量，当客户端连接或断开进而触发执行脚本时会将此时客户端所处的信息放至进程作用域的环境变量中，可以直接在脚本中引用。具体哪些变量可用，参考：https://openvpn.net/community-resources/reference-manual-for-openvpn-2-4/ (由于篇幅较长，网页搜索“environmental variables”)。
+
+> 注意有些环境变量只有在对应指令调用时才有。
+
+```sh
+#!/bin/sh
+PASSFILE="/etc/openvpn/server/psw-file"
+LOG_FILE="/etc/openvpn/server/openvpn-authorized.log"
+TIME_STAMP=`date "+%Y-%m-%d %T"`
+Ding_Webhook_Token=
+Ding_Webhook="https://oapi.dingtalk.com/robot/send?access_token="$Ding_Webhook_Token
+swap_seconds ()
+{
+    SEC=$1
+    [ "$SEC" -le 60 ] && echo "$SEC秒"
+    [ "$SEC" -gt 60 ] && [ "$SEC" -le 3600 ] && echo "$(( SEC / 60 ))分钟$(( SEC % 60 ))秒"
+    [ "$SEC" -gt 3600 ] && echo "$(( SEC / 3600 ))小时$(( (SEC % 3600) / 60 ))分钟$(( (SEC % 3600) % 60 ))秒"
+}
+
+if [ $script_type = 'user-pass-verify' ] ; then
+	if [ ! -r "${PASSFILE}" ]; then
+		echo "${TIME_STAMP}: Could not open password file "${PASSFILE}" for reading." >> ${LOG_FILE}
+		exit 1
+	fi
+	CORRECT_PASSWORD=`awk '!/^;/&&!/^#/&&$1=="'${username}'"{print $2;exit}' ${PASSFILE}`
+	if [ "${CORRECT_PASSWORD}" = "" ]; then
+		echo "${TIME_STAMP}: User does not exist: username="${username}", password="${password}"." >> ${LOG_FILE}
+		exit 1
+	fi
+	if [ "${password}" = "${CORRECT_PASSWORD}" ]; then
+		echo "${TIME_STAMP}: Successful authentication: username="${username}"." >> ${LOG_FILE}
+		exit 0
+	fi
+	echo "${TIME_STAMP}: Incorrect password: username="${username}", password="${password}"." >> ${LOG_FILE}
+	exit 1
+fi
+if [ $script_type = 'client-connect' ] ; then
+	curl -s "$Ding_Webhook" \
+        -H 'Content-Type: application/json' \
+        -d '
+        {   
+            "msgtype": "markdown",
+            "markdown": {
+                "title": "'$common_name'连接到了OpenVPN",
+                "text": "## '$common_name'连接到了OpenVPN\n> ####    **连接时间**:  '"$TIME_STAMP"'\n> ####    **IP + 端口**:  '$trusted_ip':'$trusted_port'\n> ####    **端对端IP**:  '$ifconfig_pool_remote_ip' <===> '$ifconfig_local'"
+            },
+            "at": {
+                "isAtAll": true
+            }
+        }'
+fi
+if [ $script_type = 'client-disconnect' ]; then
+	duration_time=`swap_seconds $time_duration`
+    curl -s "$Ding_Webhook" \
+        -H 'Content-Type: application/json' \
+        -d '
+        {   
+            "msgtype": "markdown",
+            "markdown": {
+                "title": "'$common_name'断开了OpenVPN",
+                "text": "## '$common_name'断开了OpenVPN\n> ####    **断开时间**:  '"$TIME_STAMP"'\n> ####    **IP + 端口**:  '$trusted_ip':'$trusted_port'\n> ####    **端对端IP**:  '$ifconfig_pool_remote_ip' <===> '$ifconfig_local'\n> ####    **持续时间**: '$duration_time'"
+            },
+            "at": {
+                "isAtAll": true
+            }
+        }'
+fi
+```
+
+
+
+
+
+# 附录
+
+## 1、可调用脚本的OpenVPN配置参数
+
+- **iproute cmd**
+- **route-up cmd**
+- **route-pre-down cmd**
+- **up cmd**
+- **down cmd**
+- **client-connect cmd**
+- **client-disconnect cmd**
+- **auth-user-pass-verify cmd method**
+- **learn-address cmd**
+- **tls-verify cmd**
+- **ipchange cmd**
+- **down-pre**
+
+以上参数，可在脚本中通过**script_type**进行甄别。‘
+
+> **script_type**，**up, down, ipchange, route-up, tls-verify, auth-user-pass-verify,** **client-connect, client-disconnect,** **learn-address.** 
 
 
 
