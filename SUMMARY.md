@@ -347,9 +347,9 @@
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
     * [fffmpeg](origin/audio-video-fffmpeg.md)
-* Python
+* **Python**
     * [环境搭建：安装配置](origin/python-basic.md)
-* JWT
+    * [JupyterHub/RStuido](origin/python-workerbench-jupyterhub.md)
 ## Part Ⅶ：大数据
 
 - Cloudera

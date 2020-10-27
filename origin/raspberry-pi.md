@@ -1,4 +1,4 @@
-# 树莓派Raspberry 
+# 树莓派Raspberry Pi 4
 
 # 一、简介
 
@@ -41,6 +41,8 @@ SPI是串行外设接口，用于控制具有主从关系的组件，采用从�
 ## 各型号配置对比
 
 ![](../assets/raspberry-pi-3.png)
+
+部分电子元件电路图：https://www.dazhuanlan.com/2019/12/26/5e043f4a96380/
 
 # 二、基础配置
 
@@ -112,11 +114,92 @@ sudo echo -e 'export http_proxy="http://代理服务器地址:端口"\nexport ht
 
 ### ④设置apt镜像源为阿里云镜像源
 
+raspbian
+
 ```bash
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
 echo -e "deb https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib\ndeb-src https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib" > /etc/apt/sources.list
 apt update
 ```
 
+Ubuntu 20.04
+
+```bash
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal main restricted" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates main restricted" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal universe" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates universe" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal multiverse" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates multiverse" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-backports main restricted universe multiverse" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security main restricted" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security universe" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security multiverse" > /etc/apt/sources.list
+apt update
+```
+
+## 4、播放音频
+
+```bash
+apt install mpg123
+mpg123 音频文件
+mpg123 音频文件 </dev/null &
+# 或者
+apt-get install sox libsox-fmt-all
+play 音频文件
+
+# 或者
+apt-get install cmus
+cmus
+```
+
+## 5、调节音频输出音量大小
+
+```bash
+apt install alsa-utils
+alsamixer # 指令会出现一个调节音量的界面。调节完成后按“ESC”退出
+amixer set PCM 116%
+```
 
 
+
+# 三、安装特殊软件
+
+## 1、安装RStudio Server
+
+```bash
+apt-get install -y git r-recommended python-dev
+cd /home/pi/Downloads/
+git clone https://github.com/rstudio/rstudio.git
+cd /home/pi/Downloads/rstudio/dependencies/common/
+./install-common
+cd /home/pi/Downloads/rstudio/dependencies/linux/
+./install-dependencies-debian
+
+#saw java 6 was not installed. installed v7
+apt-get install -y openjdk-7-jdk
+
+#tried to make install, got an error about dictionaries not installed and rerun install-dependencies
+cd /home/pi/Downloads/rstudio/dependencies/common/
+./install-common
+
+#tried to make install, hangs at "ext:" so I tried manually installing pandoc, which should have been installed earlier, but apparently was not
+apt-get install -y pandoc
+
+#tried to make install, hangs at "ext:" so I tried installing the latest GWT compiler
+cd /home/pi/Downloads
+wget http://dl.google.com/closure-compiler/compiler-latest.zip
+unzip compiler-latest.zip
+rm COPYING README.md compiler-latest.zip
+mv closure-compiler-v20170218.jar /home/pi/Downloads/rstudio/src/gwt/tools/compiler/compiler.jar
+
+#build and install works!
+cd /home/pi/Downloads/rstudio/
+#remove build if exists
+rm -r ./build
+mkdir build
+cd build
+cmake .. -DRSTUDIO_TARGET=Server -DCMAKE_BUILD_TYPE=Release
+make install
+```

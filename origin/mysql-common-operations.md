@@ -559,5 +559,76 @@ sql>load data infile '/var/lib/mysql-files/UserData.csv'
   order by data_length desc, index_length desc;
   ```
 
-  
+
+# 18、开起慢查询日志
+
+参考：[采集MySQL慢查询日志到Elasticsearch中附录的第二小节](logstash-采集MySQL慢查询日志到Elasticsearch.md)
+
+MySQL可以将执行超过指定时间的DQL、DML、DDL等语句记录下来。默认慢查询日志记录是关闭的
+
+- **log_slow_queries** ：表示是否开启慢查询日志，5.6以前的版本使用此参数指定是否开启慢查询日志，5.6以后的版本使用`slow_query_log`取代此参数，如果你使用的mysql版本刚好是5.5，那么你可以看到这两个参数同时存在，此时我们不用同时设置它们，设置这两个参数中的任何一个，另一个也会自动保持一致。
+
+- **log_output** : 表示当慢查询日志开启以后，以哪种方式存放，log_output可以设置为4种值，"`FILE`"、"`TABLE`"、"`FILE,TABLE`"、"`NONE`"。此值为"`FILE`"表示慢查询日志存放于指定的文件中，此值为"`TABLE`"表示慢查询日志存放于mysql库的`slow_log`表中，此值为"`FILE,TABLE`"表示将慢查询日志同时存放于指定的文件与`slow_log`表中，一般不会进行这样的设置，因为这样会徒增很多IO压力，如果开启，建议设置为"`table`",此值为"`NONE`"时表示不记录查询日志，即使`slow_query_log`设置为`ON`，如果`log_output`设置为`NONE`，也不会记录慢查询日志，其实，`log_output`不止用于控制慢查询日志的输出，查询日志的输出也是由此参数进行控制，也就是说，`log_output`设置为`file`，就表示查询日志和慢查询日志都存放到对应的文件中，设置为`table`，查询日志和慢查询日志就都存放在对应的数据库表中。
+
+- **slow_query_log** ：表示是否开启慢查询日志，此参数与`log_slow_queries`的作用没有区别，5.6以后的版本使用此参数替代`log_slow_queries`。
+
+- **slow_query_log_file** ：当使用文件存储慢查询日志时(log_output设置为"`FILE`"或者"`FILE,TABLE`"时)，指定慢查询日志存储于哪个日志文件中，默认的慢查询日志文件名为"`主机名-slow.log`"，慢查询日志的位置为`datadir`参数所对应的目录位置，一般情况下为 `/var/lib/mysql`
+
+- **long_query_time** ：表示"多长时间的查询"被认定为"慢查询"，此值得默认值为10秒，表示超过10秒的查询被认定为慢查询。
+
+- **log_queries_not_using_indexes** ：表示如果运行的sql语句没有使用到索引，是否也被当做慢查询语句记录到慢查询日志中，`OFF`表示不记录，`ON`表示记录。
+
+- **log_throttle_queries_not_using_indexes** ：5.6.5版本新引入的参数，当`log_queries_not_using_inde`设置为`ON`时，没有使用索引的查询语句也会被当做慢查询语句记录到慢查询日志中，使用`log_throttle_queries_not_using_indexes`可以限制这种语句每分钟记录到慢查询日志中的次数，因为在生产环境中，有可能有很多没有使用索引的语句，此类语句频繁的被记录到慢查询日志中，可能会导致慢查询日志快速不断的增长，管理员可以通过此参数进行控制。
+- **min_examined_row_limit** ：扫描记录少于改值的SQL不记录到慢查询日志，结合去记录没有使用索引的SQL语句的例子，有可能存在某一个表，数据量维持在几行左右，且没有建立索引。这种表即使不建立索引，查询也很快，扫描记录很小，如果确定有这种表，则可以通过此参数设置，将这个SQL不记录到慢查询日志。
+- **log_slow_admin_statements**：记录超时的管理操作SQL到慢查询日志，比如`ALTER/ANALYZE TABLE`
+-  **log_slow_slave_statements**：在从服务器上开启慢查询日志
+- **log_timestamps(5.7+)**： 写入时区信息。可根据需求记录UTC时间或者服务器本地系统时间
+
+查询慢日志是否开起等其他参数
+
+```bash
+# 查询慢日志是否开启
+show variables like 'slow_query%';
+# 查询多少秒的查询视为慢查询
+show variables like 'long_query_time%';
+# 查询慢查询日志输出到哪儿。
+show variables like 'log_output%';
+```
+
+MySQL 8
+
+```bash
+set global log_output=‘FILE’; – 开启慢日志,纪录到 mysql.slow_log 表
+set global long_query_time=2; – 设置超过0.1秒的查询为慢查询
+set global slow_query_log=‘ON’;-- 打开慢日志记录
+```
+
+
+
+# 19、慢查询日志统计分析工具mysqldumpslow
+
+通过`mysqldumpslow`命令我们可以更加方便的从不同的维度对慢日志进行排序、查找、统计。但是`mysqldumpslow`只能作用于慢查询日志文件
+
+```bash
+-s：排序规则参数
+	c: 执行计数
+  l: 锁定时间
+  r: 返回记录
+  t: 执行时间
+  al:平均锁定时间
+  ar:平均返回记录数
+  at:平均执行时间
+-t 是top n的意思，返回多少条数据。
+-g 可以跟上正则匹配模式，大小写不敏感。
+
+# 得到返回记录最多的20个sql
+mysqldumpslow -s r -t 20 sqlslow.log
+# 得到平均访问次数最多的20条sql
+mysqldumpslow -s ar -t 20 sqlslow.log
+# 得到平均访问次数最多,并且里面含有ttt字符的20条sql
+mysqldumpslow -s ar -t 20 -g "ttt" sqldlow.log
+
+# 如果出现 -bash: mysqldumpslow: command not found 错误，请执行"ln -s /usr/local/mysql/bin/mysqldumpslow /usr/bin"
+# 如果出现如下错误，Died at /usr/bin/mysqldumpslow line 161, <> chunk 405659.说明你要分析的sql日志太大了，请拆分后再分析
+```
 

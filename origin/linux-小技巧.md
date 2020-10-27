@@ -1070,7 +1070,7 @@ echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install
 ## APT
 
 ```bash
-
+ 
 ```
 
 # 48、使用curl命令发送邮件
@@ -1289,3 +1289,74 @@ journalctl --vacuum-time=1years
 read -p $'第一行内容\n第二行内容:' 变量
 ```
 
+# 52、nmcli命令行/numtui字符界面管理网络
+
+参考：https://www.cnblogs.com/liuhedong/p/10695969.html
+
+安装命令
+
+```bash
+yum install NetworkManager NetworkManager-tui
+# 或者
+apt install network-manager
+```
+
+显示网络管理器的整体状态
+
+```bash
+nmcli general status
+```
+
+查看网卡设备
+
+```bash
+$ nmcli dev
+DEVICE         TYPE      STATE      CONNECTION
+wlan0          wifi      connected  ****
+eth0           ethernet  unmanaged  --
+lo             loopback  unmanaged  --
+tun0           tun       unmanaged  --
+p2p-dev-wlan0  wifi-p2p  unmanaged  --
+```
+
+查看附近的WIFI网络
+
+```bash
+$ nmcli d wifi list
+
+IN-USE  BSSID              SSID              MODE   CHAN  RATE        SIGNAL  BARS  SECURITY
+*       CC:2D:21:4B:53:81  Stark-Industries  Infra  4     270 Mbit/s  100     ▂▄▆█  WPA1 WPA2
+        E8:3F:67:FF:2A:42  HUAWEI-忆         Infra  6     130 Mbit/s  60      ▂▄▆_  WPA2
+        90:47:3C:3E:32:D1  CMCC-VzjQ         Infra  7     130 Mbit/s  60      ▂▄▆_  WPA1 WPA2
+        E8:3F:67:FF:2A:47  --                Infra  6     130 Mbit/s  57      ▂▄▆_  WPA2
+        E8:3F:67:FF:2A:44  666666            Infra  6     130 Mbit/s  57      ▂▄▆_  WPA2
+        8C:FD:18:4A:79:74  CMCC-GNTn         Infra  9     130 Mbit/s  55      ▂▄__  WPA1 WPA2
+        8C:FD:18:4A:79:78  CMCC-GNTn-5G      Infra  36    270 Mbit/s  52      ▂▄__  WPA1 WPA2
+```
+
+连接WIFI
+
+```bash
+$ nmcli d wifi connect <WIFI_SSID> password <WIFI_PASSWORD>
+```
+
+连接隐藏WIFI
+
+```bash
+$ nmcli c add type wifi con-name <连接名> ifname wlan0 ssid <WIFI_SSID>
+$ nmcli c modify <连接名> wifi-sec.key-mgmt wpa-psk wifi-sec.psk <WIFI_PASSWORD>
+$ nmcli c up <连接名>
+```
+
+查看网络设备连接状态
+
+```bash
+nmcli connection show
+nmcli connection show --active
+# 以活动的连接进行排序
+nmcli connection show --order +active
+# 将所有连接以名称排序
+nmcli connection show --order +name
+# 将所有连接以类型排序(倒序)
+nmcli connection show --order -type
+```

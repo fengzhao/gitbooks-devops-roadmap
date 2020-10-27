@@ -1,23 +1,24 @@
-
-
-# Python 多用户工作台JupyterHub
+# Python/R语言多用户工作台JupyterHub/RStuido
 
 # 一、简介
 
-# 二、安装
+Jupyter是一款基于python的web notebook服务，目前有大多python数据挖掘与机器学习爱好者使用这款服务，其特性其实与Ipytohn Notebook差不多，准确说Ipython Notebook是一款提供增强型交互的功能的shell，而Jupyter除了Ipython的功能，还加入了普通编辑器的通用功能，是一款带代码交互的动态文档web编辑器
 
-## 1、二进制安装
+# 二、安装及命令详解
+
+## 1、各种方式安装
+
+### 二进制安装
 
 以Ubuntu为例
 
 ```bash
-apt-get install npm
+apt-get install npm python3-pip
 npm config set registry https://registry.npm.taobao.org --global
 mkdir ~/.pip
 echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host=mirrors.aliyun.com\n" > ~/.pip/pip.conf
-python3 -m pip install jupyterhub
+python3 -m pip install jupyterhub notebook
 npm install -g configurable-http-proxy
-python3 -m pip install notebook
 ```
 
 生成默认配置文件
@@ -29,17 +30,17 @@ jupyterhub --generate-config
 修改配置文件`~/jupyterhub_config.py`并启动jupyterhub
 
 ```	bash
-nohup jupyterhub --generate-config -f ~/jupyterhub_config.py 2>&1 >> /var/log/jupyterhub.log &
+nohup jupyterhub -f ~/jupyterhub_config.py 2>&1 >> /var/log/jupyterhub.log &
 echo $! > /var/log/jupyterhub.pid
 
 # 或者
-nohup jupyterhub --generate-config -f ~/jupyterhub_config.py 2>&1 >> /var/log/jupyterhub.log &!
+nohup jupyterhub  -f ~/jupyterhub_config.py 2>&1 >> /var/log/jupyterhub.log &!
 echo $! > /var/log/jupyterhub.pid
 ```
 
-## 2、docker安装
+### docker安装
 
-## 3、kubernetes安装
+### kubernetes安装
 
 ```bash
 helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/ && \
@@ -57,15 +58,15 @@ helm upgrade --cleanup-on-fail \
 
 
 
-# 三、jupyterhub 命令详解
+## 2、jupyterhub 命令详解
 
-## 命令格式
+### 命令格式
 
 ```bash
 jupyterhub cmd [args]
 ```
 
-## 全局命令参数
+### 全局命令参数
 
 ```bash
 --debug
@@ -144,9 +145,9 @@ jupyterhub cmd [args]
     url for the database. e.g. `sqlite:///jupyterhub.sqlite`
 ```
 
-## 子命令
+### 子命令
 
-### token：生成用户API token
+#### token：生成用户API token
 
 命令格式
 
@@ -175,11 +176,9 @@ jupyterhub token [username]
 $> jupyterhub token kaylee
 ab01cd23ef45
 ```
+## 3、其他命令
 
-
-# 四、其他命令
-
-## Jupyter kernel的管理
+### Jupyter kernel的管理
 
 ```bash
 jupyter-kernelspec  list
@@ -188,9 +187,9 @@ jupyter-kernelspec uninstall
 jupyter-kernelspec remove
 ```
 
+# 三、Jupyter功能扩展
 
-
-# 五、使用LDAP进行用户认证
+## 1、使用LDAP进行用户认证
 
 Github：https://github.com/jupyterhub/ldapauthenticator
 
@@ -223,6 +222,49 @@ c.LDAPAuthenticator.user_attribute = 'sAMAccountName'
 c.LDAPAuthenticator.lookup_dn_user_dn_attribute = 'cn'
 c.LDAPAuthenticator.escape_userdn = False
 c.LDAPAuthenticator.bind_dn_template = '{username}'
+```
+
+## 2、添加扩展插件管理器
+
+```bash
+pip3 install jupyter_contrib_nbextensions
+# 安装完之后需要配置 nbextension，注意配置的时候要确保已关闭Jupyter Notebook
+jupyter contrib nbextension install --skip-running-check
+# 命令执行完后，会生成配置文件/usr/local/etc/jupyter/jupyter_nbconvert_config.json
+```
+
+重新启动 Jupyterhub后，上面选项栏会出现 Nbextensions 的选项。
+
+![](../assets/python-r-workbench-jupyter-rstudio-4.png)
+
+
+
+## 3、支持R语言kernel
+
+安装R语言
+
+```bash
+apt-get install r-base r-base-core r-base-dev
+pip3 install jupyterlab
+```
+
+R安装基础工具
+
+```R
+R > install.packages(c('pbdZMQ', 'repr', 'devtools', 'IRkernel'))
+R > IRkernel::installspec(user = FALSE)
+# 安装完成后会在目录/root/.local/share/jupyter/kernels/ir生成一份配置信息
+
+jupyter labextension install @techrah/text-shortcuts
+# 刷新页面就可以看到R的kernel了！
+```
+
+参考：https://irkernel.github.io/installation/
+
+# 四、安装RStudio Server
+
+```bash
+
 ```
 
 

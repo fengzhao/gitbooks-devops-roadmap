@@ -211,29 +211,7 @@ mysql> set global long_query_time=1;
 [mysqld]
 slow_query_log = ON
 slow_query_log_file = /usr/local/mysql/data/slow.log
-long_query_time = 1
-
-# 使用mysqldumpslow和mysqlsla分析mysql慢查询日志
-
-# mysqldumpslow 慢日志分析工具
--s 按照那种方式排序    
-    c：访问计数
-    l：锁定时间
-    r:返回记录
-    al：平均锁定时间
-    ar：平均访问记录数
-    at：平均查询时间
--t 是top n的意思，返回多少条数据。-g 可以跟上正则匹配模式，大小写不敏感。
-	
-# 得到返回记录最多的20个sql
-mysqldumpslow -s r -t 20 sqlslow.log
-# 得到平均访问次数最多的20条sql
-mysqldumpslow -s ar -t 20 sqlslow.log
-# 得到平均访问次数最多,并且里面含有ttt字符的20条sql
-mysqldumpslow -s ar -t 20 -g "ttt" sqldlow.log
-
-# 如果出现 -bash: mysqldumpslow: command not found 错误，请执行"ln -s /usr/local/mysql/bin/mysqldumpslow /usr/bin"
-# 如果出现如下错误，Died at /usr/bin/mysqldumpslow line 161, <> chunk 405659.说明你要分析的sql日志太大了，请拆分后再分析
+long_query_time = 1	
 ```
 
 5.5版本慢查询日志
