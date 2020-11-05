@@ -170,6 +170,8 @@ PUT /_snapshot/快照仓库名/快照名?wait_for_completion=true
 ```bash
 GET _snapshot/快照仓库名/_all
 GET _cat/snapshots/快照仓库名
+
+curl -XGET "http://127.0.0.1:9200/_snapshot/快照仓库名/_all" | jq -r '.snapshots[].snapshot'
 ```
 
 ## 4、删除快照

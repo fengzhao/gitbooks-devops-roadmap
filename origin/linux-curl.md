@@ -342,3 +342,9 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=******' \
 }'
 ```
 
+## 17、强制域名解析至指定IP地址
+
+```bash
+curl --resolve test.test.com:80:127.0.0.1 "http://test.test.com/"
+```
+

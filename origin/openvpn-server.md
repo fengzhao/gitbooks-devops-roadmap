@@ -451,8 +451,6 @@ iptables  -D POSTROUTING -t nat -s 10.8.6.0/24 ! -d 10.8.6.0/24 -j SNAT --to 192
 iptables -F
 ```
 
-
-
 ## 5、远程管理OpenVPN（简单密码认证）
 
 服务端配置文件`/etc/openvpn/server/server.conf`追加`management 服务器IP地址 7505 密码文件`(不要使用localhost)，然后重启openvpn服务。
@@ -605,6 +603,25 @@ if [ $script_type = 'client-disconnect' ]; then
         }'
 fi
 ```
+
+## 7、客户端间进行互联
+
+如果需要客户端进行互联，openvpn服务端配置文件`/etc/openvpn/server/server.conf`中追加以下内容，然后重启openvpn服务。
+
+```bash
+client-to-client
+```
+
+此时，openvpn服务端等同路由器在维护路由表。客户端之间就可以通过各自分配的虚拟IP进行通信了。比如有两个客户端, 各自使用不同的网络途径连接到服务端，各自分配VIP地址分别为`10.8.0.6`和`10.8.0.10`。此时两者就可以通过虚拟IP进行通信了
+
+**注意** 在客户端可能会在TUN设备上看到两个地址, 其中一个是客户端面的VIP, 另外一个是网关. 比如下例中
+
+```
+utun3: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+inet 10.8.0.6 --> 10.8.0.5/32 utun3
+```
+
+`10.8.0.6`是VIP, 而`10.8.0.5`是网关. 在互联时, 需要使用VIP而不是网关地址.
 
 
 

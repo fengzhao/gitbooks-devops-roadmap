@@ -2,15 +2,15 @@
 
 # 一、简介
 
-官方文档：https://help.aliyun-cli.com/document_detail/110244.html?spm=a2c4g.11174283.6.542.382e474f0pJ2rv
+官方文档：https://help.aliyun.com/product/29991.html
 
-Github地址：https://github.com/aliyun-cli/aliyun-cli-cli
+Github地址：https://github.com/aliyun/aliyun-cli
 
 # 二、安装配置
 
 ## 1、二进制安装
 
-**下载地址**：https://github.com/aliyun-cli/aliyun-cli-cli/releases?spm=a2c4g.11186623.2.13.41956bbb8p2KpE
+**下载地址**：https://github.com/aliyun/aliyun-cli/releases
 
 **下载解压至系统环境变量路径下即可**
 
