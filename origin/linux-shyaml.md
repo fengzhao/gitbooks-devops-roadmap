@@ -53,3 +53,4 @@ cat file.yaml | shyaml key-values idc_group.bx
 # 参考链接
 
 1. https://www.linuxidc.com/Linux/2016-04/130403.htm
+2. https://dev.to/vikcodes/yq-a-command-line-tool-that-will-help-you-handle-your-yaml-resources-better-8j9

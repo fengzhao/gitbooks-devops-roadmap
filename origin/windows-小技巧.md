@@ -27,7 +27,7 @@
 设置KMS服务器
 
     slmgr -skms KMS服务器
-​
+
 常用的KMS服务器
 
     kms.03k.org
@@ -51,7 +51,7 @@
 
     win10专业版密钥
     W269N-WFGWX-YVC9B-4J6C9-T83GX
-​
+
 激活
 
     slmgr -ato
@@ -129,3 +129,50 @@ Windows+R,输入regedit，打开注册表，修改一下注册表的值(十进�
 ![](../assets/windows-小技巧-12.png)
 ![](../assets/windows-小技巧-13.png)
 ![](../assets/windows-小技巧-14.png)
+
+## 13、Window下类Unix终端Cygwin
+
+官网下载地址：https://cygwin.com/install.html
+
+注意：在安装时，会让选择预下载的软件，记得预下载`lynx、wget、curl、zsh`
+
+![](../assets/windows-小技巧-15.png)
+
+## ①安装apt-cyg包管理器
+
+apt-cyg是Cygwin下类似于apt的包管理器，可安装Github 地址：https://github.com/transcode-open/apt-cyg
+
+```bash
+git clone https://github.com/transcode-open/apt-cyg.git
+cd apt-cyg
+install apt-cyg /bin
+# 配置apt-cyg的镜像源
+apt-cyg mirror http://mirrors.163.com/cygwin
+# 更新源
+apt-cyg update
+# 安装软件
+apt-cyg install jq vim 
+
+```
+
+### 参考：
+
+1. https://zhuanlan.zhihu.com/p/66930502
+
+## ②安装配置zsh及oh-my-zsh
+
+参考[ZSH](linux-zsh.md)
+
+## ③设置默认终端shell
+
+```bash
+$ mkpasswd > /etc/passwd
+# 然后在/etc/passwd文件中设置当前用户为/bin/zsh
+```
+
+## 
+
+
+
+
+

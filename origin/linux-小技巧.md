@@ -1360,3 +1360,16 @@ nmcli connection show --order +name
 # 将所有连接以类型排序(倒序)
 nmcli connection show --order -type
 ```
+
+# 53、对bash执行curl的脚本进行传参
+
+```bash
+curl http://test.com/test/test.sh | bash -s arg1 arg2
+
+bash <(curl -s http://test.com/test/test.sh ) arg1 arg2
+# 若参数中带有”-“，则可使用长选项”–”解决
+curl -s http://test.com/test/test.sh | bash -s -- arg1 arg2
+# 若参数为”-p arg -d arg”,则
+curl -s http://test.com/test/test.sh | bash -s -- -p arg1 -d arg2
+```
+

@@ -345,6 +345,7 @@
 * **Python**
     * [环境搭建：安装配置](origin/python-basic.md)
     * [JupyterHub/RStuido](origin/python-workerbench-jupyterhub.md)
+* [Nvidia](origin/nvidia.md)
 ## Part Ⅶ：大数据
 
 - Cloudera
