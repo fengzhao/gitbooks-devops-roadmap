@@ -19,8 +19,6 @@
 | Node2  | 8C16G100G /data100G | 192.168.1.62 | K8S Worker(kubelet、kube-proxy、docker)                      |
 | Node3  | 8C16G100G /data100G | 192.168.1.63 | K8S Worker(kubelet、kube-proxy、docker)                      |
 
-
-
 # 二、Kubeasz ansible脚本简介
 
 Kubeasz Github地址：https://github.com/easzlab/kubeasz

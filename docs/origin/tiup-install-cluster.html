@@ -6522,8 +6522,8 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <li>PD&#xFF1A;<a href="https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml" _target="blank">https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml</a></li>
 <li>TiKV&#xFF1A;<a href="https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml" _target="blank">https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml</a></li>
 </ul>
-<h2 id="10&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;">10&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;</h2>
-<h3 id="&#x2460;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;">&#x2460;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;</h3>
+<h1 id="&#x56DB;&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;">&#x56DB;&#x3001;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;</h1>
+<h2 id="1&#x3001;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;">1&#x3001;&#x4FEE;&#x6539;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53C2;&#x6570;</h2>
 <p>&#x96C6;&#x7FA4;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x8C03;&#x6574;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>edit-config</code> &#x547D;&#x4EE4;&#x6765;&#x7F16;&#x8F91;&#x53C2;&#x6570;&#x3002;&#x5177;&#x4F53;&#x7684;&#x64CD;&#x4F5C;&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF1A;</p>
 <ol>
 <li><p>&#x4EE5;&#x7F16;&#x8F91;&#x6A21;&#x5F0F;&#x6253;&#x5F00;&#x8BE5;&#x96C6;&#x7FA4;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</p>
@@ -6561,7 +6561,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
     <span class="token key atrule">performance.txn-total-size-limit</span><span class="token punctuation">:</span> <span class="token number">1073741824</span>
 </code></pre>
 <p>&#x7136;&#x540E;&#x6267;&#x884C; <code>tiup cluster reload ${cluster-name} -R tidb</code> &#x547D;&#x4EE4;&#x6EDA;&#x52A8;&#x91CD;&#x542F;&#x3002;</p>
-<h3 id="&#x2461;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;">&#x2461;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;</h3>
+<h2 id="2&#x3001;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;">2&#x3001;&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;</h2>
 <p>&#x90E8;&#x7F72;&#x5E76;&#x542F;&#x52A8;&#x96C6;&#x7FA4;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>tiup cluster rename</code> &#x547D;&#x4EE4;&#x6765;&#x5BF9;&#x96C6;&#x7FA4;&#x91CD;&#x547D;&#x540D;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster <span class="token function">rename</span> <span class="token variable">${cluster-name}</span> <span class="token variable">${new-name}</span>
 </code></pre>
@@ -6572,7 +6572,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <li>&#x91CD;&#x547D;&#x540D;&#x96C6;&#x7FA4;&#x4E4B;&#x540E; Grafana &#x53EF;&#x80FD;&#x4F1A;&#x6B8B;&#x7559;&#x4E00;&#x4E9B;&#x65E7;&#x96C6;&#x7FA4;&#x540D;&#x7684;&#x9762;&#x677F;&#xFF0C;&#x9700;&#x8981;&#x624B;&#x52A8;&#x5220;&#x9664;&#x8FD9;&#x4E9B;&#x9762;&#x677F;&#x3002;</li>
 </ul>
 </blockquote>
-<h3 id="&#x2461;&#x5173;&#x95ED;&#x96C6;&#x7FA4;">&#x2461;&#x5173;&#x95ED;&#x96C6;&#x7FA4;</h3>
+<h2 id="3&#x3001;&#x5173;&#x95ED;&#x96C6;&#x7FA4;">3&#x3001;&#x5173;&#x95ED;&#x96C6;&#x7FA4;</h2>
 <p>&#x5173;&#x95ED;&#x96C6;&#x7FA4;&#x64CD;&#x4F5C;&#x4F1A;&#x6309; Drainer -&gt; TiFlash -&gt; TiDB -&gt; Pump -&gt; TiKV -&gt; PD &#x7684;&#x987A;&#x5E8F;&#x5173;&#x95ED;&#x6574;&#x4E2A; TiDB &#x96C6;&#x7FA4;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#xFF08;&#x540C;&#x65F6;&#x4E5F;&#x4F1A;&#x5173;&#x95ED;&#x76D1;&#x63A7;&#x7EC4;&#x4EF6;&#xFF09;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster stop <span class="token variable">${cluster-name}</span>
 </code></pre>
@@ -6583,7 +6583,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <p>&#x4E0B;&#x5217;&#x547D;&#x4EE4;&#x53EA;&#x505C;&#x6B62; <code>1.2.3.4</code> &#x548C; <code>1.2.3.5</code> &#x8FD9;&#x4E24;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x7684; TiDB &#x7EC4;&#x4EF6;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster stop <span class="token variable">${cluster-name}</span> -N <span class="token number">1.2</span>.3.4:4000,1.2.3.5:4000
 </code></pre>
-<h3 id="&#x2463;&#x6E05;&#x9664;&#x96C6;&#x7FA4;&#x6570;&#x636E;">&#x2463;&#x6E05;&#x9664;&#x96C6;&#x7FA4;&#x6570;&#x636E;</h3>
+<h2 id="4&#x3001;&#x6E05;&#x9664;&#x96C6;&#x7FA4;&#x6570;&#x636E;">4&#x3001;&#x6E05;&#x9664;&#x96C6;&#x7FA4;&#x6570;&#x636E;</h2>
 <p>&#x6B64;&#x64CD;&#x4F5C;&#x4F1A;&#x5173;&#x95ED;&#x6240;&#x6709;&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x6E05;&#x7A7A;&#x5176;&#x6570;&#x636E;&#x76EE;&#x5F55;&#x6216;/&#x548C;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x65E0;&#x6CD5;&#x6062;&#x590D;&#xFF0C;&#x9700;&#x8981;<strong>&#x8C28;&#x614E;&#x64CD;&#x4F5C;</strong>&#x3002;</p>
 <p>&#x6E05;&#x7A7A;&#x96C6;&#x7FA4;&#x6240;&#x6709;&#x670D;&#x52A1;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x65E5;&#x5FD7;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster clean <span class="token variable">${cluster-name}</span> --data
@@ -6603,11 +6603,107 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <p>&#x6E05;&#x7A7A;&#x90E8;&#x7F72;&#x5728; <code>172.16.13.12</code> &#x4EE5;&#x5916;&#x7684;&#x6240;&#x6709;&#x670D;&#x52A1;&#x7684;&#x65E5;&#x5FD7;&#x548C;&#x6570;&#x636E;&#xFF1A;</p>
 <pre class="language-"><code class="lang-bash">tiup cluster clean <span class="token variable">${cluster-name}</span> --all --ignore-node <span class="token number">192.168</span>.1.70
 </code></pre>
-<h3 id="&#x2464;&#x5220;&#x9664;&#x96C6;&#x7FA4;">&#x2464;&#x5220;&#x9664;&#x96C6;&#x7FA4;</h3>
+<h2 id="5&#x3001;&#x5220;&#x9664;&#x96C6;&#x7FA4;">5&#x3001;&#x5220;&#x9664;&#x96C6;&#x7FA4;</h2>
 <pre class="language-"><code class="lang-bash">tiup cluster destroy &#x96C6;&#x7FA4;&#x540D;&#x5B57;
 </code></pre>
+<h2 id="6&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5347;&#x7EA7;">6&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5347;&#x7EA7;</h2>
+<p>&#x5728;&#x5B98;&#x65B9;&#x7EC4;&#x4EF6;&#x63D0;&#x4F9B;&#x4E86;&#x65B0;&#x7248;&#x4E4B;&#x540E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>tiup update</code> &#x547D;&#x4EE4;&#x6765;&#x5347;&#x7EA7;&#x7EC4;&#x4EF6;&#x3002;&#x9664;&#x4E86;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x7684;&#x7528;&#x6CD5;&#x57FA;&#x672C;&#x548C; <code>tiup install</code> &#x76F8;&#x540C;&#xFF1A;</p>
+<ul>
+<li><code>--all</code>&#xFF1A;&#x5347;&#x7EA7;&#x6240;&#x6709;&#x7EC4;&#x4EF6;</li>
+<li><code>--nightly</code>&#xFF1A;&#x5347;&#x7EA7;&#x81F3; nightly &#x7248;&#x672C;</li>
+<li><code>--self</code>&#xFF1A;&#x5347;&#x7EA7; TiUP &#x81EA;&#x5DF1;&#x81F3;&#x6700;&#x65B0;&#x7248;&#x672C;</li>
+<li><code>--force</code>&#xFF1A;&#x5F3A;&#x5236;&#x5347;&#x7EA7;&#x81F3;&#x6700;&#x65B0;&#x7248;&#x672C;</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#x4E00;&#xFF1A;&#x5347;&#x7EA7;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x81F3;&#x6700;&#x65B0;&#x7248;&#x672C;</p>
+<pre class="language-"><code class="lang-shell">tiup update --all
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E8C;&#xFF1A;&#x5347;&#x7EA7;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x81F3; nightly &#x7248;&#x672C;</p>
+<pre class="language-"><code class="lang-shell">tiup update --all --nightly
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E09;&#xFF1A;&#x5347;&#x7EA7; TiUP &#x81F3;&#x6700;&#x65B0;&#x7248;&#x672C;</p>
+<pre class="language-"><code class="lang-shell">tiup update --self
+</code></pre>
+<h2 id="7&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x6269;&#x5BB9;">7&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x6269;&#x5BB9;</h2>
+<p>&#x7F16;&#x8F91;&#x7EC4;&#x4EF6;&#x8282;&#x70B9;&#x6269;&#x5BB9;&#x8282;&#x70B9;&#x4FE1;&#x606F;&#x7684;&#x6587;&#x4EF6; <code>tidb-servers-scale-out-new-node.yaml</code></p>
+<p>TIDB&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53C2;&#x8003;</p>
+<pre class="language-"><code class="lang-ini">tidb_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    port: 4000
+    status_port: 10080
+    deploy_dir: /data/deploy/install/deploy/tidb-4000
+    log_dir: /data/deploy/install/log/tidb-4000
+</code></pre>
+<p>TiKV &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53C2;&#x8003;&#xFF1A;</p>
+<pre class="language-"><code class="lang-ini">tikv_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    port: 20160
+    status_port: 20180
+    deploy_dir: /data/deploy/install/deploy/tikv-20160
+    data_dir: /data/deploy/install/data/tikv-20160
+    log_dir: /data/deploy/install/log/tikv-20160
+</code></pre>
+<p>PD &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53C2;&#x8003;&#xFF1A;</p>
+<pre class="language-"><code class="lang-ini">pd_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    name: pd-1
+    client_port: 2379
+    peer_port: 2380
+    deploy_dir: /data/deploy/install/deploy/pd-2379
+    data_dir: /data/deploy/install/data/pd-2379
+    log_dir: /data/deploy/install/log/pd-2379
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>tiup cluster edit-config <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cluster-name</span><span class="token punctuation">&gt;</span></span></code> &#x67E5;&#x770B;&#x5F53;&#x524D;&#x96C6;&#x7FA4;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x4E2D;&#x7684; <code>global</code> &#x548C; <code>server_configs</code> &#x53C2;&#x6570;&#x914D;&#x7F6E;&#x9ED8;&#x8BA4;&#x4F1A;&#x88AB; <code>scale-out.yaml</code> &#x7EE7;&#x627F;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x4F1A;&#x5728; <code>scale-out.yaml</code> &#x4E2D;&#x751F;&#x6548;&#x3002;</p>
+<blockquote>
+<p>&#x6B64;&#x5904;&#x5047;&#x8BBE;&#x5F53;&#x524D;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x7684;&#x7528;&#x6237;&#x548C;&#x65B0;&#x589E;&#x7684;&#x673A;&#x5668;&#x6253;&#x901A;&#x4E86;&#x4E92;&#x4FE1;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x6EE1;&#x8DB3;&#x5DF2;&#x6253;&#x901A;&#x4E92;&#x4FE1;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7; <code>-p</code> &#x6765;&#x8F93;&#x5165;&#x65B0;&#x673A;&#x5668;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x6216;&#x901A;&#x8FC7; <code>-i</code> &#x6307;&#x5B9A;&#x79C1;&#x94A5;&#x6587;&#x4EF6;&#x3002;</p>
+</blockquote>
+<p>&#x6267;&#x884C;&#x6269;&#x5BB9;&#x547D;&#x4EE4;</p>
+<pre class="language-"><code class="lang-shell">tiup cluster scale-out &#x96C6;&#x7FA4;&#x540D; tidb-servers-scale-out-new-node.yaml
+</code></pre>
+<p>&#x9884;&#x671F;&#x8F93;&#x51FA; Scaled cluster <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cluster-name</span><span class="token punctuation">&gt;</span></span></code> out successfully &#x4FE1;&#x606F;&#xFF0C;&#x8868;&#x793A;&#x6269;&#x5BB9;&#x64CD;&#x4F5C;&#x6210;&#x529F;&#x3002;</p>
+<h2 id="8&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x6E05;&#x7406;">8&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x6E05;&#x7406;</h2>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>tiup clean</code> &#x547D;&#x4EE4;&#x6765;&#x6E05;&#x7406;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5220;&#x9664;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x3002;&#x5982;&#x679C;&#x5728;&#x6E05;&#x7406;&#x4E4B;&#x524D;&#x5B9E;&#x4F8B;&#x8FD8;&#x5728;&#x8FD0;&#x884C;&#xFF0C;&#x4F1A;&#x5148; kill &#x76F8;&#x5173;&#x8FDB;&#x7A0B;&#x3002;&#x8BE5;&#x547D;&#x4EE4;&#x7528;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">tiup clean <span class="token punctuation">[</span>tag<span class="token punctuation">]</span> <span class="token punctuation">[</span>flags<span class="token punctuation">]</span>
+</code></pre>
+<p>&#x652F;&#x6301;&#x4EE5;&#x4E0B;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li><code>--all</code>&#xFF1A;&#x6E05;&#x9664;&#x6240;&#x6709;&#x7684;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;</li>
+</ul>
+<p>&#x5176;&#x4E2D; tag &#x8868;&#x793A;&#x8981;&#x6E05;&#x7406;&#x7684;&#x5B9E;&#x4F8B; tag&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E86; <code>--all</code> &#x5219;&#x4E0D;&#x4F20;&#x9012; tag&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#x4E00;&#xFF1A;&#x6E05;&#x7406; tag &#x540D;&#x79F0;&#x4E3A; <code>experiment</code> &#x7684;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;</p>
+<pre class="language-"><code class="lang-shell">tiup clean experiment
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E8C;&#xFF1A;&#x6E05;&#x7406;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;</p>
+<pre class="language-"><code class="lang-shell">tiup clean --all
+</code></pre>
+<h2 id="9&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5378;&#x8F7D;">9&#x3001;&#x96C6;&#x7FA4;&#x7EC4;&#x4EF6;&#x5378;&#x8F7D;</h2>
+<p>TiUP &#x5B89;&#x88C5;&#x7684;&#x7EC4;&#x4EF6;&#x4F1A;&#x5360;&#x7528;&#x672C;&#x5730;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x4FDD;&#x7559;&#x8FC7;&#x591A;&#x8001;&#x7248;&#x672C;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x5B89;&#x88C5;&#x4E86;&#x54EA;&#x4E9B;&#x7248;&#x672C;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5378;&#x8F7D;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>tiup uninstall</code> &#x547D;&#x4EE4;&#x6765;&#x5378;&#x8F7D;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x7248;&#x672C;&#x6216;&#x8005;&#x7279;&#x5B9A;&#x7248;&#x672C;&#xFF0C;&#x4E5F;&#x652F;&#x6301;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x3002;&#x8BE5;&#x547D;&#x4EE4;&#x7528;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">tiup uninstall <span class="token punctuation">[</span>component<span class="token punctuation">]</span><span class="token punctuation">[</span>:version<span class="token punctuation">]</span> <span class="token punctuation">[</span>flags<span class="token punctuation">]</span>
+</code></pre>
+<p>&#x652F;&#x6301;&#x7684;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li><code>--all</code>&#xFF1A;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x7684;&#x7EC4;&#x4EF6;&#x6216;&#x7248;&#x672C;</li>
+<li><code>--self</code>&#xFF1A;&#x5378;&#x8F7D; TiUP &#x81EA;&#x8EAB;</li>
+</ul>
+<p>component &#x4E3A;&#x8981;&#x5378;&#x8F7D;&#x7684;&#x7EC4;&#x4EF6;&#x540D;&#x79F0;&#xFF0C;version &#x4E3A;&#x8981;&#x5378;&#x8F7D;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x90FD;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#xFF0C;&#x7701;&#x7565;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x90FD;&#x9700;&#x8981;&#x52A0;&#x4E0A; <code>--all</code> &#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>&#x82E5;&#x7701;&#x7565;&#x7248;&#x672C;&#xFF0C;&#x52A0; <code>--all</code> &#x8868;&#x793A;&#x5378;&#x8F7D;&#x8BE5;&#x7EC4;&#x4EF6;&#x6240;&#x6709;&#x7248;&#x672C;</li>
+<li>&#x82E5;&#x7248;&#x672C;&#x548C;&#x7EC4;&#x4EF6;&#x90FD;&#x7701;&#x7565;&#xFF0C;&#x5219;&#x52A0; <code>--all</code> &#x8868;&#x793A;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x7EC4;&#x4EF6;&#x53CA;&#x5176;&#x6240;&#x6709;&#x7248;&#x672C;</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#x4E00;&#xFF1A;&#x5378;&#x8F7D; v3.0.8 &#x7248;&#x672C;&#x7684; TiDB</p>
+<pre class="language-"><code class="lang-shell">tiup uninstall tidb:v3.0.8
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E8C;&#xFF1A;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x7248;&#x672C;&#x7684; TiKV</p>
+<pre class="language-"><code class="lang-shell">tiup uninstall tikv --all
+</code></pre>
+<p>&#x793A;&#x4F8B;&#x4E09;&#xFF1A;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x7EC4;&#x4EF6;</p>
+<pre class="language-"><code class="lang-shell">tiup uninstall --all
+</code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-09-02 22:55:59
+2020-11-19 15:23:05
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6651,7 +6747,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.30.1.2","depth":3,"next":{"title":"DM(Data Migration)及Ansible部署","level":"7.30.2","depth":2,"path":"origin/tidb-ansible-dm.md","ref":"origin/tidb-ansible-dm.md","articles":[]},"previous":{"title":"Ansible二进制部署管理","level":"7.30.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2020-09-02T14:55:59.401Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-11-13T02:51:14.100Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.30.1.2","depth":3,"next":{"title":"DM(Data Migration)及Ansible部署","level":"7.30.2","depth":2,"path":"origin/tidb-ansible-dm.md","ref":"origin/tidb-ansible-dm.md","articles":[]},"previous":{"title":"Ansible二进制部署管理","level":"7.30.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2020-11-19T07:23:05.992Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-11-25T05:38:51.846Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

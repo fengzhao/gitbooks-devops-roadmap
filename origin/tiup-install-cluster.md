@@ -401,9 +401,9 @@ tiup cluster display 集群名字 --dashboard
 - PD：https://github.com/tikv/pd/blob/v4.0.0-rc/conf/config.toml
 - TiKV：https://github.com/tikv/tikv/blob/v4.0.0-rc/etc/config-template.toml
 
-## 10、集群其他操作
+# 四、集群其他操作
 
-### ①修改集群组件配置参数
+## 1、修改集群组件配置参数
 
 集群运行过程中，如果需要调整某个组件的参数，可以使用 `edit-config` 命令来编辑参数。具体的操作步骤如下：
 
@@ -453,7 +453,7 @@ server_configs:
 
 然后执行 `tiup cluster reload ${cluster-name} -R tidb` 命令滚动重启。
 
-### ②重命名集群
+## 2、重命名集群
 
 部署并启动集群后，可以通过 `tiup cluster rename` 命令来对集群重命名：
 
@@ -466,7 +466,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 > - 重命名集群会重启监控（Prometheus 和 Grafana）。
 > - 重命名集群之后 Grafana 可能会残留一些旧集群名的面板，需要手动删除这些面板。
 
-### ②关闭集群
+## 3、关闭集群
 
 关闭集群操作会按 Drainer -> TiFlash -> TiDB -> Pump -> TiKV -> PD 的顺序关闭整个 TiDB 集群所有组件（同时也会关闭监控组件）：
 
@@ -488,7 +488,7 @@ tiup cluster stop ${cluster-name} -R tidb
 tiup cluster stop ${cluster-name} -N 1.2.3.4:4000,1.2.3.5:4000
 ```
 
-### ④清除集群数据
+## 4、清除集群数据
 
 此操作会关闭所有服务，并清空其数据目录或/和日志目录，并且无法恢复，需要**谨慎操作**。
 
@@ -528,9 +528,155 @@ tiup cluster clean ${cluster-name} --all --ignore-node 192.168.1.70:9000
 tiup cluster clean ${cluster-name} --all --ignore-node 192.168.1.70
 ```
 
-### ⑤删除集群
+## 5、删除集群
 
 ```bash
 tiup cluster destroy 集群名字
+```
+
+## 6、集群组件升级
+
+在官方组件提供了新版之后，你可以使用 `tiup update` 命令来升级组件。除了以下几个参数，该命令的用法基本和 `tiup install` 相同：
+
+- `--all`：升级所有组件
+- `--nightly`：升级至 nightly 版本
+- `--self`：升级 TiUP 自己至最新版本
+- `--force`：强制升级至最新版本
+
+示例一：升级所有组件至最新版本
+
+```shell
+tiup update --all
+```
+
+示例二：升级所有组件至 nightly 版本
+
+```shell
+tiup update --all --nightly
+```
+
+示例三：升级 TiUP 至最新版本
+
+```shell
+tiup update --self
+```
+
+## 7、集群组件扩容
+
+编辑组件节点扩容节点信息的文件 `tidb-servers-scale-out-new-node.yaml`
+
+TIDB配置文件参考
+
+```ini
+tidb_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    port: 4000
+    status_port: 10080
+    deploy_dir: /data/deploy/install/deploy/tidb-4000
+    log_dir: /data/deploy/install/log/tidb-4000
+```
+
+TiKV 配置文件参考：
+
+```ini
+tikv_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    port: 20160
+    status_port: 20180
+    deploy_dir: /data/deploy/install/deploy/tikv-20160
+    data_dir: /data/deploy/install/data/tikv-20160
+    log_dir: /data/deploy/install/log/tikv-20160
+```
+
+PD 配置文件参考：
+
+```ini
+pd_servers:
+  - host: 10.0.1.5
+    ssh_port: 22
+    name: pd-1
+    client_port: 2379
+    peer_port: 2380
+    deploy_dir: /data/deploy/install/deploy/pd-2379
+    data_dir: /data/deploy/install/data/pd-2379
+    log_dir: /data/deploy/install/log/pd-2379
+```
+
+可以使用 `tiup cluster edit-config <cluster-name>` 查看当前集群的配置信息，因为其中的 `global` 和 `server_configs` 参数配置默认会被 `scale-out.yaml` 继承，因此也会在 `scale-out.yaml` 中生效。
+
+> 此处假设当前执行命令的用户和新增的机器打通了互信，如果不满足已打通互信的条件，需要通过 `-p` 来输入新机器的密码，或通过 `-i` 指定私钥文件。
+
+执行扩容命令
+
+```shell
+tiup cluster scale-out 集群名 tidb-servers-scale-out-new-node.yaml
+```
+
+预期输出 Scaled cluster `<cluster-name>` out successfully 信息，表示扩容操作成功。
+
+## 8、集群组件实例清理
+
+你可以使用 `tiup clean` 命令来清理组件实例，并删除工作目录。如果在清理之前实例还在运行，会先 kill 相关进程。该命令用法如下：
+
+```bash
+tiup clean [tag] [flags]
+```
+
+支持以下参数：
+
+- `--all`：清除所有的实例信息
+
+其中 tag 表示要清理的实例 tag，如果使用了 `--all` 则不传递 tag。
+
+示例一：清理 tag 名称为 `experiment` 的组件实例
+
+```shell
+tiup clean experiment
+```
+
+示例二：清理所有组件实例
+
+```shell
+tiup clean --all
+```
+
+## 9、集群组件卸载
+
+TiUP 安装的组件会占用本地磁盘空间，如果不想保留过多老版本的组件，可以先查看当前安装了哪些版本的组件，然后再卸载某个组件。
+
+你可以使用 `tiup uninstall` 命令来卸载某个组件的所有版本或者特定版本，也支持卸载所有组件。该命令用法如下：
+
+```bash
+tiup uninstall [component][:version] [flags]
+```
+
+支持的参数：
+
+- `--all`：卸载所有的组件或版本
+- `--self`：卸载 TiUP 自身
+
+component 为要卸载的组件名称，version 为要卸载的版本，这两个都可以省略，省略任何一个都需要加上 `--all` 参数：
+
+- 若省略版本，加 `--all` 表示卸载该组件所有版本
+- 若版本和组件都省略，则加 `--all` 表示卸载所有组件及其所有版本
+
+示例一：卸载 v3.0.8 版本的 TiDB
+
+```shell
+tiup uninstall tidb:v3.0.8
+```
+
+示例二：卸载所有版本的 TiKV
+
+```shell
+tiup uninstall tikv --all
+```
+
+示例三：卸载所有已经安装的组件
+
+```shell
+tiup uninstall --all
 ```
 

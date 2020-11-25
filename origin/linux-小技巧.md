@@ -1291,23 +1291,28 @@ read -p $'第一行内容\n第二行内容:' 变量
 
 # 52、nmcli命令行/numtui字符界面管理网络
 
-参考：https://www.cnblogs.com/liuhedong/p/10695969.html
+- 参考：https://www.cnblogs.com/liuhedong/p/10695969.html
 
-安装命令
+- 通常用 `con` 关键字替换 `connection`，并用 `mod` 关键字替换 `modify`
+- `nmtui` 是一个基于文本用户界面的，用于控制网络的管理器，当我们执行 `nmtui` 时，它将打开一个基于文本的用户界面，通过它我们可以添加、修改和删除连接。除此之外，`nmtui` 还可以用来设置系统的主机名。
 
-```bash
-yum install NetworkManager NetworkManager-tui
-# 或者
-apt install network-manager
-```
+- 安装命令
 
-显示网络管理器的整体状态
+  ```bash
+  yum install NetworkManager NetworkManager-tui
+  # 或者
+  apt install network-manager
+  ```
+
+  
+
+## ①显示网络管理器的整体状态
 
 ```bash
 nmcli general status
 ```
 
-查看网卡设备
+## ②查看网卡设备
 
 ```bash
 $ nmcli dev
@@ -1319,7 +1324,7 @@ tun0           tun       unmanaged  --
 p2p-dev-wlan0  wifi-p2p  unmanaged  --
 ```
 
-查看附近的WIFI网络
+## ③查看附近的WIFI网络
 
 ```bash
 $ nmcli d wifi list
@@ -1334,13 +1339,13 @@ IN-USE  BSSID              SSID              MODE   CHAN  RATE        SIGNAL  BA
         8C:FD:18:4A:79:78  CMCC-GNTn-5G      Infra  36    270 Mbit/s  52      ▂▄__  WPA1 WPA2
 ```
 
-连接WIFI
+## ④连接WIFI
 
 ```bash
 $ nmcli d wifi connect <WIFI_SSID> password <WIFI_PASSWORD>
 ```
 
-连接隐藏WIFI
+## ⑤连接隐藏WIFI
 
 ```bash
 $ nmcli c add type wifi con-name <连接名> ifname wlan0 ssid <WIFI_SSID>
@@ -1348,7 +1353,7 @@ $ nmcli c modify <连接名> wifi-sec.key-mgmt wpa-psk wifi-sec.psk <WIFI_PASSWO
 $ nmcli c up <连接名>
 ```
 
-查看网络设备连接状态
+## ⑥查看网络设备连接状态
 
 ```bash
 nmcli connection show
@@ -1360,6 +1365,25 @@ nmcli connection show --order +name
 # 将所有连接以类型排序(倒序)
 nmcli connection show --order -type
 ```
+
+## ⑦固定IP地址
+
+```bash
+# 列出当前活动的连接
+nmcli connection
+# 固定IP地址
+nmcli con mod <WIFI连接名> ipv4.addresses 192.168.1.4/24
+# 设置网关
+nmcli con mod <WIFI连接名> ipv4.gateway 192.168.1.1
+# 设置手动获取IP，不使用DHCP
+nmcli con mod <WIFI连接名> ipv4.method manual
+# 设置DNS
+nmcli con mod <WIFI连接名> ipv4.dns "8.8.8.8"
+# 生效配置
+nmcli con up <WIFI连接名>
+```
+
+
 
 # 53、对bash执行curl的脚本进行传参
 

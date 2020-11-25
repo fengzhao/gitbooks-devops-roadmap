@@ -120,7 +120,7 @@ status:
   phase: Bound
 ```
 
-## 示例1
+### 示例1
 
 ```bash
 cat test.yaml | yq r - status
@@ -132,7 +132,7 @@ capacity:
 phase: Bound
 ```
 
-## 示例2
+### 示例2
 
 ```bash
 cat test.yaml | yq r - spec.resources
@@ -141,7 +141,7 @@ requests:
   storage: 10Gi
 ```
 
-## 示例3
+### 示例3
 
 ```bash
 cat test.yaml | yq r - metadata | grep -E 'name:|namespace:'
@@ -150,8 +150,28 @@ name: test
 namespace: app-test
 ```
 
+## 原始yaml
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test
+  namespace: test
+type: Opaque
+data:
+  prometheus-additional.yaml: dGVzdAo=
+```
+
+### 示例1
+
+```bash
+ cat a.yaml | yq r - data.'"prometheus-additional.yaml"' | base64 --decode
+```
+
 
 
 # 参考
 
 1. https://github.com/mikefarah/yq
+2. 
