@@ -20,7 +20,7 @@ reids镜像相关信息：
 
 - 镜像定制：
 
-  ```dockerfile
+  ```bash
   FROM redis:6.0.9-alpine
   COPY redis.conf /usr/local/etc/redis/redis.conf
   CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
