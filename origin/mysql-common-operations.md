@@ -142,9 +142,14 @@ mysqladmin -uroot -p*** password 1234abcd
 
 ## ③update更新user表  
 
-```
+```bash
 use mysql 
 update user set PASSWORD = PASSWORD('1234abcd') where user = 'root';
+flush privileges;
+
+# mysql 5.7
+use mysql 
+update user set authentication_string = PASSWORD('1234abcd') where user = 'root';
 flush privileges;
 ```
 

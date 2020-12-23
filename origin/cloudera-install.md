@@ -104,8 +104,6 @@ reboot now
 
 所有主机备份自带的YUM源配置文件
 
- 
-
 ```bash
 mkdir /etc/yum.repos.d/bak ;\
 mv /etc/yum.repos.d/r* /etc/yum.repos.d/bak/ ;\
@@ -152,7 +150,9 @@ yum repolist
 
 ### 上传CM、MySQL、JDK、CDH，Spark，Kafka的parcels包相关的安装包到CM主机的/var/www/html/目录下
 
- 
+CM相关的RPM官网下载地址：https://archive.cloudera.com/cm6/
+
+CDH相关的RPM官网下载地址：https://archive.cloudera.com/cdh6/
 
 ```bash
 bash -c 'cat > /etc/yum.repos.d/cm5.repo <<EOF
@@ -227,9 +227,7 @@ EOF' ;\
   rm -rf ./HitthroughSSH.sh ./hosts.txt
 ```
 
-## 5. 将CM主机上的YUM源同步到其他主机上
-
- 
+## 5. 将CM主机上的YUM源同步到其他主机上 
 
 ```bash
 for i in {cm,master1,master2,node1,node2,node3} ;do scp /etc/yum.repos.d/rhel74.repo $i.cloudera.curiouser.com:/etc/yum.repos.d/ ;done
@@ -238,8 +236,6 @@ for i in {cm,master1,master2,node1,node2,node3} ;do scp /etc/yum.repos.d/rhel74.
 ## 6. 配置集群内的NTP时间同步
 
 将CM主机作为NTP服务端
-
- 
 
 ```bash
 yum install ntp -y ;\
@@ -296,8 +292,6 @@ wget http://cm.cloudera.curiouser.com/oracle-jdk/{local_policy.jar,US_export_pol
 
 ## 8. 所有主机挂载额外硬盘到/data目录
 
- 
-
 ```bash
 disk=sdb &&\
 yum install -y lvm2 &&\
@@ -315,8 +309,6 @@ df -mh
 ## 9、CM节点安装MySQL，并添加MySQL 的JDBC包
 
 安装MySQL
-
- 
 
 ```bash
 yum install -y mysql-community-server &&\
@@ -349,15 +341,11 @@ systemctl status mysqld
 
 修改MySQL用户root的默认密码
 
- 
-
 ```bash
 mysql -uroot -p`awk '{ if(match($0,"root@localhost: ")) {print substr($0,RSTART+RLENGTH) }}' /data/mysql/logs/mysqld.log` -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Test@123';"
 ```
 
 创建相关Database
-
- 
 
 ```bash
 mysql -uroot -p`awk '{ if(match($0,"root@localhost: ")) {print substr($0,RSTART+RLENGTH) }}' /data/mysql/logs/mysqld.log` \
@@ -388,9 +376,7 @@ ln -s /usr/share/java/mysql-connector-java-5.1.46.jar /usr/share/java/mysql-conn
 
 # 三、CM节点安装Cloudera Manager
 
-## 1、安装服务
-
- 
+## 1、安装服务 
 
 ```bash
 yum install -y cloudera-manager-daemons cloudera-manager-server  
@@ -398,15 +384,11 @@ yum install -y cloudera-manager-daemons cloudera-manager-server
 
 ## 2、配置 Cloudera Manager 能够连接 Mysql 外部数据库
 
- 
-
 ```bash
 /usr/share/cmf/schema/scm_prepare_database.sh -h cm.cloudera.curiouser.com mysql scm scm 123456
 ```
 
 ## 3、启动服务
-
- 
 
 ```bash
 systemctl enable cloudera-scm-server &&\
@@ -468,3 +450,4 @@ chown -R zookeeper:zookeeper /data/zookeeper
  ![img](../assets/cloudera-install-26.png) 
  备注：集群中黄色警告配置是主机上分配的角色，占用的内存超出了主机的物理内存 
  ![img](../assets/cloudera-install-27.png)
+

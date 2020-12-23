@@ -47,6 +47,10 @@
   * [kubernetes容器的访问方式](origin/kubernetes-容器的访问方式.md)
   * [kubernetes的容器网络CNI](origin/kubernetes的容器网络.md)
   * [kube-proxy的实现方式之iptables与ipvs模式](origin/kubernetes-kube-proxy-iptables-ipvs.md)
+* 系统应用
+  * 网络CNI
+    * Traefik
+      * [常用操作](origin/k8s-cni-traefik-common-operation.md)
 * 安装
   * [Kubeadm安装单机版Kubernetes](origin/kubernetes-使用Kubeadm安装单机版Kubernetes.md)
   * [Kubeasz二进制安装Kubernetes集群](origin/kubernetes-Kubeasz二进制安装集群.md)
@@ -137,7 +141,7 @@
     * [日志系统技术概览简介](origin/logging-日志系统技术概览简介.md)
     * [日志系统数据在个组件中的流转格式](origin/logging-日志系统数据在个组件中的流转格式.md)
     * Kafka
-        * 安装
+        * [原理](origin/kafka-origin.md)
         * [基础知识](origin/logging-kafka基础知识.md)
         * [kafka常用操作](origin/logging-kafka常用操作.md)
     * Filebeat
@@ -150,12 +154,9 @@
         * [Pipeline示例--采集MySQL慢查询日志到Elasticsearch](origin/logstash-采集MySQL慢查询日志到Elasticsearch.md)
         * Filter
           * [grok插件](origin/logstash-filter-grok.md)
-    * Fluentd
+        * [常用filter实现的功能](origin/logstash-filter-summary.md)
+    * [ELK系列安装部署](origin/elk-install.md)
     * Elasticsearch
-        * 部署
-            * [二进制方式](origin/elasticsearch-binary-install.md)
-            * [Docker方式](origin/elasticsearch-docker-install.md)
-            * [K8S方式](origin/elasticsearch-k8s-install.md)
         * [基础知识](origin/elasticsearch-基础知识.md)
             * API Endpoints
                 * [_cat](origin/elasticsearch--_cat-API.md)
@@ -163,7 +164,8 @@
                 * search
                 * [bulk](origin/elasticsearch-bulk-api.md)
             * [Ingest节点](origin/elasticsearch-ingest节点.md)
-            * [数据的分配路由](origin/elasticsearch-数据的分配路由.md)
+            * [数据的路由分配](origin/elasticsearch-数据的分配路由.md)
+            * [进程池](origin/es-thread-pool.md)
         * 管理
             * [Xpack](origin/elasticsearch-7.1的xpack权限控制.md)
             * [Snapshots](origin/elasticSearch-索引的快照备份与恢复.md)
@@ -175,7 +177,6 @@
             * [测试](origin/elasticsearch-pressuretest.md)
             * [优化](origin/elasticsearch-optimizing.md)
         * [问题总结](origin/elasticsearch-问题总结.md)
-    * Kibana
 * Metrics
     * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
         * [kube-prometheus](origin/kube-prometheus.md)
@@ -232,6 +233,7 @@
     * [git提交规范](origin/git-standard-commit-message.md)
 * [正则表达式](origin/regular-expression详解.md)
 * [SSL/TLS](origin/ssl-tls.md)
+  
     - [CFSSL](origin/ssl-tls-cfssl.md)
 * Ceph
     * 安装
@@ -250,6 +252,8 @@
             * [MySQL性能测试之sysbench](origin/sysbench-mysql.md)
         * Redis
             * [Redis性能测试之redis-benchmark](origin/redis-benchmark.md)
+        * Kafka
+            * [Kafka性能测试](origin/kafka-perf.md)
 * FastDFS
     * 安装
     * 使用
@@ -258,6 +262,7 @@
     * [Kickstart文件参数详解](origin/pxe-kickstart文件参数详解.md)
     * [PXE引导配置文件参数详解](origin/pxe-引导配置文件参数详解.md)
 * Tool
+  
     * [Sublime Text 3](origin/tool-SublimeText.md)
 * Windows
     * [CMD发送SMTP邮件](origin/windows-cmd发送SMTP邮件.md)
@@ -291,21 +296,27 @@
       * [top](origin/linux-top.md)
       * [ip/ifconfig](origin/linux-ip-ifconfig.md)
     * [防火墙iptables](origin/linux-iptables.md)
-      * [SNAT]
-* 数据库
-    * [MySQL](origin/mysql-basic.md)
-      * 运维
-        * [常见操作及SQL](origin/mysql-common-operations.md)
-        * [用户权限管理](origin/mysql-user-privileges.md)
-        * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
-        * 备份与恢复
-          * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
-          * [MysqlDump详解](origin/mysql-dumper.md)
-      * 基础概念
-        * [存储过程语法](origin/mysql-procedure-grammar.md)
-        * [常用存储过程](origin/mysql-procedure.md)
-        * [事物隔离级别](origin/mysql-transaction.md)
-        * [临时表](origin/mysql-temporary.md)
+
+* [MySQL](origin/mysql-basic.md)
+
+    * 运维
+      * [常见操作及SQL](origin/mysql-common-operations.md)
+      * [用户权限管理](origin/mysql-user-privileges.md)
+      * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
+      * 备份与恢复
+        * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
+        * [MysqlDump详解](origin/mysql-dumper.md)
+    * 基础概念
+      * [存储过程语法](origin/mysql-procedure-grammar.md)
+      * [常用存储过程](origin/mysql-procedure.md)
+      * [事物隔离级别](origin/mysql-transaction.md)
+      * [临时表](origin/mysql-temporary.md)
+
+* Redis
+    * [基础概念](origin/redis-basic.md)
+    * [安装部署](origin/reids-install-deploy.md)
+    * [数据迁移备份恢复](origin/redis-backup-restore.md)
+    * [常用操作](origin/reids-common-opreations.md)
 * 负载均衡与代理
     * Nginx
     * HAProxy
@@ -321,10 +332,12 @@
         * [Nginx](origin/nginx.md)
           * [Nginx配置优化](origin/nginx-config.md)
 * iSCSI
+  
     * [群晖Synology的iSCSI](origin/iSCSI-简介配置使用.md)
 * [GitBook](origin/gitbook-简介安装配置.md)
 * [Telegram机器人](origin/telegram-Bot机器.md)
 * OpenVPN
+  
     * [OpenVPN Server](origin/openvpn-server.md)
 * vSphere
     * [ESXI 管理常用命令](origin/vsphere-esxi.md)
@@ -341,6 +354,7 @@
 * [Aliyun CLI](origin/aliyun-cli.md)
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
+  
     * [fffmpeg](origin/audio-video-fffmpeg.md)
 * **Python**
     * [环境搭建：安装配置](origin/python-basic.md)

@@ -534,8 +534,9 @@ kadmin.local: exit
 
 ## 0、升级说明
 
-1. 只升级Cloudera Manage
-2. cm5.11.1升级至cm5.15.0
+1. 版本升级路径参考：https://docs.cloudera.com/documentation/enterprise/upgrade/topics/ug_upgrade_paths.html#ug_upgrade_paths
+2. 只升级Cloudera Manage
+3. cm5.11.1升级至cm5.15.0
 
 ## 1、CM主机停止Cloudera Manager server，所有主机停止Cloudera Manager agent
 
@@ -549,15 +550,15 @@ systemctl stop cloudera-scm-agent
 ## 2、备份CM主机MySQL数据库中的所有Database
 
 ```
-mysqldump -uroot -p --all-databases > cloudera.sql
+mysqldump -uroot -p --all-databases > cloudera-mysql-backup.sql
 ```
 
 ## 3、备份Cloudera Manager server、agent的配置文件
 
 ```
 mkdir ~/bak &&\
-scp -r /etc/cloudera-scm-server/ ~/bak/ &&\
-scp -r /etc/cloudera-scm-agent/ bak/
+cp -r /etc/cloudera-scm-server/ ~/bak/ &&\
+cp -r /etc/cloudera-scm-agent/ bak/
 ```
 
 ## 4、所有主机配置新版本CM RPM包的YUM源

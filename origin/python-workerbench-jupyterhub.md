@@ -263,9 +263,72 @@ jupyter labextension install @techrah/text-shortcuts
 
 # 四、安装RStudio Server
 
-```bash
+以`Ubuntu 18.04 bionic` 为例
 
+```bash
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/linux/ubuntu bionic-cran40/">> /etc/apt/sources.list.d/r-tuna.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo apt-get update
+sudo apt-get install r-base-dev
 ```
 
+## 包的管理
 
+包的安装
+
+```R
+# 从镜像源仓库安装
+install.packages("rjson",repos="https://mirrors.ustc.edu.cn/CRAN") 
+install.packages("ape")
+# 从包文件安装
+  # 在R CLI中
+    install.packages("/root/mgcv_1.8-29.tar.gz", repos = NULL)
+    # 或者
+    packageurl <- "http://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_0.9.1.tar.gz"
+    packageurl <- "https://cran.rstudio.com/bin/macosx/contrib/4.0/mgcv_1.8-23.tgz"
+    install.packages(packageurl, repos=NULL, type="source")
+  # 在linux命令行
+    R CMD INSTALL package.tar.gz
+    # 或者
+    su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
+```
+
+包的查看
+
+```R
+installed.packages()
+```
+
+包的删除
+
+```R
+remove. packages(c("pkg1","pkg2") , lib = file .path("path", "to", "library"))
+
+# shili
+remove.packages("mgcv", lib="/usr/lib/R/library")
+```
+
+包的清除
+
+```R
+detach("package:rjson")
+```
+
+包的加载
+
+```R
+library(rjson)
+require(rjson)---便于写脚本特性
+```
+
+## 升级R版本
+
+```R
+# 安装包，如果已经有此包可跳过此步骤
+install.packages("installr")
+ 
+# 加载包，升级
+library(installr)
+updateR()
+```
 

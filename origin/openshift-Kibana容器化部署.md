@@ -1,22 +1,3 @@
-# 一、拉取镜像
-
-```bash
-docker pull docker.io/kibana/kibana:6.6.1
-#或者
-docker pull docker.elastic.co/kibana/kibana:6.6.1
-```
-
-# 二、Docker部署
-
-## 单机Docker部署
-
-```bash
-docker run -p 5601:5601 \
--e "ELASTICSEARCH_HOST=http://ElasticSearch_HostIP:9200" \
--e "SERVER_NAME=Curiouser" \
-docker.elastic.co/kibana/kibana:6.6.1
-```
-
 # 三、OKD上部署
 
 ## DeploymentConfig

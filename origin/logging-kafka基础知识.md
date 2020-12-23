@@ -244,6 +244,21 @@ Schema:
 2. 然后在"Consumer id 注册"节点下注册一个watch用来监听当前group中其他consumer的"退出"和"加入";只要此znode path下节点列表变更,都会触发此group下consumer的负载均衡.(比如一个consumer失效,那么其他consumer接管partitions).
 3. 在"Broker id 注册"节点下,注册一个watch用来监听broker的存活情况;如果broker列表变更,将会触发所有的groups下的consumer重新balance.
 
+
+
+# 三、kafka的版本
+
+## Kafka版本规则
+
+在Kafka 1.0.0之前基本遵循4位版本号，比如Kafka 0.8.2.0、Kafka 0.11.0.3等。而从1.0.0开始Kafka就告别了4位版本号，遵循 Major.Minor.Patch 的版本规则，其中Major表示大版本，通常是一些重大改变，因此彼此之间功能可能会不兼容；Minor表示小版本，通常是一些新功能的增加；最后Patch表示修订版，主要为修复一些重点Bug而发布的版本。比如Kafka 2.1.1，大版本就是2，小版本是1，Patch版本为1，是为修复Bug发布的第1个版本。
+
+## Kafka版本演进
+
+Kafka总共发布了7个大版本，分别是0.7.x、0.8.x、0.9.x、0.10.x、0.11.x、1.x及2.x版本。截止目前，最新版本是Kafka 2.6.0.，也是最新稳定版本
+
+kafka的offset保存位置分为两种情况 0.9.0.0版本之前默认保存在zookeeper当中 ，0.9.0.0版本之后保存在broker对应的topic当中
+
 # 参考链接
 
 1. http://blog.csdn.net/lizhitao/article/details/23744675
+2. https://www.jianshu.com/p/5bef1f9f74cd

@@ -1,4 +1,4 @@
-# 一、elasticsearch集群开启“xpack的monitoring功能“导致”failed to flush export bulks和 there are no ingest nodes in this cluster”报错
+# 一、xpack的monitoring功能“导致”failed to flush export bulks和 there are no ingest nodes in this cluster”报错
 
 **原因**：
 
@@ -22,10 +22,35 @@ xpack的monitoring功能需要定义exporter用于导出监控数据， 默认�
 
 
 
-# 二、Elasticsearch的监控日志索引Index的保存期限为7天
+# 二、监控日志索引Index的保存期限为7天
 
 Elasticsearch的监控日志索引Index为"`.monitoring-*`"开头的，保存期限为7天，7天之后会自动删除。
 
 **参考**
 
 1. https://discuss.elastic.co/t/how-system-index-like-monitoring-es-6-2018-02-06-are-being-deleted-automatically/119578
+
+# 三、字段过大导致kibana搜索是分片失败
+
+**报错**：
+
+```bash
+The length of [response.keyword] field of [SwiBc3YBv0gFs9LK4P1_] doc of [docc-2020-12-18] index has exceeded [1000000] - maximum allowed to be analyzed for highlighting. This maximum can be set by changing the [index.highlight.max_analyzed_offset] index level setting. For large texts, indexing with offsets or term vectors is recommended!
+```
+
+**原因**：某个字段超出了字符偏移量上限
+
+**解决方案**
+
+```bash
+PUT /分片失败的索引/_settings
+ {
+    "index" : {
+        "highlight.max_analyzed_offset" : 60000000
+    }
+}
+```
+
+
+
+## 
