@@ -644,7 +644,7 @@ inet 10.8.0.6 --> 10.8.0.5/32 utun3
 - **ipchange cmd**
 - **down-pre**
 
-以上参数，可在脚本中通过**script_type**进行甄别。‘
+以上参数，可在脚本中通过**script_type**进行甄别。
 
 > **script_type**，**up, down, ipchange, route-up, tls-verify, auth-user-pass-verify,** **client-connect, client-disconnect,** **learn-address.** 
 

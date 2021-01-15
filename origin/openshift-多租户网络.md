@@ -8,11 +8,11 @@ Openshift提供两种网络方案：
 
 # 二、启动多租户网络
 
-需要将集群中所有的master节点配置文件/etc/origin/master/master-config.yaml和node节点配置文件/etc/origin/node/node-config.yaml中的networkPluginName的属性值从redhat/openshift-ovs-subnet修改为redhat/openshift-ovs-multitenant，然后重启Openshift集群Master节点的origin-master-controllers.service服务和Node节点的origin-node.service服务
+需要将集群中所有的master节点配置文件`/etc/origin/master/master-config.yaml`和node节点配置文件`/etc/origin/node/node-config.yaml`中的`networkPluginName`的属性值从`redhat/openshift-ovs-subnet`修改为`redhat/openshift-ovs-multitenant`，然后重启Openshift集群Master节点的`origin-master-controllers.service`服务和Node节点的`origin-node.service服`务
 
 # 三、测试，查看网络隔离
 
-1. 在一个项目中的一个pod的终端中ping/telnet/curl/nslook另一个项目中的pod的ip地址或者对应svc的FQDN（<service>.<pod_namespace>.svc.cluster.local）
+1. 在一个项目中的一个pod的终端中`ping/telnet/curl/nslook`另一个项目中的pod的ip地址或者对应svc的FQDN`（<service>.<pod_namespace>.svc.cluster.local）`
    
 2. 查看namespace的Netid是否一致
     ```bash
@@ -33,7 +33,7 @@ Openshift提供两种网络方案：
 
     # project 1,2,3中所有的pod，service可以通过容器IP相互访问（通过service的FQDN不能相互访问）
     oc adm pod-network join-projects --to=<project1> <project2> <project3>
-
+    
     #将某个project中所有的pod和service设置为全局可访问
     oc adm pod-network make-projects-global <project2> <project3>
 
