@@ -144,6 +144,7 @@
         * [原理](origin/kafka-origin.md)
         * [基础知识](origin/logging-kafka基础知识.md)
         * [kafka常用操作](origin/logging-kafka常用操作.md)
+        * [kafka连接调试脚本](origin/kafka-client-connect-procedure-tools.md)
     * Filebeat
         * [简介安装配置](origin/filebeat-简介安装配置.md)
         * [多实例安装部署](origin/filebeat-多实例部署.md)
@@ -270,6 +271,7 @@
     * [Windows Server管理](origin/windows-server.md)
     * [Windows进程守护工具NSSM](origin/windows-nssm.md)
     * [Windows 无人值守部署服务](origin/windows-deployment-service-aik.md)
+    * [主机的网络唤醒WOL服务](origin/windows-wakeuponlan.md)
 * Linux
     * [Linux小技巧](origin/linux-小技巧.md)
     * [比较两个文件的不同](origin/linux-diff.md)
@@ -296,7 +298,6 @@
       * [top](origin/linux-top.md)
       * [ip/ifconfig](origin/linux-ip-ifconfig.md)
     * [防火墙iptables](origin/linux-iptables.md)
-
 * [MySQL](origin/mysql-basic.md)
 
     * 运维
@@ -311,13 +312,13 @@
       * [常用存储过程](origin/mysql-procedure.md)
       * [事物隔离级别](origin/mysql-transaction.md)
       * [临时表](origin/mysql-temporary.md)
-
 * Redis
     * [基础概念](origin/redis-basic.md)
     * [安装部署](origin/reids-install-deploy.md)
     * [数据迁移备份恢复](origin/redis-backup-restore.md)
     * [常用操作](origin/reids-common-opreations.md)
 * 负载均衡与代理
+    * [Keepalived](origin/keepalived.md)
     * Nginx
     * HAProxy
     * LVS
@@ -354,8 +355,7 @@
 * [Aliyun CLI](origin/aliyun-cli.md)
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
-  
-    * [fffmpeg](origin/audio-video-fffmpeg.md)
+  * [fffmpeg](origin/audio-video-fffmpeg.md)
 * **Python**
     * [环境搭建：安装配置](origin/python-basic.md)
     * [JupyterHub/RStuido](origin/python-workerbench-jupyterhub.md)
@@ -379,4 +379,12 @@
 ## Part VIII: golang学习笔记
 
 - [基础语法](origin/golang-basic.md)
+  - [go的并发](origin/golang-concurrent-programming.md)
+- [Web框架Gin的使用总结](origin/go-gin.md)
+- 第三方工具
+  - [statik-将静态资源文件打包到二进制文件中](origin/golang-statik.md)
+
+# Part IX : JavaScript学习笔记
+
+- [JavaScript常用工具函数](origin/js-kits.md)
 
