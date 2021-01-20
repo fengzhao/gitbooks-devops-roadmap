@@ -1482,16 +1482,16 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.2.1" >
+        <li class="chapter " data-level="4.2.1" data-path="gitlab-install.html">
             
-                <span>
+                <a href="gitlab-install.html">
             
                     
                         <b>4.2.1.</b>
                     
                     安装
             
-                </span>
+                </a>
             
 
             
@@ -6228,12 +6228,13 @@
 						<h2 id="gitlab&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x5907;&#x4EFD;&#x4E0E;&#x6062;&#x590D;">Gitlab&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x5907;&#x4EFD;&#x4E0E;&#x6062;&#x590D;</h2>
 <h1 id="&#x4E00;&#x3001;preface">&#x4E00;&#x3001;Preface</h1>
 <p>GItlab&#x4E0A;&#x7684;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x5B9A;&#x671F;&#x7684;&#x5BFC;&#x51FA;&#x5907;&#x4EFD;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x8FDB;&#x884C;&#x6062;&#x590D;</p>
-<h1 id="&#x4E8C;&#x3001;&#x901A;&#x8FC7;api&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;">&#x4E8C;&#x3001;&#x901A;&#x8FC7;API&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</h1>
+<h1 id="&#x4E8C;&#x3001;api&#x63A5;&#x53E3;&#x5907;&#x4EFD;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6570;&#x636E;">&#x4E8C;&#x3001;API&#x63A5;&#x53E3;&#x5907;&#x4EFD;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6570;&#x636E;</h1>
+<p>gitlab&#x63D0;&#x4F9B;&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6307;&#x5B9A;&#x8D44;&#x6E90;&#x7684;API&#x63A5;&#x53E3;</p>
 <table>
 <thead>
 <tr>
-<th>&#x652F;&#x6301;&#x5BFC;&#x51FA;&#x7684;&#x6570;&#x636E;&#x9879;</th>
-<th>&#x4E0D;&#x652F;&#x6301;&#x5BFC;&#x51FA;&#x7684;&#x6570;&#x636E;&#x9879;</th>
+<th>&#x652F;&#x6301;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x5BFC;&#x51FA;&#x7684;gitlab&#x8D44;&#x6E90;</th>
+<th>&#x4E0D;&#x652F;&#x6301;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x5BFC;&#x51FA;&#x7684;gitlab&#x8D44;&#x6E90;</th>
 </tr>
 </thead>
 <tbody>
@@ -6271,8 +6272,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="&#x901A;&#x8FC7;api&#x63A5;&#x53E3;">&#x901A;&#x8FC7;API&#x63A5;&#x53E3;</h2>
-<h3 id="1-&#x8C03;&#x7528;&#x751F;&#x6210;export&#x7684;&#x63A5;&#x53E3;">1. &#x8C03;&#x7528;&#x751F;&#x6210;Export&#x7684;&#x63A5;&#x53E3;</h3>
+<h2 id="1&#x3001;&#x901A;&#x8FC7;api&#x63A5;&#x53E3;">1&#x3001;&#x901A;&#x8FC7;API&#x63A5;&#x53E3;</h2>
+<h3 id="&#x2460;-&#x8C03;&#x7528;&#x751F;&#x6210;export&#x7684;&#x63A5;&#x53E3;">&#x2460; &#x8C03;&#x7528;&#x751F;&#x6210;Export&#x7684;&#x63A5;&#x53E3;</h3>
 <p><strong>&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;</strong></p>
 <pre class="language-"><code>POST /projects/:id/export
 </code></pre><table>
@@ -6319,7 +6320,7 @@
 </table>
 <pre class="language-"><code class="lang-bash"><span class="token function">curl</span> --request POST --header <span class="token string">&quot;PRIVATE-TOKEN: &lt;your_access_token&gt;&quot;</span> https://gitlab.example.com/api/v4/projects/1/export
 </code></pre>
-<h3 id="2-&#x8C03;&#x7528;&#x83B7;&#x53D6;export&#x751F;&#x6210;&#x72B6;&#x6001;&#x7684;&#x63A5;&#x53E3;">2. &#x8C03;&#x7528;&#x83B7;&#x53D6;Export&#x751F;&#x6210;&#x72B6;&#x6001;&#x7684;&#x63A5;&#x53E3;</h3>
+<h3 id="&#x2461;&#x8C03;&#x7528;&#x83B7;&#x53D6;export&#x751F;&#x6210;&#x72B6;&#x6001;&#x7684;&#x63A5;&#x53E3;">&#x2461;&#x8C03;&#x7528;&#x83B7;&#x53D6;Export&#x751F;&#x6210;&#x72B6;&#x6001;&#x7684;&#x63A5;&#x53E3;</h3>
 <p><strong>&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;</strong></p>
 <table>
 <thead>
@@ -6341,7 +6342,7 @@
 </table>
 <pre class="language-"><code class="lang-bash"><span class="token function">curl</span> --header <span class="token string">&quot;PRIVATE-TOKEN: &lt;your_access_token&gt;&quot;</span> https://gitlab.example.com/api/v4/projects/1/export
 </code></pre>
-<h3 id="3-&#x4E0B;&#x8F7D;export">3. &#x4E0B;&#x8F7D;Export</h3>
+<h3 id="&#x2462;&#x4E0B;&#x8F7D;export">&#x2462;&#x4E0B;&#x8F7D;Export</h3>
 <p><strong>&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;</strong></p>
 <pre class="language-"><code class="lang-bash">GET /projects/:id/export/download
 </code></pre>
@@ -6365,7 +6366,7 @@
 </table>
 <pre class="language-"><code class="lang-bash"><span class="token function">curl</span> --header <span class="token string">&quot;PRIVATE-TOKEN: &lt;your_access_token&gt;&quot;</span> --remote-header-name --remote-name https://gitlab.example.com/api/v4/projects/5/export/download
 </code></pre>
-<h3 id="4-&#x6267;&#x884C;&#x811A;&#x672C;">4. &#x6267;&#x884C;&#x811A;&#x672C;</h3>
+<h3 id="&#x2463;&#x6267;&#x884C;&#x811A;&#x672C;">&#x2463;&#x6267;&#x884C;&#x811A;&#x672C;</h3>
 <pre class="language-"><code class="lang-bash"><span class="token comment">#/bin/bash</span>
 
 <span class="token assign-left variable">gitlab_url</span><span class="token operator">=</span>http://gitlab.apps.okd311.curiouser.com/
@@ -6383,15 +6384,280 @@
   <span class="token keyword">fi</span>
 <span class="token keyword">done</span>
 </code></pre>
-<h2 id="&#x901A;&#x8FC7;ui&#x754C;&#x9762;">&#x901A;&#x8FC7;UI&#x754C;&#x9762;</h2>
-<h3 id="1-&#x4ED3;&#x5E93;&#x9875;&#x9762;--settings--general--advanced--export-project&#x6309;&#x94AE;">1. &#x4ED3;&#x5E93;&#x9875;&#x9762;--&gt;Settings--&gt;General--&gt;Advanced--&gt;Export project&#x6309;&#x94AE;</h3>
-<h3 id="2-&#x70B9;&#x51FB;export">2. &#x70B9;&#x51FB;Export</h3>
+<h2 id="2&#x3001;&#x901A;&#x8FC7;ui&#x754C;&#x9762;">2&#x3001;&#x901A;&#x8FC7;UI&#x754C;&#x9762;</h2>
+<h3 id="&#x2460;ui&#x8DEF;&#x5F84;">&#x2460;UI&#x8DEF;&#x5F84;</h3>
+<p>&#x4ED3;&#x5E93;&#x9875;&#x9762;--&gt;Settings--&gt;General--&gt;Advanced--&gt;Export project&#x6309;&#x94AE;</p>
+<h3 id="&#x2461;&#x70B9;&#x51FB;export">&#x2461;&#x70B9;&#x51FB;Export</h3>
 <p><img src="../assets/gitlab-backuprestore-1.png" alt=""></p>
-<h3 id="3-&#x5F53;export&#x751F;&#x6210;&#x540E;&#x4F1A;&#x53D1;&#x9001;&#x5E26;&#x6709;export&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x7684;&#x90AE;&#x4EF6;&#x7ED9;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x7EF4;&#x62A4;&#x8005;">3. &#x5F53;Export&#x751F;&#x6210;&#x540E;&#x4F1A;&#x53D1;&#x9001;&#x5E26;&#x6709;Export&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x7684;&#x90AE;&#x4EF6;&#x7ED9;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x7EF4;&#x62A4;&#x8005;</h3>
+<h3 id="&#x2462;&#x5F53;export&#x751F;&#x6210;&#x540E;&#x4F1A;&#x53D1;&#x9001;&#x5E26;&#x6709;export&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x7684;&#x90AE;&#x4EF6;&#x7ED9;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x7EF4;&#x62A4;&#x8005;">&#x2462;&#x5F53;Export&#x751F;&#x6210;&#x540E;&#x4F1A;&#x53D1;&#x9001;&#x5E26;&#x6709;Export&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x7684;&#x90AE;&#x4EF6;&#x7ED9;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7684;&#x7EF4;&#x62A4;&#x8005;</h3>
 <p><img src="../assets/gitlab-backuprestore-2.png" alt="image-20200106113640611"></p>
-<h3 id="4-&#x53EF;&#x9009;&#x540E;&#x7EED;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;ui&#x754C;&#x9762;&#x4E0A;&#x70B9;&#x51FB;&#x4E0B;&#x8F7D;export">4. (&#x53EF;&#x9009;)&#x540E;&#x7EED;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;UI&#x754C;&#x9762;&#x4E0A;&#x70B9;&#x51FB;&#x4E0B;&#x8F7D;Export</h3>
+<h3 id="&#x2463;&#x53EF;&#x9009;&#x540E;&#x7EED;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;ui&#x754C;&#x9762;&#x4E0A;&#x70B9;&#x51FB;&#x4E0B;&#x8F7D;export">&#x2463;(&#x53EF;&#x9009;)&#x540E;&#x7EED;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;UI&#x754C;&#x9762;&#x4E0A;&#x70B9;&#x51FB;&#x4E0B;&#x8F7D;Export</h3>
 <p><img src="../assets/gitlab-backuprestore-3.png" alt=""></p>
-<h1 id="&#x4E09;&#x3001;&#x901A;&#x8FC7;git-clone&#x4EE3;&#x7801;&#x5230;&#x5904;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;">&#x4E09;&#x3001;&#x901A;&#x8FC7;git clone&#x4EE3;&#x7801;&#x5230;&#x5904;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</h1>
+<h1 id="&#x4E09;&#x3001;&#x547D;&#x4EE4;&#x884C;&#x5907;&#x4EFD;gitlab&#x5B9E;&#x4F8B;&#x6570;&#x636E;">&#x4E09;&#x3001;&#x547D;&#x4EE4;&#x884C;&#x5907;&#x4EFD;gitlab&#x5B9E;&#x4F8B;&#x6570;&#x636E;</h1>
+<p>gitlab&#x63D0;&#x4F9B;&#x4E86;&#x76F8;&#x5E94;&#x7684;&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x5907;&#x4EFD;&#x4E0E;&#x6062;&#x590D;&#x3002;</p>
+<h2 id="1&#x3001;&#x5907;&#x4EFD;">1&#x3001;&#x5907;&#x4EFD;</h2>
+<h3 id="&#x2460;&#x547D;&#x4EE4;">&#x2460;&#x547D;&#x4EE4;</h3>
+<h4 id="&#x4E8C;&#x8FDB;&#x5236;&#x65B9;&#x5F0F;&#x6216;docker&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x7684;">&#x4E8C;&#x8FDB;&#x5236;&#x65B9;&#x5F0F;&#x6216;docker&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x7684;</h4>
+<ul>
+<li><p>&#x7248;&#x672C;&gt;= GitLab 12.2</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create
+<span class="token comment"># &#x6216;&#x8005;</span>
+docker <span class="token builtin class-name">exec</span> -t <span class="token operator">&lt;</span>container name<span class="token operator">&gt;</span> gitlab-backup create
+</code></pre>
+</li>
+<li><p>&#x7248;&#x672C; &lt; GitLab 12.1 </p>
+<pre class="language-"><code class="lang-bash">gitlab-rake gitlab:backup:create
+<span class="token comment"># &#x6216;&#x8005;</span>
+docker <span class="token builtin class-name">exec</span> -t <span class="token operator">&lt;</span>container name<span class="token operator">&gt;</span> gitlab-rake gitlab:backup:create
+</code></pre>
+</li>
+</ul>
+<h4 id="&#x6E90;&#x4EE3;&#x7801;&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x7684;"><strong>&#x6E90;&#x4EE3;&#x7801;&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x7684;</strong></h4>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> -u <span class="token function">git</span> -H bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:create <span class="token assign-left variable">RAILS_ENV</span><span class="token operator">=</span>production
+</code></pre>
+<h4 id="&#x4F7F;&#x7528;helm&#x90E8;&#x7F72;&#x5728;k8s&#x4E2D;&#x7684;"><strong>&#x4F7F;&#x7528;helm&#x90E8;&#x7F72;&#x5728;k8s&#x4E2D;&#x7684;</strong></h4>
+<p>&#x4F7F;&#x7528;helm&#x90E8;&#x7F72;&#x7684;&#xFF0C;<code>GitLab task runner</code>&#x5BB9;&#x5668;&#x4E2D;&#x6709;&#x4E2A;&#x4E00;&#x4E2A;&#x5DE5;&#x5177;&#x811A;&#x672C;&#x53EF;&#x8FDB;&#x884C;&#x5907;&#x4EFD;</p>
+<pre class="language-"><code class="lang-bash">kubectl <span class="token builtin class-name">exec</span> -it <span class="token operator">&lt;</span>gitlab task-runner pod<span class="token operator">&gt;</span> backup-utility
+</code></pre>
+<h4 id="&#x751F;&#x6210;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x4FE1;&#x606F;">&#x751F;&#x6210;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x4FE1;&#x606F;</h4>
+<ul>
+<li>&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF1A;&#x9ED8;&#x8BA4;<code>/var/opt/gitlab/backups</code>&#xFF0C;&#x53EF;&#x5728;<code>config/gitlab.yml</code>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BBE;&#x7F6E;<code>backup_path</code>&#x8FDB;&#x884C;&#x63A7;&#x5236;</li>
+<li>&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x540D;&#x89C4;&#x5219;&#xFF1A;&#x9ED8;&#x8BA4;<code>[TIMESTAMP]-&#x7248;&#x672C;_gitlab_backup.tar</code></li>
+</ul>
+<h3 id="&#x2461;&#x652F;&#x6301;&#x5907;&#x4EFD;&#x7684;gitlab&#x5B9E;&#x4F8B;&#x6570;&#x636E;">&#x2461;&#x652F;&#x6301;&#x5907;&#x4EFD;&#x7684;gitlab&#x5B9E;&#x4F8B;&#x6570;&#x636E;</h3>
+<ul>
+<li>Database</li>
+<li>Attachments</li>
+<li>Git repositories data</li>
+<li>CI/CD job output logs</li>
+<li>CI/CD job artifacts</li>
+<li>LFS objects</li>
+<li>Container Registry images</li>
+<li>GitLab Pages content</li>
+<li>Snippets</li>
+<li>Group wikis</li>
+</ul>
+<h3 id="&#x2462;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x5907;&#x4EFD;&#x7B56;&#x7565;&#x53C2;&#x6570;">&#x2462;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x5907;&#x4EFD;&#x7B56;&#x7565;&#x53C2;&#x6570;</h3>
+<p>&#x9ED8;&#x8BA4;&#x7684;&#x5907;&#x4EFD;&#x7B56;&#x7565;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4F7F;&#x7528;Linux&#x547D;&#x4EE4;tar&#x548C;gzip&#x5C06;&#x6570;&#x636E;&#x4ECE;&#x76F8;&#x5E94;&#x7684;&#x6570;&#x636E;&#x4F4D;&#x7F6E;&#x6D41;&#x5F0F;&#x4F20;&#x8F93;&#x5230;&#x5907;&#x4EFD;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x6570;&#x636E;&#x5FEB;&#x901F;&#x53D8;&#x5316;&#x65F6;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x95EE;&#x9898;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x5F53;tar&#x6B63;&#x5728;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x65F6;&#x66F4;&#x6539;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x9519;&#x8BEF;&#x6587;&#x4EF6;&#x53EF;&#x80FD;&#x4F1A;&#x968F;&#x7740;&#x6211;&#x4EEC;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x800C;&#x53D1;&#x751F;&#x66F4;&#x6539;&#xFF0C;&#x5E76;&#x5BFC;&#x81F4;&#x5907;&#x4EFD;&#x8FC7;&#x7A0B;&#x5931;&#x8D25;&#x3002;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;8.17&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x79CD;&#x79F0;&#x4E3A;&#x526F;&#x672C;&#x7684;&#x65B0;&#x5907;&#x4EFD;&#x7B56;&#x7565;&#x3002;&#x8BE5;&#x7B56;&#x7565;&#x5728;&#x8C03;&#x7528;tar&#x548C;gzip&#x4E4B;&#x524D;&#x5C06;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x4F4D;&#x7F6E;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x4E86;&#x9519;&#x8BEF;&#x3002;&#x526F;&#x4F5C;&#x7528;&#x662F;&#x5907;&#x4EFD;&#x8FC7;&#x7A0B;&#x6700;&#x591A;&#x5360;&#x7528;&#x989D;&#x5916;&#x7684;1X&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x3002;&#x8BE5;&#x8FC7;&#x7A0B;&#x5C3D;&#x529B;&#x5728;&#x6BCF;&#x4E2A;&#x9636;&#x6BB5;&#x6E05;&#x7406;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x6837;&#x95EE;&#x9898;&#x5C31;&#x4E0D;&#x4F1A;&#x590D;&#x6742;&#x5316;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;&#x5927;&#x578B;&#x5B89;&#x88C5;&#x800C;&#x8A00;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x5F53;&#x5927;&#x7684;&#x53D8;&#x5316;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x590D;&#x5236;&#x7B56;&#x7565;&#x4E0D;&#x662F;8.17&#x4E2D;&#x7684;&#x9ED8;&#x8BA4;&#x7B56;&#x7565;</li>
+</ul>
+<p><strong><code>BACKUP</code></strong>&#xFF1A;&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x4EE3;&#x66FF;&#x9ED8;&#x8BA4;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x540D;&#x89C4;&#x5219;&#x4E2D;&#x7684;&#x65F6;&#x95F4;&#x6233;&#x5B57;&#x6BB5;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<code>[BACKUP&#x7684;&#x503C;]-&#x7248;&#x672C;_gitlab_backup.tar</code></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump
+<span class="token comment"># &#x7248;&#x672C; &lt; GitLab 12.1 &#x65F6;</span>
+gitlab-rake gitlab:backup:create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump
+</code></pre>
+<p><strong><code>GZIP_RSYNCABLE</code></strong>&#xFF1A;&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x53EF;&#x88AB;<code>rsync</code>&#x4F20;&#x8F93;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump <span class="token assign-left variable">GZIP_RSYNCABLE</span><span class="token operator">=</span>yes
+<span class="token comment"># &#x7248;&#x672C; &lt; GitLab 12.1 &#x65F6;</span>
+gitlab-rake gitlab:backup:create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump <span class="token assign-left variable">GZIP_RSYNCABLE</span><span class="token operator">=</span>yes
+</code></pre>
+<p><strong><code>SKIP</code></strong>&#xFF1A;&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x65F6;&#x6392;&#x9664;&#x54EA;&#x4E9B;gitlab&#x8D44;&#x6E90;&#xFF0C;&#x53EF;&#x9009;&#x9879;&#x6709;<code>db(database)&#x3001;uploads(attachments)&#x3001;builds(CI job output logs)&#x3001;artifacts(CI job artifacts)&#x3001;lfs(LFS objects)&#x3001;registry(Container Registry images)&#x3001;pages(Pages content)&#x3001;repositories(Git repositories data)</code></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump <span class="token assign-left variable">GZIP_RSYNCABLE</span><span class="token operator">=</span>yes  <span class="token assign-left variable">SKIP</span><span class="token operator">=</span>builds,lfs
+<span class="token comment"># &#x7248;&#x672C; &lt; GitLab 12.1 &#x65F6;</span>
+gitlab-rake gitlab:backup:create <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>dump <span class="token assign-left variable">GZIP_RSYNCABLE</span><span class="token operator">=</span>yes <span class="token assign-left variable">SKIP</span><span class="token operator">=</span>builds,lfs
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> -u <span class="token function">git</span> -H bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:create <span class="token assign-left variable">SKIP</span><span class="token operator">=</span>db,uploads <span class="token assign-left variable">RAILS_ENV</span><span class="token operator">=</span>production
+</code></pre>
+<p><strong><code>SKIP=tar</code></strong>&#xFF1A;&#x521B;&#x5EFA;&#x5907;&#x4EFD;&#x7684;&#x6700;&#x540E;&#x4E00;&#x90E8;&#x5206;&#x662F;&#x751F;&#x6210;&#x5305;&#x542B;&#x6240;&#x6709;&#x90E8;&#x5206;&#x7684;.tar&#x6587;&#x4EF6;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x5907;&#x4EFD;&#x662F;&#x7531;&#x5176;&#x4ED6;&#x5907;&#x4EFD;&#x8F6F;&#x4EF6;&#x83B7;&#x53D6;&#x7684;&#xFF09;&#xFF0C;&#x521B;&#x5EFA;.tar&#x6587;&#x4EF6;&#x53EF;&#x80FD;&#x4F1A;&#x6D6A;&#x8D39;&#x7CBE;&#x529B;&#xFF0C;&#x751A;&#x81F3;&#x76F4;&#x63A5;&#x6709;&#x5BB3;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5C06;tar&#x6DFB;&#x52A0;&#x5230;SKIP&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#x6765;&#x8DF3;&#x8FC7;&#x6B64;&#x6B65;&#x9AA4;&#x3002;&#x5C06;tar&#x6DFB;&#x52A0;&#x5230;SKIP&#x53D8;&#x91CF;&#x4F1A;&#x5C06;&#x5305;&#x542B;&#x5907;&#x4EFD;&#x7684;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x4FDD;&#x7559;&#x5728;&#x7528;&#x4E8E;&#x4E2D;&#x95F4;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x3002;&#x521B;&#x5EFA;&#x65B0;&#x5907;&#x4EFD;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x5C06;&#x88AB;&#x8986;&#x76D6;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5E94;&#x786E;&#x4FDD;&#x5C06;&#x5B83;&#x4EEC;&#x590D;&#x5236;&#x5230;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#xFF0C;&#x56E0;&#x4E3A;&#x7CFB;&#x7EDF;&#x4E0A;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5907;&#x4EFD;&#x3002;</p>
+<p><strong><code>GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</code></strong>&#x4E0E;<strong><code>GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</code></strong> &#xFF1A;</p>
+<p>&#x8BBE;&#x7F6E;&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6570;&#x636E;&#x65F6;&#x4F7F;&#x7528;&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;<code>GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</code>&#x662F;&#x8BBE;&#x7F6E;&#x540C;&#x65F6;&#x6700;&#x591A;&#x53EF;&#x5BFC;&#x51FA;&#x591A;&#x5C11;&#x4E2A;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x6570;&#x636E;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;1&#x3002;<code>GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</code> &#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5B58;&#x50A8;&#x4E0A;&#x540C;&#x65F6;&#x5907;&#x4EFD;&#x7684;&#x6700;&#x5927;&#x9879;&#x76EE;&#x6570;&#x3002;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5C06;&#x5B58;&#x50A8;&#x5E93;&#x5907;&#x4EFD;&#x5206;&#x6563;&#x5230;&#x5404;&#x4E2A;&#x5B58;&#x50A8;&#x4E2D;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">GITLAB_BACKUP_MAX_CONCURRENCY</span><span class="token operator">=</span><span class="token number">4</span> <span class="token assign-left variable">GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> -u <span class="token function">git</span> -H bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:create <span class="token assign-left variable">GITLAB_BACKUP_MAX_CONCURRENCY</span><span class="token operator">=</span><span class="token number">4</span> <span class="token assign-left variable">GITLAB_BACKUP_MAX_STORAGE_CONCURRENCY</span><span class="token operator">=</span><span class="token number">1</span>
+</code></pre>
+<p><strong><code>CRON</code></strong>&#xFF1A;&#x5728;&#x4F7F;&#x7528;crontab&#x8FDB;&#x5B9A;&#x65F6;&#x5907;&#x4EFD;&#x65F6;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A;1&#x662F;&#x4E3A;&#x4E86;&#x4E0D;&#x663E;&#x793A;&#x5907;&#x4EFD;&#x8FDB;&#x5EA6;&#x4FE1;&#x606F;&#xFF0C;&#x51CF;&#x5C11;&#x5907;&#x4EFD;&#x671F;&#x95F4;&#x76F8;&#x5173;&#x8F93;&#x51FA;</p>
+<pre class="language-"><code class="lang-bash"><span class="token number">0</span> <span class="token number">2</span> * * * /opt/gitlab/bin/gitlab-backup create <span class="token assign-left variable">CRON</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token comment"># &#x7248;&#x672C; &lt; GitLab 12.1 &#x65F6;</span>
+<span class="token number">0</span> <span class="token number">2</span> * * * gitlab-rake gitlab:backup:create <span class="token assign-left variable">CRON</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token number">0</span> <span class="token number">2</span> * * * <span class="token builtin class-name">cd</span> /home/git/gitlab <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/local/bin:/usr/bin:/bin bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:create <span class="token assign-left variable">RAILS_ENV</span><span class="token operator">=</span>production <span class="token assign-left variable">CRON</span><span class="token operator">=</span><span class="token number">1</span>
+</code></pre>
+<h3 id="&#x2463;&#x5907;&#x4EFD;&#x76F8;&#x5173;&#x7684;&#x914D;&#x7F6E;">&#x2463;&#x5907;&#x4EFD;&#x76F8;&#x5173;&#x7684;&#x914D;&#x7F6E;</h3>
+<p>&#x5907;&#x4EFD;&#x65F6;&#x7684;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#x9664;&#x4E86;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/etc/gitlab/gitlab.rb</code>&#x6216;<code>/home/git/gitlab/config/gitlab.yml</code>&#x4E2D;&#x8FDB;&#x884C;&#x914D;&#x7F6E;</p>
+<h4 id="&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x6743;&#x9650;"><strong>&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x6743;&#x9650;</strong></h4>
+<pre class="language-"><code class="lang-bash">gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_archive_permissions&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> 0644 
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+backup:
+  archive_permissions: 0644 <span class="token comment"># Makes the backup archives world-readable</span>
+</code></pre>
+<h4 id="&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x4FDD;&#x5B58;&#x671F;&#x9650;">&#x8BBE;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x4FDD;&#x5B58;&#x671F;&#x9650;</h4>
+<p>&#x5982;&#x679C;&#x7279;&#x610F;&#x6307;&#x5B9A;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x540D;&#x524D;&#x7F00;&#xFF0C;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x65F6;&#x95F4;&#x6233;&#x4E3A;&#x524D;&#x7F00;&#x7684;&#x3002;&#x5728;&#x6267;&#x884C;&#x5907;&#x4EFD;&#x65F6;&#xFF0C;&#x53EF;&#x5C06;&#x6BD4;&#x65E9;&#x4E8E;<code>backup_keep_time</code>&#x65F6;&#x95F4;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x81EA;&#x52A8;&#x6E05;&#x9664;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment">## Limit backup lifetime to 7 days - 604800 seconds</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_keep_time&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">604800</span>
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+backup:
+  <span class="token comment">## Limit backup lifetime to 7 days - 604800 seconds</span>
+  keep_time: <span class="token number">604800</span>
+</code></pre>
+<h3 id="&#x2464;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x5907;&#x4EFD;">&#x2464;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x5907;&#x4EFD;</h3>
+<p>GitLab&#x63D0;&#x4F9B;&#x7684;&#x5907;&#x4EFD;Rake&#x4EFB;&#x52A1;&#x662F;&#x4E0D;&#x4F1A;&#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;</p>
+<h4 id="&#x624B;&#x52A8;&#x5907;&#x4EFD;">&#x624B;&#x52A8;&#x5907;&#x4EFD;</h4>
+<p>&#x76F4;&#x63A5;&#x624B;&#x52A8;&#x5907;&#x4EFD;&#x6574;&#x4E2A;<code>/etc/gitlab</code>&#x76EE;&#x5F55;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x5907;&#x4EFD;&#x6574;&#x4E2A;&#x76EE;&#x5F55;&#x7684;&#x8BDD;&#xFF0C;&#x81F3;&#x5C11;&#x4E5F;&#x8981;&#x5907;&#x4EFD;&#x4EE5;&#x4E0B;&#x6587;&#x4EF6;</p>
+<ul>
+<li><code>/etc/gitlab/gitlab-secrets.json</code></li>
+<li><code>/etc/gitlab/gitlab.rb</code></li>
+</ul>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x5B89;&#x88C5;&#x65F6;</p>
+<ul>
+<li><code>/home/git/gitlab/config/secrets.yml</code></li>
+<li><code>/home/git/gitlab/config/gitlab.yml</code></li>
+</ul>
+<h4 id="&#x547D;&#x4EE4;&#x884C;&#x5907;&#x4EFD;">&#x547D;&#x4EE4;&#x884C;&#x5907;&#x4EFD;</h4>
+<ul>
+<li><p>&#x5F53;&#x7248;&#x672C; &gt;= 12.3&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x547D;&#x4EE4;<code>sudo gitlab-ctl backup-etc</code>&#x547D;&#x4EE4;&#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x5728;<code>/etc/gitlab/config_backup/</code>,&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x53CA;&#x76EE;&#x5F55;&#x90FD;&#x662F;&#x53EA;&#x6709;root&#x53EF;&#x8BFB;&#x5199;&#x3002;</p>
+</li>
+<li><p>&#x540C;&#x65F6;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x914D;&#x7F6E;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;<code>sudo gitlab-ctl backup-etc <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>DIRECTORY</span><span class="token punctuation">&gt;</span></span></code></p>
+</li>
+<li>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x540D;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#xFF1A;<code>gitlab_config_&#x65F6;&#x95F4;&#x6233;_&#x65E5;&#x671F;.tar</code></li>
+<li>&#x4F1A;&#x5907;&#x4EFD;&#x4EE5;&#x4E0B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</li>
+</ul>
+<pre class="language-"><code class="lang-bash">/etc/gitlab/
+/etc/gitlab/ssh_host_rsa_key.pub
+/etc/gitlab/ssh_host_ecdsa_key.pub
+/etc/gitlab/trusted-certs/
+/etc/gitlab/ssh_host_rsa_key
+/etc/gitlab/ssh_host_ecdsa_key
+/etc/gitlab/ssh_host_ed25519_key.pub
+/etc/gitlab/ssh_host_ed25519_key
+/etc/gitlab/gitlab.rb
+/etc/gitlab/gitlab-secrets.json
+</code></pre>
+<ul>
+<li>&#x53EF;&#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#xFF0C;<code>15 04 * * 2-6  gitlab-ctl backup-etc &amp;&amp; cd /etc/gitlab/config_backup &amp;&amp; cp $(ls -t | head -n1) /data/gitlab/config-backups/</code></li>
+</ul>
+<h3 id="&#x2465;&#x4E0A;&#x4F20;&#x5907;&#x4EFD;&#x5230;&#x5916;&#x90E8;&#x4E91;&#x5B58;&#x50A8;">&#x2465;&#x4E0A;&#x4F20;&#x5907;&#x4EFD;&#x5230;&#x5916;&#x90E8;&#x4E91;&#x5B58;&#x50A8;</h3>
+<p>&#x53EF;&#x5728;<code>/etc/gitlab/gitlab.rb</code>&#x4E2D;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x8BA9;&#x547D;&#x4EE4;&#x884C;&#x6267;&#x884C;&#x7684;&#x811A;&#x672C;&#x5C06;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x5230;&#x5916;&#x90E8;&#x4E91;&#x5B58;&#x50A8;&#x4E2D;&#xFF0C;&#x652F;&#x6301;&#x7684;&#x4E91;&#x5B58;&#x50A8;&#xFF1A;<code>AWS S3</code>, <code>Google Cloud Storage</code>, <code>Azure Blob storage</code>, <code>&#x5176;&#x4ED6;S3&#x7C7B;&#x578B;&#x4F9B;&#x5E94;&#x5546;</code></p>
+<blockquote>
+<p>&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#x5C06;&#x5907;&#x4EFD;&#x4E0A;&#x4F20;&#x81F3;&#x4E91;&#x5B58;&#x50A8;&#x65F6;&#xFF0C;&#x53EF;&#x5728;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x540E;&#x6DFB;&#x52A0;<code>DIRECTORY</code>&#x53C2;&#x6570;&#xFF0C;&#x5C06;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x524D;&#x6DFB;&#x52A0;&#x8DEF;&#x5F84;&#xFF0C;&#x4FBF;&#x4E8E;&#x5907;&#x4EFD;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">DIRECTORY</span><span class="token operator">=</span>daily
+<span class="token function">sudo</span> gitlab-backup create <span class="token assign-left variable">DIRECTORY</span><span class="token operator">=</span>weekly
+</code></pre>
+</blockquote>
+<h4 id="amazon-s3">Amazon S3</h4>
+<pre class="language-"><code class="lang-bash">gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_connection&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">&apos;provider&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;AWS&apos;</span>,
+  <span class="token string">&apos;region&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;eu-west-1&apos;</span>,
+  <span class="token string">&apos;aws_access_key_id&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;AKIAKIAKI&apos;</span>,
+  <span class="token string">&apos;aws_secret_access_key&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;secret123&apos;</span>
+  <span class="token comment"># If using an IAM Profile, don&apos;t configure aws_access_key_id &amp; aws_secret_access_key</span>
+  <span class="token comment"># &apos;use_iam_profile&apos; =&gt; true</span>
+<span class="token punctuation">}</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_remote_directory&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&apos;my.s3.bucket&apos;</span>
+</code></pre>
+<h4 id="digital-ocean-spaces">Digital Ocean Spaces</h4>
+<pre class="language-"><code class="lang-bash">gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_connection&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">&apos;provider&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;AWS&apos;</span>,
+  <span class="token string">&apos;region&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;ams3&apos;</span>,
+  <span class="token string">&apos;aws_access_key_id&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;AKIAKIAKI&apos;</span>,
+  <span class="token string">&apos;aws_secret_access_key&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;secret123&apos;</span>,
+  <span class="token string">&apos;endpoint&apos;</span>              <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;https://ams3.digitaloceanspaces.com&apos;</span>
+<span class="token punctuation">}</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_remote_directory&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&apos;my.s3.bucket&apos;</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x4E0A;&#x4F20;&#x65F6;&#x51FA;&#x73B0;<code>400 Bad Request</code>&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x9ED8;&#x8BA4;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x65F6;&#x52A0;&#x5BC6;&#x7684;&#xFF0C;&#x800C;<code>Digital Ocean Spaces</code>&#x4E0D;&#x652F;&#x6301;&#x4E0A;&#x4F20;&#x52A0;&#x5BC6;&#x6587;&#x4EF6;&#xFF0C;&#x6CE8;&#x91CA;&#x6216;&#x5220;&#x9664;&#x6389;<code>[&apos;gitlab_rails[&apos;backup_encryption&apos;]</code></p>
+<h4 id="google-cloud-storage">Google Cloud Storage</h4>
+<pre class="language-"><code class="lang-bash">gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_connection&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">&apos;provider&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;Google&apos;</span>,
+  <span class="token string">&apos;google_storage_access_key_id&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;Access Key&apos;</span>,
+  <span class="token string">&apos;google_storage_secret_access_key&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;Secret&apos;</span>,
+
+  <span class="token comment">## If you have CNAME buckets (foo.example.com), you might run into SSL issues</span>
+  <span class="token comment">## when uploading backups (&quot;hostname foo.example.com.storage.googleapis.com</span>
+  <span class="token comment">## does not match the server certificate&quot;). In that case, uncomnent the following</span>
+  <span class="token comment">## setting. See: https://github.com/fog/fog/issues/2834</span>
+  <span class="token comment">#&apos;path_style&apos; =&gt; true</span>
+<span class="token punctuation">}</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_remote_directory&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&apos;my.google.bucket&apos;</span>
+</code></pre>
+<p>&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</p>
+<pre class="language-"><code class="lang-bash">  backup:
+    upload:
+      connection:
+        provider: <span class="token string">&apos;Google&apos;</span>
+        google_storage_access_key_id: <span class="token string">&apos;Access Key&apos;</span>
+        google_storage_secret_access_key: <span class="token string">&apos;Secret&apos;</span>
+      remote_directory: <span class="token string">&apos;my.google.bucket&apos;</span>
+</code></pre>
+<h4 id="azure-blob-storage">Azure Blob storage</h4>
+<pre class="language-"><code class="lang-bash">gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_connection&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+ <span class="token string">&apos;provider&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;AzureRM&apos;</span>,
+ <span class="token string">&apos;azure_storage_account_name&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;&lt;AZURE STORAGE ACCOUNT NAME&gt;&apos;</span>,
+ <span class="token string">&apos;azure_storage_access_key&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;&lt;AZURE STORAGE ACCESS KEY&gt;&apos;</span>,
+ <span class="token string">&apos;azure_storage_domain&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;blob.core.windows.net&apos;</span>, <span class="token comment"># Optional</span>
+<span class="token punctuation">}</span>
+gitlab_rails<span class="token punctuation">[</span><span class="token string">&apos;backup_upload_remote_directory&apos;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&apos;&lt;AZURE BLOB CONTAINER&gt;&apos;</span>
+</code></pre>
+<p>&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</p>
+<pre class="language-"><code class="lang-bash">  backup:
+    upload:
+      connection:
+        provider: <span class="token string">&apos;AzureRM&apos;</span>
+        azure_storage_account_name: <span class="token string">&apos;&lt;AZURE STORAGE ACCOUNT NAME&gt;&apos;</span>
+        azure_storage_access_key: <span class="token string">&apos;&lt;AZURE STORAGE ACCESS KEY&gt;&apos;</span>
+      remote_directory: <span class="token string">&apos;&lt;AZURE BLOB CONTAINER&gt;&apos;</span>
+</code></pre>
+<h2 id="2&#x3001;&#x6062;&#x590D;&#x5907;&#x4EFD;">2&#x3001;&#x6062;&#x590D;&#x5907;&#x4EFD;</h2>
+<h3 id="&#x2460;&#x786E;&#x5B9A;&#x8981;&#x6062;&#x590D;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;git&#x7528;&#x6237;&#x5E76;&#x62E5;&#x6709;&#x76F8;&#x5E94;&#x8BFB;&#x5199;&#x6743;&#x9650;">&#x2460;&#x786E;&#x5B9A;&#x8981;&#x6062;&#x590D;&#x7684;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;git&#x7528;&#x6237;&#x5E76;&#x62E5;&#x6709;&#x76F8;&#x5E94;&#x8BFB;&#x5199;&#x6743;&#x9650;</h3>
+<p>&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x8981;&#x653E;&#x5230;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/etc/gitlab/gitlab.rb</code> &#x4E2D;&#xFF0C;&#x914D;&#x7F6E;&#x9879;<code>gitlab_rails[&apos;backup_path&#x2019;] (&#x9ED8;&#x8BA4;&#x662F;/var/opt/gitlab/backups)</code>&#x6216;&#x8005;<code>backup:  path: &quot;tmp/backups&quot;(&#x9ED8;&#x8BA4;&#x662F;/home/git/gitlab/tmp/backups)</code>&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84;&#x4E0B;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token function">cp</span> /data/gitlab-backups/11493107454_2018_04_25_10.6.4-ce_gitlab_backup.tar /var/opt/gitlab/backups/
+<span class="token function">sudo</span> <span class="token function">chown</span> git.git /var/opt/gitlab/backups/11493107454_2018_04_25_10.6.4-ce_gitlab_backup.tar
+</code></pre>
+<h3 id="&#x2461;&#x505C;&#x6389;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDB;&#x7A0B;">&#x2461;&#x505C;&#x6389;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDB;&#x7A0B;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-ctl stop unicorn
+<span class="token function">sudo</span> gitlab-ctl stop puma
+<span class="token function">sudo</span> gitlab-ctl stop sidekiq
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> <span class="token function">service</span> gitlab stop
+
+<span class="token comment"># &#x9A8C;&#x8BC1;gitlab&#x72B6;&#x6001;</span>
+<span class="token function">sudo</span> gitlab-ctl status
+</code></pre>
+<h3 id="&#x2462;&#x5F00;&#x59CB;&#x6062;&#x590D;&#x6307;&#x5B9A;&#x7684;&#x5907;&#x4EFD;">&#x2462;&#x5F00;&#x59CB;&#x6062;&#x590D;&#x6307;&#x5B9A;&#x7684;&#x5907;&#x4EFD;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-backup restore <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>11493107454_2018_04_25_10.6.4-ce
+<span class="token comment"># &#x7248;&#x672C; &lt; GitLab 12.1 &#x65F6;</span>
+gitlab-rake gitlab:backup:restore <span class="token assign-left variable">BACKUP</span><span class="token operator">=</span>11493107454_2018_04_25_10.6.4-ce
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> -u <span class="token function">git</span> -H bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:restore <span class="token assign-left variable">RAILS_ENV</span><span class="token operator">=</span>production
+</code></pre>
+<p><strong>&#x6062;&#x590D;&#x5907;&#x4EFD;&#x65F6;&#x7684;&#x4E00;&#x4E9B;&#x53C2;&#x6570;</strong></p>
+<ul>
+<li><p><code>GITLAB_ASSUME_YES=1</code>&#xFF1A;&#x6062;&#x590D;&#x5907;&#x4EFD;&#x65F6;&#xFF0C;&#x6062;&#x590D;&#x811A;&#x672C;&#x53EF;&#x80FD;&#x8DF3;&#x51FA;&#x4E00;&#x4E9B;&#x63D0;&#x793A;&#xFF0C;&#x8BBE;&#x7F6E;&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;&#x8FD9;&#x4E9B;&#x63D0;&#x793A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> <span class="token assign-left variable">GITLAB_ASSUME_YES</span><span class="token operator">=</span><span class="token number">1</span> gitlab-backup restore
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> -u <span class="token function">git</span> -H <span class="token assign-left variable">GITLAB_ASSUME_YES</span><span class="token operator">=</span><span class="token number">1</span> bundle <span class="token builtin class-name">exec</span> rake gitlab:backup:restore <span class="token assign-left variable">RAILS_ENV</span><span class="token operator">=</span>production
+</code></pre>
+</li>
+</ul>
+<h3 id="&#x2463;&#x6062;&#x590D;&#x6570;&#x636E;&#x52A0;&#x5BC6;&#x7528;&#x7684;&#x79D8;&#x94A5;&#x6587;&#x4EF6;">&#x2463;&#x6062;&#x590D;&#x6570;&#x636E;&#x52A0;&#x5BC6;&#x7528;&#x7684;&#x79D8;&#x94A5;&#x6587;&#x4EF6;</h3>
+<p>&#x6062;&#x590D;<code>/etc/gitlab/gitlab-secrets.json</code>&#x6216;<code>/home/git/gitlab/.secret(&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;)</code>&#x6587;&#x4EF6;&#x3002;&#x8BE5;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x6570;&#x636E;&#x5E93;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;&#xFF0C;CI / CD&#x53D8;&#x91CF;&#x4EE5;&#x53CA;&#x7528;&#x4E8E;&#x4E24;&#x91CD;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x5982;&#x679C;&#x60A8;&#x65E0;&#x6CD5;&#x8FDE;&#x540C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6570;&#x636E;&#x5907;&#x4EFD;&#x4E00;&#x8D77;&#x8FD8;&#x539F;&#x6B64;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x542F;&#x7528;&#x4E86;&#x53CC;&#x91CD;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x7684;&#x7528;&#x6237;&#x4EE5;&#x53CA;GitLab Runner&#x90FD;&#x5C06;&#x5931;&#x53BB;&#x5BF9;GitLab&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3002;</p>
+<h3 id="&#x2464;&#x542F;&#x52A8;">&#x2464;&#x542F;&#x52A8;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-ctl reconfigure
+<span class="token function">sudo</span> gitlab-ctl restart
+<span class="token comment"># &#x6E90;&#x7801;&#x5B89;&#x88C5;&#x65F6;</span>
+<span class="token function">sudo</span> <span class="token function">service</span> gitlab restart
+</code></pre>
+<h3 id="&#x2465;&#x9A8C;&#x8BC1;">&#x2465;&#x9A8C;&#x8BC1;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> gitlab-rake gitlab:check <span class="token assign-left variable">SANITIZE</span><span class="token operator">=</span>true
+<span class="token function">sudo</span> gitlab-ctl status
+</code></pre>
+<p>&#x5F53;&#x7248;&#x672C; &gt;= 13.1,&#x53EF;&#x6267;&#x884C;<code>sudo gitlab-rake gitlab:doctor:secrets</code>&#x68C0;&#x67E5;&#x6570;&#x636E;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x662F;&#x5426;&#x89E3;&#x5BC6;&#x5566;</p>
+<h2 id="3&#x3001;&#x95EE;&#x9898;">3&#x3001;&#x95EE;&#x9898;</h2>
+<h3 id="&#x2460;&#x538B;&#x7F29;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x65F6;&#x62A5;&#x9519;">&#x2460;&#x538B;&#x7F29;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x65F6;&#x62A5;&#x9519;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">sudo</span> /opt/gitlab/bin/gitlab-backup create
+<span class="token punctuation">..</span>.
+Dumping <span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+gzip: stdout: Input/output error
+
+Backup failed
+</code></pre>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;</p>
+<ul>
+<li>&#x68C0;&#x67E5;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x662F;&#x5426;&#x591F;&#x7528;</li>
+<li>&#x5982;&#x679C;&#x5B58;&#x50A8;&#x7684;&#x8DEF;&#x5F84;&#x662F;NFS&#x6302;&#x8F7D;&#x70B9;&#xFF0C;&#x68C0;&#x67E5;&#x6302;&#x8F7D;&#x9009;&#x9879;&#x7684;<code>timeout</code>&#x662F;&#x5426;&#x59CB;&#x7EC8;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;600&#xFF0C;&#x53EF;&#x8BBE;&#x7F6E;&#x5927;&#x4E00;&#x70B9;</li>
+</ul>
+<h1 id="&#x56DB;&#x3001;&#x901A;&#x8FC7;git-clone&#x4EE3;&#x7801;&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;">&#x56DB;&#x3001;&#x901A;&#x8FC7;git clone&#x4EE3;&#x7801;&#x5BFC;&#x51FA;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</h1>
 <h2 id="shell&#x811A;&#x672C;">shell&#x811A;&#x672C;</h2>
 <pre class="language-"><code class="lang-bash"><span class="token shebang important">#!/bin/bash</span>
 <span class="token comment"># A script to backup GitLab repositories.</span>
@@ -6457,13 +6723,13 @@ check <span class="token function">mkdir</span> -p <span class="token variable">
 </code></pre>
 <h1 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h1>
 <ol>
-<li><h1 id="httpsdocsgitlabcomeeapiprojectimportexporthtml"><a href="https://docs.gitlab.com/ee/api/project_import_export.html" _target="blank">https://docs.gitlab.com/ee/api/project_import_export.html</a></h1>
-</li>
+<li><a href="https://docs.gitlab.com/omnibus/settings/backups.html" _target="blank">https://docs.gitlab.com/omnibus/settings/backups.html</a></li>
+<li><a href="https://docs.gitlab.com/ee/api/project_import_export.html" _target="blank">https://docs.gitlab.com/ee/api/project_import_export.html</a></li>
 <li><a href="https://docs.gitlab.com/ee/user/project/settings/import_export.html" _target="blank">https://docs.gitlab.com/ee/user/project/settings/import_export.html</a></li>
 <li><a href="https://gist.github.com/devopstaku/7b1b2594ce657957206f3ec5f262eadb" _target="blank">https://gist.github.com/devopstaku/7b1b2594ce657957206f3ec5f262eadb</a> </li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-06-16 21:35:29
+2021-01-20 22:42:27
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6503,7 +6769,7 @@ check <span class="token function">mkdir</span> -p <span class="token variable">
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"代码仓库的备份与恢复","level":"4.2.2.3","depth":3,"next":{"title":"Gitlab CI/CD","level":"4.2.3","depth":2,"ref":"","articles":[{"title":"Gitlab Runner","level":"4.2.3.1","depth":3,"path":"origin/gitlab-runner.md","ref":"origin/gitlab-runner.md","articles":[]}]},"previous":{"title":"代码仓库配置事件触发器Webhook","level":"4.2.2.2","depth":3,"path":"origin/gitlab-配置代码仓库事件触发器Webhook.md","ref":"origin/gitlab-配置代码仓库事件触发器Webhook.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/gitlab-backuprestore.md","mtime":"2020-06-16T13:35:29.493Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-01-18T10:10:21.362Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"代码仓库的备份与恢复","level":"4.2.2.3","depth":3,"next":{"title":"Gitlab CI/CD","level":"4.2.3","depth":2,"ref":"","articles":[{"title":"Gitlab Runner","level":"4.2.3.1","depth":3,"path":"origin/gitlab-runner.md","ref":"origin/gitlab-runner.md","articles":[]}]},"previous":{"title":"代码仓库配置事件触发器Webhook","level":"4.2.2.2","depth":3,"path":"origin/gitlab-配置代码仓库事件触发器Webhook.md","ref":"origin/gitlab-配置代码仓库事件触发器Webhook.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/gitlab-backuprestore.md","mtime":"2021-01-20T14:42:27.906Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-01-20T14:42:54.148Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

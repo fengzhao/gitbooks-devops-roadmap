@@ -98,3 +98,17 @@ func main(){
 }
 ```
 
+# 五、数组的遍历
+
+```go
+var test_array = [5]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
+for _,a := range test_array {
+	fmt.Println(a)
+}
+
+var test_array = [3]string{"test1","test2"}
+for _,a := range test_array {
+	fmt.Println(a)
+}
+```
+

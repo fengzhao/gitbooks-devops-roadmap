@@ -23,9 +23,9 @@ gitlab_rails['smtp_tls'] = false
 
 **注意**：
 
-1. 当使用Docker镜像部署时，相关Gitlab参数可追加在环境变量“GITLAB_OMNIBUS_CONFIG”的值中进行配置。详见：https://docs.gitlab.com/omnibus/docker/
+1. 当使用Docker镜像部署时，相关Gitlab参数可追加在环境变量“GITLAB_OMNIBUS_CONFIG”的值中进行配置。详见：https://docs.gitlab.com/omnibus/docker/ 及 [gitlab的安装与配置](gitlab-install.md)
 
-# 2. 测试发送邮件
+2. 测试发送邮件
 
 ```bash
 $ gitlab-rails console

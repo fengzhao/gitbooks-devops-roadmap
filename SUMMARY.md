@@ -85,7 +85,7 @@
         * [Gitlab](origin/jenkins-gitlab插件的使用.md)
         * [Generic Webhook Trigger](origin/jenkins-generic-webhook-trigger插件.md)
 * Gitlab
-    * 安装
+    * [安装](origin/gitlab-install.md)
     * 管理
         * [配置SMTP邮件服务](origin/gitlab-配置SMTP邮件服务.md)
         * [代码仓库配置事件触发器Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
