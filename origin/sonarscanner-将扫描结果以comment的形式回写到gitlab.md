@@ -25,13 +25,19 @@ Jenkins CI流水线是在使用Jenkins Slave(Kubernetes插件动态生成Slave P
 
 ## 2、生成用户访问Token
 
+该Token用于客户端调用SonarQube API上传扫描代码时使用
+
 ![](../assets/sonarscanner-将扫描结果以comment的形式回写到gitlab-3.png)
 
 ## 3、gitlab创建sonarscanner的用户,并生成AccessKey
 
+在sonarqube 服务端分析生成结果后，会使用该用户的身份在对应代码下以评论的形式显示扫描结果。所以需要该用户的AccessKey有访问Gitlab API的权限。
+
 ![](../assets/sonarscanner-将扫描结果以comment的形式回写到gitlab-4.png)
 
 ## 4、在gitlab中将sonarqube加入到对应项目仓库的Members中
+
+设置sonarqube用户在该仓库的角色起码是**开发者**
 
 ![](../assets/sonarscanner-将扫描结果以comment的形式回写到gitlab-5.png)
 

@@ -32,10 +32,6 @@ make
 make install
 ```
 
-## 2、包管理器安装
-
-
-
 # 二、Python的包管理器pip
 
 ## 1、 安装
@@ -50,18 +46,16 @@ yum install python-pip
 #### APT
 
 ```
-apt-get install python-pip
+apt-get install python3-pip
 ```
 
 ## 2、更新
 
 ```bash
-pip install -U pip
+pip3 install -U pip
 ```
 
-
-
 ```bash
-pthon -m pip install -U pip
+pthon3 -m pip install -U pip
 ```
 

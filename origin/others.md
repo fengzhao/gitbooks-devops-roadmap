@@ -45,3 +45,14 @@
 
 1. https://blog.csdn.net/waynelu92/java/article/details/73604172
 
+# 二、armel、armhf和arm64的区别
+
+出于低功耗、封装限制等种种原因，以前的一些ARM处理器没有独立的硬件浮点运算单元，需要手写软件来实现浮点运算。随着技术发展，现在高端的ARM处理器基本都具备了硬件执行浮点操作的能力。这样，新旧两种架构之间的差异，就产生了两个不同的嵌入式应用程序二进制接口（EABI）——软浮点与矢量浮点（VFP）。但是软浮点（soft float）和硬浮点（hard float）之间有向前兼容却没有向后兼容的能力，也就是软浮点的二进制接口（EABI）仍然可以用于当前的高端ARM处理器。
+
+- armel：是arm eabi little endian的缩写。eabi是软浮点二进制接口，这里的e是embeded，是对于嵌入式设备而言。
+
+- armhf：是arm hard float的缩写。
+
+- arm64：64位的arm默认就是hf的，因此不需要hf的后缀。
+
+- armel和armhf的区别体现在浮点运算上，它们在进行浮点运算时都会使用fpu，但是armel传参数用普通寄存器，而armhf传参数用的是fpu的寄存器，因此armhf的浮点运算性能更高。

@@ -676,6 +676,8 @@ npm version
 
 # 33、安装Docker，并设置新硬盘LVM成docker的数据目录
 
+## CentOS/Redhat
+
 ```bash
 wget https://download.docker.com/linux/centos/docker-ce.repo -O  /etc/yum.repos.d/docker-ce.repo ;\
 yum makecache ;\
@@ -686,7 +688,14 @@ touch /etc/docker/daemon.json ;\
 bash -c ' tee  /etc/docker/daemon.json <<EOF
 {
   "registry-mirrors": ["https://0gxg9a07.mirror.aliyuncs.com"],
-  "insecure-registries": ["0.0.0.0/0"]
+  "insecure-registries": ["0.0.0.0/0"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "3",
+    "labels": "production_status",
+    "env": "os,customer"
+  }
 }
 EOF' ;\
 systemctl daemon-reload ;\
@@ -703,6 +712,46 @@ df -mh ;\
 systemctl start docker ;\
 ls /var/lib/docker/ ;\
 docker info |grep "Insecure Registries:" -A 4
+```
+
+## Ubuntu
+
+```bash
+apt-get remove docker docker-engine docker.io containerd runc && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# X86_64
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+# arm64
+sudo add-apt-repository \
+   "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+apt-get update && \
+apt-cache madison docker-ce && \
+apt-get install -y docker-ce && \
+touch /etc/docker/daemon.json && \
+bash -c ' tee  /etc/docker/daemon.json <<EOF
+{
+  "registry-mirrors": ["https://0gxg9a07.mirror.aliyuncs.com"],
+  "insecure-registries": ["0.0.0.0/0"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "3",
+    "labels": "production_status",
+    "env": "os,customer"
+  }
+}
+EOF' && \
+systemctl daemon-reload && \
+systemctl enable docker && \
+systemctl start docker 
 ```
 
 # 34、字符转换命令expand/unexpand
@@ -1069,9 +1118,7 @@ echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install
 
 ## APT
 
-```bash
- 
-```
+``` 
 
 # 48、使用curl命令发送邮件
 

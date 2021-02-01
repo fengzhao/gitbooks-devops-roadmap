@@ -1489,7 +1489,7 @@
                     
                         <b>4.2.1.</b>
                     
-                    安装
+                    安装配置
             
                 </a>
             
@@ -1916,6 +1916,21 @@
                         <b>4.4.2.</b>
                     
                     Sonarqube使用Gitlab登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4.3" data-path="sonarqube-ide-scanner.html">
+            
+                <a href="sonarqube-ide-scanner.html">
+            
+                    
+                        <b>4.4.3.</b>
+                    
+                    IDE本地插件扫描检查
             
                 </a>
             
@@ -6964,7 +6979,10 @@ mysql&gt; create table &#x8868;&#x540D;
 <pre class="language-"><code>mv &#x8868;&#x540D;.ibd /usr/local/var/mysql/&#x5E93;&#x540D;
 </code></pre><h4 id="&#x5BFC;&#x5165;&#x8868;&#x7A7A;&#x95F4;">&#x5BFC;&#x5165;&#x8868;&#x7A7A;&#x95F4;</h4>
 <pre class="language-"><code>alter table &#x8868;&#x540D; import tablespace
-</code></pre><p>&#x767B;&#x5F55;&#x672C;&#x5730;&#x6570;&#x636E;&#x5E93;&#x5373;&#x53EF;&#x770B;&#x5230;&#x6062;&#x590D;&#x7684;&#x5355;&#x4E2A;&#x8868;&#x7684;&#x6570;&#x636E;</p>
+</code></pre><blockquote>
+<p> <strong>&#x5BFC;&#x5165;&#x8868;&#x65F6;&#x5982;&#x679C;&#x62A5;<code>Error Code: 1808. Schema mismatch (Table has ROW_TYPE_DYNAMIC row format, .ibd file has ROW_TYPE_COMPACT row format.</code>&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x5219;&#x5728;&#x5EFA;&#x8868;&#x8BED;&#x53E5;&#x540E;&#x52A0;&#x4E0A;<code>ROW_FORMAT=COMPACT</code>&#x91CD;&#x65B0;&#x6765;&#x4E00;&#x904D;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x3002;</strong></p>
+</blockquote>
+<p>&#x767B;&#x5F55;&#x672C;&#x5730;&#x6570;&#x636E;&#x5E93;&#x5373;&#x53EF;&#x770B;&#x5230;&#x6062;&#x590D;&#x7684;&#x5355;&#x4E2A;&#x8868;&#x7684;&#x6570;&#x636E;</p>
 <h1 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h1>
 <table>
 <thead>
@@ -7013,7 +7031,7 @@ mysql&gt; create table &#x8868;&#x540D;
 </tbody>
 </table>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-07-21 18:20:05
+2021-01-27 09:39:25
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7053,7 +7071,7 @@ mysql&gt; create table &#x8868;&#x540D;
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"MySQL的数据备份与恢复","level":"7.14.1.4.1","depth":4,"next":{"title":"MysqlDump详解","level":"7.14.1.4.2","depth":4,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]},"previous":{"title":"备份与恢复","level":"7.14.1.4","depth":3,"ref":"","articles":[{"title":"MySQL的数据备份与恢复","level":"7.14.1.4.1","depth":4,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},{"title":"MysqlDump详解","level":"7.14.1.4.2","depth":4,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-backup-restore.md","mtime":"2020-07-21T10:20:05.536Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-01-20T14:42:54.148Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"MySQL的数据备份与恢复","level":"7.14.1.4.1","depth":4,"next":{"title":"MysqlDump详解","level":"7.14.1.4.2","depth":4,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]},"previous":{"title":"备份与恢复","level":"7.14.1.4","depth":3,"ref":"","articles":[{"title":"MySQL的数据备份与恢复","level":"7.14.1.4.1","depth":4,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},{"title":"MysqlDump详解","level":"7.14.1.4.2","depth":4,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-backup-restore.md","mtime":"2021-01-27T01:39:25.629Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-02-01T06:52:43.584Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

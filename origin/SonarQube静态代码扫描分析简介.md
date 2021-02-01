@@ -89,17 +89,17 @@
    - 例如sonar scanner Maven插件在settings.xml中配置的参数
 4. **项目分析客户端命令行运行时配置的参数，例如sonar-scanner二进制命令行运行时以“-D”开头的配置参数**
 
-# 六、扫描器SonarScanner
+# 六、扫描器
 
 当SonarQube服务端搭建配置好了，Sonar提供了各种插件形式的Sonar Scanner扫描器供你选择来扫描你的源代码。
 
-- **SonarScanner**：下载二进制客户端进行扫描
-- **SonarScanner for Maven**：以Maven插件的形式扫描代码
-- **SonarScanner for Jenkins**：以Jenkins插件的形式配置扫描代码
-- **SonarScanner for Gradle**：以Gradle插件的形式配置扫描代码
-- **SonarScanner for Ant**：以Ant插件的形式配置扫描代码
+- **SonarScanner**：二进制客户端
+- **SonarScanner for Maven**：Maven插件
+- **SonarScanner for Jenkins**：Jenkins插件
+- **SonarScanner for Gradle**：Gradle插件
+- **SonarScanner for Ant**：Ant插件
 
-## SonarScanner项目扫描参数
+## SonarScanner扫描参数
 
 [官方文档说明](https://docs.sonarqube.org/latest/analysis/analysis-parameters/)
 

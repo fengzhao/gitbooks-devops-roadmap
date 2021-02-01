@@ -873,6 +873,8 @@ mv 表名.ibd /usr/local/var/mysql/库名
 alter table 表名 import tablespace
   ```
 
+>  **导入表时如果报`Error Code: 1808. Schema mismatch (Table has ROW_TYPE_DYNAMIC row format, .ibd file has ROW_TYPE_COMPACT row format.`的错误，则在建表语句后加上`ROW_FORMAT=COMPACT`重新来一遍上面的操作。**
+
 登录本地数据库即可看到恢复的单个表的数据
 
 # 总结

@@ -1489,7 +1489,7 @@
                     
                         <b>4.2.1.</b>
                     
-                    安装
+                    安装配置
             
                 </a>
             
@@ -1916,6 +1916,21 @@
                         <b>4.4.2.</b>
                     
                     Sonarqube使用Gitlab登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4.3" data-path="sonarqube-ide-scanner.html">
+            
+                <a href="sonarqube-ide-scanner.html">
+            
+                    
+                        <b>4.4.3.</b>
+                    
+                    IDE本地插件扫描检查
             
                 </a>
             
@@ -6778,6 +6793,7 @@ yum <span class="token function">install</span> gcc-c++ <span class="token funct
 <span class="token function">npm</span> version
 </code></pre>
 <h1 id="33&#x3001;&#x5B89;&#x88C5;docker&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x65B0;&#x786C;&#x76D8;lvm&#x6210;docker&#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;">33&#x3001;&#x5B89;&#x88C5;Docker&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x65B0;&#x786C;&#x76D8;LVM&#x6210;docker&#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;</h1>
+<h2 id="centosredhat">CentOS/Redhat</h2>
 <pre class="language-"><code class="lang-bash"><span class="token function">wget</span> https://download.docker.com/linux/centos/docker-ce.repo -O  /etc/yum.repos.d/docker-ce.repo <span class="token punctuation">;</span><span class="token punctuation">\</span>
 yum makecache <span class="token punctuation">;</span><span class="token punctuation">\</span>
 yum <span class="token function">install</span> docker-ce-17.12.1.ce -y <span class="token punctuation">;</span><span class="token punctuation">\</span>
@@ -6787,7 +6803,14 @@ systemctl <span class="token builtin class-name">enable</span> docker <span clas
 <span class="token function">bash</span> -c <span class="token string">&apos; tee  /etc/docker/daemon.json &lt;&lt;EOF
 {
   &quot;registry-mirrors&quot;: [&quot;https://0gxg9a07.mirror.aliyuncs.com&quot;],
-  &quot;insecure-registries&quot;: [&quot;0.0.0.0/0&quot;]
+  &quot;insecure-registries&quot;: [&quot;0.0.0.0/0&quot;],
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;100m&quot;,
+    &quot;max-file&quot;: &quot;3&quot;,
+    &quot;labels&quot;: &quot;production_status&quot;,
+    &quot;env&quot;: &quot;os,customer&quot;
+  }
 }
 EOF&apos;</span> <span class="token punctuation">;</span><span class="token punctuation">\</span>
 systemctl daemon-reload <span class="token punctuation">;</span><span class="token punctuation">\</span>
@@ -6804,6 +6827,43 @@ mkfs.xfs /dev/docker/docker-lib <span class="token punctuation">;</span><span cl
 systemctl start docker <span class="token punctuation">;</span><span class="token punctuation">\</span>
 <span class="token function">ls</span> /var/lib/docker/ <span class="token punctuation">;</span><span class="token punctuation">\</span>
 docker info <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">&quot;Insecure Registries:&quot;</span> -A <span class="token number">4</span>
+</code></pre>
+<h2 id="ubuntu">Ubuntu</h2>
+<pre class="language-"><code class="lang-bash"><span class="token function">apt-get</span> remove docker docker-engine docker.io containerd runc <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
+
+<span class="token comment"># X86_64</span>
+<span class="token function">sudo</span> add-apt-repository <span class="token punctuation">\</span>
+   <span class="token string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   <span class="token variable"><span class="token variable">$(</span>lsb_release -cs<span class="token variable">)</span></span> \
+   stable&quot;</span>
+
+<span class="token comment"># arm64</span>
+<span class="token function">sudo</span> add-apt-repository <span class="token punctuation">\</span>
+   <span class="token string">&quot;deb [arch=arm64] https://download.docker.com/linux/ubuntu \
+   <span class="token variable"><span class="token variable">$(</span>lsb_release -cs<span class="token variable">)</span></span> \
+   stable&quot;</span>
+
+<span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">apt-cache</span> madison docker-ce <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">apt-get</span> <span class="token function">install</span> -y docker-ce <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">touch</span> /etc/docker/daemon.json <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">bash</span> -c <span class="token string">&apos; tee  /etc/docker/daemon.json &lt;&lt;EOF
+{
+  &quot;registry-mirrors&quot;: [&quot;https://0gxg9a07.mirror.aliyuncs.com&quot;],
+  &quot;insecure-registries&quot;: [&quot;0.0.0.0/0&quot;],
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;100m&quot;,
+    &quot;max-file&quot;: &quot;3&quot;,
+    &quot;labels&quot;: &quot;production_status&quot;,
+    &quot;env&quot;: &quot;os,customer&quot;
+  }
+}
+EOF&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+systemctl daemon-reload <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+systemctl <span class="token builtin class-name">enable</span> docker <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+systemctl start docker
 </code></pre>
 <h1 id="34&#x3001;&#x5B57;&#x7B26;&#x8F6C;&#x6362;&#x547D;&#x4EE4;expandunexpand">34&#x3001;&#x5B57;&#x7B26;&#x8F6C;&#x6362;&#x547D;&#x4EE4;expand/unexpand</h1>
 <p>&#x7528;&#x4E8E;&#x5C06;&#x6587;&#x4EF6;&#x7684;&#x5236;&#x8868;&#x7B26;&#xFF08;Tab&#xFF09;&#x8F6C;&#x6362;&#x4E3A;&#x7A7A;&#x683C;&#x7B26;&#xFF08;Space&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E00;&#x4E2A;Tab&#x5BF9;&#x5E94;8&#x4E2A;&#x7A7A;&#x683C;&#x7B26;&#xFF0C;&#x5E76;&#x5C06;&#x7ED3;&#x679C;&#x8F93;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x3002;&#x82E5;&#x4E0D;&#x6307;&#x5B9A;&#x4EFB;&#x4F55;&#x6587;&#x4EF6;&#x540D;&#x6216;&#x6240;&#x7ED9;&#x6587;&#x4EF6;&#x540D;&#x4E3A;&#x201D;-&#x201C;&#xFF0C;&#x5219;expand&#x4F1A;&#x4ECE;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x3002;</p>
@@ -7074,55 +7134,54 @@ openssl rand -hex <span class="token number">10</span>
 <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;[global]<span class="token entity" title="\n">\n</span>index-url = https://mirrors.aliyun.com/pypi/simple/<span class="token entity" title="\n">\n</span>[install]<span class="token entity" title="\n">\n</span>trusted-host=mirrors.aliyun.com<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token operator">&gt;</span> ~/.pip/pip.conf
 </code></pre>
 <h2 id="apt">APT</h2>
-<pre class="language-"><code class="lang-bash">
+<pre class="language-"><code>
+# 48&#x3001;&#x4F7F;&#x7528;curl&#x547D;&#x4EE4;&#x53D1;&#x9001;&#x90AE;&#x4EF6;
 
-</code></pre>
-<h1 id="48&#x3001;&#x4F7F;&#x7528;curl&#x547D;&#x4EE4;&#x53D1;&#x9001;&#x90AE;&#x4EF6;">48&#x3001;&#x4F7F;&#x7528;curl&#x547D;&#x4EE4;&#x53D1;&#x9001;&#x90AE;&#x4EF6;</h1>
-<pre class="language-"><code class="lang-bash"><span class="token function">curl</span> -s --ssl-reqd --write-out %<span class="token punctuation">{</span>http_code<span class="token punctuation">}</span> --output /dev/null <span class="token punctuation">\</span>
-  --url <span class="token string">&quot;smtp://&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;:&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x53E3;&quot;</span> <span class="token punctuation">\</span>
-  --user <span class="token string">&quot;&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x7528;&#x6237;&#x540D;:&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x5BC6;&#x7801;&quot;</span> <span class="token punctuation">\</span>
-  --mail-from &#x53D1;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740; <span class="token punctuation">\</span>
-  --mail-rcpt &#x6536;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740; <span class="token punctuation">\</span>
+```bash
+curl -s --ssl-reqd --write-out %{http_code} --output /dev/null \
+  --url &quot;smtp://&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;:&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x53E3;&quot; \
+  --user &quot;&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x7528;&#x6237;&#x540D;:&#x53D1;&#x4EF6;&#x4EBA;SMTP&#x670D;&#x52A1;&#x5668;&#x5BC6;&#x7801;&quot; \
+  --mail-from &#x53D1;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740; \
+  --mail-rcpt &#x6536;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740; \
   --upload-file /tmp/emai-data.txt
 
-<span class="token comment"># /tmp/emai-data.txt&#x7684;&#x5185;&#x5BB9;</span>
+# /tmp/emai-data.txt&#x7684;&#x5185;&#x5BB9;
 
 FROM: &#x53D1;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740;
 To: &#x6536;&#x4EF6;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740;
 CC: &#x6284;&#x9001;&#x4EBA;&#x90AE;&#x7BB1;&#x5730;&#x5740;
 Subject: &#x4E3B;&#x9898;
 
-Content-Type: multipart/mixed<span class="token punctuation">;</span> <span class="token assign-left variable">boundary</span><span class="token operator">=</span>MixedBoundary
+Content-Type: multipart/mixed; boundary=MixedBoundary
 
 --MixedBoundary
-Content-Type: multipart/related<span class="token punctuation">;</span> <span class="token assign-left variable">boundary</span><span class="token operator">=</span>AlternativeBoundary
+Content-Type: multipart/related; boundary=AlternativeBoundary
 
 --AlternativeBoundary
-Content-Type: multipart/related<span class="token punctuation">;</span> <span class="token assign-left variable">boundary</span><span class="token operator">=</span>RelatedBoundary
+Content-Type: multipart/related; boundary=RelatedBoundary
 
 --RelatedBoundary
-Content-Type: text/html<span class="token punctuation">;</span> <span class="token assign-left variable">charset</span><span class="token operator">=</span>utf-8
+Content-Type: text/html; charset=utf-8
 
-<span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>h<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>&#x6D4B;&#x8BD5;<span class="token operator">&lt;</span>h<span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>
-<span class="token operator">&lt;</span>/body<span class="token operator">&gt;</span>
-<span class="token operator">&lt;</span>/html<span class="token operator">&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>&#x6D4B;&#x8BD5;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
 
 --RelatedBoundary--
 
 --AlternativeBoundary--
 
 --MixedBoundary
-Content-Type: text/plain<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span>test.txt
+Content-Type: text/plain; name=test.txt
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment<span class="token punctuation">;</span> <span class="token assign-left variable">filename</span><span class="token operator">=</span>test.txt
+Content-Disposition: attachment; filename=test.txt
 
-<span class="token punctuation">[</span>base64&#x7F16;&#x7801;&#x7684;&#x9644;&#x4EF6;&#x5185;&#x5BB9;<span class="token punctuation">]</span>
+[base64&#x7F16;&#x7801;&#x7684;&#x9644;&#x4EF6;&#x5185;&#x5BB9;]
 
 --MixedBoundary--
-</code></pre>
-<p>&#x53C2;&#x8003;&#xFF1A;</p>
+</code></pre><p>&#x53C2;&#x8003;&#xFF1A;</p>
 <ol>
 <li><p><a href="https://skeletonkey.com/filemaker-18-smtp-curl/" _target="blank">https://skeletonkey.com/filemaker-18-smtp-curl/</a></p>
 </li>
@@ -7316,7 +7375,7 @@ nmcli con up <span class="token operator">&lt;</span>WIFI&#x8FDE;&#x63A5;&#x540D
 <span class="token function">curl</span> -s http://test.com/test/test.sh <span class="token operator">|</span> <span class="token function">bash</span> -s -- -p arg1 -d arg2
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-11-24 22:21:38
+2021-01-29 15:21:01
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7356,7 +7415,7 @@ nmcli con up <span class="token operator">&lt;</span>WIFI&#x8FDE;&#x63A5;&#x540D
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Linux小技巧","level":"7.13.1","depth":2,"next":{"title":"比较两个文件的不同","level":"7.13.2","depth":2,"path":"origin/linux-diff.md","ref":"origin/linux-diff.md","articles":[]},"previous":{"title":"Linux","level":"7.13","depth":1,"ref":"","articles":[{"title":"Linux小技巧","level":"7.13.1","depth":2,"path":"origin/linux-小技巧.md","ref":"origin/linux-小技巧.md","articles":[]},{"title":"比较两个文件的不同","level":"7.13.2","depth":2,"path":"origin/linux-diff.md","ref":"origin/linux-diff.md","articles":[]},{"title":"基础服务安装","level":"7.13.3","depth":2,"path":"origin/linux-baseserver.md","ref":"origin/linux-baseserver.md","articles":[]},{"title":"Linux后台启动进程","level":"7.13.4","depth":2,"path":"origin/linux-daemon.md","ref":"origin/linux-daemon.md","articles":[]},{"title":"文本处理","level":"7.13.5","depth":2,"path":"origin/linux-文本处理.md","ref":"origin/linux-文本处理.md","articles":[]},{"title":"SSH私钥代理ssh-agent","level":"7.13.6","depth":2,"path":"origin/ssh-agent.md","ref":"origin/ssh-agent.md","articles":[]},{"title":"htpasswd","level":"7.13.7","depth":2,"path":"origin/linux-htpasswd.md","ref":"origin/linux-htpasswd.md","articles":[]},{"title":"YAML文本处理工具shyaml","level":"7.13.8","depth":2,"path":"origin/linux-shyaml.md","ref":"origin/linux-shyaml.md","articles":[]},{"title":"JSON文本处理工具jq","level":"7.13.9","depth":2,"path":"origin/linux-jq.md","ref":"origin/linux-jq.md","articles":[]},{"title":"yaml文本处理工具yq","level":"7.13.10","depth":2,"path":"origin/yaml-yq.md","ref":"origin/yaml-yq.md","articles":[]},{"title":"Curl命令详解","level":"7.13.11","depth":2,"path":"origin/linux-curl.md","ref":"origin/linux-curl.md","articles":[]},{"title":"rsync命令详解","level":"7.13.12","depth":2,"path":"origin/linux-rsync.md","ref":"origin/linux-rsync.md","articles":[]},{"title":"LVM原理及使用","level":"7.13.13","depth":2,"path":"origin/linux-lvm.md","ref":"origin/linux-lvm.md","articles":[]},{"title":"Linux交换分区","level":"7.13.14","depth":2,"path":"origin/linux-交换分区.md","ref":"origin/linux-交换分区.md","articles":[]},{"title":"Linux硬盘读写性能测试","level":"7.13.15","depth":2,"path":"origin/linux-硬盘读写性能测试.md","ref":"origin/linux-硬盘读写性能测试.md","articles":[]},{"title":"Vim小技巧","level":"7.13.16","depth":2,"path":"origin/vim-小技巧.md","ref":"origin/vim-小技巧.md","articles":[]},{"title":"Yum-RPM包管理","level":"7.13.17","depth":2,"path":"origin/linux-yum.md","ref":"origin/linux-yum.md","articles":[]},{"title":"ZSH","level":"7.13.18","depth":2,"path":"origin/linux-zsh.md","ref":"origin/linux-zsh.md","articles":[]},{"title":"Systemd-进程管理","level":"7.13.19","depth":2,"path":"origin/linux-进程管理工具SystemD.md","ref":"origin/linux-进程管理工具SystemD.md","articles":[]},{"title":"僵尸进程与孤儿进程","level":"7.13.20","depth":2,"path":"origin/linux-zombie-orphaned-process.md","ref":"origin/linux-zombie-orphaned-process.md","articles":[]},{"title":"排错工具及技巧","level":"7.13.21","depth":2,"ref":"","articles":[{"title":"ps","level":"7.13.21.1","depth":3,"path":"origin/linux-ps.md","ref":"origin/linux-ps.md","articles":[]},{"title":"top","level":"7.13.21.2","depth":3,"path":"origin/linux-top.md","ref":"origin/linux-top.md","articles":[]},{"title":"ip/ifconfig","level":"7.13.21.3","depth":3,"path":"origin/linux-ip-ifconfig.md","ref":"origin/linux-ip-ifconfig.md","articles":[]}]},{"title":"防火墙iptables","level":"7.13.22","depth":2,"path":"origin/linux-iptables.md","ref":"origin/linux-iptables.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-小技巧.md","mtime":"2020-11-24T14:21:38.626Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-01-20T14:42:54.148Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Linux小技巧","level":"7.13.1","depth":2,"next":{"title":"比较两个文件的不同","level":"7.13.2","depth":2,"path":"origin/linux-diff.md","ref":"origin/linux-diff.md","articles":[]},"previous":{"title":"Linux","level":"7.13","depth":1,"ref":"","articles":[{"title":"Linux小技巧","level":"7.13.1","depth":2,"path":"origin/linux-小技巧.md","ref":"origin/linux-小技巧.md","articles":[]},{"title":"比较两个文件的不同","level":"7.13.2","depth":2,"path":"origin/linux-diff.md","ref":"origin/linux-diff.md","articles":[]},{"title":"基础服务安装","level":"7.13.3","depth":2,"path":"origin/linux-baseserver.md","ref":"origin/linux-baseserver.md","articles":[]},{"title":"Linux后台启动进程","level":"7.13.4","depth":2,"path":"origin/linux-daemon.md","ref":"origin/linux-daemon.md","articles":[]},{"title":"文本处理","level":"7.13.5","depth":2,"path":"origin/linux-文本处理.md","ref":"origin/linux-文本处理.md","articles":[]},{"title":"SSH私钥代理ssh-agent","level":"7.13.6","depth":2,"path":"origin/ssh-agent.md","ref":"origin/ssh-agent.md","articles":[]},{"title":"htpasswd","level":"7.13.7","depth":2,"path":"origin/linux-htpasswd.md","ref":"origin/linux-htpasswd.md","articles":[]},{"title":"YAML文本处理工具shyaml","level":"7.13.8","depth":2,"path":"origin/linux-shyaml.md","ref":"origin/linux-shyaml.md","articles":[]},{"title":"JSON文本处理工具jq","level":"7.13.9","depth":2,"path":"origin/linux-jq.md","ref":"origin/linux-jq.md","articles":[]},{"title":"yaml文本处理工具yq","level":"7.13.10","depth":2,"path":"origin/yaml-yq.md","ref":"origin/yaml-yq.md","articles":[]},{"title":"Curl命令详解","level":"7.13.11","depth":2,"path":"origin/linux-curl.md","ref":"origin/linux-curl.md","articles":[]},{"title":"rsync命令详解","level":"7.13.12","depth":2,"path":"origin/linux-rsync.md","ref":"origin/linux-rsync.md","articles":[]},{"title":"LVM原理及使用","level":"7.13.13","depth":2,"path":"origin/linux-lvm.md","ref":"origin/linux-lvm.md","articles":[]},{"title":"Linux交换分区","level":"7.13.14","depth":2,"path":"origin/linux-交换分区.md","ref":"origin/linux-交换分区.md","articles":[]},{"title":"Linux硬盘读写性能测试","level":"7.13.15","depth":2,"path":"origin/linux-硬盘读写性能测试.md","ref":"origin/linux-硬盘读写性能测试.md","articles":[]},{"title":"Vim小技巧","level":"7.13.16","depth":2,"path":"origin/vim-小技巧.md","ref":"origin/vim-小技巧.md","articles":[]},{"title":"Yum-RPM包管理","level":"7.13.17","depth":2,"path":"origin/linux-yum.md","ref":"origin/linux-yum.md","articles":[]},{"title":"ZSH","level":"7.13.18","depth":2,"path":"origin/linux-zsh.md","ref":"origin/linux-zsh.md","articles":[]},{"title":"Systemd-进程管理","level":"7.13.19","depth":2,"path":"origin/linux-进程管理工具SystemD.md","ref":"origin/linux-进程管理工具SystemD.md","articles":[]},{"title":"僵尸进程与孤儿进程","level":"7.13.20","depth":2,"path":"origin/linux-zombie-orphaned-process.md","ref":"origin/linux-zombie-orphaned-process.md","articles":[]},{"title":"排错工具及技巧","level":"7.13.21","depth":2,"ref":"","articles":[{"title":"ps","level":"7.13.21.1","depth":3,"path":"origin/linux-ps.md","ref":"origin/linux-ps.md","articles":[]},{"title":"top","level":"7.13.21.2","depth":3,"path":"origin/linux-top.md","ref":"origin/linux-top.md","articles":[]},{"title":"ip/ifconfig","level":"7.13.21.3","depth":3,"path":"origin/linux-ip-ifconfig.md","ref":"origin/linux-ip-ifconfig.md","articles":[]}]},{"title":"防火墙iptables","level":"7.13.22","depth":2,"path":"origin/linux-iptables.md","ref":"origin/linux-iptables.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-小技巧.md","mtime":"2021-01-29T07:21:01.141Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-02-01T06:52:43.584Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

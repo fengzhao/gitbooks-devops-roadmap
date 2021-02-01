@@ -1491,7 +1491,7 @@
                     
                         <b>4.2.1.</b>
                     
-                    安装
+                    安装配置
             
                 </a>
             
@@ -1918,6 +1918,21 @@
                         <b>4.4.2.</b>
                     
                     Sonarqube使用Gitlab登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4.3" data-path="sonarqube-ide-scanner.html">
+            
+                <a href="sonarqube-ide-scanner.html">
+            
+                    
+                        <b>4.4.3.</b>
+                    
+                    IDE本地插件扫描检查
             
                 </a>
             
@@ -6247,10 +6262,13 @@ sonarqube&#x53EF;&#x4EE5;&#x5B89;&#x88C5;&#x63D2;&#x4EF6;gitlab,&#x8BA9;sonarsca
 <p>   &#x63D2;&#x4EF6;Github:<a href="https://github.com/gabrie-allaigre/sonar-gitlab-plugin/" _target="blank">https://github.com/gabrie-allaigre/sonar-gitlab-plugin/</a>
    <img src="../assets/sonarscanner-&#x5C06;&#x626B;&#x63CF;&#x7ED3;&#x679C;&#x4EE5;comment&#x7684;&#x5F62;&#x5F0F;&#x56DE;&#x5199;&#x5230;gitlab-2.png" alt=""></p>
 <h2 id="2&#x3001;&#x751F;&#x6210;&#x7528;&#x6237;&#x8BBF;&#x95EE;token">2&#x3001;&#x751F;&#x6210;&#x7528;&#x6237;&#x8BBF;&#x95EE;Token</h2>
+<p>&#x8BE5;Token&#x7528;&#x4E8E;&#x5BA2;&#x6237;&#x7AEF;&#x8C03;&#x7528;SonarQube API&#x4E0A;&#x4F20;&#x626B;&#x63CF;&#x4EE3;&#x7801;&#x65F6;&#x4F7F;&#x7528;</p>
 <p><img src="../assets/sonarscanner-&#x5C06;&#x626B;&#x63CF;&#x7ED3;&#x679C;&#x4EE5;comment&#x7684;&#x5F62;&#x5F0F;&#x56DE;&#x5199;&#x5230;gitlab-3.png" alt=""></p>
 <h2 id="3&#x3001;gitlab&#x521B;&#x5EFA;sonarscanner&#x7684;&#x7528;&#x6237;&#x5E76;&#x751F;&#x6210;accesskey">3&#x3001;gitlab&#x521B;&#x5EFA;sonarscanner&#x7684;&#x7528;&#x6237;,&#x5E76;&#x751F;&#x6210;AccessKey</h2>
+<p>&#x5728;sonarqube &#x670D;&#x52A1;&#x7AEF;&#x5206;&#x6790;&#x751F;&#x6210;&#x7ED3;&#x679C;&#x540E;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x8BE5;&#x7528;&#x6237;&#x7684;&#x8EAB;&#x4EFD;&#x5728;&#x5BF9;&#x5E94;&#x4EE3;&#x7801;&#x4E0B;&#x4EE5;&#x8BC4;&#x8BBA;&#x7684;&#x5F62;&#x5F0F;&#x663E;&#x793A;&#x626B;&#x63CF;&#x7ED3;&#x679C;&#x3002;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x8BE5;&#x7528;&#x6237;&#x7684;AccessKey&#x6709;&#x8BBF;&#x95EE;Gitlab API&#x7684;&#x6743;&#x9650;&#x3002;</p>
 <p><img src="../assets/sonarscanner-&#x5C06;&#x626B;&#x63CF;&#x7ED3;&#x679C;&#x4EE5;comment&#x7684;&#x5F62;&#x5F0F;&#x56DE;&#x5199;&#x5230;gitlab-4.png" alt=""></p>
 <h2 id="4&#x3001;&#x5728;gitlab&#x4E2D;&#x5C06;sonarqube&#x52A0;&#x5165;&#x5230;&#x5BF9;&#x5E94;&#x9879;&#x76EE;&#x4ED3;&#x5E93;&#x7684;members&#x4E2D;">4&#x3001;&#x5728;gitlab&#x4E2D;&#x5C06;sonarqube&#x52A0;&#x5165;&#x5230;&#x5BF9;&#x5E94;&#x9879;&#x76EE;&#x4ED3;&#x5E93;&#x7684;Members&#x4E2D;</h2>
+<p>&#x8BBE;&#x7F6E;sonarqube&#x7528;&#x6237;&#x5728;&#x8BE5;&#x4ED3;&#x5E93;&#x7684;&#x89D2;&#x8272;&#x8D77;&#x7801;&#x662F;<strong>&#x5F00;&#x53D1;&#x8005;</strong></p>
 <p><img src="../assets/sonarscanner-&#x5C06;&#x626B;&#x63CF;&#x7ED3;&#x679C;&#x4EE5;comment&#x7684;&#x5F62;&#x5F0F;&#x56DE;&#x5199;&#x5230;gitlab-5.png" alt=""></p>
 <h2 id="5&#x3001;sonarqube&#x4E2D;&#x7F16;&#x8F91;gitlab&#x63D2;&#x4EF6;&#x7684;&#x5168;&#x5C40;&#x914D;&#x7F6E;">5&#x3001;Sonarqube&#x4E2D;&#x7F16;&#x8F91;gitlab&#x63D2;&#x4EF6;&#x7684;&#x5168;&#x5C40;&#x914D;&#x7F6E;</h2>
 <p>&#x626B;&#x63CF;&#x9879;&#x76EE;&#x65F6;&#xFF0C;&#x626B;&#x63CF;&#x53C2;&#x6570;&#x751F;&#x6548;&#x4F18;&#x5148;&#x7EA7;&#x5982;&#x4E0B;&#xFF1A;</p>
@@ -6586,7 +6604,7 @@ Caused by: org.apache.maven.plugin.MojoExecutionException:com.talanlabs.sonar.pl
 <li><a href="https://www.cnblogs.com/amyzhu/p/8988519.html" _target="blank">https://www.cnblogs.com/amyzhu/p/8988519.html</a></li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-06-16 21:35:29
+2021-01-22 11:58:01
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6630,7 +6648,7 @@ Caused by: org.apache.maven.plugin.MojoExecutionException:com.talanlabs.sonar.pl
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"SonarScanner-将扫描结果以comment的形式回写到gitlab","level":"4.4.1","depth":2,"next":{"title":"Sonarqube使用Gitlab登录","level":"4.4.2","depth":2,"path":"origin/sonarqube-gitlab-auth.md","ref":"origin/sonarqube-gitlab-auth.md","articles":[]},"previous":{"title":"SonarQube静态代码扫描分析","level":"4.4","depth":1,"path":"origin/SonarQube静态代码扫描分析简介.md","ref":"origin/SonarQube静态代码扫描分析简介.md","articles":[{"title":"SonarScanner-将扫描结果以comment的形式回写到gitlab","level":"4.4.1","depth":2,"path":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","ref":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","articles":[]},{"title":"Sonarqube使用Gitlab登录","level":"4.4.2","depth":2,"path":"origin/sonarqube-gitlab-auth.md","ref":"origin/sonarqube-gitlab-auth.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","mtime":"2020-06-16T13:35:29.541Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-01-20T14:42:54.148Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"SonarScanner-将扫描结果以comment的形式回写到gitlab","level":"4.4.1","depth":2,"next":{"title":"Sonarqube使用Gitlab登录","level":"4.4.2","depth":2,"path":"origin/sonarqube-gitlab-auth.md","ref":"origin/sonarqube-gitlab-auth.md","articles":[]},"previous":{"title":"SonarQube静态代码扫描分析","level":"4.4","depth":1,"path":"origin/SonarQube静态代码扫描分析简介.md","ref":"origin/SonarQube静态代码扫描分析简介.md","articles":[{"title":"SonarScanner-将扫描结果以comment的形式回写到gitlab","level":"4.4.1","depth":2,"path":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","ref":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","articles":[]},{"title":"Sonarqube使用Gitlab登录","level":"4.4.2","depth":2,"path":"origin/sonarqube-gitlab-auth.md","ref":"origin/sonarqube-gitlab-auth.md","articles":[]},{"title":"IDE本地插件扫描检查","level":"4.4.3","depth":2,"path":"origin/sonarqube-ide-scanner.md","ref":"origin/sonarqube-ide-scanner.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md","mtime":"2021-01-22T03:58:01.030Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-02-01T06:52:43.584Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

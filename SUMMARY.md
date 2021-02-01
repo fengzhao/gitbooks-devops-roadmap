@@ -85,7 +85,7 @@
         * [Gitlab](origin/jenkins-gitlab插件的使用.md)
         * [Generic Webhook Trigger](origin/jenkins-generic-webhook-trigger插件.md)
 * Gitlab
-    * [安装](origin/gitlab-install.md)
+    * [安装配置](origin/gitlab-install.md)
     * 管理
         * [配置SMTP邮件服务](origin/gitlab-配置SMTP邮件服务.md)
         * [代码仓库配置事件触发器Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
@@ -112,6 +112,7 @@
 * [SonarQube静态代码扫描分析](origin/SonarQube静态代码扫描分析简介.md)
     * [SonarScanner-将扫描结果以comment的形式回写到gitlab](origin/sonarscanner-将扫描结果以comment的形式回写到gitlab.md)
     * [Sonarqube使用Gitlab登录](origin/sonarqube-gitlab-auth.md)
+    * [IDE本地插件扫描检查](origin/sonarqube-ide-scanner.md)
 * LDAP
     * 安装
     * 客户端
