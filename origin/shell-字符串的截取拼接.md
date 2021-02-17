@@ -2,25 +2,25 @@
 
 | 表达式                                    | 含义                                                         |
 | ----------------------------------------- | ------------------------------------------------------------ |
-| `${#string}`                              | $string的 长度                                               |
-| `${string:position}`                      | 在\$string中, 从位置$position开始提取子串                     |
-| `${string:position:length}`               | 在\$string中, 从位置$position开始提取长度为$length的子串      |
-| `${string#substring}`                     | 从 变量\$string的开头, 删除最短匹配$substring的子串           |
-| `${string##substring}`                    | 从 变量\$string的开头, 删除最长匹配$substring的子串           |
-| `${string%substring}`                     | 从 变量\$string的结尾, 删除最短匹配$substring的子串           |
-| `${string%%substring}`                    | 从 变量\$string的结尾, 删除最长匹配$substring的子串           |
-| `${string/substring/replacement}`         | 使用\$replacement, 来代替第一个匹配的$substring               |
+| `${#string}`                              | $string的字符个数                                            |
+| `${string:position}`                      | 在\$string中, 从位置$position开始提取子串                    |
+| `${string:position:length}`               | 在\$string中, 从位置$position开始提取长度为$length的子串     |
+| `${string#substring}`                     | 从 变量\$string的开头, 删除最短匹配$substring的子串          |
+| `${string##substring}`                    | 从 变量\$string的开头, 删除最长匹配$substring的子串          |
+| `${string%substring}`                     | 从 变量\$string的结尾, 删除最短匹配$substring的子串          |
+| `${string%%substring}`                    | 从 变量\$string的结尾, 删除最长匹配$substring的子串          |
+| `${string/substring/replacement}`         | 使用\$replacement, 来代替第一个匹配的$substring              |
 | `${string//substring/replacement}`        | 使用\$replacement, 代替所有匹配的$substring                  |
 | `${string/#substring/replacement}`        | 如果\$string的前缀匹配$substring, 那么就用$replacement来代替匹配到的$substring |
 | `${string/%substring/replacement}`        | 如果\$string的后缀匹配$substring, 那么就用$replacement来代替匹配到的$substring |
-| `expr match "$string" '$substring'`       | 匹配\$string开头的$substring* 的长度                          |
-| `expr "$string" : '$substring'`           | 匹 配\$string开头的$substring* 的长度                         |
-| `expr index "$string" $substring`         | 在\$string中匹配到的$substring的第一个字符出现的位置          |
-| `expr substr $string $position $length`   | 在\$string中 从位置$position开始提取长度为$length的子串       |
-| `expr match "$string" '\($substring\)'`   | 从\$string的 开头位置提取$substring*                          |
-| `expr "$string" : '\($substring\)'`       | 从\$string的 开头位置提取$substring*                          |
-| `expr match "$string" '.*\($substring\)'` | 从\$string的 结尾提取$substring*                              |
-| `expr "$string" : '.*\($substring\)'`     | 从\$string的 结尾提取\$substring*                              |
+| `expr match "$string" '$substring'`       | 匹配\$string开头的$substring* 的长度                         |
+| `expr "$string" : '$substring'`           | 匹 配\$string开头的$substring* 的长度                        |
+| `expr index "$string" $substring`         | 在\$string中匹配到的$substring的第一个字符出现的位置         |
+| `expr substr $string $position $length`   | 在\$string中 从位置$position开始提取长度为$length的子串      |
+| `expr match "$string" '\($substring\)'`   | 从\$string的 开头位置提取$substring*                         |
+| `expr "$string" : '\($substring\)'`       | 从\$string的 开头位置提取$substring*                         |
+| `expr match "$string" '.*\($substring\)'` | 从\$string的 结尾提取$substring*                             |
+| `expr "$string" : '.*\($substring\)'`     | 从\$string的 结尾提取\$substring*                            |
 
 
 
@@ -72,7 +72,7 @@ b=${a:7};echo $b
 # 结果：io/openshift/origin-metrics-cassandra:v3.9
 ```
 
-## 7. 从右边第几个字符开始，及字符的个数
+## 7. 从右边第几个字符开始，向右截取 length 个字符。
 
 ```bash
 # 样本: a="docker.io/openshift/origin-metrics-cassandra:v3.9"   

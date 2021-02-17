@@ -90,6 +90,7 @@
         * [配置SMTP邮件服务](origin/gitlab-配置SMTP邮件服务.md)
         * [代码仓库配置事件触发器Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
         * [代码仓库的备份与恢复](origin/gitlab-backuprestore.md)
+        * [版本升级](origin/gitlab-upgrade.md)
     * Gitlab CI/CD
         * [Gitlab Runner](origin/gitlab-runner.md)
 * [Nexus](origin/nexus-简介.md)
@@ -299,6 +300,7 @@
       * [top](origin/linux-top.md)
       * [ip/ifconfig](origin/linux-ip-ifconfig.md)
     * [防火墙iptables](origin/linux-iptables.md)
+    * [proc文件详解](origin/linux-proc.md)
 * [MySQL](origin/mysql-basic.md)
 
     * 运维

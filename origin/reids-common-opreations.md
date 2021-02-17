@@ -123,10 +123,6 @@ lastsave
 # 执行成功时返回UNIX时间戳
 ```
 
-
-
-
-
 ## 5、慢日志操作
 
 Redis慢查询日志是一个记录超过指定执行时间的查询的系统。 这里的执行时间不包括IO操作，比如与客户端通信，发送回复等等，而只是实际执行命令所需的时间（这是唯一在命令执行过程中线程被阻塞且不能同时处理其他请求的阶段）。
@@ -176,44 +172,65 @@ slowlog reset
 
 # 二、Key操作
 
-## 查询键的值
+## 查找key
+
+查找所有符合给定模式pattern（正则表达式）的 key 
+
+```bash
+key 
+# 支持的正则表达模式：
+
+# h?llo 匹配 hello, hallo 和 hxllo
+# h*llo 匹配 hllo 和 heeeello
+# h[ae]llo 匹配 hello 和 hallo, 但是不匹配 hillo
+# h[^e]llo 匹配 hallo, hbllo, … 但是不匹配 hello
+# h[a-b]llo 匹配 hallo 和 hbllo
+```
+
+## 查询key的值
 
 ```bash
 get key
 # 不存在则返回nil
 ```
 
-## 批量获取键的值
+## 批量获取key的值
 
 ```bash
 mget key [key .....]
 # mget 1 2 3
 ```
 
-## 查询当前DB的键总数
+## 查询当前DB的key总数
 
 ```bash
 dbsize
 ```
 
-## 检查键是否存在
+## 检查key是否存在
 
 ```bash
 exist key
 # 存在返回1，不存在返回0
 ```
 
-## 查询键的过期时间
+## 查询key的过期时间
 
 ```bash
 ttl key # 查询键在多少秒后过期 （>0 剩余过期时间；-1 没有设置过期时间；-2 键不存在）
 pttl key # 查询键在多少毫秒后过期
 ```
 
-## 查询键的数据类型
+## 查询key的数据类型
 
 ```bash
 type key （如果键不存在，则返回none）
+```
+
+## 删除Key
+
+```bash
+del key
 ```
 
 
@@ -298,8 +315,6 @@ hmset key field value [field value ...]
 ```bash
 hdel key field [key field ....]
 ```
-
-
 
 ## 2、DQL
 

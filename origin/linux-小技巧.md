@@ -1116,13 +1116,11 @@ mkdir ~/.pip
 echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host=mirrors.aliyun.com\n" > ~/.pip/pip.conf
 ```
 
-## APT
 
-``` 
 
 # 48、使用curl命令发送邮件
 
-```bash
+``` bash
 curl -s --ssl-reqd --write-out %{http_code} --output /dev/null \
   --url "smtp://发件人SMTP服务器地址:发件人SMTP服务器端口" \
   --user "发件人SMTP服务器用户名:发件人SMTP服务器密码" \
@@ -1430,8 +1428,6 @@ nmcli con mod <WIFI连接名> ipv4.dns "8.8.8.8"
 nmcli con up <WIFI连接名>
 ```
 
-
-
 # 53、对bash执行curl的脚本进行传参
 
 ```bash
@@ -1442,5 +1438,37 @@ bash <(curl -s http://test.com/test/test.sh ) arg1 arg2
 curl -s http://test.com/test/test.sh | bash -s -- arg1 arg2
 # 若参数为”-p arg -d arg”,则
 curl -s http://test.com/test/test.sh | bash -s -- -p arg1 -d arg2
+```
+
+# 54、windows下编写的脚本文件，放到Linux中无法识别格式
+
+在Linux中执行.sh脚本，异常`/bin/sh^M: bad interpreter: No such file or directory。`windows下编写的脚本文件，放到Linux中无法识别格式，在vi的时候,会在下面显示此文件的格式,比如 `"dos.txt" [dos] 120L, 2532C` 字样,表示是一个`[dos]`格式文件,如果是MAC系统的,会显示`[MAC]`。dos格式文件传输到unix系统时,会在每行的结尾多一个`^M`
+
+用vi打开脚本文件，在命令模式下输入`set ff=unix` 用命令`:set ff?`可以看到dos或unix的字样
+
+其他工具去除参考：[文本处理的第七章节](../origin/linux-文本处理.md)
+
+# 55、文件编码格式
+
+查看
+
+```bash
+brew/yum/apt install -y enca
+enca 文件名
+
+file 文件名
+
+vim中:set fileencoding
+```
+
+转换
+
+```bash
+# 将GBK编码的文件转换成UTF-8编码
+enconv -L zh_CN -x UTF-8 filename
+# 将UTF-8 编码的文件转换成GBK编码
+iconv -f UTF-8 -t GBK file1 -o file2
+
+vim中:set fileencoding=utf-8
 ```
 
