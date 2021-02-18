@@ -588,7 +588,7 @@ EOF' ;\
 ```bash
 download_url=`echo https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/``curl -s -L https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/ |grep apache-zookeeper | awk -F ">" '{print $2}'|awk -F "\"" '{print $2}' | head -n 1` && \
 curl -# $download_url | tar -zxC /opt/ && \
-ln -s `ls /opt |grep apache-zookeeper-*bin*| sed  "s:^:\`pwd\`/: "` /opt/zookeeper && \
+ln -s `ls  /opt/ |grep apache-zookeeper-* | sed  "s:^:/opt/: "` /opt/zookeeper && \
 sed -i '$a export ZOOKEEPER_HOME=/opt/zookeeper\nexport PATH=$PATH:$ZOOKEEPER_HOME/bin' /etc/profile && \
 source /etc/profile && \
 cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg  && \
@@ -614,7 +614,7 @@ jps -l
 download_d=`echo https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/``curl -sL https://mirrors.tuna.tsinghua.edu.cn/apache/kafka |grep \`date +%Y\` |grep "folder.gif" | tac | head -n 1 |awk -F ">" '{print $3}' |awk -F "/" '{print $1}'` && \
 download_url=`echo $download_d/``curl -sL $download_d |grep kafka_ | tac | head -n 1 | awk -F ">" '{print $2}' | awk -F "\"" '{print $2}'` && \
 curl -# $download_url | tar -zxC /opt/ && \
-ln -s `ls /opt |grep kafka_*| sed  "s:^:\`pwd\`/: "` /opt/kafka && \
+ln -s `ls /opt |grep kafka_*| sed  "s:^:/opt/: "` /opt/kafka && \
 sed -i '$a export KAFKA_HOME=/opt/kafka\nexport PATH=$PATH:$KAFKA_HOME/bin' /etc/profile && \
 source /etc/profile && \
 cp /opt/kafka/config/server.properties /opt/kafka/config/server_bak.properties && \

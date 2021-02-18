@@ -147,6 +147,7 @@
         * [基础知识](origin/logging-kafka基础知识.md)
         * [kafka常用操作](origin/logging-kafka常用操作.md)
         * [kafka连接调试脚本](origin/kafka-client-connect-procedure-tools.md)
+        * [Zookeeper和kafka的WebUI工具](origin/zk-kafka-ui.md)
     * Filebeat
         * [简介安装配置](origin/filebeat-简介安装配置.md)
         * [多实例安装部署](origin/filebeat-多实例部署.md)
@@ -387,7 +388,7 @@
 - 第三方工具
   - [statik-将静态资源文件打包到二进制文件中](origin/golang-statik.md)
 
-# Part IX : JavaScript学习笔记
+## Part IX : JavaScript学习笔记
 
 - [JavaScript常用工具函数](origin/js-kits.md)
 
