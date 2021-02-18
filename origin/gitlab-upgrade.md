@@ -16,8 +16,7 @@ gitlab的版本规则是：`主版本(Major).次版本(Minor).补丁版本(Patch
   - `11.3.4` -> `11.11.1`
   - `12.0.4` -> `12.0.12`
   - `11.11.1` -> `11.11.8`
-- 而主版本更新，需要考虑版本是否可向后兼容于数据迁移
-- 
+- 而主版本升级，需要考虑版本是否可向后兼容与数据迁移，原则上先升级到当前主版本的最大次版本，然后在升级到下个主要版本最小次版本，依次往最新的版本进行升级
 
 说明文档：
 
@@ -26,44 +25,9 @@ gitlab的版本规则是：`主版本(Major).次版本(Minor).补丁版本(Patch
 
 # 二、升级
 
-升级的方式步骤取决于Gitlab的部署方式，目前gitlab支持的部署方式有：`二进制包安装`、`源码编译安装`、`Docker方式安装`、`Helm方式安装`
+## 1、版本升级路径
 
-## 1、升级前准备
-
-- 某些主要/次要版本可能需要完成一系列的后台数据迁移
-
-  - 对于二进制方式安装的gitlab
-
-    - gitlab >= 12.9
-
-    ```bash
-    sudo gitlab-rails runner -e production 'puts Gitlab::BackgroundMigration.remaining'
-    ```
-
-    - gitlab <= 12.8
-
-    ```bash
-    puts Sidekiq::Queue.new("background_migration").size
-    Sidekiq::ScheduledSet.new.select { |r| r.klass == 'BackgroundMigrationWorker' }.size
-    ```
-
-  - 对于源码安装的gutlab
-  
-    - gitlab >= 12.9
-  
-      ```bash
-      cd /home/git/gitlab
-      sudo -u git -H bundle exec rails runner -e production 'puts Gitlab::BackgroundMigration.remaining'
-      ```
-  
-    - gitlab <= 12.8
-  
-      ```bash
-      puts Sidekiq::Queue.new("background_migration").size
-      Sidekiq::ScheduledSet.new.select { |r| r.klass == 'BackgroundMigrationWorker' }.size
-      ```
-
-## 2、主版本升级的路径
+`8.11.Z` --> `8.12.0` --> `8.17.7` --> `9.5.10` --> `10.8.7` --> `11.11.8` --> `12.0.12` --> `12.1.17` --> `12.10.14` --> `13.0.14` --> `13.1.11` -- > [latest `13.Y.Z`](https://about.gitlab.com/releases/categories/releases/)
 
 | 当前版本 | 目标版本 | 支持的版本升级路径                                           | 备注                                                         |
 | :--------- | :------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
@@ -78,4 +42,15 @@ gitlab的版本规则是：`主版本(Major).次版本(Minor).补丁版本(Patch
 
 `11.6.1 ----> 11.11.0-ce.0(关键点) ----> 12.0.1-ce.0(关键点) ----> 12.8.0-ce.0 ----> 12.10.0(关键点) ----> 13.0.0-ce.0(关键点) ----> latest(13.8.3)`
 
+## 2、升级步骤
 
+升级的步骤取决于Gitlab的部署方式
+
+- `二进制包安装`
+  - 参考文档：https://docs.gitlab.com/omnibus/update/
+- `源码编译安装`
+  - 参考文档：https://docs.gitlab.com/ee/update/upgrading_from_source.html
+- `Docker方式安装`
+  - 参考文档：https://docs.gitlab.com/omnibus/docker/README.html#update
+- `Helm方式安装`
+  - 参考文档：https://docs.gitlab.com/charts/installation/upgrade.html#steps
