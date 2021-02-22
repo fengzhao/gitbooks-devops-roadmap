@@ -148,6 +148,7 @@
         * [kafka常用操作](origin/logging-kafka常用操作.md)
         * [kafka连接调试脚本](origin/kafka-client-connect-procedure-tools.md)
         * [Zookeeper和kafka的WebUI工具](origin/zk-kafka-ui.md)
+        * [命令行Kafka工具](origin/kafka-shell-kaf.md)
     * Filebeat
         * [简介安装配置](origin/filebeat-简介安装配置.md)
         * [多实例安装部署](origin/filebeat-多实例部署.md)

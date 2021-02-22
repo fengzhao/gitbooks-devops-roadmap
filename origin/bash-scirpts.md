@@ -104,3 +104,34 @@ echo $b
 持续时间: 16小时41分钟40秒
 ```
 
+## 7、脚本命令行参数的传递与判断
+
+```bash
+#!/bin/bash
+
+main() {
+	if [[ $# == 1 ]]; then
+        case $1 in
+        "-h")
+            echo "脚本使用方法: "
+            echo "  ./gitlab-pipeline.sh git仓库名1 git仓库名2 ... tag名(tag命名规则为: *-v加数字)"
+            exit
+            ;;
+        "--help")
+            echo "脚本使用方法: "
+            echo "  ./gitlab-pipeline.sh git仓库名1 git仓库名2 ... tag名(tag命名规则为: *-v加数字)"
+            exit
+            ;;
+        *)
+            echo "参数错误！"
+            exit
+            ;;
+        esac
+    fi
+}
+
+main $*
+```
+
+
+

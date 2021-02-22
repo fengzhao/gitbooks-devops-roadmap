@@ -243,14 +243,20 @@ oc expose service jira --name=jira --port=8080 --hostname=jira.apps.okd311.curio
 
 # 五、问题
 
-## 1.Unable to create and acquire lock file for jira.home directory '/var/atlassian/application-data/jira
+## 1.
+
+> Unable to create and acquire lock file for jira.home directory '/var/atlassian/application-data/jira
 
 **解决**：删除jira_home目录下的lock文件（.jira-home.lock），是一个隐藏文件，然后重启jira服务即可。
 
-## 2.Unable to clean the cache directory: /var/atlassian/application-data/jira/plugins/.osgi-plugins/feli
+## 2.
+
+> Unable to clean the cache directory: /var/atlassian/application-data/jira/plugins/.osgi-plugins/feli
 
 **解决：**先停止jira服务，然后删除$JIRA_HOME/plugins/.osgi-plugins/felix/，然后启动jira服务即可
 
-## 3.There is/are [1] thread(s) in total that are monitored by this Valve and may be stuck.
+## 3.
+
+> There is/are [1] thread(s) in total that are monitored by this Valve and may be stuck.
 
 **解决方案：**等等就好了
