@@ -1,5 +1,7 @@
 # 一、Curl命令详解
 
+帮助文档：https://curl.se/docs/manpage.html
+
 
 语法：`curl [options] [URL...]`
 
@@ -348,3 +350,78 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=******' \
 curl --resolve test.test.com:80:127.0.0.1 "http://test.test.com/"
 ```
 
+## 18、显示请求的耗时情况
+
+`curl` 命令提供了 `-w` 参数，能够帮助分析请求的哪一步耗时比较长，好进一步找到问题的原因。
+
+![](../assets/curl-1.png)
+
+`-w`后面指定要显示的内容，后面可通过curl的变量显示某一项耗时。以下为内置
+
+- `time_namelookup`：DNS 域名解析耗时
+- `time_connect`：TCP 连接建立的时间，就是三次握手的时间
+- `time_appconnect`：SSL/SSH 等上层协议建立连接的时间，比如 connect/handshake 的时间
+- `time_redirect`：从开始到最后一个请求事务的时间
+- `time_pretransfer`：从请求开始到响应开始传输的时间
+- `time_starttransfer`：从请求开始到第一个字节将要传输的时间，这包括time_pretransfer以及服务器计算结果所需的时间。
+- `time_total`：这次请求花费的全部时间
+- `url_effective`: 最终获取的url地址，尤其是当你指定给curl的地址存在301跳转，且通过-L继续追踪的情形。
+- `time_redirect`:  重定向时间，包括到最后一次传输前的几次重定向的DNS解析，连接，预传输，传输时间
+- `num_redirects`:  在请求中跳转的次数
+- `ssl_verify_result`: ssl认证结果，返回0表示认证成功。
+- `size_request`: 请求的大小
+
+```bash
+$ curl -kls \
+-w "\n请求响应状态码 : %{http_code}\n----------\n请求信息：\n  客户端信息:     %{local_ip}:%{local_port} \n  服务器信息:     %{remote_ip}:%{remote_port}\n  发送请求个数:   %{num_connects}\n  请求大小:       %{size_request} bytes\n  重定向URL:      %{redirect_url}\n  响应Header大小: %{size_header} bytes\n请求耗时统计:\n  DNS解析完成时间:        第%{time_namelookup}秒\n  TCP握手完成时间:        第%{time_connect}秒\n  SSL握手完成时间:        第%{time_appconnect}秒\n  客户端发送请求开始时间: 第%{time_pretransfer}秒\n  请求收到第一个字节时间: 第%{time_starttransfer}秒\n  请求结束时间:           第%{time_total}秒\n----------\nTCP和SSL连接耗时: %{time_pretransfer} - %{time_namelookup}\n服务器处理耗时:   %{time_starttransfer} - %{time_pretransfer}\n响应数据传输耗时: %{time_total} - %{time_starttransfer}\n共计耗时:         %{time_total}秒\n" \
+https://google.com
+
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="https://www.google.com/">here</A>.
+</BODY></HTML>
+
+请求响应状态码 : 301
+----------
+请求信息：
+  客户端信息:     127.0.0.1:64073
+  服务器信息:     127.0.0.1:8001
+  发送请求个数:   1
+  请求大小:       184 bytes
+  重定向URL:      https://www.google.com/
+  响应Header大小: 508 bytes
+请求耗时统计:
+  DNS解析完成时间:        第0.000114秒
+  TCP握手完成时间:        第0.000358秒
+  SSL握手完成时间:        第0.460882秒
+  客户端发送请求开始时间: 第0.460956秒
+  请求收到第一个字节时间: 第0.603045秒
+  请求结束时间:           第0.603188秒
+----------
+TCP和SSL连接耗时: 0.460956 - 0.000114
+服务器处理耗时:    0.603045 - 0.460956
+响应数据传输耗时:  0.603188 - 0.603045
+共计耗时:         0.603188秒
+```
+
+可将`-w`的输出格式配置写在curl的默认配置文件`~/.curlrc`中
+
+```bash
+-kls
+-w "\n请求响应状态码 : %{http_code}\n----------\n请求信息：\n  客户端信息:     %{local_ip}:%{local_port} \n  服务器信息:     %{remote_ip}:%{remote_port}\n  发送请求个数:   %{num_connects}\n  请求大小:       %{size_request} bytes\n  重定向URL:      %{redirect_url}\n  响应Header大小: %{size_header} bytes\n请求耗时统计:\n  DNS解析完成时间:        第%{time_namelookup}秒\n  TCP握手完成时间:        第%{time_connect}秒\n  SSL握手完成时间:        第%{time_appconnect}秒\n  客户端发送请求开始时间: 第%{time_pretransfer}秒\n  请求收到第一个字节时间: 第%{time_starttransfer}秒\n  请求结束时间:           第%{time_total}秒\n----------\nTCP和SSL连接耗时: %{time_pretransfer} - %{time_namelookup}\n服务器处理耗时:   %{time_starttransfer} - %{time_pretransfer}\n响应数据传输耗时: %{time_total} - %{time_starttransfer}\n共计耗时:         %{time_total}秒\n"
+```
+
+Chrome控制台时间显示的耗时对应
+
+![](../assets/curl-chrome.png)
+
+![](../assets/curl-chrome-2.png)
+
+参考：
+
+1. https://curl.se/docs/manpage.html
+2. https://blog.cloudflare.com/a-question-of-timing/
+3. https://cizixs.com/2017/04/11/use-curl-to-analyze-request/
+4. https://blog.csdn.net/weifangan/article/details/80741981

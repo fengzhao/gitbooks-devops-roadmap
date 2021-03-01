@@ -91,8 +91,10 @@
         * [代码仓库配置事件触发器Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
         * [代码仓库的备份与恢复](origin/gitlab-backuprestore.md)
         * [版本升级](origin/gitlab-upgrade.md)
+        * [Gitlab的制品仓库](origin/gitlab-package-registry.md)
     * Gitlab CI/CD
         * [Gitlab Runner](origin/gitlab-runner.md)
+        * [Gitlab Pipeline](origin/gitlab-pipeline.md)
 * [Nexus](origin/nexus-简介.md)
     * 配置
         * [使用OrientDB Console在DB层面修改配置](origin/nexus-使用OrientDB Console在DB层面修改配置.md)
@@ -304,8 +306,7 @@
     * [防火墙iptables](origin/linux-iptables.md)
     * [proc文件详解](origin/linux-proc.md)
 * [MySQL](origin/mysql-basic.md)
-
-    * 运维
+* 运维
       * [常见操作及SQL](origin/mysql-common-operations.md)
       * [用户权限管理](origin/mysql-user-privileges.md)
       * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)

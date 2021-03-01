@@ -524,7 +524,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ```bash
 curl -# http://192.168.1.7:32770/repository/public-resources/jdk-8u241-linux-x64.tar.gz | tar -zxC /opt/ && \
-ln -s `ls /opt |grep jdk1.8.0_241*| sed  "s:^:\`pwd\`/: "` /opt/jdk && \
+ln -s `ls /opt |grep jdk1.8.0_241*| sed  "s:^:/opt: "` /opt/jdk && \
 sed -i '$a export JAVA_HOME=/opt/jdk\nexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar\nexport PATH=$PATH:$JAVA_HOME/bin' /etc/profile && \
 source /etc/profile && \
 ln -s /opt/jdk/bin/java /usr/bin/java && \
@@ -718,7 +718,8 @@ docker info |grep "Insecure Registries:" -A 4
 
 ```bash
 apt-get remove docker docker-engine docker.io containerd runc && \
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+apt install -y software-properties-common && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
 # X86_64
 sudo add-apt-repository \
@@ -733,7 +734,7 @@ sudo add-apt-repository \
    stable"
 
 apt-get update && \
-apt-cache madison docker-ce && \
+apt-cache docker-ce && \
 apt-get install -y docker-ce && \
 touch /etc/docker/daemon.json && \
 bash -c ' tee  /etc/docker/daemon.json <<EOF
