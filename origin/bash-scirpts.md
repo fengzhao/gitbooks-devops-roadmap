@@ -135,3 +135,48 @@ main $*
 
 
 
+# 8、检测docker 容器的启动状态
+
+
+
+```bash
+# 第一步：判断镜像是否存在
+if [ `docker images --format {{.Repository}}:{{.Tag}} |grep -Fx 192.168.1.7:32772/applications/$CI_PROJECT_NAME:${CI_COMMIT_SHORT_SHA};echo $?` -eq 0 ];then
+   docker pull 192.168.1.7:32772/applications/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA ;
+fi;
+# 第二步：判断是否已经有重名的容器在运行或者处在其他状态。重名的，先删掉，在启动；不重名的直接启动
+if [ `docker ps -a --format {{.Names}} |grep -Fx $CI_PROJECT_NAME > /dev/null ;echo $?` -eq 0 ] ;then
+   docker rm -f $CI_PROJECT_NAME ;
+   docker run -d --name $CI_PROJECT_NAME -p 30088:8080 192.168.1.7:32772/applications/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA ;
+else
+   docker run -d --name $CI_PROJECT_NAME -p 30088:8080 192.168.1.7:32772/applications/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA ;
+fi;
+# 第三步：循环五次判断容器的监控检测是否处于什么状态。健康状态就直接退出循环，不健康显示健康检查日志，正在启动的直接显示。处于其他状态的直接显示状态
+n=0;
+while true ;do
+  container_state=`docker inspect --format='{{json .State.Health.Status}}' $CI_PROJECT_NAME`;
+  case $container_state in
+    '"starting"' )
+      echo "应用容器正在启动！";
+    ;;
+    '"healthy"' )
+      echo "应用容器已启动，状态健康！";
+    break;
+    ;;
+    '"unhealthy"' )
+      echo "应用容器健康检测失败！";
+      docker inspect --format='{{json .State.Health.Log}}' $CI_PROJECT_NAME;
+    ;;
+    * )
+      echo "未知的状态:$container_state";
+    ;;
+  esac;
+  sleep 1s;
+  n=$(($n+1));
+  if [ $n -eq 5 ];
+     then break ;
+  fi ;
+done
+
+```
+
