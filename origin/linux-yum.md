@@ -374,22 +374,24 @@ type=rpm-md
 ```properties
 [MySQL-Community-5.6]
 name=MySQL Community 5.6
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql56-community-el7/
+baseurl=https://mirrors.ustc.edu.cn/mysql-repo/yum/mysql-5.6-community/el/7/x86_64/
 enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
 [MySQL-Community-5.7]
 name=MySQL Community 5.7
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql57-community-el7/
+baseurl=https://mirrors.ustc.edu.cn/mysql-repo/yum/mysql-5.7-community/el/7/x86_64/
 enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+[MySQL-Community-8.0]
+name=MySQL Community 8.0
+baseurl=https://mirrors.ustc.edu.cn/mysql-repo/yum/mysql-8.0-community/el/7/x86_64/
+enabled=1
+gpgcheck=0
 [MySQL-Community-Connectors]
 name=MySQL Community  Connectors
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql-connectors-community-el7/
+baseurl=http://mirrors.ustc.edu.cn/mysql-repo/yum/mysql-connectors-community/el/7/x86_64/
 enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
 [MySQL-Community-Tools]
 name=MySQL Community  Tools
 baseurl=https://mirrors.tuna.tsinghua.edu.cn/mysql/yum/mysql-tools-community-el7/

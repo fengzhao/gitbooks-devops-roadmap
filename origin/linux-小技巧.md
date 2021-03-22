@@ -674,47 +674,61 @@ npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ ;\
 npm version
 ```
 
-# 33、安装Docker，并设置新硬盘LVM成docker的数据目录
+# 33、安装docker/docker-compose
 
-## CentOS/Redhat
+**脚本自动安装**
 
 ```bash
-wget https://download.docker.com/linux/centos/docker-ce.repo -O  /etc/yum.repos.d/docker-ce.repo ;\
-yum makecache ;\
-yum install docker-ce-17.12.1.ce -y ;\
-systemctl enable docker ;\
-mkdir /etc/docker ;\
-touch /etc/docker/daemon.json ;\
-bash -c ' tee  /etc/docker/daemon.json <<EOF
+sudo curl -sSL https://get.docker.com | sh
+```
+
+**CentOS/Redhat**
+
+> 设置新硬盘LVM成docker的数据目录
+
+```bash
+yum install -y yum-utils epel-rease lvm2 && \
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+yum list docker-ce --showduplicates | sort -r && \
+yum install -y docker-ce docker-compose && \
+mkdir /etc/docker && \
+bash -c 'cat > /etc/docker/daemon.json <<EOF
 {
-  "registry-mirrors": ["https://0gxg9a07.mirror.aliyuncs.com"],
-  "insecure-registries": ["0.0.0.0/0"],
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://docker.mirrors.ustc.edu.cn",
+    "http://hub-mirror.c.163.com"
+  ],
+  "max-concurrent-downloads": 10,
   "log-driver": "json-file",
+  "log-level": "warn",
   "log-opts": {
-    "max-size": "100m",
+    "max-size": "10m",
     "max-file": "3",
     "labels": "production_status",
     "env": "os,customer"
-  }
+    },
+  "data-root": "/var/lib/docker"
 }
-EOF' ;\
-systemctl daemon-reload ;\
-disk=/dev/sdc ;\
-yum install -y lvm2 ;\
-pvcreate ${disk} ;\
-vgcreate -s 4M docker ${disk} ;\
-PE_Number=`vgdisplay ${disk}|grep "Free  PE"|awk '{print $5}'` ;\
-lvcreate -l ${PE_Number} -n docker-lib docker ;\
-mkfs.xfs /dev/docker/docker-lib ;\
-mkdir /var/lib/docker ;\
-echo "/dev/docker/docker-lib /var/lib/docker/ xfs defaults 0 0" >> /etc/fstab ;\
-df -mh ;\
-systemctl start docker ;\
-ls /var/lib/docker/ ;\
-docker info |grep "Insecure Registries:" -A 4
+EOF' && \
+disk=/dev/sdc && \
+pvcreate ${disk} && \
+vgcreate -s 4M docker ${disk} && \
+PE_Number=`vgdisplay ${disk}|grep "Free  PE"|awk '{print $5}'` && \
+lvcreate -l ${PE_Number} -n docker-lib docker && \
+mkfs.xfs /dev/docker/docker-lib && \
+mkdir /var/lib/docker && \
+echo "/dev/docker/docker-lib /var/lib/docker/ xfs defaults 0 0" >> /etc/fstab && \
+df -mh && \
+systemctl daemon-reload && \
+systemctl enable docker && \
+systemctl start docker && \
+docker info &&\
+docker info |grep "Insecure Registries:" -A 4  && \
+ls /var/lib/docker/
 ```
 
-## Ubuntu
+**Ubuntu**
 
 ```bash
 apt-get remove docker docker-engine docker.io containerd runc && \
@@ -969,9 +983,9 @@ Debian 官方建议，所有安全性更新，只从官方主站更新，勿使�
 最后忠告：
 不要同时启用多个源，同一仓库的源启用一个即可，否则容易引起混乱。以下实例便是列有多套而仅启用一套。
 
-## 参考
+**参考**
 
-https://forum.ubuntu.org.cn/viewtopic.php?t=366506
+1. https://forum.ubuntu.org.cn/viewtopic.php?t=366506
 
 # 41、裸磁盘分区扩容
 
@@ -1042,40 +1056,122 @@ tar -cf newTar --include='some/path/*' oldTar
 echo -e "test\ndasdasd" > test
 ```
 
-# 44、安装Docker
+# 44、dd命令
+
+> dd 可从标准输入或文件中读取数据，根据指定的格式来转换数据，再输出到文件、设备或标准输出。
+
+参数说明:
 
 ```bash
-sudo curl -sSL https://get.docker.com | sh
+if=文件名：输入文件名，默认为标准输入。即指定源文件。
+of=文件名：输出文件名，默认为标准输出。即指定目的文件。
+ibs=bytes：一次读入bytes个字节，即指定一个块大小为bytes个字节。
+obs=bytes：一次输出bytes个字节，即指定一个块大小为bytes个字节。
+bs=bytes：同时设置读入/输出的块大小为bytes个字节。
+cbs=bytes：一次转换bytes个字节，即指定转换缓冲区大小。
+skip=blocks：从输入文件开头跳过blocks个块后再开始复制。
+seek=blocks：从输出文件开头跳过blocks个块后再开始复制。
+count=blocks：仅拷贝blocks个块，块大小等于ibs指定的字节数。
+conv=<关键字>，关键字可以有以下11种：
+    conversion：用指定的参数转换文件。
+    ascii：转换ebcdic为ascii
+    ebcdic：转换ascii为ebcdic
+    ibm：转换ascii为alternate ebcdic
+    block：把每一行转换为长度为cbs，不足部分用空格填充
+    unblock：使每一行的长度都为cbs，不足部分用空格填充
+    lcase：把大写字符转换为小写字符
+    ucase：把小写字符转换为大写字符
+    swap：交换输入的每对字节
+    noerror：出错时不停止
+    notrunc：不截短输出文件
+    sync：将每个输入块填充到ibs个字节，不足部分用空（NUL）字符补齐。
+--help：显示帮助信息
+--version：显示版本信息
 ```
 
-```bash
-yum install -y yum-utils
-yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-yum list docker-ce --showduplicates | sort -r
-yum install -y docker-ce-18.06.3.ce docker-compose
-bash -c 'cat > /etc/docker/daemon.json <<EOF
-{
-  "registry-mirrors": [
-    "https://dockerhub.azk8s.cn",
-    "https://docker.mirrors.ustc.edu.cn",
-    "http://hub-mirror.c.163.com"
-  ],
-  "max-concurrent-downloads": 10,
-  "log-driver": "json-file",
-  "log-level": "warn",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3"
-    },
-  "data-root": "/var/lib/docker"
-}
-EOF'
-systemctl enable docker
-systemctl start docker
-docker info
-```
+**示例：**
+
+- 刻录ISO镜像到硬盘(u盘)
+
+  > sudo dd if=CentOS-7-x86_64-Minimal-2009.iso of=/dev/disk2 bs=1m
+  >
+  > ```
+  > # 观察刻录进度
+  > sudo watch kill -USR1 $(pgrep ^dd)  # -USR1是dd专用的信号，它接收到该信号，就会显示刻录的进度
+  > # 检查刻录是否结束后
+  > sync
+  > # 弹出磁盘
+  > umount /dev/disk2
+  > ```
+
+- 修复无法格式化的U盘
+
+  > ```
+  > dd if=/dev/zero of=/dev/sdc bs=512 count=1
+  > ```
+
+- 文件中英文大小写转换
+
+  > dd if=testfile_2 of=testfile_1 conv=ucase 
+
+- 将本地的/dev/hdb整盘备份到/dev/hdd
+
+  >  dd if=/dev/hdb of=/dev/hdd
+
+- 将备份文件恢复到指定盘
+
+  >  dd if=/root/image of=/dev/hdb
+
+- 将备份文件恢复到指定盘
+
+  >  dd if=/root/image of=/dev/hdb
+
+- 备份/dev/hdb全盘数据，并利用gzip工具进行压缩，保存到指定路径
+
+  >   dd if=/dev/hdb | gzip > /root/image.gz
+
+- 将压缩的备份文件恢复到指定盘
+
+  > gzip -dc /root/image.gz | dd of=/dev/hdb
+
+- 备份磁盘开始的512个字节大小的MBR信息到指定文件
+
+   ```bash
+  dd if=/dev/hda of=/root/image count=1 bs=512
+  # count=1指仅拷贝一个块；bs=512指块大小为512个字节。
+  # 恢复
+  dd if=/root/image of=/dev/hda
+  ```
+
+- 备份软盘
+
+  >  dd if=/dev/fd0 of=disk.img count=1 bs=1440k (即块大小为1.44M)
+
+- 拷贝内存内容到硬盘
+
+  >  dd if=/dev/mem of=/root/mem.bin bs=1024 (指定块大小为1k) 
+
+- 拷贝光盘内容到指定文件夹，并保存为cd.iso文件
+
+  > dd if=/dev/cdrom(hdc) of=/root/cd.iso
+
+- 将/dev/hdb全盘数据备份到指定路径的image文件
+
+  >  dd if=/dev/hdb of=/root/image
+  
+- 销毁磁盘数据
+
+   利用随机数据填充硬盘来销毁数据
+
+   >  dd if=/dev/urandom of=/dev/hda1
+
+- 修复硬盘
+
+   当硬盘较长时间(一年以上)放置不使用后，磁盘上会产生magnetic flux point，当磁头读到这些区域时会遇到困难，并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。
+
+   > dd if=/dev/sda of=/dev/sda 或dd if=/dev/hda of=/dev/hda
+
+   
 
 # 45 、生成随机字符串
 
@@ -1102,7 +1198,7 @@ tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 
 # 47、常见包管理器的阿里云镜像源设置
 
-## npm 
+**npm** 
 
 ```bash
 npm config set registry https://registry.npm.taobao.org --global
@@ -1110,14 +1206,12 @@ npm config set disturl https://npm.taobao.org/dist --global
 npm config get registry 
 ```
 
-## Python
+**Python**
 
 ```bash
 mkdir ~/.pip
 echo -e "[global]\nindex-url = https://mirrors.aliyun.com/pypi/simple/\n[install]\ntrusted-host=mirrors.aliyun.com\n" > ~/.pip/pip.conf
 ```
-
-
 
 # 48、使用curl命令发送邮件
 
@@ -1181,7 +1275,7 @@ Content-Disposition: attachment; filename=test.txt
 
 **split命令** 可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。
 
-### 选项
+**选项**
 
 ```shell
 -a, --suffix-length=N   指定后缀长度(默认为2)
@@ -1210,7 +1304,7 @@ r/K/N   likewise but only output Kth of N to stdout
 
 ```
 
-### 实例
+**实例**
 
 使用split命令将date.file文件分割成大小为10KB的小文件：
 
@@ -1239,7 +1333,7 @@ date.file  split_file000  split_file001  split_file002  split_file003  split_fil
 split -l 10 date.file
 ```
 
-# 50、journalctl查看内核日志和应用日志
+# 50、journalctl查看内核/应用日志
 
 Systemd统一管理所有Unit的启动日志。带来的好处就是，可以只用journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件是/etc/systemd/journald.conf。该工具是从message这个文件里读取信息。
 
@@ -1471,5 +1565,236 @@ enconv -L zh_CN -x UTF-8 filename
 iconv -f UTF-8 -t GBK file1 -o file2
 
 vim中:set fileencoding=utf-8
+```
+
+# 56、Linux安装使用SQLServer客户端sqlcmd
+
+**安装**
+
+```bash
+# CentOS/RHEL
+curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/msprod.repo
+sudo yum remove mssql-tools unixODBC-utf16-devel
+sudo yum install mssql-tools unixODBC-devel
+
+# Ubuntu/Debian
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+apt-get update 
+apt-get install mssql-tools unixodbc-dev
+```
+
+**使用**
+
+```bash
+sqlcmd -S SERVERNAME,49399 -U User -P pwd -d DatabaseName -Q "SELECT * FROM Test;"
+# 如果执行出现“-bash: !”: event not found",终端shell设置set +H
+```
+
+参考：
+
+1. https://serverfault.com/questions/208265/what-is-bash-event-not-found
+2. https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15#ubuntu
+
+# 57、NTP同步时间
+
+Windows系统上自带的两个：`time.windows.com` 和 `time.nist.gov`
+ MacOS上自带的两个：`time.apple.com` 和 `time.asia.apple.com`
+ NTP授时快速域名服务：`cn.ntp.org.cn`
+
+http://www.ntp.org.cn/
+
+```bash
+yum install ntp -y  && \
+cp /etc/ntp.conf /etc/ntp.conf.bak && \
+ntpdate -u NTP服务器 && \
+sed -i '/^server/d' /etc/ntp.conf && \
+echo -e "server 内网NTP服务器IP地址\nserver 外网NTP服务器IP地址" >> /etc/ntp.conf && \
+systemctl enable ntpd && \
+systemctl start ntpd && \
+systemctl status ntpd  && \
+ntpstat
+```
+
+### **NTP服务端配置**
+
+```bash
+yum install ntp -y && \
+mv /etc/ntp.conf /etc/ntp.conf.bak && \
+bash -c 'cat > /etc/ntp.conf << EOF
+driftfile /var/lib/ntp/drift
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1 
+restrict -6 ::1
+restrict 172.16.0.0 mask 255.255.255.0 nomodify   #指定允许的客户端网段
+server  127.127.1.0
+fudge   127.127.1.0 stratum 10
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/keys
+EOF' && \
+    systemctl enable ntpd && \
+    systemctl start ntpd && \
+    systemctl status ntpd && \
+    ntpstat
+```
+
+### **NTP客户端配置**
+
+```bash
+yum install ntp -y && \               
+mv /etc/ntp.conf /etc/ntp.conf.bak && \
+bash -c 'cat > /etc/ntp.conf << EOF
+driftfile /var/lib/ntp/drift
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1 
+restrict -6 ::1
+server 172.16.0.2                      
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/keys
+EOF' && \
+    systemctl enable ntpd && \
+    systemctl start ntpd && \
+    systemctl status ntpd && \
+    ntpstat
+```
+
+### **NTP常用命令**
+
+```bash
+# 从时间服务器更新系统时间
+ntpdate -u NTP服务器
+# 查询不更新
+ntpdate -q NTP服务器  
+#查看时间同步状态
+ntpstat
+#列出所有作为时钟源校正过本地NTP服务器时钟的上层NTP服务器的列表
+ntpq -p   
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+*172.16.0.2      LOCAL(0)        11 u   43   64  377    0.623   26.067   8.290
+
+# remote： 远程NTP服务器的IP地址或域名，带 “*” 的表示本地NTP服务器与该服务器同步。
+# refid： 远程NTP服务器的上层服务器的IP地址或域名。
+# st： 远程NTP服务器所在的层数。
+# t： 本地NTP服务器与远程NTP服务器的通信方式，u: 单播； b: 广播； l: 本地。
+# when： 上一次校正时间与现在时间的差值。
+# poll： 本地NTP服务器查询远程NTP服务器的时间间隔。
+# reach： 是一种衡量前8次查询是否成功的位掩码值，377表示都成功，0表示不成功。
+# delay： 网络延时，单位是10的-6次方秒。
+# offset： 本地NTP服务器与远程NTP服务器的时间偏移。
+# jitter： 查询偏差的分布值，用于表示远程NTP服务器的网络延时是否稳定，单位为10的-6次方秒。
+
+ntpdate -d NTP服务器
+```
+
+### **常见NTP时间服务器**
+
+```bash
+pool.ntp.org
+# 中国
+cn.ntp.org.cn
+# 中国香港
+hk.ntp.org.cn
+# 美国
+us.ntp.org.cn
+# 阿里云NTP服务器
+ntp.aliyun.com             
+ntp1.aliyun.com
+ntp2.aliyun.com
+ntp3.aliyun.com
+ntp4.aliyun.com
+ntp5.aliyun.com
+ntp6.aliyun.com
+ntp7.aliyun.com
+# 阿里云Time服务器
+time1.aliyun.com
+time2.aliyun.com
+time3.aliyun.com
+time4.aliyun.com
+time5.aliyun.com
+time6.aliyun.com
+time7.aliyun.com
+# 北京大学 
+s1c.time.edu.cn
+s2m.time.edu.cn
+# 清华大学
+s1b.time.edu.cn
+s1e.time.edu.cn
+s2a.time.edu.cn
+s2b.time.edu.cn
+#苹果提供的授时服务器   
+time1.apple.com
+time2.apple.com
+time3.apple.com
+time4.apple.com
+time5.apple.com
+time6.apple.com
+time7.apple.com
+#Google提供的授时服务器   
+time1.google.com
+time2.google.com
+time3.google.com
+time4.google.com
+```
+
+### Windows下NTP客户端服务配置
+
+- `运行`对话框输入`gpedit.msc`进入组策略
+
+- 依次进入 `计算机配置 > 管理模板 > 系统 > Windows时间服务 > 时间提供程序`
+
+  ![](../assets/linux-ntp-windows-client-1.jpg)
+
+  ![](../assets/linux-ntp-windows-client-2.jpg)
+
+- 然后进入 `控制面板 > 时钟、语言和区域 > 设置时间和日期 > Internet时间 > 更改设置`
+
+  ![](../assets/linux-ntp-windows-client-3.png)
+
+# 58、Yum升级内核
+
+内核下载地址：https://elrepo.org/linux/kernel/
+
+- kernel-lt（lt=long-term）长期有效
+- kernel-ml（ml=mainline）主流版本
+
+### **安装最新内核**
+
+```bash
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm && \
+yum --enablerepo=elrepo-kernel install -y kernel-ml 
+```
+
+### **配置默认内核**
+
+```bash
+# 查看grube启动时当前默认设置的内核
+grub2-editenv list
+
+# 查看grub2当前支持可启动的内核
+awk -F \' '$1=="menuentry " {print i++ " : " $2}' /etc/grub2.cfg 
+
+0 : CentOS Linux (5.11.8-1.el7.elrepo.x86_64) 7 (Core)
+1 : CentOS Linux (3.10.0-1160.el7.x86_64) 7 (Core)
+2 : CentOS Linux (0-rescue-7acaacd4599a461f9540eece4c227d87) 7 (Core)
+
+# 设置grube启动时使用最新的内核
+grub2-set-default 'CentOS Linux (5.11.8-1.el7.elrepo.x86_64) 7 (Core)'
+
+# 再次查看grube启动时当前默认设置的内核
+grub2-editenv list
+
+# 重启生效
+reboot now
+```
+
+### **更新基础软件**
+
+```bash
+# 更新kernel-ml-devel、kernel-ml-headers、kernel-ml-doc、kernel-tools、perf、kernel-ml-headers
+yum --enablerepo=elrepo-kernel install -y kernel-ml-devel kernel-ml-headers kernel-ml-doc kernel-tools perf python-perf
 ```
 

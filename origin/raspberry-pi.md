@@ -126,16 +126,16 @@ Ubuntu 20.04
 
 ```bash
 mv /etc/apt/sources.list /etc/apt/sources.list.bak
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal main restricted" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates main restricted" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal universe" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates universe" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal multiverse" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates multiverse" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-backports main restricted universe multiverse" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security main restricted" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security universe" > /etc/apt/sources.list
-echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security multiverse" > /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal main restricted" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates main restricted"  >>  /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal universe" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates universe" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal multiverse" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-updates multiverse" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security main restricted" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security universe" >> /etc/apt/sources.list
+echo "deb https://mirrors.aliyun.com/ubuntu-ports focal-security multiverse" >> /etc/apt/sources.list
 apt update
 ```
 

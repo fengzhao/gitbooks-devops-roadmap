@@ -131,6 +131,9 @@ ZSH_THEME="alanpeabody"
 # 设置自定义配置文件的路径
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# 设置存储历史命令的默认文件路径
+# HISTFILE=~/.zsh_history
+
 # 配置要加载的插件（配置的插件要能在 ~/.oh-my-zsh/plugins/* 下找到，自定义的插件目录为 ~/.oh-my-zsh/custom/plugins/ ）.注意：插件安装的越多，zsh的启动速度越慢，选择使用率最高的插件才是最好的选择
 plugins=(
   git

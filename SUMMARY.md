@@ -95,6 +95,7 @@
     * Gitlab CI/CD
         * [Gitlab Runner](origin/gitlab-runner.md)
         * [Gitlab Pipeline](origin/gitlab-pipeline.md)
+    * [Gitlab Restful API](origin/gitlab-api.md)
 * [Nexus](origin/nexus-简介.md)
     * 配置
         * [使用OrientDB Console在DB层面修改配置](origin/nexus-使用OrientDB Console在DB层面修改配置.md)
@@ -278,46 +279,80 @@
     * [Windows进程守护工具NSSM](origin/windows-nssm.md)
     * [Windows 无人值守部署服务](origin/windows-deployment-service-aik.md)
     * [主机的网络唤醒WOL服务](origin/windows-wakeuponlan.md)
+* MacOS
+    * [MacOS小技巧](origin/macos-tips.md)
 * Linux
     * [Linux小技巧](origin/linux-小技巧.md)
+    
     * [比较两个文件的不同](origin/linux-diff.md)
+    
     * [基础服务安装](origin/linux-baseserver.md)
+    
     * [Linux后台启动进程](origin/linux-daemon.md)
+    
     * [文本处理](origin/linux-文本处理.md)
+    
     * [SSH私钥代理ssh-agent](origin/ssh-agent.md)
+    
     * [htpasswd](origin/linux-htpasswd.md)
+    
     * [YAML文本处理工具shyaml](origin/linux-shyaml.md)
+    
     * [JSON文本处理工具jq](origin/linux-jq.md)
+    
     * [yaml文本处理工具yq](origin/yaml-yq.md)
+    
     * [Curl命令详解](origin/linux-curl.md)
+    
     * [rsync命令详解](origin/linux-rsync.md)
+    
     * [LVM原理及使用](origin/linux-lvm.md)
+    
     * [Linux交换分区](origin/linux-交换分区.md)
+    
     * [Linux硬盘读写性能测试](origin/linux-硬盘读写性能测试.md)
+    
     * [Vim小技巧](origin/vim-小技巧.md)
+    
     * [Yum-RPM包管理](origin/linux-yum.md)
+    
     * [ZSH](origin/linux-zsh.md)
+    
     * [Systemd-进程管理](origin/linux-进程管理工具SystemD.md)
+    
     * [僵尸进程与孤儿进程](origin/linux-zombie-orphaned-process.md)
-    * 排错工具及技巧
-      * [ps](origin/linux-ps.md)
-      * [top](origin/linux-top.md)
-      * [ip/ifconfig](origin/linux-ip-ifconfig.md)
-    * [防火墙iptables](origin/linux-iptables.md)
     * [proc文件详解](origin/linux-proc.md)
+    
+- Linux排错优化
+  - 硬件
+    - [磁盘I/O：iostat]()
+  - 系统
+    - [系统进程：top](origin/linux-top.md)
+    - [ip/ifconfig](origin/linux-ip-ifconfig.md)
+    - [ps](origin/linux-ps.md)
+    - [pidstat]()
+    - [tcpdump](origin/network-tcpdump.md)
+    - [strace](origin/linux-strace.md)
+    - [stap]()
+  - 网络
+    - [hping](origin/linux-hping.md)
+    - [traceroute](origin/network-traceroute.md)
+    - [conntrack]()
+    - [sar]()
+- [防火墙iptables](origin/linux-iptables.md)
 * [MySQL](origin/mysql-basic.md)
-* 运维
-      * [常见操作及SQL](origin/mysql-common-operations.md)
-      * [用户权限管理](origin/mysql-user-privileges.md)
-      * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
-      * 备份与恢复
-        * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
-        * [MysqlDump详解](origin/mysql-dumper.md)
-    * 基础概念
-      * [存储过程语法](origin/mysql-procedure-grammar.md)
-      * [常用存储过程](origin/mysql-procedure.md)
-      * [事物隔离级别](origin/mysql-transaction.md)
-      * [临时表](origin/mysql-temporary.md)
+    * 运维
+         * [常见操作及SQL](origin/mysql-common-operations.md)
+         * [用户权限管理](origin/mysql-user-privileges.md)
+         * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
+     * 备份与恢复
+            * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
+            * [MysqlDump详解](origin/mysql-dumper.md)
+      * 基础概念
+        * [存储过程语法](origin/mysql-procedure-grammar.md)
+        * [常用存储过程](origin/mysql-procedure.md)
+        * [事物隔离级别](origin/mysql-transaction.md)
+        * [临时表](origin/mysql-temporary.md)
 * Redis
     * [基础概念](origin/redis-basic.md)
     * [安装部署](origin/reids-install-deploy.md)
@@ -361,6 +396,7 @@
 * [Aliyun CLI](origin/aliyun-cli.md)
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
+  
   * [fffmpeg](origin/audio-video-fffmpeg.md)
 * **Python**
     * [环境搭建：安装配置](origin/python-basic.md)

@@ -56,7 +56,7 @@ Usage: redis-dump [global options] COMMAND [command options]
 ### 示例
 
 ```bash
-redis-dump -u redis://127.0.0.1:6379 -d 0 -c 50000 > redis-backup.json
+redis-dump -u redis://127.0.0.1:6379 -d 0 -c 50000 > redis-backup-$(date "+%Y%m%d-%H%M%S").json
 ```
 
 ## 3、redis-load导入JSON数据文件到Redis
@@ -77,7 +77,7 @@ redis-load [global options] COMMAND [command options]
 ### 示例
 
 ```bash
- cat redis-backup.json| redis-load -u redis://127.0.0.1:26379 -d 0
+ cat redis-backup.json| redis-load -u redis://127.0.0.1:6379 -d 0
 ```
 
 ### 注意

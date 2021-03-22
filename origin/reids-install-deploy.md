@@ -48,6 +48,8 @@ helm repo update
 ## 4、源码安装
 
 >  redis要求gcc版本高于5.3，CentOS7.4默认版本4.8.5，所以先升级gcc
+>
+>  redis要求tcl版本高于8.5，yum install -y tcl
 
 ```bash
 yum -y install centos-release-scl

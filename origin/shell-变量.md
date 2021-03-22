@@ -4,6 +4,12 @@
 
 ```bash
 var=`shell命令`  # `是反引号
+var=$(shell命令) 
+var='
+line 1
+line 2
+line 3
+'
 ```
 
 ## 2. 变量的参数替换和扩展
@@ -21,8 +27,6 @@ var=`shell命令`  # `是反引号
 | ${!varprefix*}  | 匹配之前所有以varprefix开头进行声明的变量                    |
 | ${!varprefix@}  | 匹配之前所有以varprefix开头进行声明的变量                    |
 
-
-
 ## 3. 读取标准输入输出赋值给变量
 
 ```bash
@@ -30,7 +34,7 @@ read -p "请输入一个字符： " key
 echo $key
 ```
 
-# 二. 变量的引用
+# 二、变量的引用
 
 ```bash
 $var
@@ -38,7 +42,31 @@ ${var}
 ${var:defaultvalue}
 ```
 
-# 三. 内置变量
+# 三、变量是否换行输出显示
+
+如果想一个命令的多行输出赋值给一个变量
+
+```bash
+var='line 1
+line 2
+line 3
+'
+```
+
+使用echo输出时，在bash中
+
+```bash
+$ echo $var 
+line 1 line 2 line 3
+$ echo "$var"
+line 1
+line 2
+line 3
+
+# 总共是有四行的输出，最后一个是空行
+```
+
+# 四、内置变量
 
 | 内置变量    | 描述                                                         |
 | ----------- | ------------------------------------------------------------ |

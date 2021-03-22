@@ -118,3 +118,24 @@ Windows下保存的文本文件，上传到Linux/Unix下后总会在末尾多了
 
 # ^M 表示清除成功
 ```
+
+## 4、设置粘贴时换行问题
+
+有些版本vim的默认配置下，在插入模式下粘贴文字会换行加tab缩进，例如
+
+```bash
+line
+  line
+    line
+```
+
+在命令行中设置或在配置文件中设置
+
+```bash
+:set paste
+```
+
+参考：https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim/2514520
+
+
+

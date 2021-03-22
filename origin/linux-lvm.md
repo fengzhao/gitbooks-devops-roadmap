@@ -173,3 +173,29 @@ resize2fs LV_Name
 LV文件系统是xfs时
 xfs_growfs LV_Name
 ```
+
+# 四、挂载已创建的LVM磁盘
+
+```bash
+# 查看已有硬盘
+fdisk -l
+
+# 查看lvm磁盘的lv
+lvdisplay 
+
+
+# 查看lv是否激活
+lvscan
+  ACTIVE            '/dev/data/data' [<111.72 GiB] inherit
+
+# 激活卷组
+vgchange -ay /dev/data/data
+
+# 查看lv已安装的文件系统
+file -sL /dev/data/data
+	/dev/data/data: Linux rev 1.0 ext4 filesystem data, UUID=d6c28fac-fb04-423e-bf71-3271b808681c (extents) (64bit) (large files) (huge files)
+```
+
+# 参考
+
+1. https://wiki.archlinux.org/index.php/LVM_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)

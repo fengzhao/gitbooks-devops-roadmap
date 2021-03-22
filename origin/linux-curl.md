@@ -173,9 +173,9 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
 
 ## 1、通过-o/-O选项保存下载的文件到指定的文件中
 
--o：将文件保存为命令行中指定的文件名的文件中
+`-o`：将文件保存为命令行中指定的文件名的文件中
 
--O：使用URL中默认的文件名保存文件到本地
+`-O`：使用URL中默认的文件名保存文件到本地
 
 ```bash
 # 将文件下载到本地并命名为mygettext.html
@@ -187,9 +187,9 @@ curl -O http://www.gnu.org/software/gettext/manual/gettext.html
 
 ## 2、显示response中的Headers或Body
 
--i：显示response header 和 body
+`-i`：显示response header 和 body
 
--I：只显示response header
+`-I`：只显示response header
 
 ```bash
 curl -i https://www.baidu.com
@@ -204,7 +204,7 @@ curl -O URL1 -O URL2
 
 ## 4、代理的设置
 
--x：为CURL设置代理
+`-x`：为CURL设置代理
 
 ```bash
 curl -x 192.168.1.2:3128 http://google.com/
@@ -218,7 +218,7 @@ curl --noproxy http://www.baidu.com
 
 ## 5、允许重定向
 
--L：允许重定向
+`-L`：允许重定向
 
 ```bash
 curl -L -x 192.168.1.2:3128 http://google.com/
@@ -226,7 +226,7 @@ curl -L -x 192.168.1.2:3128 http://google.com/
 
 ## 6、限速
 
---limit-rate： 对CURL的最大网络使用进行限制
+`--limit-rate`： 对CURL的最大网络使用进行限制
 
 ```bash
 curl --limit-rate 1000B -O http://www.gnu.org/software/gettext/manual/gettext.html
@@ -234,7 +234,7 @@ curl --limit-rate 1000B -O http://www.gnu.org/software/gettext/manual/gettext.ht
 
 ## 7、添加认证信息
 
--u: 在访问需要认证的页面时，可通过-u选项提供用户名和密码进行授权
+`-u`: 在访问需要认证的页面时，可通过-u选项提供用户名和密码进行授权
 
 
 ```bash
@@ -245,7 +245,7 @@ curl -u username URL
 
 ## 8、获取更多信息
 
--v 和 -trace：获取更多信息
+`-v 和 -trace`：获取更多信息
 
 ```bash
 curl -v -L -x 192.168.1.2:3128 http://google.com/
@@ -253,11 +253,11 @@ curl -v -L -x 192.168.1.2:3128 http://google.com/
 
 ## 9、自定义HTTP请求
 
--X: 可以指定curl发送HTTP请求的方法，例如GET(默认),PUT,POST,DELETE等
+`-X`: 可以指定curl发送HTTP请求的方法，例如GET(默认),PUT,POST,DELETE等
 
--H：添加请求的Header信息
+`-H`：添加请求的Header信息
 
--d/--data: 添加请求的Body
+`-d/--dat`a: 添加请求的Body
 
 ```bash
 curl -XPUT "http://127.0.0.1:9200/test/test/1" \
@@ -275,17 +275,15 @@ curl -XPUT "http://127.0.0.1:9200/test/test/1" \
 
 ## 10、断点续传
 
--C: 可对大文件使用断点续传功能
+`-C`: 可对大文件使用断点续传功能
 
 ```bash
-
 curl -C -O http://www.gnu.org/software/gettext/manual/gettext.html
-
 ```
 
 ## 11、模仿浏览器
 
--A：指定浏览器去访问网站(有些网站需要使用特定的浏览器去访问他们，有些还需要使用某些特定的版本)
+`-A`：指定浏览器去访问网站(有些网站需要使用特定的浏览器去访问他们，有些还需要使用某些特定的版本)
 
 ```bash
 curl -A "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.0)" http://google.com/
@@ -293,7 +291,7 @@ curl -A "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.0)" http://google.com/
 
 ## 12、显示下载进度条
 
--# ：显示下载进度条
+`-#` ：显示下载进度条
 
 ```bash
 curl -# -O http://www.linux.com/dodo1.JPG
@@ -303,7 +301,7 @@ curl -# -O http://www.linux.com/dodo1.JPG
 
 很多服务器会检查http访问的referer从而来控制访问。比如：你是先访问首页，然后再访问首页中的邮箱页面，这里访问邮箱的referer地址就是访问首页成功后的页面地址，如果服务器发现对邮箱页面访问的referer地址不是首页的地址，就断定那是个盗连了
 
--e: 设定referer
+`-e`: 设定referer
 
 ```bash
 curl -e "www.linux.com" http://mail.linux.com
@@ -312,9 +310,9 @@ curl -e "www.linux.com" http://mail.linux.com
 
 ## 14、保存与使用Cookie
 
--D: 保存Cookie
+`-D`: 保存Cookie
 
--b: 使用Cookie
+`-b`: 使用Cookie
 
 ```bash
 # 将网站的cookies信息保存到sugarcookies文件中
@@ -326,7 +324,7 @@ curl -b sugarcookies http://localhost/sugarcrm/index.php
 
 ## 15、忽略证书不受信问题
 
--k: 忽略HTTPS证书不受信问题
+`-k`: 忽略HTTPS证书不受信问题
 
 ```bash
 curl -k https://allinone.okd311.curiouser.com:8443

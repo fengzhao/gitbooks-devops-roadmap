@@ -39,4 +39,7 @@ else
 fi
 ```
 
-参考：https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
+参考：
+
+1. https://unix.stackexchange.com/questions/109625/shell-scripting-z-and-n-options-with-if
+2. https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash

@@ -298,12 +298,14 @@ ls -lR /data|grep txt|wc -l
 grep -v '^\s*$' test.txt
 ```
 
-## 5、多个匹配规则
+## 5、多个匹配条件
 
 ```bash
 grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的 
 
 grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。
+
+grep -E '关键词1|关键词2' 
 ```
 
 ## 6、xargs配合grep查找
@@ -317,6 +319,21 @@ find -type f -name '*.php'|xargs grep 'GroupRecord'
 ```bash
 grep -rn "hello,world!" *
 ```
+
+## 8、完全匹配关键词
+
+```bash
+grep -Fx 关键词
+```
+
+## 9、精准匹配
+
+```bash
+grep -w 关键词 
+# 不加-w是默认情况
+```
+
+
 
 # 四、egrep
 
