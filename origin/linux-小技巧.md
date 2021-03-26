@@ -1798,3 +1798,11 @@ reboot now
 yum --enablerepo=elrepo-kernel install -y kernel-ml-devel kernel-ml-headers kernel-ml-doc kernel-tools perf python-perf
 ```
 
+# 59、新增磁盘分区不显示设备
+
+对一个磁盘创建了新分区后，`fdisk -l` 可以显示，但是不显示在`/dev/分区号`。使用`partprobe`重新扫描磁盘分区
+
+```bash
+partprobe
+```
+

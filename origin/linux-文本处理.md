@@ -46,6 +46,15 @@ a="Location: https://allinone.okd311.curiouser.com:8443/oauth/token/implicit#acc
     # 结果： FBHwgR1jj2coLoYYfG9SdGUke9L9HmAU2IOI9GaMKrQ
 ```
 
+## 4、使用多个分隔符分割字符串
+
+```bash
+# @, 空格和Tab都是字段分隔符
+awk -F”[@ /t]" '{print $1 $2}'
+```
+
+
+
 # 二、sed
 
 ```bash
@@ -68,6 +77,24 @@ d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；
 i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)
 p ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～
 s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g
+```
+
+## 0、替换环境变量的值到文件中
+
+如果想替换字符串中的值为环境变量的值，可以使用将匹配规则使用`""`括起来，在`""`中直接引用环境变量
+
+```bash
+echo "test asdasdas \$TEST" > test.txt
+export aaaaa=1234
+sed -i -e "s/\$TEST/$aaaaa/g" test.txt
+```
+
+如果变量的值中包含特殊字符，例如`/`，与sed匹配模式的关键字符造成歧义。可使用`？`代替`/`
+
+```bash
+echo "test asdasdas \$TEST" > test.txt
+export aaaaa=/1234
+sed -i "s?\$TEST?$aaaaa?g" test.txt
 ```
 
 ## 1、新增内容到末尾行的末尾

@@ -59,7 +59,18 @@ $ hdiutil convert /path/imagefile.dmg -format UDTO -o /path/convertedimage.cdr
 $ hdiutil makehybrid /path/convertedimage.cdr -iso -joliet -o /path/convertedimage.iso
 ```
 
+## 2、删除虚拟网络设备
 
+```bash
+sudo ifconfig utun3 delete
+```
 
+## 3、路由修改
 
+```bash
+# 删除路由
+ip route delete 172.16.1.2/32 
+# 添加路由
+sudo route add 172.16.1.2/32 -interface utun2
+```
 

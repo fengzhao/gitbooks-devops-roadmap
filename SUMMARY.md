@@ -288,7 +288,7 @@
     
     * [基础服务安装](origin/linux-baseserver.md)
     
-    * [Linux后台启动进程](origin/linux-daemon.md)
+    * [后台启动进程](origin/linux-daemon.md)
     
     * [文本处理](origin/linux-文本处理.md)
     
