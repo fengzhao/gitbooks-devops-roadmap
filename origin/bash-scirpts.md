@@ -104,7 +104,7 @@ echo $b
 持续时间: 16小时41分钟40秒
 ```
 
-## 7、脚本命令行参数的传递与判断
+# 7、脚本命令行参数的传递与判断
 
 ```bash
 #!/bin/bash
@@ -136,7 +136,6 @@ main $*
 
 
 # 8、检测docker 容器的启动状态
-
 
 
 ```bash
@@ -177,6 +176,98 @@ while true ;do
      then break ;
   fi ;
 done
-
 ```
 
+# 9、检查常见系统命令是否安装
+
+```bash
+check_command() {
+	if ! command -v ifconfig >/dev/null 2>&1; then
+		echo -e "\033[31mifconfig命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y net-tools >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y net-tools >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y net-tools >/dev/null 2>&1
+		fi
+	elif ! command -v ip >/dev/null 2>&1; then
+		echo -e "\033[31mip命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y iproute2 >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y iproute2 >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y iproute2 >/dev/null 2>&1
+		fi
+	elif ! command -v curl >/dev/null 2>&1; then
+		echo -e "\033[31mcurl命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y curl >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y curl >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y curl >/dev/null 2>&1
+		fi
+	elif ! command -v wget >/dev/null 2>&1; then
+		echo -e "\033[31mawk命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y wget >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y wget >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y wget >/dev/null 2>&1
+		fi
+	elif ! command -v tail >/dev/null 2>&1; then
+		echo -e "\033[31mcoreutils命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y coreutils >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y coreutils >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y coreutils >/dev/null 2>&1
+		fi
+	elif ! command -v sed >/dev/null 2>&1; then
+		echo -e "\033[31msed命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y sed >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y sed >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y sed >/dev/null 2>&1
+		fi
+	elif ! command -v grep >/dev/null 2>&1; then
+		echo -e "\033[31mgrep命令不存在，正在下载安装！\033[0m"
+		if os="ubuntu"; then
+			apt install -y grep >/dev/null 2>&1
+		elif os="centos"; then
+			yum install -y grep >/dev/null 2>&1
+		elif os="fedora"; then
+			dnf install -y grep >/dev/null 2>&1
+		fi
+	fi
+}
+```
+
+# 10、检查系统网络
+
+```bash
+check_network() {
+    check_command
+    ping -c 4 114.114.114.114 >/dev/null
+    if [ ! $? -eq 0 ]; then
+        echo -e "\033[31mIP地址无法ping通，请检查网络连接！！！\033[0m"
+        exit
+    fi
+    ping -c 4 www.baidu.com >/dev/null
+    if [ ! $? -eq 0 ]; then
+        echo -e "\033[31m域名无法Ping通，请检查DNS配置！！！\033[0m"
+        exit
+    fi
+    curl -s --retry 2 --connect-timeout 2 www.baidu.com >/dev/null
+    if [ ! $? -eq 0 ]; then
+        echo -e "\033[31m域名无法Ping通，请检查DNS配置！！！\033[0m"
+        exit
+    fi
+}
+```

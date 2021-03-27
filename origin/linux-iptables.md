@@ -432,11 +432,13 @@ iptable上中包含一个NAT表，其中有两条缺省的`PREROUTING`和 `POSTR
 
   ```bash
   # 查看内核是否启用路由转发功能
-  sysctl net.ipv4.ip_forward  || cat /etc/sysctl.conf | grep ip_forward
+  sysctl -a | grep "ip_forward" 或者 sysctl net.ipv4.ip_forward 
+  # “net.ipv4.ip_forward=1”即可表示成功开启
+  
   # 临时设置内核启用路由转发功能。重启失效
-  sysctl -w net.ipv4.ip_forward=1
+  sysctl -w net.ipv4.ip_forward=1  或者 echo 1 >/proc/sys/net/ipv4/ip_forward
   # 永久设置内核启用路由转发功能。
-  echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+  echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf && sysctl -p
   ```
 
 **Iptables 设置**

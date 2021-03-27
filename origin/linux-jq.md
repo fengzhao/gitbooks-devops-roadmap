@@ -89,10 +89,10 @@ options:
 
 ## 1、输出控制
 
-### ①美化源格式输出
+### ①美化输出
 
 ```bash
-$ jq -r ‘.’ test.json
+$ jq -r '.' test.json
 ```
 
 ### ②换行与不换行输出
@@ -141,7 +141,26 @@ $ cat test.json | jq -jr '.[] | " \"" , "IID: " , .iid , " ID: " , .id ,"\""  '
  "IID: 7 ID: 16176" "IID: 4 ID: 16173"
 ````
 
+### ④格式化输出
+
+```bash
+$ cat test.json | jq -r '[.id,.iid] as [$id,$iid] | "\($id) -|- \($iid)"'
+1 -|- 11
+22 -|- 21
+```
+
+### ⑤以Key=value的形式输出
+
+```bash
+jq -r '.snapshots[].shards|to_entries[]|"\(.key | ascii_upcase)=\(.value)"' test.json
+TOTAL=1
+FAILED=0
+SUCCESSFUL=1
+```
+
 ## 2、访问属性值
+
+### ①输出变量的值
 
 ```bash
 $ jq -r '.snapshots[].snapshot' test.json
@@ -150,10 +169,23 @@ $ jq -r '.snapshots[].snapshot,.snapshots[].end_time' test.json
 
 # 如果属性名中有空格，需要加双引号
 $ jq -r '."with space"' test.json
-
 ```
 
-## 3、JSON数组的操作
+### ②批量访问属性值
+
+```bash
+$ jq -r '.snapshots[] | [.snapshot,.end_time] test.json
+```
+
+## 3、操作属性值
+
+### ①取值赋予变量
+
+```bash
+$ cat test.json | jq -r '[.id,.iid] as [$id,$iid] | "\($id)|\($iid)"'
+```
+
+## 4、JSON数组的操作
 
 ### ①遍历访问数组
 
@@ -190,7 +222,7 @@ $ jq -r '.snapshots[:1]' test.json
 $ jq -r '.snapshots[-1:]' test.json
 ```
 
-## 4、函数操作
+## 5、函数操作
 
 ### ①keys：获取有哪些属性
 
@@ -271,8 +303,6 @@ $ jq -r '.snapshots | map(.) | .[] | {"快照名": .snapshot,"快照的索引": 
   ]
 }
 ```
-
-
 
 # 参考链接
 
