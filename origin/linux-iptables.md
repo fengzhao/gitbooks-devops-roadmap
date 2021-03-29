@@ -169,10 +169,14 @@ iptables可使用额外的扩展模块进行显示条件匹配，详情参考第
 - **DROP**：直接丢弃数据包，不给任何回应信息，这时候客户端会感觉自己的请求泥牛入海了，过了超时时间才会有反应。
 - **REJECT**：拒绝数据包通过，必要时会给数据发送端一个响应的信息，客户端刚请求就会收到拒绝的信息。
 - **SNAT**：源地址转换，解决内网用户用同一个公网地址上网的问题。
-- **MASQUERADE**：是SNAT的一种特殊形式，适用于动态的、临时会变的ip上。
+- **MASQUERADE**：地址伪装。是SNAT的一种特殊形式，适用于动态的、临时会变的ip上。
 - **DNAT**：目标地址转换。
-- **REDIRECT**：在本机做端口映射。
+- **REDIRECT**：在本机做端口映射
+- **MASK** : 做防火墙标记
+- **RETURN** : 返回调用链
 - **LOG**：在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。
+  - `--log-level LEVEL` : 日志的等级
+  - `--log-prefix FREFIX` : 日志的提示语句的前缀
 
 ## 2、规则管理
 
@@ -202,8 +206,9 @@ iptables -D FORWARD 1
 ### ③添加规则
 
 ```bash
-# 向链中添加规则
+# 在指定链的末尾添加（append）一条新的规则
 iptables -A FORWARD -s 10.8.0.10 -d 192.168.1.5 -j DROP
+# 在指定链中插入（insert）一条新的规则，默认在第一行添加
 iptables -I FORWARD -s 10.8.0.10 -d 192.168.1.5 -j DROP
 ```
 
@@ -213,9 +218,11 @@ iptables -I FORWARD -s 10.8.0.10 -d 192.168.1.5 -j DROP
 
 **②若找不到相匹配的规则，则按该链的默认策略处理**
 
-# 四、iptables匹配条件模块
+# 四、iptables的显示扩展模块
 
 官方文档：https://ipset.netfilter.org/iptables-extensions.man.html
+
+必须使用`-m`选项手动加载模块, 其扩展模块路径为:`/lib64/xtables,其中大写的为目标扩展,小写的为规则扩展`
 
 ## 1、模块管理
 
@@ -237,6 +244,10 @@ ls /usr/lib/iptables/
 ```
 
 ### ③加载模块
+
+```bash
+modprobe 模块名
+```
 
 **CentOS/Redhat**
 
@@ -291,7 +302,7 @@ iptables -A INPUT -m mac --mac-source 00:01:02:03:04:cc -j DROP
 
 ### ④state：报文状态匹配模块
 
-`-m state --state [报文状态]`
+`--state [报文状态]`：多个state可以使用`,`号分隔
 
 支持配置的报文状态：
 
@@ -301,9 +312,17 @@ iptables -A INPUT -m mac --mac-source 00:01:02:03:04:cc -j DROP
 - `INVALID`：如果一个包没有办法被识别，或者这个包没有任何状态，那么这个包的状态就是INVALID，我们可以主动屏蔽状态为INVALID的报文
 - `UNTRACKED`：报文的状态为untracked时，表示报文未被追踪，当报文的状态为Untracked时通常表示无法找到相关的连接。
 
+```bash
+iptables -A INPUT -d 172.168.100.67 -p tcp -m multiport --dport 22,80 -m state --state NEW,ESTABLISHED -j ACCEPT
+```
+
 ### ⑤string：字符串匹配模块
 
-`-m string --algo {匹配算法: bm|kmp} --string "字符串”`
+string的关键字过滤,一定要做在output链上, 在回应报文中才应该会有内容
+
+` --algo {匹配算法: bm|kmp} ` 
+
+`--string "字符串"`
 
 ```bash
 iptables -I OUTPUT -s 192.168.1.0/24 -m string --algo kmp --string "qq" -j REJECT         
@@ -312,7 +331,9 @@ iptables -I OUTPUT -s 192.168.1.0/24 -m string --algo kmp --string "qq" -j REJEC
 
 ### ⑥limit：连接数匹配模块
 
-`-m limit --limit {RATE速率: 个数/second|个数/minute} --limit-burst {每次涌入多少个}`
+`—limit`:  平均速率，单位：个数/second ，个数/minute，个数/hour
+
+`--limit-burst`:  峰值数量，默认5个
 
 ```bash
 iptables -I INPUT -d 172.16.100.7 -p tcp --dport 22 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
@@ -321,7 +342,12 @@ iptables -I INPUT -d 172.16.100.7 -p tcp --dport 22 -m limit --limit 25/minute -
 
 ### ⑦connlimit：连接数匹配模块
 
-`-m connlimit --connlimit-above N 超过N个 `
+`--connlimit-upto n` : 当现在的连接数量低于或等于这个数量(n),就匹配
+`--connlimit-above n` : 当现有的连接数量大于这个数量, 就匹配
+
+```bash
+iptables -A INPUT -d 172.16.36.61 -p tcp --dport 22 -m connlimit --connlimit-above 2 -j REJECT
+```
 
 ### ⑧time：时间限制匹配模块
 
@@ -332,7 +358,84 @@ iptables -A INPUT -p tcp --dport 21 -s 192.168.1.0/24 -m time ! --weekdays 6,7 -
 # 在工作时间，即周一到周五的8:30-18:00，开放本机的ftp服务给 192.168.1.0网络中的主机访问；并且数据下载请求的次数每分钟不得超过 5 个；
 ```
 
-# 五、iptables应用
+# 五、iptables的内核调优
+
+## 1、iptables的conntrack连接追踪优化
+
+- conntrack是netfilter的核心。有许多增强的功能，例如，地址转换（NAT），基于内容的业务识别（l7， layer-7 module）都是基于连接跟踪。
+
+- nf_conntrack模块在`kernel 2.6.15（2006-01-03发布）` 被引入，支持ipv4和ipv6，取代只支持ipv4的ip_connktrack，用于跟踪连接的状态，供其他模块使用。
+
+- iptables的连接追踪表最大容量是`/proc/sys/ipv4/ip_conntrack_max`设置的, 链接达到各种状态的超时后,会从表中删除,当模板满载时, 后续的链接可能会超时
+
+- 跟踪的连接用`哈希表`存储，每个桶（bucket）里都是1个链表，默认长度为4KB。netfilter的哈希表存储在内核空间，这部分内存不能swap
+
+- 哈希表大小 ：64位的最大连接数/8； 32位的最大连接数/4
+
+- 在64位下，当CONNTRACK_MAX为 `1048576`，HASHSIZE 为 `262144` 时，最多占350多MB
+
+- **连接跟踪调优计算公式**
+
+  - `CONNTRACK_MAX（最大几率的连接条数） = 内存个数*1024*1024*1024/16384/2 = ***`
+
+  - `Buckets（哈希表大小） = CONNTRACK_MAX / 4 = ***（Byte字节）`
+  - `跟踪数暂用最内存大小 = CONNTRACK_MAX * 300（Byte字节）= ***（Byte字节）`
+
+- **异常现象**：
+
+  - 丢包
+
+- **可调优参数**
+
+  - **哈希表桶大小**
+
+    注：net.netfilter.nf_conntrack_buckets 不能直接改（报错）
+
+    ```bash
+    # 临时生效
+    echo 262144 > /sys/module/nf_conntrack/parameters/hashsize
+    
+    # 重启永久生效
+    新建文件：/etc/modprobe.d/iptables.conf
+    options nf_conntrack hashsize = 32768 
+    ```
+
+  - **最大追踪连接数**
+
+    注：加大max值, 也会加大内存的压力
+
+    ```bash
+    # 临时生效
+    sysctl -w net.nf_conntrack_max = 393216
+    sysctl -w net.netfilter.nf_conntrack_max = 393216
+    
+    # 永久生效
+    echo "net.nf_conntrack_ma=393216" >> /etc/sysctl.conf
+    echo "net.netfilter.nf_conntrack_max=393216" >> /etc/sysctl.conf
+    sysctl -p
+    ```
+
+  - **响应时间**
+
+    ```bash
+    net.netfilter.nf_conntrack_tcp_timeout_close_wait: 
+      # CLOSE_WAIT是被动方收到FIN发ACK，然后会转到LAST_ACK发FIN，除非程序写得有问题，正常来说这状态持续时间很短。默认 60 秒
+    
+    # 临时生效
+    sysctl -w net.netfilter.nf_conntrack_tcp_timeout_established=300
+    sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=120
+    sysctl -w net.netfilter.nf_conntrack_tcp_timeout_close_wait=60
+    sysctl -w net.netfilter.nf_conntrack_tcp_timeout_fin_wait=120
+    
+    # 永久生效
+    echo "net.netfilter.nf_conntrack_tcp_timeout_established=300" >> /etc/sysctl.conf
+    echo "net.netfilter.nf_conntrack_tcp_timeout_time_wait=120" >> /etc/sysctl.conf
+    echo "net.netfilter.nf_conntrack_tcp_timeout_close_wait=60" >> /etc/sysctl.conf
+    echo "net.netfilter.nf_conntrack_tcp_timeout_fin_wait=120" >> /etc/sysctl.conf
+    sysctl -p
+    ```
+
+# 六、iptables应用
 
 ## 1、防火墙
 
@@ -398,6 +501,16 @@ iptables -t nat -A PREROUTING -i eth0 -s 172.16.0.0/12 -j DROP
 iptables -t nat -A PREROUTING -i eth0 -s 192.168.0.0/16 -j DROP
 ```
 
+### ⑨禁Ping
+
+```bash
+# 允许本机ping别的主机；但不开放别的主机ping本机；
+iptables -A OUTPUT -p icmp --icmp-type 8 -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT
+```
+
+
+
 
 
 ## 2、NAT网络地址转换
@@ -406,17 +519,17 @@ iptable上中包含一个NAT表，其中有两条缺省的`PREROUTING`和 `POSTR
 
 ### ①SNAT源地址目标转换
 
-#### 概念
+**概念**
 
 **SNAT(Source Network Address Translation)**是指在数据包从网卡发送出去的时候，把数据包中的源地址部分替换为指定的IP。
 
 适用于由局域网中的主机发起连接的情况。报文在经过NAT路由器时，将IP报文中的源IP地址转换为一个有效的广域网地址；在服务器给一个在私有网络中的主机返回响应报文时，目的IP地址就是这个局域网对外的广域网地址。报文到达NAT路由器的时候，路由器要将该报文分发给对应的主机，将IP报文的目的IP地址转换为私有网络地址
 
-#### 涉及到iptables中的链表
+**涉及到iptables中的链表**
 
 `POSTROUTING`链中的nat表
 
-#### **应用场景**
+**应用场景**
 
 局域网主机共享单个公网IP地址接入Internet
 
@@ -460,6 +573,8 @@ route add 0.0.0.0 gw 192.168.1.2
 ```bash
 iptables -t nat -I PREROUTING  -d 公网IP -p tcp  -m tcp  --dport 公网port  -j DNAT  --to-destination  10.10.223.12-10.10.223.20:8080（内网）
 ```
+
+## 3、PNAT端口重定向
 
 
 
