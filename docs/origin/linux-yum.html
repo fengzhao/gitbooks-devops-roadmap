@@ -5100,27 +5100,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.15.2.5" data-path="network-tcpdump.html">
-            
-                <a href="network-tcpdump.html">
-            
-                    
-                        <b>7.15.2.5.</b>
-                    
-                    tcpdump
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.15.2.6" data-path="linux-strace.md">
+        <li class="chapter " data-level="7.15.2.5" data-path="linux-strace.md">
             
                 <a href="linux-strace.md">
             
                     
-                        <b>7.15.2.6.</b>
+                        <b>7.15.2.5.</b>
                     
                     strace
             
@@ -5130,12 +5115,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.15.2.7" >
+        <li class="chapter " data-level="7.15.2.6" >
             
                 <span>
             
                     
-                        <b>7.15.2.7.</b>
+                        <b>7.15.2.6.</b>
                     
                     stap
             
@@ -5166,12 +5151,42 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="7.15.3.1" data-path="linux-hping.html">
+        <li class="chapter " data-level="7.15.3.1" data-path="network-tcpdump.html">
+            
+                <a href="network-tcpdump.html">
+            
+                    
+                        <b>7.15.3.1.</b>
+                    
+                    tcpdump网络抓包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.15.3.2" data-path="network-mtr.md">
+            
+                <a href="network-mtr.md">
+            
+                    
+                        <b>7.15.3.2.</b>
+                    
+                    mtr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.15.3.3" data-path="linux-hping.html">
             
                 <a href="linux-hping.html">
             
                     
-                        <b>7.15.3.1.</b>
+                        <b>7.15.3.3.</b>
                     
                     hping
             
@@ -5181,12 +5196,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.15.3.2" data-path="network-traceroute.md">
+        <li class="chapter " data-level="7.15.3.4" data-path="network-traceroute.md">
             
                 <a href="network-traceroute.md">
             
                     
-                        <b>7.15.3.2.</b>
+                        <b>7.15.3.4.</b>
                     
                     traceroute
             
@@ -5196,12 +5211,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.15.3.3" >
+        <li class="chapter " data-level="7.15.3.5" >
             
                 <span>
             
                     
-                        <b>7.15.3.3.</b>
+                        <b>7.15.3.5.</b>
                     
                     conntrack
             
@@ -5211,12 +5226,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.15.3.4" >
+        <li class="chapter " data-level="7.15.3.6" >
             
                 <span>
             
                     
-                        <b>7.15.3.4.</b>
+                        <b>7.15.3.6.</b>
                     
                     sar
             
@@ -6814,14 +6829,16 @@ EOF&apos;</span> <span class="token punctuation">;</span><span class="token punc
 <span class="token comment">#  -n&#x6307;&#x5B9A;&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7684;&#x5305;</span>
 <span class="token comment">#  -c&#x6307;&#x5B9A;&#x7684;&#x662F;repo&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x662F;/etc/yum.repo.d&#x76EE;&#x5F55;&#x4E0B;&#x7684;repo&#x6587;&#x4EF6;</span>
 </code></pre>
-<h1 id="&#x4E03;&#x3001;yumdownloadonly&#x4E0B;&#x8F7D;rpm&#x5305;&#x53CA;&#x4F9D;&#x8D56;&#x5305;">&#x4E03;&#x3001;Yumdownloadonly&#x4E0B;&#x8F7D;RPM&#x5305;&#x53CA;&#x4F9D;&#x8D56;&#x5305;</h1>
-<h2 id="1&#x3001;&#x4E0B;&#x8F7D;yumdownloadonly&#x63D2;&#x4EF6;">1&#x3001;&#x4E0B;&#x8F7D;yumdownloadonly&#x63D2;&#x4EF6;</h2>
-<pre class="language-"><code class="lang-bash">yum <span class="token function">install</span> yum-plugin-downloadonly
+<h1 id="&#x4E03;&#x3001;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;rpm&#x5305;&#x4EE5;&#x53CA;&#x5176;&#x4F9D;&#x8D56;&#x5305;">&#x4E03;&#x3001;&#x4E0B;&#x8F7D;&#x8F6F;&#x4EF6;RPM&#x5305;&#x4EE5;&#x53CA;&#x5176;&#x4F9D;&#x8D56;&#x5305;</h1>
+<h2 id="1&#x3001;yum&#x63D2;&#x4EF6;yumdownloadonly">1&#x3001;yum&#x63D2;&#x4EF6;yumdownloadonly</h2>
+<pre class="language-"><code class="lang-bash">yum <span class="token function">install</span> yum-plugin-downloadonly <span class="token operator">&amp;&amp;</span> 
+yum <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span>/root/httpd httpd
 </code></pre>
-<h2 id="2&#x3001;&#x4E0B;&#x8F7D;&#x5230;&#x6307;&#x5B9A;&#x76EE;&#x5F55;&#xFF08;&#x4F9D;&#x8D56;&#x5305;&#x4F1A;&#x4E00;&#x8D77;&#x4E0B;&#x8F7D;&#xFF09;">2&#x3001;&#x4E0B;&#x8F7D;&#x5230;&#x6307;&#x5B9A;&#x76EE;&#x5F55;&#xFF08;&#x4F9D;&#x8D56;&#x5305;&#x4F1A;&#x4E00;&#x8D77;&#x4E0B;&#x8F7D;&#xFF09;</h2>
-<pre class="language-"><code class="lang-bash">yum <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span>/root/httpd httpd
+<h2 id="2&#x3001;&#x4F7F;&#x7528;yum-utils&#x7684;&#x547D;&#x4EE4;yumdownloader">2&#x3001;&#x4F7F;&#x7528;yum-utils&#x7684;&#x547D;&#x4EE4;yumdownloader</h2>
+<pre class="language-"><code class="lang-bash">yum <span class="token function">install</span> -y yum-utils <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+yumdownloader --resolve docker-ce-20.10.5
 </code></pre>
-<h1 id="&#x9644;&#x5F55;&#xFF1A;&#x6E05;&#x534E;&#x955C;&#x50CF;&#x7AD9;&#x4E2D;&#x5E38;&#x89C1;&#x7684;&#x8F6F;&#x4EF6;&#x6E90;">&#x9644;&#x5F55;&#xFF1A;&#x6E05;&#x534E;&#x955C;&#x50CF;&#x7AD9;&#x4E2D;&#x5E38;&#x89C1;&#x7684;&#x8F6F;&#x4EF6;&#x6E90;</h1>
+<h1 id="&#x9644;&#x5F55;&#xFF1A;&#x5E38;&#x89C1;&#x8F6F;&#x4EF6;&#x6E90;">&#x9644;&#x5F55;&#xFF1A;&#x5E38;&#x89C1;&#x8F6F;&#x4EF6;&#x6E90;</h1>
 <h2 id="1&#x3001;virtualbox">1&#x3001;VirtualBox</h2>
 <pre class="language-"><code class="lang-properties">[virtualbox]
 <span class="token attr-name">name</span><span class="token punctuation">=</span><span class="token attr-value">Oracle Linux / RHEL / CentOS-$releasever / $basearch - VirtualBox</span>
@@ -6922,7 +6939,7 @@ EOF&apos;</span> <span class="token punctuation">;</span><span class="token punc
 EOF&apos;
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-03-18 17:37:58
+2021-03-30 11:22:11
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6966,7 +6983,7 @@ EOF&apos;
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Yum-RPM包管理","level":"7.14.17","depth":2,"next":{"title":"ZSH","level":"7.14.18","depth":2,"path":"origin/linux-zsh.md","ref":"origin/linux-zsh.md","articles":[]},"previous":{"title":"Vim小技巧","level":"7.14.16","depth":2,"path":"origin/vim-小技巧.md","ref":"origin/vim-小技巧.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-yum.md","mtime":"2021-03-18T09:37:58.666Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-03-29T07:39:28.199Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Yum-RPM包管理","level":"7.14.17","depth":2,"next":{"title":"ZSH","level":"7.14.18","depth":2,"path":"origin/linux-zsh.md","ref":"origin/linux-zsh.md","articles":[]},"previous":{"title":"Vim小技巧","level":"7.14.16","depth":2,"path":"origin/vim-小技巧.md","ref":"origin/vim-小技巧.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-yum.md","mtime":"2021-03-30T03:22:11.736Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-02T04:48:21.460Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

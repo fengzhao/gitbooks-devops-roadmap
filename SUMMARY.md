@@ -331,10 +331,11 @@
     - [ip/ifconfig](origin/linux-ip-ifconfig.md)
     - [ps](origin/linux-ps.md)
     - [pidstat]()
-    - [tcpdump](origin/network-tcpdump.md)
     - [strace](origin/linux-strace.md)
     - [stap]()
   - 网络
+    - [tcpdump网络抓包](origin/network-tcpdump.md)
+    - [mtr](origin/network-mtr.md)
     - [hping](origin/linux-hping.md)
     - [traceroute](origin/network-traceroute.md)
     - [conntrack]()

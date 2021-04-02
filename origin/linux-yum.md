@@ -276,21 +276,26 @@ EOF' ;\
 #  -c指定的是repo文件的路径，默认的是/etc/yum.repo.d目录下的repo文件
 ```
 
-# 七、Yumdownloadonly下载RPM包及依赖包
+# 七、下载软件RPM包以及其依赖包
 
-## 1、下载yumdownloadonly插件
-
-```bash
-yum install yum-plugin-downloadonly
-```
-
-## 2、下载到指定目录（依赖包会一起下载）
+## 1、yum插件yumdownloadonly
 
 ```bash
+yum install yum-plugin-downloadonly && 
 yum install --downloadonly --downloaddir=/root/httpd httpd
+
 ```
 
-# 附录：清华镜像站中常见的软件源
+## 2、使用yum-utils的命令yumdownloader
+
+```bash
+yum install -y yum-utils && \
+yumdownloader --resolve docker-ce-20.10.5
+```
+
+
+
+# 附录：常见软件源
 
 ## 1、VirtualBox
 
