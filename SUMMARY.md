@@ -386,6 +386,7 @@
     * [ESXI 管理常用命令](origin/vsphere-esxi.md)
     * [vCenter](origin/vSphere-vCenter.md)
     * [ESXI使用Synology的ISCSI存储](origin/esxi-synology-iscsi.md)
+    * [Synology Active Backup for Business备份管理vSphere ESXI VMs](origin/synology-abb-vsphere.md)
     * OVF模板
       * [OVF模板详解](origin/vsphere-ovf.md)
       * [VMWare OVF Tools](origin/vmware-ovf-tool.md)
