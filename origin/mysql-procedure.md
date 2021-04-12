@@ -1,6 +1,6 @@
 # 常用存储过程
 
-## 1、同时修改某一个数据库中所有表的所有字段的编码格式（mysql）
+## 1、修改Database中所有表的所有字段的编码格式（mysql）
 
 ```sql
 delimiter $$
@@ -24,3 +24,4 @@ call Test ;
 ```
 
 参考：https://blog.csdn.net/LUNG108/article/details/78285054
+

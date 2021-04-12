@@ -96,4 +96,3 @@ Enjoy Yourself
 ## 4、备份文件信息
 
 ![](../assets/synology-abb-vSphere-10.png)
-

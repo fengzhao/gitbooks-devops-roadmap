@@ -1808,3 +1808,64 @@ yum --enablerepo=elrepo-kernel install -y kernel-ml-devel kernel-ml-headers kern
 partprobe
 ```
 
+# 60、APT（Advanced Packaging Tools）
+
+### 使用APT的操作系统：
+
+- Ubuntu
+- Debian
+
+### 包查询
+
+- Debian：https://www.debian.org/distrib/packages
+
+### APT软件包的类型
+
+- **Main**：自由软件及其源代码
+- **Contrib**：本身是自由软件，但是需要依赖一些非自由软件运行
+- **Non-Free**：收到许可条例限制的软件
+
+### 说明文档：
+
+- Debian：https://www.debian.org/doc/manuals/debian-reference/ch02.zh-cn.html
+- Ubuntu:  http://manpages.ubuntu.com/manpages/xenial/man8/apt.8.html
+
+### 常用软件镜像源
+
+- 中科大
+  - Ubuntu：https://mirrors.ustc.edu.cn/ubuntu/
+  - Debian：https://mirrors.ustc.edu.cn/debian
+- 清华
+  - Ubuntu：https://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+  - Debian：https://mirrors.tuna.tsinghua.edu.cn/debian/
+
+### ①查询软件版本
+
+```bash
+apt-cache madison 包
+```
+
+### ②列出软件的所有来源
+
+```bash
+apt-cache policy 包
+# 或者
+apt-cache showpkg 包 
+```
+
+### ③模拟安装软件
+
+```bash
+apt-get install -s 包
+```
+
+### ④安装testing类型仓库里的软件
+
+```bash
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian testing main contrib non-free " >> /etc/apt/sources.list apt-get update
+```
+
+
+
+
+

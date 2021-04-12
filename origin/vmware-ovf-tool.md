@@ -1,7 +1,5 @@
 # OVF 管理工具VMWare OVF Tool
 
-
-
 # 一、简介
 
 VMWare OVF Tool是 一个可以在VMWare系列产品上导入导出虚拟机为OVF/OVA格式文件的命令行工具。
@@ -16,15 +14,11 @@ ESXI强大的客户端vSpere Client由于在MacOS上没有对应的版本。VMWa
 
 2. https://vmware.github.io/vic-product/assets/files/html/1.5/vic_vsphere_admin/deploy_vic_appliance_ovftool.html
 
-
-
 # 二、安装配置
 
 **下载地址**（需注册登录）：https://my.vmware.com/zh/group/vmware/details?downloadGroup=OVFTOOL430&productId=742 
 
 MacOS dmg格式安装后的目录为：`/Applications/VMware OVF Tool`。命令没有系统环境变量中，通过设置软连接实现：`ln -s /Applications/VMware\ OVF\ Tool/ovftool /usr/local/bin`
-
-
 
 ## 配置文件
 
@@ -75,7 +69,6 @@ ovftool --help config
 #  .....
 
 # Currently no local configuration options in .ovftool
-
 ```
 
 # 三、命令详解
@@ -213,7 +206,7 @@ ovftool --help 文档主题
                from another tool or shellscript.
 ```
 
-## 快速操作命令
+## 快速操作命令别名
 
 ```bash
 echo "nvm_2C4G80G() { ovftool --name=\"\$@\" http://192.168.1.7:32770/repository/tools/ovf/empty/2C4G80G.ovf vi://root:****@192.168.1.103 ;}" >> ~/.zshrc
@@ -223,11 +216,9 @@ echo "nvm_4C8G100G() { ovftool --name=\"\$@\" http://192.168.1.7:32770/repositor
 source ~/.zshrc
 ```
 
-
-
 # 四、操作实例
 
-1、将存储在Nexus RAW仓库中的OVF模板部署遇到远程ESXI中
+## 1、将存储在Nexus RAW仓库中的OVF模板部署遇到远程ESXI中
 
 ```bash
 ovftool \
@@ -240,13 +231,38 @@ ovftool \
 --X:waitForIp \
 http://192.168.1.7:8080/repository/tools/ovf/empty/2C4G80G.ovf \
 vi://root:'*******'@192.168.1.103
+
+# Nexus中的OVF模板文件标注VMDK位置需要修改为HTTP协议类型的URL地址
 ```
 
-2、导出远程ESXI中虚拟机的OVF模板到本地
+## 2、导出远程ESXI中虚拟机的OVF模板到本地
 
 ```bash
 ovftool vi://root:'***'@192.168.1.103/empty-6C20G100G ./empty-6C20G100G.ovf
 ```
+
+## 3、导入本地OVF模板到远程ESXI中
+
+```bash
+ovftool -ds=hdd -dm=thin -n=VM名字 本地OVF模板文件路径 vi://root@192.168.1.103
+# -dm=thin是精简置备的意思，-n是新主机的名字
+```
+
+# 五、问题
+
+1、导入VM OVF模板时报`A general system error occurred: Fault cause: vim.fault.FileNotFound`
+
+**原因：**
+
+​	`OVF模板文件中配置的有CDROM设备，而CDROM有使用ISO文件的挂载，而本地可能没有对应的ISO文件`
+
+**解决方案：**
+
+​	`编辑VM的OVF文件，搜索iso关键字，找到对应的设备定义，注释或删除掉`
+
+**参考：**https://communities.vmware.com/t5/Open-Virtualization-Format-Tool/ovftool-fails-with-Error-vim-fault-FileNotFound/m-p/2649133
+
+
 
 
 

@@ -8066,8 +8066,56 @@ yum --enablerepo<span class="token operator">=</span>elrepo-kernel <span class="
 <p>&#x5BF9;&#x4E00;&#x4E2A;&#x78C1;&#x76D8;&#x521B;&#x5EFA;&#x4E86;&#x65B0;&#x5206;&#x533A;&#x540E;&#xFF0C;<code>fdisk -l</code> &#x53EF;&#x4EE5;&#x663E;&#x793A;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x663E;&#x793A;&#x5728;<code>/dev/&#x5206;&#x533A;&#x53F7;</code>&#x3002;&#x4F7F;&#x7528;<code>partprobe</code>&#x91CD;&#x65B0;&#x626B;&#x63CF;&#x78C1;&#x76D8;&#x5206;&#x533A;</p>
 <pre class="language-"><code class="lang-bash">partprobe
 </code></pre>
+<h1 id="60&#x3001;apt&#xFF08;advanced-packaging-tools&#xFF09;">60&#x3001;APT&#xFF08;Advanced Packaging Tools&#xFF09;</h1>
+<h3 id="&#x4F7F;&#x7528;apt&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF1A;">&#x4F7F;&#x7528;APT&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF1A;</h3>
+<ul>
+<li>Ubuntu</li>
+<li>Debian</li>
+</ul>
+<h3 id="&#x5305;&#x67E5;&#x8BE2;">&#x5305;&#x67E5;&#x8BE2;</h3>
+<ul>
+<li>Debian&#xFF1A;<a href="https://www.debian.org/distrib/packages" _target="blank">https://www.debian.org/distrib/packages</a></li>
+</ul>
+<h3 id="apt&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x7C7B;&#x578B;">APT&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x7C7B;&#x578B;</h3>
+<ul>
+<li><strong>Main</strong>&#xFF1A;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#x53CA;&#x5176;&#x6E90;&#x4EE3;&#x7801;</li>
+<li><strong>Contrib</strong>&#xFF1A;&#x672C;&#x8EAB;&#x662F;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x4F9D;&#x8D56;&#x4E00;&#x4E9B;&#x975E;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#x8FD0;&#x884C;</li>
+<li><strong>Non-Free</strong>&#xFF1A;&#x6536;&#x5230;&#x8BB8;&#x53EF;&#x6761;&#x4F8B;&#x9650;&#x5236;&#x7684;&#x8F6F;&#x4EF6;</li>
+</ul>
+<h3 id="&#x8BF4;&#x660E;&#x6587;&#x6863;&#xFF1A;">&#x8BF4;&#x660E;&#x6587;&#x6863;&#xFF1A;</h3>
+<ul>
+<li>Debian&#xFF1A;<a href="https://www.debian.org/doc/manuals/debian-reference/ch02.zh-cn.html" _target="blank">https://www.debian.org/doc/manuals/debian-reference/ch02.zh-cn.html</a></li>
+<li>Ubuntu:  <a href="http://manpages.ubuntu.com/manpages/xenial/man8/apt.8.html" _target="blank">http://manpages.ubuntu.com/manpages/xenial/man8/apt.8.html</a></li>
+</ul>
+<h3 id="&#x5E38;&#x7528;&#x8F6F;&#x4EF6;&#x955C;&#x50CF;&#x6E90;">&#x5E38;&#x7528;&#x8F6F;&#x4EF6;&#x955C;&#x50CF;&#x6E90;</h3>
+<ul>
+<li>&#x4E2D;&#x79D1;&#x5927;<ul>
+<li>Ubuntu&#xFF1A;<a href="https://mirrors.ustc.edu.cn/ubuntu/" _target="blank">https://mirrors.ustc.edu.cn/ubuntu/</a></li>
+<li>Debian&#xFF1A;<a href="https://mirrors.ustc.edu.cn/debian" _target="blank">https://mirrors.ustc.edu.cn/debian</a></li>
+</ul>
+</li>
+<li>&#x6E05;&#x534E;<ul>
+<li>Ubuntu&#xFF1A;<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu/" _target="blank">https://mirrors.tuna.tsinghua.edu.cn/ubuntu/</a></li>
+<li>Debian&#xFF1A;<a href="https://mirrors.tuna.tsinghua.edu.cn/debian/" _target="blank">https://mirrors.tuna.tsinghua.edu.cn/debian/</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x2460;&#x67E5;&#x8BE2;&#x8F6F;&#x4EF6;&#x7248;&#x672C;">&#x2460;&#x67E5;&#x8BE2;&#x8F6F;&#x4EF6;&#x7248;&#x672C;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">apt-cache</span> madison &#x5305;
+</code></pre>
+<h3 id="&#x2461;&#x5217;&#x51FA;&#x8F6F;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x6765;&#x6E90;">&#x2461;&#x5217;&#x51FA;&#x8F6F;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x6765;&#x6E90;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">apt-cache</span> policy &#x5305;
+<span class="token comment"># &#x6216;&#x8005;</span>
+<span class="token function">apt-cache</span> showpkg &#x5305;
+</code></pre>
+<h3 id="&#x2462;&#x6A21;&#x62DF;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;">&#x2462;&#x6A21;&#x62DF;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token function">apt-get</span> <span class="token function">install</span> -s &#x5305;
+</code></pre>
+<h3 id="&#x2463;&#x5B89;&#x88C5;testing&#x7C7B;&#x578B;&#x4ED3;&#x5E93;&#x91CC;&#x7684;&#x8F6F;&#x4EF6;">&#x2463;&#x5B89;&#x88C5;testing&#x7C7B;&#x578B;&#x4ED3;&#x5E93;&#x91CC;&#x7684;&#x8F6F;&#x4EF6;</h3>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">echo</span> <span class="token string">&quot;deb https://mirrors.tuna.tsinghua.edu.cn/debian testing main contrib non-free &quot;</span> <span class="token operator">&gt;&gt;</span> /etc/apt/sources.list <span class="token function">apt-get</span> update
+</code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-03-30 11:25:42
+2021-04-09 13:58:42
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -8111,7 +8159,7 @@ yum --enablerepo<span class="token operator">=</span>elrepo-kernel <span class="
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Linux小技巧","level":"7.14","depth":1,"next":{"title":"Linux小技巧","level":"7.14.1","depth":2,"path":"origin/linux-小技巧.md","ref":"origin/linux-小技巧.md","articles":[]},"previous":{"title":"MacOS小技巧","level":"7.13.1","depth":2,"path":"origin/macos-tips.md","ref":"origin/macos-tips.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-小技巧.md","mtime":"2021-03-30T03:25:42.326Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-06T07:42:23.352Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Linux小技巧","level":"7.14","depth":1,"next":{"title":"Linux小技巧","level":"7.14.1","depth":2,"path":"origin/linux-小技巧.md","ref":"origin/linux-小技巧.md","articles":[]},"previous":{"title":"MacOS小技巧","level":"7.13.1","depth":2,"path":"origin/macos-tips.md","ref":"origin/macos-tips.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-小技巧.md","mtime":"2021-04-09T05:58:42.477Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-12T03:42:58.336Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>
