@@ -9,8 +9,6 @@ nginx是一款自由的、开源的、高性能的HTTP服务器和反向代理�
 - 反向代理
 - 负载均衡
 
-
-
 # 二、安装
 
 ## 1. 二进制RPM安装
@@ -41,7 +39,7 @@ EOF' && \
   yum install -y nginx
 ```
 
-## 2. 源码编译安装指定模块
+## 2. 源码编译
 
 ### ①安装编译工具
 
@@ -128,6 +126,8 @@ $ version=1.17.6 && \
 ###  ④配置编译参数 
 
 **创建nginx用户----->创建相关目录------>配置编译参数**
+
+**编译参数文档**：http://nginx.org/en/docs/configure.html
 
 ```bash
 $ ./configure --help  #查看编译配置参数
@@ -265,13 +265,48 @@ $ ./configure \
 --prefix=/opt/nginx-1.17.6 \
 --user=nginx \
 --group=nginx \
---sbin-path=/opt/nginx-1.17.6/nginx \
+--modules-path=/opt/nginx-17.6/modules \
+--sbin-path=/opt/nginx-1.17.6/sbin/nginx \
 --error-log-path=/opt/nginx-1.17.6/logs/error.log \
---conf-path=/opt/nginx-1.17.6/nginx.conf \
+--http-log-path=/opt/nginx-1.17.6/logs/access.log \
+--conf-path=/opt/nginx-1.17.6/conf/nginx.conf \
 --pid-path=/opt/nginx-1.17.6/nginx.pid \
+--lock-path=/opt/nginx-1.17.6/nginx.lock \
+--http-client-body-temp-path=/var/cache/nginx/client_temp \
+--http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+--http-scgi-temp-path=/var/cache/nginx/scgi_temp \
 --with-pcre \
---with-openssl=/usr/lib64/openssl \
---with-http_stub_status_module
+--with-openssl=../openssl-1.1.1 \
+--with-http_stub_status_module \
+--with-http_realip_module \
+--with-http_addition_module \
+--with-http_sub_module \
+--with-http_dav_module \
+--with-http_flv_module \
+--with-http_mp4_module \
+--with-http_gunzip_module \
+--with-http_gzip_static_module \
+--with-http_random_index_module \
+--with-http_secure_link_module \
+--with-http_stub_status_module \
+--with-http_auth_request_module \
+--with-http_xslt_module=dynamic \
+--with-http_image_filter_module=dynamic \
+--with-http_geoip_module=dynamic \
+--with-http_image_filter_module \
+--with-http_v2_module \
+--with-http_slice_module \
+--with-threads \
+--with-stream \
+--with-stream_ssl_module \
+--with-stream_ssl_preread_module \
+--with-stream_realip_module \
+--with-stream_geoip_module=dynamic \
+--with-mail \
+--with-mail_ssl_module \
+--with-compat
 ```
 
 ### ⑤编译安装

@@ -361,7 +361,6 @@
     * [常用操作](origin/reids-common-opreations.md)
 * 负载均衡与代理
     * [Keepalived](origin/keepalived.md)
-    * Nginx
     * HAProxy
     * LVS
     * Squid
@@ -371,9 +370,10 @@
         * Squid
             * [简介安装日志](origin/squid-简介安装.md)
             * [ACL访问权限](origin/squid-acl访问权限控制.md)
-    * [反向代理](origin/常见反向代理服务软件之间的区别.md)
-        * [Nginx](origin/nginx.md)
-          * [Nginx配置优化](origin/nginx-config.md)
+* Nginx
+    * [Nginx安装配置](origin/nginx-install-setup.md)
+    * [Nginx配置优化](origin/nginx-config.md)
+    * [Nginx日志写入kafka](origin/nginx-log-kafka.md)
 * iSCSI
   
     * [群晖Synology的iSCSI](origin/iSCSI-简介配置使用.md)

@@ -637,3 +637,30 @@ mysqldumpslow -s ar -t 20 -g "ttt" sqldlow.log
 # 如果出现如下错误，Died at /usr/bin/mysqldumpslow line 161, <> chunk 405659.说明你要分析的sql日志太大了，请拆分后再分析
 ```
 
+# 20、锁表锁库操作
+
+如果对mysql进行操作时，网络中断或SQL异常 , 可能会导致表或者库卡死 , 锁死，无法进行后续操作 （如果用 navicat 等工具连接操作, 操作都会在转圈圈，无法完成操作）。此时要找出造成锁库锁表的SQL语句的进程，将其杀死，中断其操作执行，即可解决锁库锁表。
+
+①查看锁死SQL的进程ID
+
+```bash
+# 进程ID在trx_mysql_thread_id那一列
+select id, db, user, host, command, time, state, info
+from information_schema.processlist
+where command != 'Sleep'
+order by time desc 
+```
+
+或者
+
+```bash
+# sql语句在info列，进程ID在ID列
+show processlist; 
+```
+
+②杀死相关进程
+
+```bash
+kill -9 进程号
+```
+
