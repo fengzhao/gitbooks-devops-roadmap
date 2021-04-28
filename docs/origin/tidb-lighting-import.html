@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>使用TIDB-Lightning导入数据到TIDB · Devops Roadmap</title>
+        <title>TiDB-Lightning：导入数据到TIDB · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -106,7 +106,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="golang-basic.html" />
+    <link rel="next" href="tidb-br-backup-restore.html" />
     
     
     <link rel="prev" href="tidb-dumpling-export.html" />
@@ -6408,7 +6408,7 @@
                     
                         <b>7.35.3.</b>
                     
-                    使用TiDB-Dumpling从TiDB导出数据
+                    TiDB-Dumpling：从TiDB/MySQL导出数据
             
                 </a>
             
@@ -6423,7 +6423,118 @@
                     
                         <b>7.35.4.</b>
                     
-                    使用TIDB-Lightning导入数据到TIDB
+                    TiDB-Lightning：导入数据到TIDB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.5" data-path="tidb-br-backup-restore.html">
+            
+                <a href="tidb-br-backup-restore.html">
+            
+                    
+                        <b>7.35.5.</b>
+                    
+                    TiDB-BR冷备份与恢复：分布式冷备份恢复数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.6" data-path="bigdata-migrate-operation.html">
+            
+                <a href="bigdata-migrate-operation.html">
+            
+                    
+                        <b>7.35.6.</b>
+                    
+                    大数据的数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36" >
+            
+                <span>
+            
+                    
+                        <b>7.36.</b>
+                    
+                    Apache Pulsar
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.36.1" data-path="pulsar-basic.html">
+            
+                <a href="pulsar-basic.html">
+            
+                    
+                        <b>7.36.1.</b>
+                    
+                    基础概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.2" data-path="pulsar-install.html">
+            
+                <a href="pulsar-install.html">
+            
+                    
+                        <b>7.36.2.</b>
+                    
+                    安装部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.3" data-path="pulsar-cli.html">
+            
+                <a href="pulsar-cli.html">
+            
+                    
+                        <b>7.36.3.</b>
+                    
+                    Pulsar的CLI命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.4" data-path="pulsar-perf-test.html">
+            
+                <a href="pulsar-perf-test.html">
+            
+                    
+                        <b>7.36.4.</b>
+                    
+                    Pulsar性能测试
             
                 </a>
             
@@ -6590,7 +6701,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >使用TIDB-Lightning导入数据到TIDB</a>
+        <a href=".." >TiDB-Lightning：导入数据到TIDB</a>
     </h1>
 </div>
 
@@ -6607,13 +6718,18 @@
 						
 						<h1 id="&#x4F7F;&#x7528;tidb-lightning&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5230;tidb">&#x4F7F;&#x7528;tidb-lightning&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5230;TIDB</h1>
 <h1 id="&#x4E00;&#x3001;&#x7B80;&#x4ECB;">&#x4E00;&#x3001;&#x7B80;&#x4ECB;</h1>
-<p>TiDB Lightning &#x662F;&#x4E00;&#x4E2A;&#x5C06;&#x5168;&#x91CF;&#x6570;&#x636E;&#x9AD8;&#x901F;&#x5BFC;&#x5165;&#x5230; TiDB &#x96C6;&#x7FA4;&#x7684;&#x5DE5;&#x5177;</p>
-<p>TiDB Lightning &#x6709;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x4E3B;&#x8981;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF1A;&#x4E00;&#x662F;&#x5927;&#x91CF;&#x65B0;&#x6570;&#x636E;&#x7684;&#x5FEB;&#x901F;&#x5BFC;&#x5165;&#xFF1B;&#x4E8C;&#x662F;&#x5168;&#x91CF;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x7684;&#x6062;&#x590D;&#x3002;&#x76EE;&#x524D;&#xFF0C;Lightning &#x652F;&#x6301; Mydumper &#x6216; CSV &#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x6E90;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x573A;&#x666F;&#x4E0B;&#x4F7F;&#x7528; Lightning&#xFF1A;</p>
+<p>TiDB Lightning &#x662F;&#x4E00;&#x4E2A;&#x5C06;<strong>&#x5168;&#x91CF;&#x6570;&#x636E;&#x9AD8;&#x901F;&#x5BFC;&#x5165;</strong>&#x5230; TiDB &#x96C6;&#x7FA4;&#x7684;&#x5DE5;&#x5177;</p>
+<p>TiDB Lightning &#x6709;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x4E3B;&#x8981;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF1A;</p>
 <ul>
-<li><strong>&#x8FC5;&#x901F;</strong>&#x5BFC;&#x5165;<strong>&#x5927;&#x91CF;&#x65B0;</strong>&#x6570;&#x636E;</li>
-<li>&#x6062;&#x590D;&#x6240;&#x6709;&#x5907;&#x4EFD;&#x6570;&#x636E;</li>
+<li>&#x5927;&#x91CF;&#x65B0;&#x6570;&#x636E;&#x7684;&#x5FEB;&#x901F;&#x5BFC;&#x5165;</li>
+<li>&#x5168;&#x91CF;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x7684;&#x6062;&#x590D;</li>
 </ul>
-<h1 id="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x5DE5;&#x4F5C;&#x539F;&#x7406;">&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x5DE5;&#x4F5C;&#x539F;&#x7406;</h1>
+<p>&#x76EE;&#x524D;&#xFF0C;TiDB Lightning &#x652F;&#x6301;&#xFF1A;</p>
+<ul>
+<li>&#x5BFC;&#x5165; <a href="https://docs.pingcap.com/zh/tidb/stable/dumpling-overview" _target="blank">Dumpling</a>&#x3001;CSV &#x6216; <a href="https://docs.pingcap.com/zh/tidb/stable/migrate-from-aurora-using-lightning" _target="blank">Amazon Aurora Parquet</a> &#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x6E90;&#x3002;</li>
+<li>&#x4ECE;&#x672C;&#x5730;&#x76D8;&#x6216; <a href="https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-storages" _target="blank">Amazon S3 &#x4E91;&#x76D8;</a>&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x3002;</li>
+</ul>
+<h1 id="&#x4E8C;&#x3001;&#x5DE5;&#x4F5C;&#x539F;&#x7406;">&#x4E8C;&#x3001;&#x5DE5;&#x4F5C;&#x539F;&#x7406;</h1>
 <p><img src="../assets/tidb-lightning-architecture.png" alt="TiDB Lightning &#x6574;&#x4F53;&#x67B6;&#x6784;"></p>
 <ol>
 <li><p>&#x5728;&#x5BFC;&#x6570;&#x636E;&#x4E4B;&#x524D;&#xFF0C;<code>tidb-lightning</code> &#x4F1A;&#x81EA;&#x52A8;&#x5C06; TiKV &#x96C6;&#x7FA4;&#x5207;&#x6362;&#x4E3A;&#x201C;&#x5BFC;&#x5165;&#x6A21;&#x5F0F;&#x201D; (import mode)&#xFF0C;&#x4F18;&#x5316;&#x5199;&#x5165;&#x6548;&#x7387;&#x5E76;&#x505C;&#x6B62;&#x81EA;&#x52A8;&#x538B;&#x7F29;&#x3002;</p>
@@ -6636,11 +6752,12 @@
 <p>&#x5982;&#x679C;&#x9700;&#x8981;&#x5BFC;&#x5165;&#x7684;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x662F; v3.x &#x6216;&#x4EE5;&#x4E0B;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528; Importer-backend &#x6765;&#x5B8C;&#x6210;&#x6570;&#x636E;&#x7684;&#x5BFC;&#x5165;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;<code>tidb-lightning</code> &#x9700;&#x8981;&#x5C06;&#x89E3;&#x6790;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x901A;&#x8FC7; gRPC &#x53D1;&#x9001;&#x7ED9; <code>tikv-importer</code> &#x5E76;&#x7531; <code>tikv-importer</code> &#x5B8C;&#x6210;&#x6570;&#x636E;&#x7684;&#x5BFC;&#x5165;&#xFF1B; TiDB Lightning &#x8FD8;&#x652F;&#x6301;&#x4F7F;&#x7528; TiDB-backend &#x4F5C;&#x4E3A;&#x540E;&#x7AEF;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x3002;TiDB-backend &#x4F7F;&#x7528;&#x548C; Loader &#x7C7B;&#x4F3C;&#xFF0C;<code>tidb-lightning</code> &#x5C06;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x4E3A; <code>INSERT</code> &#x8BED;&#x53E5;&#xFF0C;&#x7136;&#x540E;&#x76F4;&#x63A5;&#x5728;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x4E0A;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x8BED;&#x53E5;&#x3002;</p>
 <p>&#x4F7F;&#x7528;Dumpling&#x6216;Mydumper&#x5BFC;&#x51FA;&#x7684;&#x6570;&#x636E;&#x4E3A;SQL&#x6587;&#x4EF6;&#x3002;SQL&#x6587;&#x4EF6;&#x5206;&#x4E3A;&#x4E09;&#x7C7B;&#xFF1A;</p>
 <ul>
-<li>DB&#x540D;-schema-create.sql&#xFF1A;DB&#x7684;schema&#x521B;&#x5EFA;&#x8BED;&#x53E5;&#x6587;&#x4EF6;</li>
+<li>DB&#x540D;-schema-cre1ate.sql&#xFF1A;DB&#x7684;schema&#x521B;&#x5EFA;&#x8BED;&#x53E5;&#x6587;&#x4EF6;</li>
 <li>DB&#x540D;.&#x8868;&#x540D;-schema.sql&#xFF1A;&#x8868;&#x7684;schema&#x521B;&#x5EFA;&#x8BED;&#x53E5;&#x6587;&#x4EF6;</li>
 <li>DB&#x540D;.&#x8868;&#x540D;.sql&#xFF1A;&#x8868;&#x7684;&#x6570;&#x636E;&#x63D2;&#x5165;&#x8BED;&#x53E5;&#x6587;&#x4EF6;</li>
 </ul>
 <h1 id="&#x4E09;&#x3001;&#x6CE8;&#x610F;">&#x4E09;&#x3001;&#x6CE8;&#x610F;</h1>
+<h2 id="1&#x3001;&#x57FA;&#x7840;&#x6CE8;&#x610F;&#x4E8B;&#x9879;">1&#x3001;&#x57FA;&#x7840;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
 <ul>
 <li><p>TiDB Lightning &#x8FD0;&#x884C;&#x540E;&#xFF0C;TiDB &#x96C6;&#x7FA4;&#x5C06;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x3002;</p>
 </li>
@@ -6649,7 +6766,7 @@
 </code></pre>
 </li>
 </ul>
-<p>TiDB Lightning &#x9700;&#x8981;&#x4E0B;&#x6E38; TiDB &#x6709;&#x5982;&#x4E0B;&#x6743;&#x9650;&#xFF1A;</p>
+<h2 id="2&#x3001;lightning-&#x9700;&#x8981;&#x4E0B;&#x6E38;-tidb&#x7528;&#x6237;&#x6709;&#x5982;&#x4E0B;&#x6743;&#x9650;&#xFF1A;">2&#x3001;Lightning &#x9700;&#x8981;&#x4E0B;&#x6E38; TiDB&#x7528;&#x6237;&#x6709;&#x5982;&#x4E0B;&#x6743;&#x9650;&#xFF1A;</h2>
 <table>
 <thead>
 <tr>
@@ -6689,147 +6806,317 @@
 </tbody>
 </table>
 <p>&#x5982;&#x679C;&#x914D;&#x7F6E;&#x9879; <code>checksum = true</code>&#xFF0C;&#x5219; TiDB Lightning &#x9700;&#x8981;&#x6709;&#x4E0B;&#x6E38; TiDB admin &#x7528;&#x6237;&#x6743;&#x9650;&#x3002;</p>
-<h1 id="&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x53CA;&#x547D;&#x4EE4;&#x53C2;&#x6570;">&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x53CA;&#x547D;&#x4EE4;&#x53C2;&#x6570;</h1>
-<pre class="language-"><code class="lang-bash"><span class="token assign-left variable">version</span><span class="token operator">=</span>v4.0.5 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token function">curl</span> -<span class="token comment"># https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt &amp;&amp; \</span>
-<span class="token function">ln</span> -s /opt/tidb-toolkit-<span class="token variable">$version</span>-linux-amd64 /opt/tidb-toolkit-<span class="token variable">$version</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">echo</span> <span class="token string">&quot;export PATH=/opt/tidb-toolkit-<span class="token variable">$version</span>/bin:<span class="token environment constant">$PATH</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/profile <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
-<span class="token builtin class-name">source</span> /etc/profile <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span> 
-tidb-lightning -V
-</code></pre>
+<h2 id="3&#x3001;&#x5BFC;&#x5165;&#x540E;&#x7AEF;&#x6A21;&#x5F0F;">3&#x3001;&#x5BFC;&#x5165;&#x540E;&#x7AEF;&#x6A21;&#x5F0F;</h2>
+<p>TiDB Lightning &#x7684;<a href="https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-glossary#backend" _target="blank">&#x540E;&#x7AEF; </a>(&#x7528;&#x4E8E;&#x63A5;&#x53D7; TiDB Lightning &#x89E3;&#x6790;&#x7ED3;&#x679C;)  &#x51B3;&#x5B9A; <code>tidb-lightning</code> &#x7EC4;&#x4EF6;&#x5C06;&#x5982;&#x4F55;&#x628A;&#x5C06;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x5230;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x4E2D;&#x3002;&#x76EE;&#x524D;&#xFF0C;TiDB Lightning &#x652F;&#x6301;&#x4EE5;&#x4E0B;&#x540E;&#x7AEF;&#xFF1A;</p>
+<ul>
+<li><strong>Importer-backend</strong>&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;&#xFF1A;<code>tidb-lightning</code> &#x5148;&#x5C06; SQL &#x6216; CSV &#x6570;&#x636E;&#x7F16;&#x7801;&#x6210;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x7531; <code>tikv-importer</code> &#x5BF9;&#x5199;&#x5165;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x8FD9;&#x4E9B;&#x952E;&#x503C;&#x5BF9; Ingest &#x5230; TiKV &#x8282;&#x70B9;&#x4E2D;&#x3002;</li>
+<li><strong>Local-backend</strong>&#xFF1A;<code>tidb-lightning</code> &#x5148;&#x5C06;&#x6570;&#x636E;&#x7F16;&#x7801;&#x6210;&#x952E;&#x503C;&#x5BF9;&#x5E76;&#x6392;&#x5E8F;&#x5B58;&#x50A8;&#x5728;&#x672C;&#x5730;&#x4E34;&#x65F6;&#x76EE;&#x5F55;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x8FD9;&#x4E9B;&#x952E;&#x503C;&#x5BF9;&#x4EE5; SST &#x6587;&#x4EF6;&#x7684;&#x5F62;&#x5F0F;&#x4E0A;&#x4F20;&#x5230;&#x5404;&#x4E2A; TiKV &#x8282;&#x70B9;&#xFF0C;&#x7136;&#x540E;&#x7531; TiKV &#x5C06;&#x8FD9;&#x4E9B; SST &#x6587;&#x4EF6; Ingest &#x5230;&#x96C6;&#x7FA4;&#x4E2D;&#x3002;&#x548C; <code>Importer-backend</code> &#x539F;&#x7406;&#x76F8;&#x540C;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0D;&#x4F9D;&#x8D56;&#x989D;&#x5916;&#x7684; <code>tikv-importer</code> &#x7EC4;&#x4EF6;&#x3002;</li>
+<li><strong>TiDB-backend</strong>&#xFF1A;<code>tidb-lightning</code> &#x5148;&#x5C06;&#x6570;&#x636E;&#x7F16;&#x7801;&#x6210; <code>INSERT</code> &#x8BED;&#x53E5;&#xFF0C;&#x7136;&#x540E;&#x76F4;&#x63A5;&#x5728; TiDB &#x8282;&#x70B9;&#x4E0A;&#x8FD0;&#x884C;&#x8FD9;&#x4E9B; SQL &#x8BED;&#x53E5;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x3002;</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>&#x53C2;&#x6570;</th>
-<th>&#x63CF;&#x8FF0;</th>
-<th>&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x9879;</th>
+<th style="text-align:left">&#x540E;&#x7AEF;</th>
+<th style="text-align:left">Local-backend</th>
+<th style="text-align:left">Importer-backend</th>
+<th style="text-align:left">TiDB-backend</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>--config <em>file</em></td>
-<td>&#x4ECE; <em>file</em> &#x8BFB;&#x53D6;&#x5168;&#x5C40;&#x8BBE;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x5219;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8BBE;&#x7F6E;&#x3002;</td>
-<td></td>
+<td style="text-align:left">&#x901F;&#x5EA6;</td>
+<td style="text-align:left">&#x5FEB; (~500 GB/&#x5C0F;&#x65F6;)</td>
+<td style="text-align:left">&#x5FEB; (~400 GB/&#x5C0F;&#x65F6;)</td>
+<td style="text-align:left">&#x6162; (~50 GB/&#x5C0F;&#x65F6;)</td>
 </tr>
 <tr>
-<td>-V</td>
-<td>&#x8F93;&#x51FA;&#x7A0B;&#x5E8F;&#x7684;&#x7248;&#x672C;</td>
-<td></td>
+<td style="text-align:left">&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x7387;</td>
+<td style="text-align:left">&#x9AD8;</td>
+<td style="text-align:left">&#x9AD8;</td>
+<td style="text-align:left">&#x4F4E;</td>
 </tr>
 <tr>
-<td>-d <em>directory</em></td>
-<td>&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;&#x76EE;&#x5F55;</td>
-<td><code>mydumper.data-source-dir</code></td>
+<td style="text-align:left">&#x5360;&#x7528;&#x7F51;&#x7EDC;&#x5E26;&#x5BBD;</td>
+<td style="text-align:left">&#x9AD8;</td>
+<td style="text-align:left">&#x4E2D;</td>
+<td style="text-align:left">&#x4F4E;</td>
 </tr>
 <tr>
-<td>-L <em>level</em></td>
-<td>&#x65E5;&#x5FD7;&#x7684;&#x7B49;&#x7EA7;&#xFF1A; debug&#x3001;info&#x3001;warn&#x3001;error &#x6216; fatal (&#x9ED8;&#x8BA4;&#x4E3A; info)</td>
-<td><code>lightning.log-level</code></td>
+<td style="text-align:left">&#x5BFC;&#x5165;&#x65F6;&#x662F;&#x5426;&#x6EE1;&#x8DB3; ACID</td>
+<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">&#x662F;</td>
 </tr>
 <tr>
-<td>-f <em>rule</em></td>
-<td><a href="https://docs.pingcap.com/zh/tidb/stable/table-filter" _target="blank">&#x8868;&#x5E93;&#x8FC7;&#x6EE4;&#x7684;&#x89C4;&#x5219;</a> (&#x53EF;&#x591A;&#x6B21;&#x6307;&#x5B9A;)</td>
-<td><code>mydumper.filter</code></td>
+<td style="text-align:left">&#x76EE;&#x6807;&#x8868;</td>
+<td style="text-align:left">&#x5FC5;&#x987B;&#x4E3A;&#x7A7A;</td>
+<td style="text-align:left">&#x5FC5;&#x987B;&#x4E3A;&#x7A7A;</td>
+<td style="text-align:left">&#x53EF;&#x4EE5;&#x4E0D;&#x4E3A;&#x7A7A;</td>
 </tr>
 <tr>
-<td>--backend <a href="https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-backends" _target="blank"><em>backend</em></a></td>
-<td>&#x9009;&#x62E9;&#x540E;&#x7AEF;&#x7684;&#x6A21;&#x5F0F;&#xFF1A;<code>importer</code>&#x3001;<code>local</code> &#x6216; <code>tidb</code></td>
-<td><code>tikv-importer.backend</code></td>
+<td style="text-align:left">&#x989D;&#x5916;&#x7EC4;&#x4EF6;</td>
+<td style="text-align:left">&#x65E0;</td>
+<td style="text-align:left"><code>tikv-importer</code></td>
+<td style="text-align:left">&#x65E0;</td>
 </tr>
 <tr>
-<td>--log-file <em>file</em></td>
-<td>&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF08;&#x9ED8;&#x8BA4;&#x662F; <code>/tmp</code> &#x4E2D;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#xFF09;</td>
-<td><code>lightning.log-file</code></td>
-</tr>
-<tr>
-<td>--status-addr <em>ip:port</em></td>
-<td>TiDB Lightning &#x670D;&#x52A1;&#x5668;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
-<td><code>lightning.status-port</code></td>
-</tr>
-<tr>
-<td>--importer <em>host:port</em></td>
-<td>TiKV Importer &#x7684;&#x5730;&#x5740;</td>
-<td><code>tikv-importer.addr</code></td>
-</tr>
-<tr>
-<td>--pd-urls <em>host:port</em></td>
-<td>PD endpoint &#x7684;&#x5730;&#x5740;</td>
-<td><code>tidb.pd-addr</code></td>
-</tr>
-<tr>
-<td>--tidb-host <em>host</em></td>
-<td>TiDB Server &#x7684; host</td>
-<td><code>tidb.host</code></td>
-</tr>
-<tr>
-<td>--tidb-port <em>port</em></td>
-<td>TiDB Server &#x7684;&#x7AEF;&#x53E3;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A; 4000&#xFF09;</td>
-<td><code>tidb.port</code></td>
-</tr>
-<tr>
-<td>--tidb-status <em>port</em></td>
-<td>TiDB Server &#x7684;&#x72B6;&#x6001;&#x7AEF;&#x53E3;&#x7684;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A; 10080&#xFF09;</td>
-<td><code>tidb.status-port</code></td>
-</tr>
-<tr>
-<td>--tidb-user <em>user</em></td>
-<td>&#x8FDE;&#x63A5;&#x5230; TiDB &#x7684;&#x7528;&#x6237;&#x540D;</td>
-<td><code>tidb.user</code></td>
-</tr>
-<tr>
-<td>--tidb-password <em>password</em></td>
-<td>&#x8FDE;&#x63A5;&#x5230; TiDB &#x7684;&#x5BC6;&#x7801;</td>
-<td><code>tidb.password</code></td>
-</tr>
-<tr>
-<td>--no-schema</td>
-<td>&#x5FFD;&#x7565;&#x8868;&#x7ED3;&#x6784;&#x6587;&#x4EF6;&#xFF0C;&#x76F4;&#x63A5;&#x4ECE; TiDB &#x4E2D;&#x83B7;&#x53D6;&#x8868;&#x7ED3;&#x6784;&#x4FE1;&#x606F;</td>
-<td><code>mydumper.no-schema</code></td>
-</tr>
-<tr>
-<td>--enable-checkpoint <em>bool</em></td>
-<td>&#x662F;&#x5426;&#x542F;&#x7528;&#x65AD;&#x70B9; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
-<td><code>checkpoint.enable</code></td>
-</tr>
-<tr>
-<td>--analyze <em>bool</em></td>
-<td>&#x5BFC;&#x5165;&#x540E;&#x5206;&#x6790;&#x8868;&#x4FE1;&#x606F; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
-<td><code>post-restore.analyze</code></td>
-</tr>
-<tr>
-<td>--checksum <em>bool</em></td>
-<td>&#x5BFC;&#x5165;&#x540E;&#x6BD4;&#x8F83;&#x6821;&#x9A8C;&#x548C; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
-<td><code>post-restore.checksum</code></td>
-</tr>
-<tr>
-<td>--check-requirements <em>bool</em></td>
-<td>&#x5F00;&#x59CB;&#x4E4B;&#x524D;&#x68C0;&#x67E5;&#x96C6;&#x7FA4;&#x7248;&#x672C;&#x517C;&#x5BB9;&#x6027;&#xFF08;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true&#xFF09;</td>
-<td><code>lightning.check-requirements</code></td>
-</tr>
-<tr>
-<td>--ca <em>file</em></td>
-<td>TLS &#x8FDE;&#x63A5;&#x7684; CA &#x8BC1;&#x4E66;&#x8DEF;&#x5F84;</td>
-<td><code>security.ca-path</code></td>
-</tr>
-<tr>
-<td>--cert <em>file</em></td>
-<td>TLS &#x8FDE;&#x63A5;&#x7684;&#x8BC1;&#x4E66;&#x8DEF;&#x5F84;</td>
-<td><code>security.cert-path</code></td>
-</tr>
-<tr>
-<td>--key <em>file</em></td>
-<td>TLS &#x8FDE;&#x63A5;&#x7684;&#x79C1;&#x94A5;&#x8DEF;&#x5F84;</td>
-<td><code>security.key-path</code></td>
-</tr>
-<tr>
-<td>--server-mode</td>
-<td>&#x5728;&#x670D;&#x52A1;&#x5668;&#x6A21;&#x5F0F;&#x4E0B;&#x542F;&#x52A8; TiDB Lightning</td>
-<td><code>lightning.server-mode</code></td>
+<td style="text-align:left">&#x652F;&#x6301; TiDB &#x96C6;&#x7FA4;&#x7248;&#x672C;</td>
+<td style="text-align:left">&gt;= v4.0.0</td>
+<td style="text-align:left">&#x5168;&#x90E8;</td>
+<td style="text-align:left">&#x5168;&#x90E8;</td>
 </tr>
 </tbody>
 </table>
-<h1 id="&#x4E94;&#x3001;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;">&#x4E94;&#x3001;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;</h1>
-<h2 id="1&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4EFB;&#x52A1;&#x8BE6;&#x7EC6;&#x914D;&#x7F6E;">1&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4EFB;&#x52A1;&#x8BE6;&#x7EC6;&#x914D;&#x7F6E;</h2>
+<ul>
+<li>&#x5982;&#x679C;&#x5BFC;&#x5165;&#x7684;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x4E3A; v4.0 &#x6216;&#x4EE5;&#x4E0A;&#x7248;&#x672C;&#xFF0C;&#x8BF7;&#x4F18;&#x5148;&#x8003;&#x8651;&#x4F7F;&#x7528; Local-backend &#x6A21;&#x5F0F;&#x3002;Local-backend &#x90E8;&#x7F72;&#x66F4;&#x7B80;&#x5355;&#x5E76;&#x4E14;&#x6027;&#x80FD;&#x4E5F;&#x8F83;&#x5176;&#x4ED6;&#x4E24;&#x4E2A;&#x6A21;&#x5F0F;&#x66F4;&#x9AD8;</li>
+<li>&#x5982;&#x679C;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x4E3A; v3.x &#x6216;&#x4EE5;&#x4E0B;&#xFF0C;&#x5219;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; Importer-backend &#x6A21;&#x5F0F;</li>
+<li>&#x5982;&#x679C;&#x9700;&#x8981;&#x5BFC;&#x5165;&#x7684;&#x96C6;&#x7FA4;&#x4E3A;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7EBF;&#x4E0A;&#x96C6;&#x7FA4;&#xFF0C;&#x6216;&#x9700;&#x8981;&#x5BFC;&#x5165;&#x7684;&#x8868;&#x4E2D;&#x5DF2;&#x5305;&#x542B;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x5219;&#x6700;&#x597D;&#x4F7F;&#x7528; TiDB-backend &#x6A21;&#x5F0F;</li>
+</ul>
+<h1 id="&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x3001;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#x53CA;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BE6;&#x89E3;">&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x3001;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#x53CA;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BE6;&#x89E3;</h1>
+<h2 id="1&#x3001;&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;">1&#x3001;&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;</h2>
+<pre class="language-"><code class="lang-bash"><span class="token assign-left variable">version</span><span class="token operator">=</span>v4.0.5 <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">curl</span> -<span class="token comment"># https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt &amp;&amp; \</span>
+<span class="token function">ln</span> -s /opt/tidb-toolkit-<span class="token variable">$version</span>-linux-amd64 /opt/tidb-toolkit-<span class="token variable">$version</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">echo</span> -e <span class="token string">&quot;export TIDB_TOOLKIT_HOME=/opt/tidb-toolkit-<span class="token variable">$version</span><span class="token entity" title="\n">\n</span>export PATH=\<span class="token environment constant">$PATH</span>:\<span class="token variable">$TIDB_TOOLKIT_HOME</span>/bin&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/profile <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token builtin class-name">source</span> /etc/profile <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span> 
+tidb-lightning -V
+</code></pre>
+<h2 id="2&#x3001;tidb-lightning&#x53C2;&#x6570;">2&#x3001;tidb-lightning&#x53C2;&#x6570;</h2>
+<ul>
+<li>&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x751F;&#x6548;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+<th style="text-align:left">&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x9879;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">--config <em>file</em></td>
+<td style="text-align:left">&#x4ECE; <em>file</em> &#x8BFB;&#x53D6;&#x5168;&#x5C40;&#x8BBE;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x5219;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8BBE;&#x7F6E;&#x3002;</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">-V</td>
+<td style="text-align:left">&#x8F93;&#x51FA;&#x7A0B;&#x5E8F;&#x7684;&#x7248;&#x672C;</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">-d <em>directory</em></td>
+<td style="text-align:left">&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;&#x672C;&#x5730;&#x76EE;&#x5F55;&#x6216;<a href="https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-storages" _target="blank">&#x5916;&#x90E8;&#x5B58;&#x50A8; URL</a></td>
+<td style="text-align:left"><code>mydumper.data-source-dir</code></td>
+</tr>
+<tr>
+<td style="text-align:left">-L <em>level</em></td>
+<td style="text-align:left">&#x65E5;&#x5FD7;&#x7684;&#x7B49;&#x7EA7;&#xFF1A; debug&#x3001;info&#x3001;warn&#x3001;error &#x6216; fatal (&#x9ED8;&#x8BA4;&#x4E3A; info)</td>
+<td style="text-align:left"><code>lightning.log-level</code></td>
+</tr>
+<tr>
+<td style="text-align:left">-f <em>rule</em></td>
+<td style="text-align:left"><a href="https://docs.pingcap.com/zh/tidb/stable/table-filter" _target="blank">&#x8868;&#x5E93;&#x8FC7;&#x6EE4;&#x7684;&#x89C4;&#x5219;</a> (&#x53EF;&#x591A;&#x6B21;&#x6307;&#x5B9A;)</td>
+<td style="text-align:left"><code>mydumper.filter</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--backend <a href="https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-backends" _target="blank"><em>backend</em></a></td>
+<td style="text-align:left">&#x9009;&#x62E9;&#x540E;&#x7AEF;&#x7684;&#x6A21;&#x5F0F;&#xFF1A;<code>importer</code>&#x3001;<code>local</code> &#x6216; <code>tidb</code></td>
+<td style="text-align:left"><code>tikv-importer.backend</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--log-file <em>file</em></td>
+<td style="text-align:left">&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF08;&#x9ED8;&#x8BA4;&#x662F; <code>/tmp</code> &#x4E2D;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#xFF09;</td>
+<td style="text-align:left"><code>lightning.log-file</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--status-addr <em>ip:port</em></td>
+<td style="text-align:left">TiDB Lightning &#x670D;&#x52A1;&#x5668;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
+<td style="text-align:left"><code>lightning.status-port</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--importer <em>host:port</em></td>
+<td style="text-align:left">TiKV Importer &#x7684;&#x5730;&#x5740;</td>
+<td style="text-align:left"><code>tikv-importer.addr</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--pd-urls <em>host:port</em></td>
+<td style="text-align:left">PD endpoint &#x7684;&#x5730;&#x5740;</td>
+<td style="text-align:left"><code>tidb.pd-addr</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--tidb-host <em>host</em></td>
+<td style="text-align:left">TiDB Server &#x7684; host</td>
+<td style="text-align:left"><code>tidb.host</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--tidb-port <em>port</em></td>
+<td style="text-align:left">TiDB Server &#x7684;&#x7AEF;&#x53E3;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A; 4000&#xFF09;</td>
+<td style="text-align:left"><code>tidb.port</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--tidb-status <em>port</em></td>
+<td style="text-align:left">TiDB Server &#x7684;&#x72B6;&#x6001;&#x7AEF;&#x53E3;&#x7684;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A; 10080&#xFF09;</td>
+<td style="text-align:left"><code>tidb.status-port</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--tidb-user <em>user</em></td>
+<td style="text-align:left">&#x8FDE;&#x63A5;&#x5230; TiDB &#x7684;&#x7528;&#x6237;&#x540D;</td>
+<td style="text-align:left"><code>tidb.user</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--tidb-password <em>password</em></td>
+<td style="text-align:left">&#x8FDE;&#x63A5;&#x5230; TiDB &#x7684;&#x5BC6;&#x7801;</td>
+<td style="text-align:left"><code>tidb.password</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--no-schema</td>
+<td style="text-align:left">&#x5FFD;&#x7565;&#x8868;&#x7ED3;&#x6784;&#x6587;&#x4EF6;&#xFF0C;&#x76F4;&#x63A5;&#x4ECE; TiDB &#x4E2D;&#x83B7;&#x53D6;&#x8868;&#x7ED3;&#x6784;&#x4FE1;&#x606F;</td>
+<td style="text-align:left"><code>mydumper.no-schema</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--enable-checkpoint <em>bool</em></td>
+<td style="text-align:left">&#x662F;&#x5426;&#x542F;&#x7528;&#x65AD;&#x70B9; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
+<td style="text-align:left"><code>checkpoint.enable</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--analyze <em>bool</em></td>
+<td style="text-align:left">&#x5BFC;&#x5165;&#x540E;&#x5206;&#x6790;&#x8868;&#x4FE1;&#x606F; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
+<td style="text-align:left"><code>post-restore.analyze</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--checksum <em>bool</em></td>
+<td style="text-align:left">&#x5BFC;&#x5165;&#x540E;&#x6BD4;&#x8F83;&#x6821;&#x9A8C;&#x548C; (&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true)</td>
+<td style="text-align:left"><code>post-restore.checksum</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--check-requirements <em>bool</em></td>
+<td style="text-align:left">&#x5F00;&#x59CB;&#x4E4B;&#x524D;&#x68C0;&#x67E5;&#x96C6;&#x7FA4;&#x7248;&#x672C;&#x517C;&#x5BB9;&#x6027;&#xFF08;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; true&#xFF09;</td>
+<td style="text-align:left"><code>lightning.check-requirements</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--ca <em>file</em></td>
+<td style="text-align:left">TLS &#x8FDE;&#x63A5;&#x7684; CA &#x8BC1;&#x4E66;&#x8DEF;&#x5F84;</td>
+<td style="text-align:left"><code>security.ca-path</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--cert <em>file</em></td>
+<td style="text-align:left">TLS &#x8FDE;&#x63A5;&#x7684;&#x8BC1;&#x4E66;&#x8DEF;&#x5F84;</td>
+<td style="text-align:left"><code>security.cert-path</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--key <em>file</em></td>
+<td style="text-align:left">TLS &#x8FDE;&#x63A5;&#x7684;&#x79C1;&#x94A5;&#x8DEF;&#x5F84;</td>
+<td style="text-align:left"><code>security.key-path</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--server-mode</td>
+<td style="text-align:left">&#x5728;&#x670D;&#x52A1;&#x5668;&#x6A21;&#x5F0F;&#x4E0B;&#x542F;&#x52A8; TiDB Lightning</td>
+<td style="text-align:left"><code>lightning.server-mode</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3&#x3001;tidb-lightning-ctl&#x53C2;&#x6570;">3&#x3001;tidb-lightning-ctl&#x53C2;&#x6570;</h2>
+<ul>
+<li><p><em>tablename</em> &#x5FC5;&#x987B;&#x662F;<code>db`.`tbl</code> &#x4E2D;&#x7684;&#x9650;&#x5B9A;&#x8868;&#x540D;&#xFF08;&#x5305;&#x62EC;&#x53CD;&#x5F15;&#x53F7;&#xFF09;&#x6216;&#x5173;&#x952E;&#x8BCD; <code>all</code></p>
+</li>
+<li><p>&#x6240;&#x6709; <code>tidb-lightning</code> &#x7684;&#x53C2;&#x6570;&#x4E5F;&#x9002;&#x7528;&#x4E8E; <code>tidb-lightning-ctl</code></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">--compact</td>
+<td style="text-align:left">&#x6267;&#x884C; full compact</td>
+</tr>
+<tr>
+<td style="text-align:left">--switch-mode <em>mode</em></td>
+<td style="text-align:left">&#x5C06;&#x6BCF;&#x4E2A; TiKV Store &#x5207;&#x6362;&#x5230;&#x6307;&#x5B9A;&#x6A21;&#x5F0F;&#xFF08;normal &#x6216; import&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:left">--fetch-mode</td>
+<td style="text-align:left">&#x6253;&#x5370;&#x6BCF;&#x4E2A; TiKV Store &#x7684;&#x5F53;&#x524D;&#x6A21;&#x5F0F;</td>
+</tr>
+<tr>
+<td style="text-align:left">--import-engine <em>uuid</em></td>
+<td style="text-align:left">&#x5C06; TiKV Importer &#x4E0A;&#x5173;&#x95ED;&#x7684;&#x5F15;&#x64CE;&#x6587;&#x4EF6;&#x5BFC;&#x5165;&#x5230; TiKV &#x96C6;&#x7FA4;</td>
+</tr>
+<tr>
+<td style="text-align:left">--cleanup-engine <em>uuid</em></td>
+<td style="text-align:left">&#x5220;&#x9664; TiKV Importer &#x4E0A;&#x7684;&#x5F15;&#x64CE;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td style="text-align:left">--checkpoint-dump <em>folder</em></td>
+<td style="text-align:left">&#x5C06;&#x5F53;&#x524D;&#x7684;&#x65AD;&#x70B9;&#x4EE5; CSV &#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x5230;&#x6587;&#x4EF6;&#x5939;&#x4E2D;</td>
+</tr>
+<tr>
+<td style="text-align:left">--checkpoint-error-destroy <em>tablename</em></td>
+<td style="text-align:left">&#x5220;&#x9664;&#x65AD;&#x70B9;&#xFF0C;&#x5982;&#x679C;&#x62A5;&#x9519;&#x5219;&#x5220;&#x9664;&#x8BE5;&#x8868;</td>
+</tr>
+<tr>
+<td style="text-align:left">--checkpoint-error-ignore <em>tablename</em></td>
+<td style="text-align:left">&#x5FFD;&#x7565;&#x6307;&#x5B9A;&#x8868;&#x4E2D;&#x65AD;&#x70B9;&#x7684;&#x62A5;&#x9519;</td>
+</tr>
+<tr>
+<td style="text-align:left">--checkpoint-remove <em>tablename</em></td>
+<td style="text-align:left">&#x65E0;&#x6761;&#x4EF6;&#x5220;&#x9664;&#x8868;&#x7684;&#x65AD;&#x70B9;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4&#x3001;tikv-importer&#x53C2;&#x6570;">4&#x3001;tikv-importer&#x53C2;&#x6570;</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+<th style="text-align:left">&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x9879;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-C, --config <em>file</em></td>
+<td style="text-align:left">&#x4ECE; <em>file</em> &#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8BBE;&#x7F6E;</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">-V, --version</td>
+<td style="text-align:left">&#x8F93;&#x51FA;&#x7A0B;&#x5E8F;&#x7684;&#x7248;&#x672C;</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">-A, --addr <em>ip:port</em></td>
+<td style="text-align:left">TiKV Importer &#x670D;&#x52A1;&#x5668;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
+<td style="text-align:left"><code>server.addr</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--status-server <em>ip:port</em></td>
+<td style="text-align:left">&#x72B6;&#x6001;&#x670D;&#x52A1;&#x5668;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
+<td style="text-align:left"><code>status-server-address</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--import-dir <em>dir</em></td>
+<td style="text-align:left">&#x5F15;&#x64CE;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x50A8;&#x76EE;&#x5F55;</td>
+<td style="text-align:left"><code>import.import-dir</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--log-level <em>level</em></td>
+<td style="text-align:left">&#x65E5;&#x5FD7;&#x7684;&#x7B49;&#x7EA7;&#xFF1A; trace&#x3001;debug&#x3001;info&#x3001;warn&#x3001;error &#x6216; off</td>
+<td style="text-align:left"><code>log-level</code></td>
+</tr>
+<tr>
+<td style="text-align:left">--log-file <em>file</em></td>
+<td style="text-align:left">&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</td>
+<td style="text-align:left"><code>log-file</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="5&#x3001;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53C2;&#x6570;&#x8BE6;&#x89E3;">5&#x3001;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53C2;&#x6570;&#x8BE6;&#x89E3;</h2>
 <pre class="language-"><code class="lang-ini"><span class="token selector">[lightning]</span>
 <span class="token comment"># &#x542F;&#x52A8;&#x4E4B;&#x524D;&#x68C0;&#x67E5;&#x96C6;&#x7FA4;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x6700;&#x4F4E;&#x9700;&#x6C42;&#x3002;</span>
 <span class="token comment"># check-requirements = true</span>
@@ -6839,7 +7126,6 @@ tidb-lightning -V
 <span class="token constant">table-concurrency</span> <span class="token attr-value"><span class="token punctuation">=</span> 6</span>
 
 <span class="token comment"># &#x6570;&#x636E;&#x7684;&#x5E76;&#x53D1;&#x6570;&#x3002;&#x9ED8;&#x8BA4;&#x4E0E;&#x903B;&#x8F91; CPU &#x7684;&#x6570;&#x91CF;&#x76F8;&#x540C;&#x3002;&#x6DF7;&#x5408;&#x90E8;&#x7F72;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x5927;&#x5C0F;&#x914D;&#x7F6E;&#x4E3A;&#x903B;&#x8F91; CPU &#x6570;&#x7684; 75%&#xFF0C;&#x4EE5;&#x9650;&#x5236; CPU &#x7684;&#x4F7F;&#x7528;&#x3002;</span>
-
 <span class="token comment"># region-concurrency =</span>
 
 <span class="token comment"># I/O &#x6700;&#x5927;&#x5E76;&#x53D1;&#x6570;&#x3002;I/O &#x5E76;&#x53D1;&#x91CF;&#x592A;&#x9AD8;&#x65F6;&#xFF0C;&#x4F1A;&#x56E0;&#x786C;&#x76D8;&#x5185;&#x90E8;&#x7F13;&#x5B58;&#x9891;&#x7E41;&#x88AB;&#x5237;&#x65B0;&#x3002;&#x800C;&#x589E;&#x52A0; I/O &#x7B49;&#x5F85;&#x65F6;&#x95F4;&#xFF0C;&#x5BFC;&#x81F4;&#x7F13;&#x5B58;&#x672A;&#x547D;&#x4E2D;&#x548C;&#x8BFB;&#x53D6;&#x901F;&#x5EA6;&#x964D;&#x4F4E;&#x3002;&#x5BF9;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x5B58;&#x50A8;&#x4ECB;&#x8D28;&#xFF0C;&#x6B64;&#x53C2;&#x6570;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x8C03;&#x6574;&#x4EE5;&#x8FBE;&#x5230;&#x6700;&#x4F73;&#x6548;&#x7387;&#x3002;</span>
@@ -6887,12 +7173,16 @@ tidb-lightning -V
 <span class="token comment"># - ignore&#xFF1A;&#x4FDD;&#x7559;&#x5DF2;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x5FFD;&#x7565;&#x65B0;&#x6570;&#x636E;</span>
 <span class="token comment"># - error&#xFF1A;&#x4E2D;&#x6B62;&#x5BFC;&#x5165;&#x5E76;&#x62A5;&#x9519;</span>
 <span class="token comment"># on-duplicate = &quot;replace&quot;</span>
+
 <span class="token comment"># &#x5F53;&#x540E;&#x7AEF;&#x662F; &#x201C;local&#x201D; &#x65F6;&#xFF0C;&#x63A7;&#x5236;&#x751F;&#x6210; SST &#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x6700;&#x597D;&#x8DDF; TiKV &#x91CC;&#x9762;&#x7684; Region &#x5927;&#x5C0F;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 96 MB&#x3002;</span>
 <span class="token comment"># region-split-size = 100_663_296</span>
+
 <span class="token comment"># &#x5F53;&#x540E;&#x7AEF;&#x662F; &#x201C;local&#x201D; &#x65F6;&#xFF0C;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#x4E2D;&#x53D1;&#x9001;&#x7684; KV &#x6570;&#x91CF;&#x3002;</span>
 <span class="token comment"># send-kv-pairs = 32768</span>
+
 <span class="token comment"># &#x5F53;&#x540E;&#x7AEF;&#x662F; &#x201C;local&#x201D; &#x65F6;&#xFF0C;&#x672C;&#x5730;&#x8FDB;&#x884C; KV &#x6392;&#x5E8F;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x78C1;&#x76D8;&#x6027;&#x80FD;&#x8F83;&#x4F4E;&#xFF08;&#x5982;&#x4F7F;&#x7528;&#x673A;&#x68B0;&#x76D8;&#xFF09;&#xFF0C;&#x5EFA;&#x8BAE;&#x8BBE;&#x7F6E;&#x6210;&#x4E0E; `data-source-dir` &#x4E0D;&#x540C;&#x7684;&#x78C1;&#x76D8;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x6709;&#x6548;&#x63D0;&#x5347;&#x5BFC;&#x5165;&#x6027;&#x80FD;&#x3002;</span>
 <span class="token comment"># sorted-kv-dir = &quot;&quot;</span>
+
 <span class="token comment"># &#x5F53;&#x540E;&#x7AEF;&#x662F; &#x201C;local&#x201D; &#x65F6;&#xFF0C;TiKV &#x5199;&#x5165; KV &#x6570;&#x636E;&#x7684;&#x5E76;&#x53D1;&#x5EA6;&#x3002;&#x5F53; TiDB Lightning &#x548C; TiKV &#x76F4;&#x63A5;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x901F;&#x5EA6;&#x8D85;&#x8FC7;&#x4E07;&#x5146;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x9002;&#x5F53;&#x589E;&#x52A0;&#x8FD9;&#x4E2A;&#x503C;&#x3002;</span>
 <span class="token comment"># range-concurrency = 16</span>
 
@@ -7029,21 +7319,115 @@ tidb-lightning -V
 <span class="token comment"># &#x5728;&#x65E5;&#x5FD7;&#x4E2D;&#x6253;&#x5370;&#x5BFC;&#x5165;&#x8FDB;&#x5EA6;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#x3002;</span>
 <span class="token constant">log-progress</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;5m&quot;</span>
 </code></pre>
-<p>&#x5F00;&#x59CB;&#x6267;&#x884C;&#x4EFB;&#x52A1;</p>
-<pre class="language-"><code class="lang-bash">tidb-lightning -config /home/tidb/tidb-lightning.toml
+<h1 id="&#x4E94;&#x3001;web-&#x754C;&#x9762;">&#x4E94;&#x3001;Web &#x754C;&#x9762;</h1>
+<p>TiDB Lightning &#x652F;&#x6301;&#x5728;&#x7F51;&#x9875;&#x4E0A;&#x67E5;&#x770B;&#x5BFC;&#x5165;&#x8FDB;&#x5EA6;&#x6216;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x3002;&#x542F;&#x7528;&#x670D;&#x52A1;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</p>
+<ol>
+<li><p>&#x5728;&#x542F;&#x52A8; <code>tidb-lightning</code> &#x65F6;&#x52A0;&#x4E0A;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570; <code>--server-mode</code>&#x3002;</p>
+<pre class="language-"><code class="lang-sh"><span class="token function">nohup</span> tidb-lightning --server-mode --status-addr :8289 <span class="token operator">&gt;&gt;</span> tidb-lightning-server.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 </code></pre>
-<h2 id="2&#x3001;&#x547D;&#x4EE4;&#x884C;&#x4EFB;&#x52A1;&#x7B80;&#x5355;&#x914D;&#x7F6E;">2&#x3001;&#x547D;&#x4EE4;&#x884C;&#x4EFB;&#x52A1;&#x7B80;&#x5355;&#x914D;&#x7F6E;</h2>
-<pre class="language-"><code class="lang-bash">tidb-lightning <span class="token punctuation">\</span>
-  -L info --log-file /root/tidb-lightning_task.log <span class="token punctuation">\</span>
-  --backend <span class="token builtin class-name">local</span> --status-addr <span class="token number">10080</span> --enable-checkpoint <span class="token boolean">true</span> <span class="token punctuation">\</span>
-  -d /root/tidb_backup <span class="token punctuation">\</span>
-  --tidb-host <span class="token number">192.168</span>.1.2 <span class="token punctuation">\</span>
-  --tidb-port <span class="token number">4000</span> <span class="token punctuation">\</span>
-  --tidb-user root <span class="token punctuation">\</span>
-  --tidb-password *****
+</li>
+<li><p>&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x8BBE;&#x7F6E; <code>lightning.server-mode</code>&#x3002;</p>
+<pre class="language-"><code class="lang-toml"><span class="token punctuation">[</span><span class="token table class-name">lightning</span><span class="token punctuation">]</span>
+<span class="token key property">server-mode</span> <span class="token punctuation">=</span> <span class="token boolean">true</span>
+<span class="token key property">status-addr</span> <span class="token punctuation">=</span> <span class="token string">&apos;:8289&apos;</span>
 </code></pre>
+</li>
+</ol>
+<p>TiDB Lightning &#x542F;&#x52A8;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE; <code>http://127.0.0.1:8289</code> &#x6765;&#x7BA1;&#x7406;&#x7A0B;&#x5E8F;</p>
+<p>&#x670D;&#x52A1;&#x5668;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;TiDB Lightning &#x4E0D;&#x4F1A;&#x7ACB;&#x5373;&#x5F00;&#x59CB;&#x8FD0;&#x884C;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x7528;&#x6237;&#x5728; web &#x9875;&#x9762;&#x63D0;&#x4EA4;&#xFF08;&#x591A;&#x4E2A;&#xFF09; TOML &#x683C;&#x5F0F;&#x7684;<strong>&#x4EFB;&#x52A1;</strong>&#x6587;&#x4EF6;&#x6765;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x3002;</p>
+<h1 id="&#x516D;&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;">&#x516D;&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;</h1>
+<p>&#x5927;&#x91CF;&#x7684;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x4E00;&#x822C;&#x8017;&#x65F6;&#x6570;&#x5C0F;&#x65F6;&#x81F3;&#x6570;&#x5929;&#xFF0C;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x4F1A;&#x6709;&#x4E00;&#x5B9A;&#x673A;&#x7387;&#x53D1;&#x751F;&#x975E;&#x6B63;&#x5E38;&#x4E2D;&#x65AD;&#x3002;&#x5982;&#x679C;&#x6BCF;&#x6B21;&#x91CD;&#x542F;&#x90FD;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#xFF0C;&#x5C31;&#x4F1A;&#x6D6A;&#x8D39;&#x6389;&#x4E4B;&#x524D;&#x5DF2;&#x6210;&#x529F;&#x5BFC;&#x5165;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E3A;&#x6B64;&#xFF0C;TiDB Lightning &#x63D0;&#x4F9B;&#x4E86;&#x201C;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x201D;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5373;&#x4F7F; <code>tidb-lightning</code> &#x5D29;&#x6E83;&#xFF0C;&#x5728;&#x91CD;&#x542F;&#x65F6;&#x4ECD;&#x7136;&#x63A5;&#x7740;&#x4E4B;&#x524D;&#x7684;&#x8FDB;&#x5EA6;&#x7EE7;&#x7EED;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x6587;&#x6863;&#xFF1A;<a href="https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-checkpoints" _target="blank">https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-checkpoints</a></p>
+<h2 id="1&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x7684;&#x542F;&#x7528;&#x4E0E;&#x914D;&#x7F6E;">1&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x7684;&#x542F;&#x7528;&#x4E0E;&#x914D;&#x7F6E;</h2>
+<pre class="language-"><code class="lang-ini"><span class="token selector">[checkpoint]</span>
+<span class="token comment"># &#x542F;&#x7528;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x3002;</span>
+<span class="token comment"># &#x5BFC;&#x5165;&#x65F6;&#xFF0C;TiDB Lightning &#x4F1A;&#x8BB0;&#x5F55;&#x5F53;&#x524D;&#x8FDB;&#x5EA6;&#x3002;</span>
+<span class="token comment"># &#x82E5; TiDB Lightning &#x6216;&#x5176;&#x4ED6;&#x7EC4;&#x4EF6;&#x5F02;&#x5E38;&#x9000;&#x51FA;&#xFF0C;&#x5728;&#x91CD;&#x542F;&#x65F6;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x91CD;&#x590D;&#x518D;&#x5BFC;&#x5165;&#x5DF2;&#x5B8C;&#x6210;&#x7684;&#x6570;&#x636E;&#x3002;</span>
+<span class="token constant">enable</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+
+<span class="token comment"># &#x5B58;&#x50A8;&#x65AD;&#x70B9;&#x7684;&#x65B9;&#x5F0F;</span>
+<span class="token comment">#  - file&#xFF1A;&#x5B58;&#x653E;&#x5728;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF08;&#x8981;&#x6C42; v2.1.1 &#x6216;&#x4EE5;&#x4E0A;&#xFF09;</span>
+<span class="token comment">#  - mysql&#xFF1A;&#x5B58;&#x653E;&#x5728;&#x4EFB;&#x4F55;&#x517C;&#x5BB9; MySQL 5.7 &#x6216;&#x4EE5;&#x4E0A;&#x7684;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#xFF0C;&#x5305;&#x62EC; MariaDB &#x548C; TiDB</span>
+<span class="token constant">driver</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;file&quot;</span>
+
+<span class="token comment"># &#x5B58;&#x50A8;&#x65AD;&#x70B9;&#x7684;&#x67B6;&#x6784;&#x540D;&#x79F0;&#xFF08;&#x6570;&#x636E;&#x5E93;&#x540D;&#x79F0;&#xFF09;&#x4EC5;&#x5728; driver = &quot;mysql&quot; &#x65F6;&#x751F;&#x6548;</span>
+<span class="token comment"># schema = &quot;tidb_lightning_checkpoint&quot;</span>
+
+<span class="token comment"># &#x65AD;&#x70B9;&#x7684;&#x5B58;&#x653E;&#x4F4D;&#x7F6E;</span>
+<span class="token comment">#     &#x82E5; driver = &quot;file&quot;&#xFF0C;&#x6B64;&#x53C2;&#x6570;&#x4E3A;&#x65AD;&#x70B9;&#x4FE1;&#x606F;&#x5B58;&#x653E;&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x8BBE;&#x7F6E;&#x8BE5;&#x53C2;&#x6570;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A; `/tmp/CHECKPOINT_SCHEMA.pb`</span>
+<span class="token comment">#     &#x82E5; driver = &quot;mysql&quot;&#xFF0C;&#x6B64;&#x53C2;&#x6570;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x53C2;&#x6570; (DSN)&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#x201C;&#x7528;&#x6237;:&#x5BC6;&#x7801;@tcp(&#x5730;&#x5740;:&#x7AEF;&#x53E3;)/&#x201D;&#x3002;</span>
+<span class="token comment">#        &#x9ED8;&#x8BA4;&#x4F1A;&#x91CD;&#x7528; [tidb] &#x8BBE;&#x7F6E;&#x76EE;&#x6807;&#x6570;&#x636E;&#x5E93;&#x6765;&#x5B58;&#x50A8;&#x65AD;&#x70B9;&#x3002;&#x4E3A;&#x907F;&#x514D;&#x52A0;&#x91CD;&#x76EE;&#x6807;&#x96C6;&#x7FA4;&#x7684;&#x538B;&#x529B;&#xFF0C;&#x5EFA;&#x8BAE;&#x53E6;&#x5916;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x517C;&#x5BB9; MySQL &#x7684;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x5668;&#x3002;</span>
+<span class="token comment"># dsn = &quot;/tmp/tidb_lightning_checkpoint.pb&quot;</span>
+
+<span class="token comment"># &#x5BFC;&#x5165;&#x6210;&#x529F;&#x540E;&#x662F;&#x5426;&#x4FDD;&#x7559;&#x65AD;&#x70B9;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;&#x5220;&#x9664;&#x3002;&#x4FDD;&#x7559;&#x65AD;&#x70B9;&#x53EF;&#x7528;&#x4E8E;&#x8C03;&#x8BD5;&#xFF0C;&#x4F46;&#x6709;&#x53EF;&#x80FD;&#x6CC4;&#x6F0F;&#x6570;&#x636E;&#x6E90;&#x7684;&#x5143;&#x6570;&#x636E;&#x3002;</span>
+<span class="token comment"># keep-after-success = false</span>
+</code></pre>
+<h2 id="2&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x7684;&#x63A7;&#x5236;">2&#x3001;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x7684;&#x63A7;&#x5236;</h2>
+<p>&#x82E5; <code>tidb-lightning</code> &#x56E0;&#x4E0D;&#x53EF;&#x6062;&#x590D;&#x7684;&#x9519;&#x8BEF;&#x800C;&#x9000;&#x51FA;&#xFF08;&#x4F8B;&#x5982;&#x6570;&#x636E;&#x51FA;&#x9519;&#xFF09;&#xFF0C;&#x91CD;&#x542F;&#x65F6;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x65AD;&#x70B9;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x62A5;&#x9519;&#x79BB;&#x5F00;&#x3002;&#x4E3A;&#x4FDD;&#x8BC1;&#x5DF2;&#x5BFC;&#x5165;&#x7684;&#x6570;&#x636E;&#x5B89;&#x5168;&#xFF0C;&#x8FD9;&#x4E9B;&#x9519;&#x8BEF;&#x5FC5;&#x987B;&#x5148;&#x89E3;&#x51B3;&#x6389;&#x624D;&#x80FD;&#x7EE7;&#x7EED;&#x3002;&#x4F7F;&#x7528; <code>tidb-lightning-ctl</code> &#x5DE5;&#x5177;&#x53EF;&#x4EE5;&#x6807;&#x793A;&#x5DF2;&#x7ECF;&#x6062;&#x590D;&#x3002;</p>
+<h3 id="&#x2460;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x6574;&#x4E2A;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;">&#x2460;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x6574;&#x4E2A;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;</h3>
+<pre class="language-"><code class="lang-bash">tidb-lightning-ctl --checkpoint-error-destroy<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;<span class="token variable"><span class="token variable">`</span>schema<span class="token variable">`</span></span>.<span class="token variable"><span class="token variable">`</span>table<span class="token variable">`</span></span>&apos;</span> <span class="token operator">|</span> all <span class="token punctuation">]</span>
+</code></pre>
+<ul>
+<li>&#x8BE5;&#x547D;&#x4EE4;&#x4F1A;&#x8BA9;&#x5931;&#x8D25;&#x7684;&#x8868;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x6574;&#x4E2A;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;&#x3002;&#x9009;&#x9879;&#x4E2D;&#x7684;&#x67B6;&#x6784;&#x548C;&#x8868;&#x540D;&#x5FC5;&#x987B;&#x4EE5;&#x53CD;&#x5F15;&#x53F7; (```) &#x5305;&#x88F9;&#xFF0C;&#x800C;&#x4E14;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x5BFC;&#x5165; <code>schema`.`table</code> &#x8FD9;&#x4E2A;&#x8868;&#x66FE;&#x7ECF;&#x51FA;&#x9519;&#xFF0C;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x4F1A;&#xFF1A;<ol>
+<li>&#x4ECE;&#x76EE;&#x6807;&#x6570;&#x636E;&#x5E93;&#x79FB;&#x9664; (DROP) &#x8FD9;&#x4E2A;&#x8868;&#xFF0C;&#x6E05;&#x9664;&#x5DF2;&#x5BFC;&#x5165;&#x7684;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x5C06;&#x65AD;&#x70B9;&#x91CD;&#x8BBE;&#x5230;&#x201C;&#x672A;&#x5F00;&#x59CB;&#x201D;&#x7684;&#x72B6;&#x6001;&#x3002;</li>
+</ol>
+</li>
+<li>&#x5982;&#x679C; <code>schema`.`table</code> &#x6CA1;&#x6709;&#x51FA;&#x9519;&#xFF0C;&#x5219;&#x65E0;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>&#x4F20;&#x5165; <code>all</code> &#x4F1A;&#x5BF9;&#x6240;&#x6709;&#x8868;&#x8FDB;&#x884C;&#x4E0A;&#x8FF0;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x662F;&#x6700;&#x65B9;&#x4FBF;&#x3001;&#x5B89;&#x5168;&#x4F46;&#x4FDD;&#x5B88;&#x7684;&#x65AD;&#x70B9;&#x9519;&#x8BEF;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#x3002;</li>
+</ul>
+<h3 id="&#x2461;&#x5FFD;&#x7565;&#x51FA;&#x9519;&#x72B6;&#x6001;&#x63A5;&#x7740;&#x5E26;&#x5BFC;&#x5165;">&#x2461;&#x5FFD;&#x7565;&#x51FA;&#x9519;&#x72B6;&#x6001;&#x63A5;&#x7740;&#x5E26;&#x5BFC;&#x5165;</h3>
+<pre class="language-"><code class="lang-shell">tidb-lightning-ctl --checkpoint-error-ignore<span class="token operator">=</span><span class="token string">&apos;<span class="token variable"><span class="token variable">`</span>schema<span class="token variable">`</span></span>.<span class="token variable"><span class="token variable">`</span>table<span class="token variable">`</span></span>&apos;</span> <span class="token operator">&amp;&amp;</span>
+tidb-lightning-ctl --checkpoint-error-ignore<span class="token operator">=</span>all
+</code></pre>
+<p>&#x5982;&#x679C;&#x5BFC;&#x5165; <code>schema`.`table</code> &#x8FD9;&#x4E2A;&#x8868;&#x66FE;&#x7ECF;&#x51FA;&#x9519;&#xFF0C;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x4F1A;&#x6E05;&#x9664;&#x51FA;&#x9519;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x540C;&#x6CA1;&#x4E8B;&#x53D1;&#x751F;&#x8FC7;&#x4E00;&#x6837;&#x3002;&#x4F20;&#x5165; &quot;all&quot; &#x4F1A;&#x5BF9;&#x6240;&#x6709;&#x8868;&#x8FDB;&#x884C;&#x4E0A;&#x8FF0;&#x64CD;&#x4F5C;&#x3002;</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x9664;&#x975E;&#x786E;&#x5B9A;&#x9519;&#x8BEF;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x9009;&#x9879;&#x3002;&#x5982;&#x679C;&#x9519;&#x8BEF;&#x662F;&#x771F;&#x5B9E;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x4E0D;&#x5B8C;&#x5168;&#x3002;&#x542F;&#x7528;&#x6821;&#x9A8C;&#x548C; (CHECKSUM) &#x53EF;&#x4EE5;&#x9632;&#x6B62;&#x6570;&#x636E;&#x51FA;&#x9519;&#x88AB;&#x5FFD;&#x7565;&#x3002;</p>
+</blockquote>
+<h3 id="&#x2462;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x6709;&#x51FA;&#x9519;&#xFF0C;&#x628A;&#x65AD;&#x70B9;&#x6E05;&#x9664;">&#x2462;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x6709;&#x51FA;&#x9519;&#xFF0C;&#x628A;&#x65AD;&#x70B9;&#x6E05;&#x9664;</h3>
+<pre class="language-"><code class="lang-shell">tidb-lightning-ctl --checkpoint-remove<span class="token operator">=</span><span class="token string">&apos;<span class="token variable"><span class="token variable">`</span>schema<span class="token variable">`</span></span>.<span class="token variable"><span class="token variable">`</span>table<span class="token variable">`</span></span>&apos;</span> <span class="token operator">&amp;&amp;</span>
+tidb-lightning-ctl --checkpoint-remove<span class="token operator">=</span>all
+</code></pre>
+<h3 id="&#x2463;&#x5C06;&#x6240;&#x6709;&#x65AD;&#x70B9;&#x5907;&#x4EFD;&#x5230;&#x4F20;&#x5165;&#x7684;&#x6587;&#x4EF6;&#x5939;">&#x2463;&#x5C06;&#x6240;&#x6709;&#x65AD;&#x70B9;&#x5907;&#x4EFD;&#x5230;&#x4F20;&#x5165;&#x7684;&#x6587;&#x4EF6;&#x5939;</h3>
+<p>&#x8BE5;&#x53C2;&#x6570;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6280;&#x672F;&#x652F;&#x6301;&#x3002;&#x6B64;&#x9009;&#x9879;&#x4EC5;&#x4E8E; <code>driver = &quot;mysql&quot;</code> &#x65F6;&#x6709;&#x6548;&#x3002;</p>
+<pre class="language-"><code class="lang-shell">tidb-lightning-ctl --checkpoint-dump<span class="token operator">=</span>output/directory
+</code></pre>
+<h1 id="&#x4E03;&#x3001;&#x5B9E;&#x4F8B;">&#x4E03;&#x3001;&#x5B9E;&#x4F8B;</h1>
+<h2 id="1&#x3001;&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">1&#x3001;&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
+<blockquote>
+<p> Test.toml</p>
+</blockquote>
+<pre class="language-"><code class="lang-ini"><span class="token selector">[mydumper]</span>
+<span class="token comment"># &#x6570;&#x636E;&#x6E90;&#x76EE;&#x5F55;</span>
+<span class="token constant">data-source-dir</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;/data/tidb-dumpling-export&quot;</span>
+
+<span class="token selector">[tikv-importer]</span>
+<span class="token constant">backend</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;tidb&quot;</span>
+
+<span class="token selector">[tidb]</span>
+<span class="token constant">host</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;192.168.1.2&quot;</span>
+<span class="token constant">port</span> <span class="token attr-value"><span class="token punctuation">=</span> 4000</span>
+<span class="token constant">user</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;root&quot;</span>
+<span class="token constant">password</span> <span class="token attr-value"><span class="token punctuation">=</span> &quot;*****&quot;</span>
+</code></pre>
+<h2 id="2&#x3001;&#x542F;&#x52A8;&#x4EFB;&#x52A1;">2&#x3001;&#x542F;&#x52A8;&#x4EFB;&#x52A1;</h2>
+<ul>
+<li><p>&#x5728;lightning&#x7684;Web&#x754C;&#x9762;&#x4E2D;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+</li>
+<li><p>&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x8FD0;&#x884C;&#x4EFB;&#x52A1;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">nohup</span> tidb-lightning <span class="token punctuation">\</span>
+  -L info <span class="token punctuation">\</span>
+  --log-file /root/tidb-lightning-import-task.log <span class="token punctuation">\</span>
+  -config /root/Test.toml <span class="token punctuation">\</span>
+  <span class="token operator">&gt;</span> /root/tidb-lightning-import-task-nohup.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre>
+</li>
+</ul>
+<p>&#x5BFC;&#x5165;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;TiDB Lightning &#x4F1A;&#x81EA;&#x52A8;&#x9000;&#x51FA;&#x3002;&#x82E5;&#x5BFC;&#x5165;&#x6210;&#x529F;&#xFF0C;&#x65E5;&#x5FD7;&#x7684;&#x6700;&#x540E;&#x4E00;&#x884C;&#x4F1A;&#x663E;&#x793A; <code>tidb lightning exit</code> </p>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-09-05 21:12:55
+2021-04-27 18:38:04
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7072,12 +7456,12 @@ tidb-lightning -V
 
 		
 		
-		<a href="tidb-dumpling-export.html" class="navigation navigation-prev " aria-label="Previous page: 使用TiDB-Dumpling从TiDB导出数据">
+		<a href="tidb-dumpling-export.html" class="navigation navigation-prev " aria-label="Previous page: TiDB-Dumpling：从TiDB/MySQL导出数据">
 			<i class="fa fa-angle-left"></i>
 		</a>
 		
 		
-		<a href="golang-basic.html" class="navigation navigation-next " aria-label="Next page: 基础语法">
+		<a href="tidb-br-backup-restore.html" class="navigation navigation-next " aria-label="Next page: TiDB-BR冷备份与恢复：分布式冷备份恢复数据">
 			<i class="fa fa-angle-right"></i>
 		</a>
 		
@@ -7087,7 +7471,7 @@ tidb-lightning -V
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"使用TIDB-Lightning导入数据到TIDB","level":"7.35.4","depth":2,"next":{"title":"基础语法","level":"8.1","depth":1,"path":"origin/golang-basic.md","ref":"origin/golang-basic.md","articles":[{"title":"go的并发","level":"8.1.1","depth":2,"path":"origin/golang-concurrent-programming.md","ref":"origin/golang-concurrent-programming.md","articles":[]}]},"previous":{"title":"使用TiDB-Dumpling从TiDB导出数据","level":"7.35.3","depth":2,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-lighting-import.md","mtime":"2020-09-05T13:12:55.246Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-13T12:22:48.968Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"TiDB-Lightning：导入数据到TIDB","level":"7.35.4","depth":2,"next":{"title":"TiDB-BR冷备份与恢复：分布式冷备份恢复数据","level":"7.35.5","depth":2,"path":"origin/tidb-br-backup-restore.md","ref":"origin/tidb-br-backup-restore.md","articles":[]},"previous":{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.35.3","depth":2,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-lighting-import.md","mtime":"2021-04-27T10:38:04.931Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-28T01:43:12.003Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

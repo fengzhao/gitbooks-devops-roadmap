@@ -6406,7 +6406,7 @@
                     
                         <b>7.35.3.</b>
                     
-                    使用TiDB-Dumpling从TiDB导出数据
+                    TiDB-Dumpling：从TiDB/MySQL导出数据
             
                 </a>
             
@@ -6421,7 +6421,118 @@
                     
                         <b>7.35.4.</b>
                     
-                    使用TIDB-Lightning导入数据到TIDB
+                    TiDB-Lightning：导入数据到TIDB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.5" data-path="tidb-br-backup-restore.html">
+            
+                <a href="tidb-br-backup-restore.html">
+            
+                    
+                        <b>7.35.5.</b>
+                    
+                    TiDB-BR冷备份与恢复：分布式冷备份恢复数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.6" data-path="bigdata-migrate-operation.html">
+            
+                <a href="bigdata-migrate-operation.html">
+            
+                    
+                        <b>7.35.6.</b>
+                    
+                    大数据的数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36" >
+            
+                <span>
+            
+                    
+                        <b>7.36.</b>
+                    
+                    Apache Pulsar
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.36.1" data-path="pulsar-basic.html">
+            
+                <a href="pulsar-basic.html">
+            
+                    
+                        <b>7.36.1.</b>
+                    
+                    基础概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.2" data-path="pulsar-install.html">
+            
+                <a href="pulsar-install.html">
+            
+                    
+                        <b>7.36.2.</b>
+                    
+                    安装部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.3" data-path="pulsar-cli.html">
+            
+                <a href="pulsar-cli.html">
+            
+                    
+                        <b>7.36.3.</b>
+                    
+                    Pulsar的CLI命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.4" data-path="pulsar-perf-test.html">
+            
+                <a href="pulsar-perf-test.html">
+            
+                    
+                        <b>7.36.4.</b>
+                    
+                    Pulsar性能测试
             
                 </a>
             
@@ -6623,46 +6734,48 @@
 <span class="token function">curl</span> -s -<span class="token comment"># https://nginx.org/download/nginx-$nginx_version.tar.gz | tar zxf - -C ./ &amp;&amp; \</span>
 <span class="token builtin class-name">cd</span> nginx-<span class="token variable">$nginx_version</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
 ./configure <span class="token punctuation">\</span>
---prefix<span class="token operator">=</span>/opt/nginx-1.18.0 <span class="token punctuation">\</span>
---user<span class="token operator">=</span>nginx <span class="token punctuation">\</span>
---group<span class="token operator">=</span>nginx <span class="token punctuation">\</span>
---modules-path<span class="token operator">=</span>/opt/nginx-1.18.0/modules <span class="token punctuation">\</span>
---sbin-path<span class="token operator">=</span>/opt/nginx-1.18.0/sbin/nginx <span class="token punctuation">\</span>
---error-log-path<span class="token operator">=</span>/opt/nginx-1.18.0/logs/error.log <span class="token punctuation">\</span>
---http-log-path<span class="token operator">=</span>/opt/nginx-1.18.0/logs/access.log <span class="token punctuation">\</span>
---conf-path<span class="token operator">=</span>/opt/nginx-1.18.0/conf/nginx.conf <span class="token punctuation">\</span>
---pid-path<span class="token operator">=</span>/opt/nginx-1.18.0/nginx.pid <span class="token punctuation">\</span>
---lock-path<span class="token operator">=</span>/opt/nginx-1.18.0/nginx.lock <span class="token punctuation">\</span>
---with-pcre <span class="token punctuation">\</span>
---with-openssl<span class="token operator">=</span><span class="token punctuation">..</span>/openssl-1.1.1 <span class="token punctuation">\</span>
---with-http_stub_status_module <span class="token punctuation">\</span>
---with-http_realip_module <span class="token punctuation">\</span>
---with-http_addition_module <span class="token punctuation">\</span>
---with-http_sub_module <span class="token punctuation">\</span>
---with-http_dav_module <span class="token punctuation">\</span>
---with-http_flv_module <span class="token punctuation">\</span>
---with-http_mp4_module <span class="token punctuation">\</span>
---with-http_gunzip_module <span class="token punctuation">\</span>
---with-http_gzip_static_module <span class="token punctuation">\</span>
---with-http_random_index_module <span class="token punctuation">\</span>
---with-http_secure_link_module <span class="token punctuation">\</span>
---with-http_stub_status_module <span class="token punctuation">\</span>
---with-http_auth_request_module <span class="token punctuation">\</span>
---with-http_xslt_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
---with-http_image_filter_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
---with-http_geoip_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
---with-http_image_filter_module <span class="token punctuation">\</span>
---with-http_v2_module <span class="token punctuation">\</span>
---with-http_slice_module <span class="token punctuation">\</span>
---with-threads <span class="token punctuation">\</span>
---with-stream <span class="token punctuation">\</span>
---with-stream_ssl_module <span class="token punctuation">\</span>
---with-stream_ssl_preread_module <span class="token punctuation">\</span>
---with-stream_realip_module <span class="token punctuation">\</span>
---with-stream_geoip_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
---with-mail <span class="token punctuation">\</span>
---with-mail_ssl_module <span class="token punctuation">\</span>
---with-compat
+  --prefix<span class="token operator">=</span>/opt/nginx-1.18.0 <span class="token punctuation">\</span>
+  --user<span class="token operator">=</span>nginx <span class="token punctuation">\</span>
+  --group<span class="token operator">=</span>nginx <span class="token punctuation">\</span>
+  --modules-path<span class="token operator">=</span>/opt/nginx-1.18.0/modules <span class="token punctuation">\</span>
+  --sbin-path<span class="token operator">=</span>/opt/nginx-1.18.0/sbin/nginx <span class="token punctuation">\</span>
+  --error-log-path<span class="token operator">=</span>/opt/nginx-1.18.0/logs/error.log <span class="token punctuation">\</span>
+  --http-log-path<span class="token operator">=</span>/opt/nginx-1.18.0/logs/access.log <span class="token punctuation">\</span>
+  --conf-path<span class="token operator">=</span>/opt/nginx-1.18.0/conf/nginx.conf <span class="token punctuation">\</span>
+  --pid-path<span class="token operator">=</span>/opt/nginx-1.18.0/nginx.pid <span class="token punctuation">\</span>
+  --lock-path<span class="token operator">=</span>/opt/nginx-1.18.0/nginx.lock <span class="token punctuation">\</span>
+  --with-pcre <span class="token punctuation">\</span>
+  --with-openssl<span class="token operator">=</span><span class="token punctuation">..</span>/openssl-1.1.1 <span class="token punctuation">\</span>
+  --with-http_stub_status_module <span class="token punctuation">\</span>
+  --with-http_realip_module <span class="token punctuation">\</span>
+  --with-http_addition_module <span class="token punctuation">\</span>
+  --with-http_sub_module <span class="token punctuation">\</span>
+  --with-http_dav_module <span class="token punctuation">\</span>
+  --with-http_flv_module <span class="token punctuation">\</span>
+  --with-http_mp4_module <span class="token punctuation">\</span>
+  --with-http_gunzip_module <span class="token punctuation">\</span>
+  --with-http_gzip_static_module <span class="token punctuation">\</span>
+  --with-http_random_index_module <span class="token punctuation">\</span>
+  --with-http_secure_link_module <span class="token punctuation">\</span>
+  --with-http_stub_status_module <span class="token punctuation">\</span>
+  --with-http_auth_request_module <span class="token punctuation">\</span>
+  --with-http_xslt_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
+  --with-http_image_filter_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
+  --with-http_geoip_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
+  --with-http_image_filter_module <span class="token punctuation">\</span>
+  --with-http_v2_module <span class="token punctuation">\</span>
+  --with-http_slice_module <span class="token punctuation">\</span>
+  --with-threads <span class="token punctuation">\</span>
+  --with-stream <span class="token punctuation">\</span>
+  --with-stream_ssl_module <span class="token punctuation">\</span>
+  --with-stream_ssl_preread_module <span class="token punctuation">\</span>
+  --with-stream_realip_module <span class="token punctuation">\</span>
+  --with-stream_geoip_module<span class="token operator">=</span>dynamic <span class="token punctuation">\</span>
+  --with-mail <span class="token punctuation">\</span>
+  --with-mail_ssl_module <span class="token punctuation">\</span>
+  --with-compat <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">\</span>
+<span class="token function">make</span> <span class="token function">install</span>
 </code></pre>
 <p>&#x53C2;&#x8003;&#xFF1A;</p>
 <ul>
@@ -6675,7 +6788,91 @@
 <li><a href="https://github.com/edenhill/kafkacat" _target="blank">https://github.com/edenhill/kafkacat</a></li>
 </ul>
 <h1 id="&#x56DB;&#x3001;nginx---rsyslog---kafka">&#x56DB;&#x3001;nginx -&gt; rsyslog -&gt; kafka</h1>
-<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<h2 id="1&#x3001;prerequisite">1&#x3001;Prerequisite</h2>
+<ul>
+<li>Nginx &gt;=  v1.7.1 &#xFF08;&#x4E4B;&#x540E;&#x624D;&#x652F;&#x6301; syslog &#x7684;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x65E5;&#x5FD7;&#xFF09;</li>
+<li>Rsyslog &gt;= v8.7.0 &#xFF08;&#x6570;&#x636E;&#x9700;&#x8981;&#x901A;&#x8FC7; Rsyslog &#x7684; omkafka &#x6A21;&#x5757;&#x5199;&#x5165;&#x5230; Kafka&#xFF0C;omkafka &#x5728; Rsyslog &#x7684; v8.7.0+ &#x7248;&#x672C;&#x624D;&#x652F;&#x6301;&#xFF09;</li>
+<li>rsyslog&#x7684;<code>omkafka</code>&#x6A21;&#x5757;<code>rsyslog-kafka</code>&#x5DF2;&#x5B89;&#x88C5;</li>
+</ul>
+<h2 id="2&#x3001;rsyslog&#x914D;&#x7F6E;">2&#x3001;rsyslog&#x914D;&#x7F6E;</h2>
+<blockquote>
+<p>vi /etc/rsyslog.dc/rsyslog_nginx_kafka_cluster.conf</p>
+</blockquote>
+<pre class="language-"><code class="lang-bash">module<span class="token punctuation">(</span>load<span class="token operator">=</span><span class="token string">&quot;imudp&quot;</span><span class="token punctuation">)</span>
+input<span class="token punctuation">(</span>type<span class="token operator">=</span><span class="token string">&quot;imudp&quot;</span> <span class="token assign-left variable">port</span><span class="token operator">=</span><span class="token string">&quot;514&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># nginx access log ==&gt; rsyslog server(local) ==&gt; kafka</span>
+module<span class="token punctuation">(</span>load<span class="token operator">=</span><span class="token string">&quot;omkafka&quot;</span><span class="token punctuation">)</span>
+
+template<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">&quot;nginx-rsyslog-kafka&quot;</span> <span class="token assign-left variable">type</span><span class="token operator">=</span><span class="token string">&quot;string&quot;</span> <span class="token assign-left variable">string</span><span class="token operator">=</span><span class="token string">&quot;%msg%&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token variable">$inputname</span> <span class="token operator">==</span> <span class="token string">&quot;imudp&quot;</span> <span class="token keyword">then</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$programname</span> <span class="token operator">==</span> <span class="token string">&quot;nginx-rsyslog&quot;</span><span class="token punctuation">)</span> <span class="token keyword">then</span>
+        action<span class="token punctuation">(</span>type<span class="token operator">=</span><span class="token string">&quot;omkafka&quot;</span>
+            <span class="token assign-left variable">template</span><span class="token operator">=</span><span class="token string">&quot;nginx-rsyslog-kafka&quot;</span>
+            <span class="token assign-left variable">broker</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&quot;localhost:9092&quot;</span><span class="token punctuation">]</span>
+            <span class="token assign-left variable">topic</span><span class="token operator">=</span><span class="token string">&quot;test&quot;</span>
+            partitions.auto<span class="token operator">=</span><span class="token string">&quot;on&quot;</span>
+            <span class="token assign-left variable">confParam</span><span class="token operator">=</span><span class="token punctuation">[</span>
+                <span class="token string">&quot;socket.keepalive.enable=true&quot;</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+:rawmsg, contains, <span class="token string">&quot;nginx-rsyslog&quot;</span> ~
+</code></pre>
+<blockquote>
+<p>&#x542F;&#x52A8;rsyslog</p>
+</blockquote>
+<pre class="language-"><code class="lang-bash">rsyslogd
+</code></pre>
+<h2 id="3&#x3001;nginx&#x914D;&#x7F6E;">3&#x3001;Nginx&#x914D;&#x7F6E;</h2>
+<pre class="language-"><code class="lang-bash">http <span class="token punctuation">{</span>
+    log_format json_log <span class="token string">&apos;{ &quot;@timestamp&quot;: &quot;<span class="token variable">$time_iso8601</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;app&quot;: &quot;<span class="token variable">$app</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;remote_addr&quot;: &quot;<span class="token variable">$remote_addr</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;referer&quot;: &quot;<span class="token variable">$http_referer</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;request&quot;: &quot;<span class="token variable">$request</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;status&quot;: <span class="token variable">$status</span>, &apos;</span>
+                           <span class="token string">&apos;&quot;bytes&quot;: <span class="token variable">$body_bytes_sent</span>, &apos;</span>
+                           <span class="token string">&apos;&quot;agent&quot;: &quot;<span class="token variable">$http_user_agent</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;x_forwarded&quot;: &quot;<span class="token variable">$http_x_forwarded_for</span>&quot;, &apos;</span>
+                           <span class="token string">&apos;&quot;up_addr&quot;: &quot;<span class="token variable">$upstream_addr</span>&quot;,&apos;</span>
+                           <span class="token string">&apos;&quot;up_host&quot;: &quot;<span class="token variable">$upstream_http_host</span>&quot;,&apos;</span>
+                           <span class="token string">&apos;&quot;up_resp_time&quot;: &quot;<span class="token variable">$upstream_response_time</span>&quot;,&apos;</span>
+                           <span class="token string">&apos;&quot;request_time&quot;: &quot;<span class="token variable">$request_time</span>&quot;,&apos;</span>
+                           <span class="token string">&apos;&quot;server_name&quot;: &quot;<span class="token variable">$server_name</span>&quot;,&apos;</span>
+                           <span class="token string">&apos;&quot;x-zz-app-info&quot;: &quot;<span class="token variable">$http_x_zz_app_info</span>&quot;&apos;</span>
+                        <span class="token string">&apos; }&apos;</span><span class="token punctuation">;</span>
+  server <span class="token punctuation">{</span>
+      listen       <span class="token number">80</span><span class="token punctuation">;</span>
+      server_name  localhost<span class="token punctuation">;</span>
+      <span class="token comment"># set $app test;</span>
+      <span class="token comment"># access_log  /var/log/nginx/host.access.log  json_log;</span>
+      access_log syslog:server<span class="token operator">=</span>localhost,facility<span class="token operator">=</span>local7,tag<span class="token operator">=</span>nginx-rsyslog,severity<span class="token operator">=</span>info main<span class="token punctuation">;</span>
+
+      location / <span class="token punctuation">{</span>
+          root   /usr/share/nginx/html<span class="token punctuation">;</span>
+          index  index.html index.htm<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="4&#x3001;&#x6D4B;&#x8BD5;">4&#x3001;&#x6D4B;&#x8BD5;</h2>
+<blockquote>
+<p>nginx&#x7684;&#x65E5;&#x5FD7; &#x2014;&#x2014;&#x2014;&gt; rsyslog &#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&gt; Kafka</p>
+<p>wrk -t10 -c500 -d30s --latency <a href="http://127.0.0.1:80" _target="blank">http://127.0.0.1:80</a></p>
+<p>30.1&#x79D2;&#x53D1;&#x9001;&#x4E86;38861&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;QPS&#x5927;&#x7EA6;1291&#xFF0C;Transfer/sec: 1.05MB </p>
+<p>nginx&#x7684;&#x65E5;&#x5FD7; &#x2014;&#x2014;&#x2014;&#x2014;&gt; &#x672C;&#x5730;&#x6587;&#x4EF6;</p>
+<p>wrk -t10 -c500 -d30s --latency <a href="http://127.0.0.1:80" _target="blank">http://127.0.0.1:80</a></p>
+<p>30.07&#x79D2;&#x53D1;&#x9001;&#x4E86;115156&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;QPS&#x5927;&#x7EA6;3829&#xFF0C;Transfer/sec: 3.10MB</p>
+</blockquote>
+<p>nginx&#x7684;&#x65E5;&#x5FD7;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x53D1;&#x9001;&#x5230;rsyslog&#x518D;&#x5230;Kafka&#xFF0C;&#x6BD4;&#x843D;&#x76D8;&#x5F62;&#x6210;&#x6587;&#x4EF6;&#xFF0C;QPS&#x5C0F;&#x4E86;&#x4E09;&#x500D;&#x3002;&#x540C;&#x65F6;&#x538B;&#x6D4B;&#x5B8C;&#x6210;&#x5230;&#x6240;&#x6709;&#x65E5;&#x5FD7;&#x8FDB;kafka&#x6709;15&#x79D2;&#x5EF6;&#x8FDF;</p>
+<p><strong>&#x56E0;&#x7D20;</strong>&#xFF1A;</p>
+<ul>
+<li>&#x7F51;&#x7EDC;&#x6D88;&#x8017;</li>
+<li>&#x78C1;&#x76D8;&#x6027;&#x80FD;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;kafka&#x5199;&#x5165;&#x6162;</li>
+</ul>
+<p><strong>&#x53C2;&#x8003;</strong>&#xFF1A;</p>
 <ul>
 <li><a href="http://zhang-jc.github.io/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/" _target="blank">http://zhang-jc.github.io/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/</a></li>
 </ul>
@@ -6685,7 +6882,7 @@
 <li><a href="https://banzaicloud.com/docs/one-eye/logging-operator/quickstarts/kafka-nginx/" _target="blank">https://banzaicloud.com/docs/one-eye/logging-operator/quickstarts/kafka-nginx/</a></li>
 </ul>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-04-13 18:40:01
+2021-04-14 16:20:22
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6725,7 +6922,7 @@
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Nginx日志写入kafka","level":"7.21.3","depth":2,"next":{"title":"iSCSI","level":"7.22","depth":1,"ref":"","articles":[{"title":"群晖Synology的iSCSI","level":"7.22.1","depth":2,"path":"origin/iSCSI-简介配置使用.md","ref":"origin/iSCSI-简介配置使用.md","articles":[]}]},"previous":{"title":"Nginx配置优化","level":"7.21.2","depth":2,"path":"origin/nginx-config.md","ref":"origin/nginx-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/nginx-log-kafka.md","mtime":"2021-04-13T10:40:01.471Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-13T12:22:48.968Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Nginx日志写入kafka","level":"7.21.3","depth":2,"next":{"title":"iSCSI","level":"7.22","depth":1,"ref":"","articles":[{"title":"群晖Synology的iSCSI","level":"7.22.1","depth":2,"path":"origin/iSCSI-简介配置使用.md","ref":"origin/iSCSI-简介配置使用.md","articles":[]}]},"previous":{"title":"Nginx配置优化","level":"7.21.2","depth":2,"path":"origin/nginx-config.md","ref":"origin/nginx-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/nginx-log-kafka.md","mtime":"2021-04-14T08:20:22.941Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-28T01:43:12.003Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

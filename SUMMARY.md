@@ -417,8 +417,15 @@
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
     - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
   - [DM(Data Migration)及Ansible部署](origin/tidb-ansible-dm.md)
-  - [使用TiDB-Dumpling从TiDB导出数据](origin/tidb-dumpling-export.md)
-  - [使用TIDB-Lightning导入数据到TIDB](origin/tidb-lighting-import.md)
+  - [TiDB-Dumpling：从TiDB/MySQL导出数据](origin/tidb-dumpling-export.md)
+  - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
+  - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
+  - [大数据的数据迁移](origin/bigdata-migrate-operation.md)
+- Apache Pulsar
+  - [基础概念](origin/pulsar-basic.md)
+  - [安装部署](origin/pulsar-install.md)
+  - [Pulsar的CLI命令](origin/pulsar-cli.md)
+  - [Pulsar性能测试](origin/pulsar-perf-test.md)
 
 ## Part VIII: golang学习笔记
 

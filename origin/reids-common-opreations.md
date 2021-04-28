@@ -233,6 +233,12 @@ type key （如果键不存在，则返回none）
 del key
 ```
 
+## 统计Key
+
+```bash
+scan cursor match 正则表达式
+```
+
 
 
 # 三、String类型键的操作命令

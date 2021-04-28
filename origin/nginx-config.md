@@ -126,3 +126,38 @@ wget --http-user=test_user --http-passwd=*** http://****
 curl -u test_user:**** -O http://****
 ```
 
+# 四、自定义日志格式引用自定义Header
+
+自定日志格式时如果想获取请求中的自定义Header，nginx引用方式为`$http_headername`，如果header命名中包含`-`，需要转换成`_`。例如下面示例中引用开发自定义的`x-zz-app-info` 
+
+```bash
+http {
+	log_format json_log '{ "@timestamp": "$time_iso8601", '
+                           '"app": "$app", '
+                           '"remote_addr": "$remote_addr", '
+                           '"referer": "$http_referer", '
+                           '"request": "$request", '
+                           '"status": $status, '
+                           '"bytes": $body_bytes_sent, '
+                           '"agent": "$http_user_agent", '
+                           '"x_forwarded": "$http_x_forwarded_for", '
+                           '"up_addr": "$upstream_addr",'
+                           '"up_host": "$upstream_http_host",'
+                           '"up_resp_time": "$upstream_response_time",'
+                           '"request_time": "$request_time",'
+                           '"server_name": "$server_name",'
+                           '"x-zz-app-info": "$http_x_zz_app_info"'
+                        ' }';
+  server {
+      listen       80;
+      server_name  localhost;
+      set $app test;
+      access_log  /var/log/nginx/host.access.log  json_log;
+
+      location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+      }
+  }
+```
+

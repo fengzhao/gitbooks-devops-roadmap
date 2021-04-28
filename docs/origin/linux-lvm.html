@@ -6408,7 +6408,7 @@
                     
                         <b>7.35.3.</b>
                     
-                    使用TiDB-Dumpling从TiDB导出数据
+                    TiDB-Dumpling：从TiDB/MySQL导出数据
             
                 </a>
             
@@ -6423,7 +6423,118 @@
                     
                         <b>7.35.4.</b>
                     
-                    使用TIDB-Lightning导入数据到TIDB
+                    TiDB-Lightning：导入数据到TIDB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.5" data-path="tidb-br-backup-restore.html">
+            
+                <a href="tidb-br-backup-restore.html">
+            
+                    
+                        <b>7.35.5.</b>
+                    
+                    TiDB-BR冷备份与恢复：分布式冷备份恢复数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.6" data-path="bigdata-migrate-operation.html">
+            
+                <a href="bigdata-migrate-operation.html">
+            
+                    
+                        <b>7.35.6.</b>
+                    
+                    大数据的数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36" >
+            
+                <span>
+            
+                    
+                        <b>7.36.</b>
+                    
+                    Apache Pulsar
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.36.1" data-path="pulsar-basic.html">
+            
+                <a href="pulsar-basic.html">
+            
+                    
+                        <b>7.36.1.</b>
+                    
+                    基础概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.2" data-path="pulsar-install.html">
+            
+                <a href="pulsar-install.html">
+            
+                    
+                        <b>7.36.2.</b>
+                    
+                    安装部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.3" data-path="pulsar-cli.html">
+            
+                <a href="pulsar-cli.html">
+            
+                    
+                        <b>7.36.3.</b>
+                    
+                    Pulsar的CLI命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.4" data-path="pulsar-perf-test.html">
+            
+                <a href="pulsar-perf-test.html">
+            
+                    
+                        <b>7.36.4.</b>
+                    
+                    Pulsar性能测试
             
                 </a>
             
@@ -6715,7 +6826,7 @@ mkfs.xfs LV_Name
 <ul>
 <li>VG&#x5DF2;&#x65E0;PE&#x53EF;&#x7528;</li>
 <li>&#x65B0;&#x589E;&#x786C;&#x76D8;</li>
-<li>&#x5728;&#x7EBF;&#x6269;&#x5BB9;&#xFF08;&#x4E0D;&#x5378;&#x8F7D;umount&#xFF09;</li>
+<li>&#x5728;&#x7EBF;&#x6269;&#x5BB9;&#xFF08;&#x4E0D;&#x5378;&#x8F7D;,&#x4E0D;&#x91CD;&#x542F;&#x4E3B;&#x673A;&#xFF09;</li>
 </ul>
 <h2 id="1&#x3001;&#x521B;&#x5EFA;pv">1&#x3001;&#x521B;&#x5EFA;PV</h2>
 <pre class="language-"><code class="lang-bash">pvcreate /dev/sdd
@@ -6724,18 +6835,18 @@ mkfs.xfs LV_Name
 <pre class="language-"><code class="lang-bash">vgextend VG_Name /dev/sdd
 </code></pre>
 <h2 id="3&#x3001;&#x6269;&#x5BB9;lv&#x4E4B;&#x540E;&#x53EF;&#x770B;lv&#x5BB9;&#x91CF;&#x589E;&#x52A0;">3&#x3001;&#x6269;&#x5BB9;LV(&#x4E4B;&#x540E;&#x53EF;&#x770B;LV&#x5BB9;&#x91CF;&#x589E;&#x52A0;)</h2>
-<pre class="language-"><code class="lang-bash">lvresize -l +6399 LV_Name
+<pre class="language-"><code class="lang-bash">lvresize -l +6399 LV_Path
 &#x6216;&#x8005;
-lvresize -L +50G LV_Name
+lvresize -L +50G LV_Path
 </code></pre>
 <h2 id="4&#x3001;&#x68C0;&#x67E5;&#x5E76;&#x4FEE;&#x590D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;">4&#x3001;&#x68C0;&#x67E5;&#x5E76;&#x4FEE;&#x590D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</h2>
 <pre class="language-"><code class="lang-bash">e2fsck -f LV_Name
 </code></pre>
 <h2 id="5&#x3001;&#x5C06;&#x6269;&#x5BB9;&#x540E;&#x7684;lv&#x5B8C;&#x6574;&#x5730;&#x6269;&#x5145;&#x5230;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;">5&#x3001;&#x5C06;&#x6269;&#x5BB9;&#x540E;&#x7684;LV&#x5B8C;&#x6574;&#x5730;&#x6269;&#x5145;&#x5230;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;</h2>
 <pre class="language-"><code class="lang-bash">LV&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x662F;ext4&#x65F6;
-resize2fs LV_Name
+resize2fs LV_Path
 LV&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x662F;xfs&#x65F6;
-xfs_growfs LV_Name
+xfs_growfs LV_Path
 </code></pre>
 <h1 id="&#x56DB;&#x3001;&#x6302;&#x8F7D;&#x5DF2;&#x521B;&#x5EFA;&#x7684;lvm&#x78C1;&#x76D8;">&#x56DB;&#x3001;&#x6302;&#x8F7D;&#x5DF2;&#x521B;&#x5EFA;&#x7684;LVM&#x78C1;&#x76D8;</h1>
 <pre class="language-"><code class="lang-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x6709;&#x786C;&#x76D8;</span>
@@ -6761,7 +6872,7 @@ vgchange -ay /dev/data/data
 <li><a href="https://wiki.archlinux.org/index.php/LVM_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" _target="blank">https://wiki.archlinux.org/index.php/LVM_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87</a>) </li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-03-18 11:33:18
+2021-04-21 16:33:04
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6805,7 +6916,7 @@ vgchange -ay /dev/data/data
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"LVM原理及使用","level":"7.14.13","depth":2,"next":{"title":"Linux交换分区","level":"7.14.14","depth":2,"path":"origin/linux-交换分区.md","ref":"origin/linux-交换分区.md","articles":[]},"previous":{"title":"rsync命令详解","level":"7.14.12","depth":2,"path":"origin/linux-rsync.md","ref":"origin/linux-rsync.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-lvm.md","mtime":"2021-03-18T03:33:18.082Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-13T12:22:48.968Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"LVM原理及使用","level":"7.14.13","depth":2,"next":{"title":"Linux交换分区","level":"7.14.14","depth":2,"path":"origin/linux-交换分区.md","ref":"origin/linux-交换分区.md","articles":[]},"previous":{"title":"rsync命令详解","level":"7.14.12","depth":2,"path":"origin/linux-rsync.md","ref":"origin/linux-rsync.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/linux-lvm.md","mtime":"2021-04-21T08:33:04.749Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-28T01:43:12.003Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

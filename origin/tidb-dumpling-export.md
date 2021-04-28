@@ -1,16 +1,17 @@
-## Dumpling全量备份
+## Dumpling全量备份或导出
 
 # 一、Dumpling 简介
 
 `Dumpling` 是使用 go 开发的数据备份工具，项目地址可以参考 [`Dumpling`](https://github.com/pingcap/dumpling)。
 
-`Dumpling` 的更多具体用法可以使用 --help 选项查看，或者查看 [Dumpling 主要选项表](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview#dumpling-主要选项表)。
+`Dumpling` 的更多具体用法可查看 [Dumpling 主要选项表](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview#dumpling-主要选项表)。
 
 `Dumpling` 包含在` tidb-toolkit` 安装包中，下载链接：https://download.pingcap.org/tidb-toolkit-v4.0.5-linux-amd64.tar.gz
 
 为了快速地备份恢复数据（特别是数据量巨大的库），可以参考以下建议：
 
-- 导出来的数据文件应当尽可能的小，可以通过设置选项 `-F` 来控制导出来的文件大小。如果后续使用 TiDB Lightning 对备份文件进行恢复，建议把 `dumpling` -F 选项的值设置为 `256m`。
+- 导出来的数据文件应当尽可能的小，可以通过设置选项 `-F` 来控制导出来的文件大小。
+- 如果后续使用 TiDB Lightning 对备份文件进行恢复，建议把 `dumpling` -F 选项的值设置为 `256m`。
 - 如果导出的表中有些表的行数非常多，可以通过设置选项 `-r` 来开启表内并发。
 
 # 二、对比Mydumper
@@ -29,7 +30,7 @@
 
 # 三、从TiDB/MySQL 导出数据
 
-## 1、需要的权限
+## 1、源库导出账号所需权限
 
 - SELECT
 - RELOAD
@@ -39,12 +40,16 @@
 ## 2、安装及主要参数
 
 ```bash
-curl -s https://download.pingcap.org/tidb-toolkit-v4.0.5-linux-amd64.tar.gz | tar -zxC /opt
-cd /opt/tidb-toolkit-v4.0.5-linux-amd64
+version=v4.0.5 && \
+curl -# https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt && \
+ln -s /opt/tidb-toolkit-$version-linux-amd64 /opt/tidb-toolkit-$version && \
+echo "export PATH=/opt/tidb-toolkit-$version/bin:$PATH" >> /etc/profile && \
+source /etc/profile && \ 
+tidb-lightning -V
 ```
 
 | 主要选项                   | 用途                                                         | 默认值                                  |
-| -------------------------- | ------------------------------------------------------------ | --------------------------------------- |
+| :------------------------- | ------------------------------------------------------------ | --------------------------------------- |
 | -V 或 --version            | 输出 Dumpling 版本并直接退出                                 |                                         |
 | -B 或 --database           | 导出指定数据库                                               |                                         |
 | -T 或 --tables-list        | 导出指定数据表                                               |                                         |
@@ -65,7 +70,7 @@ cd /opt/tidb-toolkit-v4.0.5-linux-amd64
 | --filetype                 | 导出文件类型（csv/sql）                                      | "sql"                                   |
 | -o 或 --output             | 导出文件路径                                                 | "./export-${time}"                      |
 | -S 或 --sql                | 根据指定的 sql 导出数据，该选项不支持并发导出                |                                         |
-| --consistency              | flush: dump 前用 FTWRL snapshot: 通过 TSO 来指定 dump 某个快照时间点的 TiDB 数据 lock: 对需要 dump 的所有表执行 `lock tables read` 命令 none: 不加锁 dump，无法保证一致性 auto: MySQL 默认用 flush, TiDB 默认用 snapshot | "auto"                                  |
+| --consistency              | flush: dump 前用 FTWRL<br/>snapshot: 通过 TSO 来指定 dump 某个快照时间点的 TiDB 数据 <br/>lock: 对需要 dump 的所有表执行 `lock tables read` 命令 <br/>none: 不加锁 dump，无法保证一致性 <br/>auto: MySQL 默认用 flush, TiDB 默认用 snapshot | "auto"                                  |
 | --snapshot                 | snapshot tso，只在 consistency=snapshot 下生效               |                                         |
 | --where                    | 对备份的数据表通过 where 条件指定范围                        |                                         |
 | -p 或 --password           | 连接的数据库主机的密码                                       |                                         |
@@ -83,33 +88,24 @@ cd /opt/tidb-toolkit-v4.0.5-linux-amd64
 | --status-addr              | Dumpling 的服务地址，包含了 Prometheus 拉取 metrics 信息及 pprof 调试的地址 | ":8281"                                 |
 | --tidb-mem-quota-query     | 单条 dumpling 命令导出 SQL 语句的内存限制，单位为 byte，默认为 32 GB | 34359738368                             |
 
-## 3、导出到 sql 文件
+## 3、导出数据文件格式
+
+### ①导出到 sql 文件
 
 Dumpling 默认导出数据格式为 sql 文件。也可以通过设置 `--filetype sql` 导出数据到 sql 文件：
 
 ```bash
-dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  --filetype sql \
-  --threads 32 \
-  -o /tmp/test \
-  -F 256
+dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql --threads 32 -o /data/dumpling-export -F 256
 ```
 
 上述命令中，`-h`、`-P`、`-u` 分别是地址，端口，用户。如果需要密码验证，可以用 `-p $YOUR_SECRET_PASSWORD` 传给 Dumpling。
 
-## 4、导出到 csv 文件
+### ②导出到 csv 文件
 
 假如导出数据的格式是 CSV（使用 `--filetype csv` 即可导出 CSV 文件），还可以使用 `--sql <SQL>` 导出指定 SQL 选择出来的记录，例如，导出 `test.sbtest1` 中所有 `id < 100` 的记录：
 
 ```bash
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
+dumpling -u root -P 4000 -h 127.0.0.1 -o /data/dumpling-export/test \
   --filetype csv \
   --sql 'select * from `test`.`sbtest1` where id < 100'
 ```
@@ -119,40 +115,32 @@ dumpling \
 > 1. `--sql` 选项暂时仅仅可用于导出 csv 的场景。
 > 2. 这里需要在要导出的所有表上执行 `select * from <table-name> where id < 100` 语句。如果部分表没有指定的字段，那么导出会失败。
 
-## 5、筛选导出的数据
+## 4、筛选导出的数据
 
-### 使用 `--where` 选项筛选数据
+### ①使用 `--where` 选项筛选数据
 
 默认情况下，除了系统数据库中的表之外，Dumpling 会导出整个数据库的表。你可以使用 `--where <SQL where expression>` 来选定要导出的记录。
 
 ```bash
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
+dumpling -u root -P 4000 -h 127.0.0.1 -o /data/dumpling-export/test \
   --where "id < 100"
 ```
 
 上述命令将会导出各个表的 id < 100 的数据。
 
-### 使用 `--filter` 选项筛选数据
+### ②使用 `--filter` 选项筛选数据
 
 Dumpling 可以通过 `--filter` 指定 table-filter 来筛选特定的库表。table-filter 的语法与 .gitignore 相似，详细语法参考[表库过滤](https://docs.pingcap.com/zh/tidb/stable/table-filter)。
 
 ```bash
-./bin/dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
+dumpling -u root -P 4000 -h 127.0.0.1 -o /data/dumpling-export/test \
   --filter "employees.*" \
   --filter "*.WorkOrder"
 ```
 
 上述命令将会导出 `employees` 数据库的所有表，以及所有数据库中的 `WorkOrder` 表。
 
-### 使用 `-B` 或 `-T` 选项筛选数据
+### ③使用 `-B` 或 `-T` 选项筛选数据
 
 Dumpling 也可以通过 `-B` 或 `-T` 选项导出特定的数据库/数据表。
 
@@ -163,10 +151,10 @@ Dumpling 也可以通过 `-B` 或 `-T` 选项导出特定的数据库/数据表�
 
 例如通过指定：
 
-- `-B employees` 导出 `employees` 数据库
-- `-T employees.WorkOrder` 导出 `employees.WorkOrder` 数据表
+- `-B employees` ：导出 `employees` 数据库
+- `-T employees.WorkOrder` ：导出 `employees.WorkOrder` 数据表
 
-## 6、通过并发提高 Dumpling 的导出效率
+## 5、并发提高 Dumpling导出效率选项
 
 默认情况下，导出的文件会存储到 `./export-<current local time>` 目录下。常用选项如下：
 
@@ -176,7 +164,7 @@ Dumpling 也可以通过 `-B` 或 `-T` 选项导出特定的数据库/数据表�
 
 利用以上选项可以让 Dumpling 的并行度更高。
 
-## 7、调整 Dumpling 的数据一致性选项
+## 6、调整 Dumpling 的数据一致性选项
 
 > **注意：**
 > 在大多数场景下，用户不需要调整 Dumpling 的默认数据一致性选项。
@@ -189,20 +177,30 @@ Dumpling 通过 `--consistency <consistency level>` 标志控制导出数据“�
 - `none`：不做任何一致性保证。
 - `auto`：对 MySQL 使用 `flush`，对 TiDB 使用 `snapshot`。
 
-一切完成之后，你应该可以在 `/tmp/test` 看到导出的文件了：
+## 7、导出的SQL文件
+
+TiDB Dumping导出的SQL文件命名格式都有：
+
+- `metadata`：此文件包含导出的起始时间以及 master binary log 的位置。
+- `{database}-schema-create.sql`：创建database的 SQL 文件on
+- `{database}.{table}-schema.sql`：创建 table 的 SQL 文件
+- `{database}.{table}.{0001}.{sql|csv`}：数据源文件
+- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`：其他导出文件
+
+后续如果想使用TiDB Lighting将这些SQL文件导入到TiDB**另外一个的DB**中的话，可批量将SQL文件名的database部分改掉
 
 ```bash
-$ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
-
-140B  metadata
-66B   test-schema-create.sql
-300B  test.sbtest1-schema.sql
-190K  test.sbtest1.0.sql
-300B  test.sbtest2-schema.sql
-190K  test.sbtest2.0.sql
-300B  test.sbtest3-schema.sql
-190K  test.sbtest3.0.sql
+# 例如源库DB为Test，想把数据导入到目标库Test-2中
+old_database_name=test
+new_database_name=Test-2
+for i in $(ls *.sql | grep -v schema-create );do 
+		mv $i $new_database_name.${i#*.};
+done
+mv ${old_database_name}-schema-create.sql ${new_database_name}-schema-create.sql
+echo "" > ${new_database_name}-schema-create.sql
 ```
+
+
 
 ## 8、导出 TiDB 的历史数据快照
 
@@ -211,8 +209,8 @@ Dumpling 可以通过 `--snapshot` 指定导出某个 [tidb_snapshot](https://do
 `--snapshot` 选项可设为 TSO（`SHOW MASTER STATUS` 输出的 `Position` 字段）或有效的 `datetime` 时间，例如：
 
 ```bash
-./dumpling --snapshot 417773951312461825
-./dumpling --snapshot "2020-07-02 17:12:45"
+dumpling --snapshot 417773951312461825
+dumpling --snapshot "2020-07-02 17:12:45"
 ```
 
 即可导出 TSO 为 `417773951312461825` 或 `2020-07-02 17:12:45` 时的 TiDB 历史数据快照。
@@ -251,8 +249,4 @@ Could not read data from testSchema.testTable: GC life time is shorter than tran
    ```bash
    update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
    ```
-
-
-
-
 

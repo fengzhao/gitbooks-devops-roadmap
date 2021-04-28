@@ -117,10 +117,12 @@ yum install -y gcc gc++ perl gcc-c++
 ### ③下载解压Nginx源码包
 
 ```bash
-$ version=1.17.6 && \
-  wget http://nginx.org/download/nginx-$version.tar.gz && \
-  tar -zxf nginx-*.tar.gz && \
-  cd nginx-$version
+version=1.18.0 && \
+mkdir nginx-source && \
+cd nginx-source && \
+curl -s -# https://www.openssl.org/source/openssl-1.1.1.tar.gz | tar zxvf - -C ./ && \
+curl -s -# https://nginx.org/download/nginx-$version.tar.gz | tar zxvf - -C ./ && \
+cd nginx-$version
 ```
 
 ###  ④配置编译参数 

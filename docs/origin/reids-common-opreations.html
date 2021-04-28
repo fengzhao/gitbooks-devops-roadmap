@@ -6406,7 +6406,7 @@
                     
                         <b>7.35.3.</b>
                     
-                    使用TiDB-Dumpling从TiDB导出数据
+                    TiDB-Dumpling：从TiDB/MySQL导出数据
             
                 </a>
             
@@ -6421,7 +6421,118 @@
                     
                         <b>7.35.4.</b>
                     
-                    使用TIDB-Lightning导入数据到TIDB
+                    TiDB-Lightning：导入数据到TIDB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.5" data-path="tidb-br-backup-restore.html">
+            
+                <a href="tidb-br-backup-restore.html">
+            
+                    
+                        <b>7.35.5.</b>
+                    
+                    TiDB-BR冷备份与恢复：分布式冷备份恢复数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.35.6" data-path="bigdata-migrate-operation.html">
+            
+                <a href="bigdata-migrate-operation.html">
+            
+                    
+                        <b>7.35.6.</b>
+                    
+                    大数据的数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36" >
+            
+                <span>
+            
+                    
+                        <b>7.36.</b>
+                    
+                    Apache Pulsar
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.36.1" data-path="pulsar-basic.html">
+            
+                <a href="pulsar-basic.html">
+            
+                    
+                        <b>7.36.1.</b>
+                    
+                    基础概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.2" data-path="pulsar-install.html">
+            
+                <a href="pulsar-install.html">
+            
+                    
+                        <b>7.36.2.</b>
+                    
+                    安装部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.3" data-path="pulsar-cli.html">
+            
+                <a href="pulsar-cli.html">
+            
+                    
+                        <b>7.36.3.</b>
+                    
+                    Pulsar的CLI命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.36.4" data-path="pulsar-perf-test.html">
+            
+                <a href="pulsar-perf-test.html">
+            
+                    
+                        <b>7.36.4.</b>
+                    
+                    Pulsar性能测试
             
                 </a>
             
@@ -6749,6 +6860,9 @@ pttl key <span class="token comment"># &#x67E5;&#x8BE2;&#x952E;&#x5728;&#x591A;&
 <h2 id="&#x5220;&#x9664;key">&#x5220;&#x9664;Key</h2>
 <pre class="language-"><code class="lang-bash">del key
 </code></pre>
+<h2 id="&#x7EDF;&#x8BA1;key">&#x7EDF;&#x8BA1;Key</h2>
+<pre class="language-"><code class="lang-bash">scan cursor match &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;
+</code></pre>
 <h1 id="&#x4E09;&#x3001;string&#x7C7B;&#x578B;&#x952E;&#x7684;&#x64CD;&#x4F5C;&#x547D;&#x4EE4;">&#x4E09;&#x3001;String&#x7C7B;&#x578B;&#x952E;&#x7684;&#x64CD;&#x4F5C;&#x547D;&#x4EE4;</h1>
 <h2 id="1&#x3001;ddl">1&#x3001;DDL</h2>
 <h3 id="&#x2460;&#x8BBE;&#x7F6E;&#x952E;&#x503C;">&#x2460;&#x8BBE;&#x7F6E;&#x952E;&#x503C;</h3>
@@ -6879,7 +6993,7 @@ rpushx key value1 <span class="token punctuation">[</span>value2 <span class="to
 <span class="token comment"># &#x5982;&#x679C; key &#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x88AB;&#x770B;&#x4F5C;&#x662F;&#x7A7A;list&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x957F;&#x5EA6;&#x4E3A; 0&#x3002; &#x5F53;&#x5B58;&#x50A8;&#x5728; key &#x91CC;&#x7684;&#x503C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;list&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;error&#x3002;</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-02-03 15:20:41
+2021-04-27 14:06:14
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -6919,7 +7033,7 @@ rpushx key value1 <span class="token punctuation">[</span>value2 <span class="to
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"常用操作","level":"7.18.4","depth":2,"next":{"title":"负载均衡与代理","level":"7.19","depth":1,"ref":"","articles":[{"title":"Keepalived","level":"7.19.1","depth":2,"path":"origin/keepalived.md","ref":"origin/keepalived.md","articles":[]},{"title":"HAProxy","level":"7.19.2","depth":2,"ref":"","articles":[]},{"title":"LVS","level":"7.19.3","depth":2,"ref":"","articles":[]},{"title":"Squid","level":"7.19.4","depth":2,"ref":"","articles":[]},{"title":"Varnish","level":"7.19.5","depth":2,"ref":"","articles":[]}]},"previous":{"title":"数据迁移备份恢复","level":"7.18.3","depth":2,"path":"origin/redis-backup-restore.md","ref":"origin/redis-backup-restore.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/reids-common-opreations.md","mtime":"2021-02-03T07:20:41.395Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-13T12:22:48.968Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"常用操作","level":"7.18.4","depth":2,"next":{"title":"负载均衡与代理","level":"7.19","depth":1,"ref":"","articles":[{"title":"Keepalived","level":"7.19.1","depth":2,"path":"origin/keepalived.md","ref":"origin/keepalived.md","articles":[]},{"title":"HAProxy","level":"7.19.2","depth":2,"ref":"","articles":[]},{"title":"LVS","level":"7.19.3","depth":2,"ref":"","articles":[]},{"title":"Squid","level":"7.19.4","depth":2,"ref":"","articles":[]},{"title":"Varnish","level":"7.19.5","depth":2,"ref":"","articles":[]}]},"previous":{"title":"数据迁移备份恢复","level":"7.18.3","depth":2,"path":"origin/redis-backup-restore.md","ref":"origin/redis-backup-restore.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/reids-common-opreations.md","mtime":"2021-04-27T06:06:14.434Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-04-28T01:43:12.003Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

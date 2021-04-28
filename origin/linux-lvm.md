@@ -135,7 +135,7 @@ mount -a
 
 - VG已无PE可用
 - 新增硬盘
-- 在线扩容（不卸载umount）
+- 在线扩容（不卸载,不重启主机）
 
 ## 1、创建PV
 
@@ -153,9 +153,9 @@ vgextend VG_Name /dev/sdd
 ## 3、扩容LV(之后可看LV容量增加)
 
 ```bash
-lvresize -l +6399 LV_Name
+lvresize -l +6399 LV_Path
 或者
-lvresize -L +50G LV_Name
+lvresize -L +50G LV_Path
 ```
 
 
@@ -169,9 +169,9 @@ e2fsck -f LV_Name
 
 ```bash
 LV文件系统是ext4时
-resize2fs LV_Name
+resize2fs LV_Path
 LV文件系统是xfs时
-xfs_growfs LV_Name
+xfs_growfs LV_Path
 ```
 
 # 四、挂载已创建的LVM磁盘

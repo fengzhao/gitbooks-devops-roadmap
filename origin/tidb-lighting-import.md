@@ -2,16 +2,19 @@
 
 # 一、简介
 
-TiDB Lightning 是一个将全量数据高速导入到 TiDB 集群的工具
+TiDB Lightning 是一个将**全量数据高速导入**到 TiDB 集群的工具
 
-TiDB Lightning 有以下两个主要的使用场景：一是大量新数据的快速导入；二是全量备份数据的恢复。目前，Lightning 支持 Mydumper 或 CSV 输出格式的数据源。你可以在以下两种场景下使用 Lightning：
+TiDB Lightning 有以下两个主要的使用场景：
 
-- **迅速**导入**大量新**数据
-- 恢复所有备份数据
+- 大量新数据的快速导入
+- 全量备份数据的恢复
 
+目前，TiDB Lightning 支持：
 
+- 导入 [Dumpling](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview)、CSV 或 [Amazon Aurora Parquet](https://docs.pingcap.com/zh/tidb/stable/migrate-from-aurora-using-lightning) 输出格式的数据源。
+- 从本地盘或 [Amazon S3 云盘](https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-storages)读取数据。
 
-# 二、整体工作原理
+# 二、工作原理
 
 ![TiDB Lightning 整体架构](../assets/tidb-lightning-architecture.png)
 
@@ -37,13 +40,15 @@ TiDB Lightning 有以下两个主要的使用场景：一是大量新数据的�
 
 使用Dumpling或Mydumper导出的数据为SQL文件。SQL文件分为三类：
 
-- DB名-schema-create.sql：DB的schema创建语句文件
+- DB名-schema-cre1ate.sql：DB的schema创建语句文件
 - DB名.表名-schema.sql：表的schema创建语句文件
 - DB名.表名.sql：表的数据插入语句文件
 
 
 
 # 三、注意
+
+## 1、基础注意事项
 
 - TiDB Lightning 运行后，TiDB 集群将无法正常对外提供服务。
 
@@ -53,9 +58,7 @@ TiDB Lightning 有以下两个主要的使用场景：一是大量新数据的�
   bin/tidb-lightning-ctl --switch-mode=normal
   ```
 
-
-
-TiDB Lightning 需要下游 TiDB 有如下权限：
+## 2、Lightning 需要下游 TiDB用户有如下权限：
 
 | 权限   | 作用域            |
 | ------ | ----------------- |
@@ -69,24 +72,50 @@ TiDB Lightning 需要下游 TiDB 有如下权限：
 
 如果配置项 `checksum = true`，则 TiDB Lightning 需要有下游 TiDB admin 用户权限。
 
-# 四、安装及命令参数
+## 3、导入后端模式
+
+TiDB Lightning 的[后端 ](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-glossary#backend)(用于接受 TiDB Lightning 解析结果)  决定 `tidb-lightning` 组件将如何把将数据导入到目标集群中。目前，TiDB Lightning 支持以下后端：
+
+- **Importer-backend**（默认）：`tidb-lightning` 先将 SQL 或 CSV 数据编码成键值对，由 `tikv-importer` 对写入的键值对进行排序，然后把这些键值对 Ingest 到 TiKV 节点中。
+- **Local-backend**：`tidb-lightning` 先将数据编码成键值对并排序存储在本地临时目录，然后将这些键值对以 SST 文件的形式上传到各个 TiKV 节点，然后由 TiKV 将这些 SST 文件 Ingest 到集群中。和 `Importer-backend` 原理相同，不过不依赖额外的 `tikv-importer` 组件。
+- **TiDB-backend**：`tidb-lightning` 先将数据编码成 `INSERT` 语句，然后直接在 TiDB 节点上运行这些 SQL 语句进行数据导入。
+
+| 后端                | Local-backend     | Importer-backend  | TiDB-backend     |
+| :------------------ | :---------------- | :---------------- | :--------------- |
+| 速度                | 快 (~500 GB/小时) | 快 (~400 GB/小时) | 慢 (~50 GB/小时) |
+| 资源使用率          | 高                | 高                | 低               |
+| 占用网络带宽        | 高                | 中                | 低               |
+| 导入时是否满足 ACID | 否                | 否                | 是               |
+| 目标表              | 必须为空          | 必须为空          | 可以不为空       |
+| 额外组件            | 无                | `tikv-importer`   | 无               |
+| 支持 TiDB 集群版本  | >= v4.0.0         | 全部              | 全部             |
+
+- 如果导入的目标集群为 v4.0 或以上版本，请优先考虑使用 Local-backend 模式。Local-backend 部署更简单并且性能也较其他两个模式更高
+- 如果目标集群为 v3.x 或以下，则建议使用 Importer-backend 模式
+- 如果需要导入的集群为生产环境线上集群，或需要导入的表中已包含有数据，则最好使用 TiDB-backend 模式
+
+# 四、安装、命令参数及配置文件详解
+
+## 1、下载安装
 
 ```bash
 version=v4.0.5 && \
 curl -# https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt && \
 ln -s /opt/tidb-toolkit-$version-linux-amd64 /opt/tidb-toolkit-$version && \
-echo "export PATH=/opt/tidb-toolkit-$version/bin:$PATH" >> /etc/profile && \
+echo -e "export TIDB_TOOLKIT_HOME=/opt/tidb-toolkit-$version\nexport PATH=\$PATH:\$TIDB_TOOLKIT_HOME/bin" >> /etc/profile && \
 source /etc/profile && \ 
 tidb-lightning -V
 ```
 
+## 2、tidb-lightning参数
 
+- 命令行参数生效优先级高于配置文件中的
 
 | 参数                                                         | 描述                                                         | 对应配置项                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------ |
+| :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------- |
 | --config *file*                                              | 从 *file* 读取全局设置。如果没有指定则使用默认设置。         |                                |
 | -V                                                           | 输出程序的版本                                               |                                |
-| -d *directory*                                               | 读取数据的目录                                               | `mydumper.data-source-dir`     |
+| -d *directory*                                               | 读取数据的本地目录或[外部存储 URL](https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-storages) | `mydumper.data-source-dir`     |
 | -L *level*                                                   | 日志的等级： debug、info、warn、error 或 fatal (默认为 info) | `lightning.log-level`          |
 | -f *rule*                                                    | [表库过滤的规则](https://docs.pingcap.com/zh/tidb/stable/table-filter) (可多次指定) | `mydumper.filter`              |
 | --backend [*backend*](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-backends) | 选择后端的模式：`importer`、`local` 或 `tidb`                | `tikv-importer.backend`        |
@@ -109,9 +138,37 @@ tidb-lightning -V
 | --key *file*                                                 | TLS 连接的私钥路径                                           | `security.key-path`            |
 | --server-mode                                                | 在服务器模式下启动 TiDB Lightning                            | `lightning.server-mode`        |
 
-# 五、任务配置
+## 3、tidb-lightning-ctl参数
 
-## 1、配置文件任务详细配置
+- *tablename* 必须是``db`.`tbl`` 中的限定表名（包括反引号）或关键词 `all`
+
+- 所有 `tidb-lightning` 的参数也适用于 `tidb-lightning-ctl`
+
+| 参数                                   | 描述                                                 |
+| :------------------------------------- | :--------------------------------------------------- |
+| --compact                              | 执行 full compact                                    |
+| --switch-mode *mode*                   | 将每个 TiKV Store 切换到指定模式（normal 或 import） |
+| --fetch-mode                           | 打印每个 TiKV Store 的当前模式                       |
+| --import-engine *uuid*                 | 将 TiKV Importer 上关闭的引擎文件导入到 TiKV 集群    |
+| --cleanup-engine *uuid*                | 删除 TiKV Importer 上的引擎文件                      |
+| --checkpoint-dump *folder*             | 将当前的断点以 CSV 格式存储到文件夹中                |
+| --checkpoint-error-destroy *tablename* | 删除断点，如果报错则删除该表                         |
+| --checkpoint-error-ignore *tablename*  | 忽略指定表中断点的报错                               |
+| --checkpoint-remove *tablename*        | 无条件删除表的断点                                   |
+
+## 4、tikv-importer参数
+
+| 参数                      | 描述                                                | 对应配置项              |
+| :------------------------ | :-------------------------------------------------- | :---------------------- |
+| -C, --config *file*       | 从 *file* 读取配置。如果没有指定，则使用默认设置    |                         |
+| -V, --version             | 输出程序的版本                                      |                         |
+| -A, --addr *ip:port*      | TiKV Importer 服务器的监听地址                      | `server.addr`           |
+| --status-server *ip:port* | 状态服务器的监听地址                                | `status-server-address` |
+| --import-dir *dir*        | 引擎文件的存储目录                                  | `import.import-dir`     |
+| --log-level *level*       | 日志的等级： trace、debug、info、warn、error 或 off | `log-level`             |
+| --log-file *file*         | 日志文件路径                                        | `log-file`              |
+
+## 5、任务配置文件参数详解
 
 ```ini
 [lightning]
@@ -123,7 +180,6 @@ index-concurrency = 2
 table-concurrency = 6
 
 # 数据的并发数。默认与逻辑 CPU 的数量相同。混合部署的情况下可以将其大小配置为逻辑 CPU 数的 75%，以限制 CPU 的使用。
-
 # region-concurrency =
 
 # I/O 最大并发数。I/O 并发量太高时，会因硬盘内部缓存频繁被刷新。而增加 I/O 等待时间，导致缓存未命中和读取速度降低。对于不同的存储介质，此参数可能需要调整以达到最佳效率。
@@ -171,12 +227,16 @@ addr = "172.16.31.10:8287"
 # - ignore：保留已有数据，忽略新数据
 # - error：中止导入并报错
 # on-duplicate = "replace"
+
 # 当后端是 “local” 时，控制生成 SST 文件的大小，最好跟 TiKV 里面的 Region 大小保持一致，默认是 96 MB。
 # region-split-size = 100_663_296
+
 # 当后端是 “local” 时，一次请求中发送的 KV 数量。
 # send-kv-pairs = 32768
+
 # 当后端是 “local” 时，本地进行 KV 排序的路径。如果磁盘性能较低（如使用机械盘），建议设置成与 `data-source-dir` 不同的磁盘，这样可有效提升导入性能。
 # sorted-kv-dir = ""
+
 # 当后端是 “local” 时，TiKV 写入 KV 数据的并发度。当 TiDB Lightning 和 TiKV 直接网络传输速度超过万兆的时候，可以适当增加这个值。
 # range-concurrency = 16
 
@@ -314,23 +374,139 @@ switch-mode = "5m"
 log-progress = "5m"
 ```
 
-开始执行任务
+# 五、Web 界面
 
-```bash
-tidb-lightning -config /home/tidb/tidb-lightning.toml
+TiDB Lightning 支持在网页上查看导入进度或执行一些简单任务管理。启用服务器模式的方式有如下几种：
+
+1. 在启动 `tidb-lightning` 时加上命令行参数 `--server-mode`。
+
+   ```sh
+   nohup tidb-lightning --server-mode --status-addr :8289 >> tidb-lightning-server.log 2>&1 &
+   ```
+
+2. 在配置文件中设置 `lightning.server-mode`。
+
+   ```toml
+   [lightning]
+   server-mode = true
+   status-addr = ':8289'
+   ```
+
+TiDB Lightning 启动后，可以访问 `http://127.0.0.1:8289` 来管理程序
+
+服务器模式下，TiDB Lightning 不会立即开始运行，而是通过用户在 web 页面提交（多个） TOML 格式的**任务**文件来导入数据。
+
+# 六、断点续传
+
+大量的数据导入一般耗时数小时至数天，长时间运行的进程会有一定机率发生非正常中断。如果每次重启都从头开始，就会浪费掉之前已成功导入的数据。为此，TiDB Lightning 提供了“断点续传”的功能，即使 `tidb-lightning` 崩溃，在重启时仍然接着之前的进度继续工作。
+
+文档：https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-checkpoints
+
+## 1、断点续传的启用与配置
+
+```ini
+[checkpoint]
+# 启用断点续传。
+# 导入时，TiDB Lightning 会记录当前进度。
+# 若 TiDB Lightning 或其他组件异常退出，在重启时可以避免重复再导入已完成的数据。
+enable = true
+
+# 存储断点的方式
+#  - file：存放在本地文件系统（要求 v2.1.1 或以上）
+#  - mysql：存放在任何兼容 MySQL 5.7 或以上的数据库中，包括 MariaDB 和 TiDB
+driver = "file"
+
+# 存储断点的架构名称（数据库名称）仅在 driver = "mysql" 时生效
+# schema = "tidb_lightning_checkpoint"
+
+# 断点的存放位置
+#     若 driver = "file"，此参数为断点信息存放的文件路径。如果不设置该参数则默认为 `/tmp/CHECKPOINT_SCHEMA.pb`
+#     若 driver = "mysql"，此参数为数据库连接参数 (DSN)，格式为“用户:密码@tcp(地址:端口)/”。
+#        默认会重用 [tidb] 设置目标数据库来存储断点。为避免加重目标集群的压力，建议另外使用一个兼容 MySQL 的数据库服务器。
+# dsn = "/tmp/tidb_lightning_checkpoint.pb"
+
+# 导入成功后是否保留断点。默认为删除。保留断点可用于调试，但有可能泄漏数据源的元数据。
+# keep-after-success = false
 ```
 
-## 2、命令行任务简单配置
+## 2、断点续传的控制
+
+若 `tidb-lightning` 因不可恢复的错误而退出（例如数据出错），重启时不会使用断点，而是直接报错离开。为保证已导入的数据安全，这些错误必须先解决掉才能继续。使用 `tidb-lightning-ctl` 工具可以标示已经恢复。
+
+### ①从头开始整个导入过程
 
 ```bash
-tidb-lightning \
-  -L info --log-file /root/tidb-lightning_task.log \
-  --backend local --status-addr 10080 --enable-checkpoint true \
-  -d /root/tidb_backup \
-  --tidb-host 192.168.1.2 \
-  --tidb-port 4000 \
-  --tidb-user root \
-  --tidb-password ***** 
-
+tidb-lightning-ctl --checkpoint-error-destroy=['`schema`.`table`' | all ]
 ```
 
+- 该命令会让失败的表从头开始整个导入过程。选项中的架构和表名必须以反引号 (```) 包裹，而且区分大小写。
+- 如果导入 ``schema`.`table`` 这个表曾经出错，这条命令会：
+  1. 从目标数据库移除 (DROP) 这个表，清除已导入的数据。
+  2. 将断点重设到“未开始”的状态。
+- 如果 ``schema`.`table`` 没有出错，则无操作。
+- 传入 `all` 会对所有表进行上述操作，这是最方便、安全但保守的断点错误解决方法。
+
+### ②忽略出错状态接着带导入
+
+```shell
+tidb-lightning-ctl --checkpoint-error-ignore='`schema`.`table`' &&
+tidb-lightning-ctl --checkpoint-error-ignore=all
+```
+
+如果导入 ``schema`.`table`` 这个表曾经出错，这条命令会清除出错状态，如同没事发生过一样。传入 "all" 会对所有表进行上述操作。
+
+> **注意：**
+>
+> 除非确定错误可以忽略，否则不要使用这个选项。如果错误是真实的话，可能会导致数据不完全。启用校验和 (CHECKSUM) 可以防止数据出错被忽略。
+
+### ③无论是否有出错，把断点清除
+
+```shell
+tidb-lightning-ctl --checkpoint-remove='`schema`.`table`' &&
+tidb-lightning-ctl --checkpoint-remove=all
+```
+
+### ④将所有断点备份到传入的文件夹
+
+该参数主要用于技术支持。此选项仅于 `driver = "mysql"` 时有效。
+
+```shell
+tidb-lightning-ctl --checkpoint-dump=output/directory
+```
+
+# 七、实例
+
+## 1、编写配置文件
+
+>  Test.toml
+
+```ini
+[mydumper]
+# 数据源目录
+data-source-dir = "/data/tidb-dumpling-export"
+
+[tikv-importer]
+backend = "tidb"
+
+[tidb]
+host = "192.168.1.2"
+port = 4000
+user = "root"
+password = "*****"
+```
+
+## 2、启动任务
+
+- 在lightning的Web界面中提交任务配置文件
+
+- 在命令行中运行任务配置文件
+
+  ```bash
+  nohup tidb-lightning \
+    -L info \
+    --log-file /root/tidb-lightning-import-task.log \
+    -config /root/Test.toml \
+    > /root/tidb-lightning-import-task-nohup.log 2>&1 &
+  ```
+
+导入完毕后，TiDB Lightning 会自动退出。若导入成功，日志的最后一行会显示 `tidb lightning exit`

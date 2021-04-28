@@ -664,3 +664,15 @@ show processlist;
 kill -9 进程号
 ```
 
+# 21、统计DB所有表的实际条数
+
+如果从`information_schema.tables` 表统计获取各表的信息话，对于非事务性表，`table_rows` 这个值是精确的，对于事务性引擎，这个值通常是估算的。例如 MyISAM，存储精确的数目。对于其它存储引擎，比如 InnoDB ，本值是一个大约的数，与实际值相差可达 40 到 50% 。在这些情况下，使用 `SELECT COUNT(*)` 来获得准确的数目。对于在 `information_schema` 数据库中的表， Rows 值为 NULL 。
+
+```bash
+SELECT CONCAT( 'SELECT "', TABLE_NAME, '", COUNT(*) FROM ', TABLE_SCHEMA, '.', TABLE_NAME, ' UNION ALL' )  EXEC_SQL
+FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'DB名字';
+```
+
+上述SQL会输出用于统计指定DB中所有表行数的SQL语句，复制以后，删除最后一行末尾的`UNION ALL`，然后执行即可获取所有表的实际条数
+
+**参考**：https://commandnotfound.cn/sql/7/345/MySQL-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8B%E5%90%84%E4%B8%AA%E8%A1%A8%E7%9A%84%E8%A1%8C%E6%95%B0%E4%BF%A1%E6%81%AF
