@@ -68,3 +68,12 @@ topic主题类型
 - 以消息backlog的形式，持久保存所有的未被确认消息
 
 Pulsar 支持保证一条消息只能在broker服务端被持久化一次的特性，即消息去重功能
+
+
+
+
+
+# 参考
+
+1. https://jack-vanlightly.com/blog/2018/10/2/understanding-how-apache-pulsar-works
+

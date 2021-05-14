@@ -234,3 +234,16 @@ brew bundle --file="~/Desktop/Brewfile"
 ### 参考：
 
 1. https://wsgzao.github.io/post/homebrew-bundle/
+
+## 6、使用Brew安装的软件信息
+
+### ①MySQL
+
+- 日志和底层DB数据文件: `/usr/local/var/mysql`
+- bin文件路径：`/usr/local/Cellar/mysql@mysql版本/mysql版本`
+- brew 启动命令：`brew services restart mysql@mysql版本 `
+
+### ②Nginx
+
+- 主配置文件路径：`/usr/local/etc/nginx/nginx.conf`
+- bin文件路径: `/usr/local/Cellar/nginx/nginx版本号/`

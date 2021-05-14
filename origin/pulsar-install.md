@@ -2,7 +2,7 @@
 
 # 一、简介
 
-# 二、Binbary
+# 二、二进制安装
 
 ## 1、prerequisite
 
@@ -50,8 +50,6 @@ for i in {2..3};do
 	ssh root@192.168.1.12$i -c 'ln -s /opt/apache-pulsar-2.7.1 /opt/pulsar && '
 done
 ```
-
-
 
 ## 4、部署Zookeeper集群
 
@@ -134,14 +132,6 @@ pulsar-client consume persistent://public/default/test -n 100 -s "consumer-test"
 ```bash
 pulsar-client produce persistent://public/default/test -n 1 -m "Hello Pulsar"
 ```
-
-### ⑤创建
-
-
-
-
-
-
 
 # 三、Docker
 

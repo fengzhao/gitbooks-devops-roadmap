@@ -715,11 +715,18 @@ MariaDB [(none)]> SHOW DATABASES;  #数据还原
   wget https://downloads.mysql.com/archives/get/p/23/file/mysql-client_5.6.46-1debian8_amd64.deb
   dpkg -i mysql*
   
-  # 安装Percona XtraBackup2.3
+  # ubuntu 安装Percona XtraBackup2.3
   wget https://repo.percona.com/apt/percona-release_0.1-6.$(lsb_release -sc)_all.deb
   dpkg -i percona-release_0.1-6.bionic_all.deb
   apt-get update
   apt-get install percona-xtrabackup
+  
+  # CentOS 安装Percona XtraBackup2.3
+  yum install -y perl rsync perl-Data-Dumper
+  wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.3.5/binary/redhat/7/x86_64/percona-xtrabackup-2.3.5-1.el7.x86_64.rpm
+  yum clean all 
+  yum repolist
+  yum localinstall percona-xtrabackup-2.3.2-1.el7.x86_64.rpm
   ```
 
 - 恢复解压后的备份文件
@@ -800,18 +807,22 @@ MariaDB [(none)]> SHOW DATABASES;  #数据还原
 
   注意：由于上一步中MySQL配置文件中添加`skip-grant-tables`,此时，是可以不用输入密码就可以登录
 
-  ```
+  ```bash
   mysql -u root -p
   
   mysql > use mysql 
   mysql > update user set PASSWORD = PASSWORD('***新密码***') where user = 'root';
   mysql > flush privileges;
+  
+# 或者使用以下SQL语句重新建立root用户的远程登录权限
+  mysql > GRANT ALL PRIVILEGES ON *.* TO root@"%" IDENTIFIED BY '**新密码***' WITH GRANT OPTION;
+mysql > flush privileges;
   ```
 
   修改完成后，将配置文件中的`skip-grant-tables`删掉，重新部署启动。禁止跳过密码登录
-
+  
   注意：
-
+  
   - 如果原始数据库中，没有远程root用户登录用户权限，可在跳过密码验证阶段，使用navicat连接上后，直接在界面更新mysql.user的root用户localhost为root用户%的权限
 
 ### ②单个表物理.ibd文件恢复

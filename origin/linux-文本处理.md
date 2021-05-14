@@ -282,8 +282,6 @@ sed ‘1G’ tmp
  sed '/xi$/{x;p;x;}' tmp
 ```
 
-
-
 # 三、grep
 
 ```bash

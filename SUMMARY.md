@@ -188,8 +188,9 @@
 * Metrics
     * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
         * [kube-prometheus](origin/kube-prometheus.md)
-    * Exporter
+    * Prometheus Exporters
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
+        * [Blackbox Exporter](origin/prometheus-blackbox-exporter.md)
 * Tracing
     * SkyWalking
 * [Sentry日志聚合告警平台](origin/sentry.md)
@@ -346,6 +347,7 @@
          * [常见操作及SQL](origin/mysql-common-operations.md)
          * [用户权限管理](origin/mysql-user-privileges.md)
          * [MySQL SQL Mode : ONLY_FULL_GROUP_BY](origin/mysql-mode-only-full-groupby.md)
+         * [Binglog](origin/mysql-binlog.md)
      * 备份与恢复
             * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
             * [MysqlDump详解](origin/mysql-dumper.md)
@@ -416,7 +418,7 @@
   - 安装部署
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
     - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
-  - [DM(Data Migration)及Ansible部署](origin/tidb-ansible-dm.md)
+  - [DM(Data Migration)数据增量全量同步至TiDB](origin/tidb-dm.md)
   - [TiDB-Dumpling：从TiDB/MySQL导出数据](origin/tidb-dumpling-export.md)
   - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
   - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
@@ -426,6 +428,7 @@
   - [安装部署](origin/pulsar-install.md)
   - [Pulsar的CLI命令](origin/pulsar-cli.md)
   - [Pulsar性能测试](origin/pulsar-perf-test.md)
+  - [Pulsar的Kafka协议适配器KoP](origin/pulsar-kafka-kop.md)
 
 ## Part VIII: golang学习笔记
 

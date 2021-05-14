@@ -83,6 +83,8 @@ mysqldump  -uroot -p --all-databases
 mysqldump  -uroot -p --databases test mysql
 --debug
 输出debug信息，用于调试。默认值为：d:t,/tmp/mysqldump.trace
+
+
 mysqldump  -uroot -p --all-databases --debug
 mysqldump  -uroot -p --all-databases --debug=” d:t,/tmp/debug.trace”
 --debug-check
@@ -95,6 +97,7 @@ mysqldump  -uroot -p --all-databases --debug-info
 设置默认字符集，默认值为utf8
 mysqldump  -uroot -p --all-databases --default-character-set=utf8
 --delayed-insert
+
 采用延时插入方式（INSERT DELAYED）导出数据
 mysqldump  -uroot -p --all-databases --delayed-insert
 --delete-master-logs

@@ -318,15 +318,14 @@ iptables -A INPUT -d 172.168.100.67 -p tcp -m multiport --dport 22,80 -m state -
 
 ### ⑤string：字符串匹配模块
 
-string的关键字过滤,一定要做在output链上, 在回应报文中才应该会有内容
-
 ` --algo {匹配算法: bm|kmp} ` 
 
 `--string "字符串"`
 
 ```bash
-iptables -I OUTPUT -s 192.168.1.0/24 -m string --algo kmp --string "qq" -j REJECT         
+iptables -I OUTPUT -s 192.168.1.0/24 -m string --algo kmp --string "qq" -j REJECT     
 #使用kmp算法限制拒绝源地址192.168.1.0/24带有"qq"字符串的请求
+iptables -I INPUT -m string --string "export/*" --algo bm -j DROP
 ```
 
 ### ⑥limit：连接数匹配模块

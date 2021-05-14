@@ -36,10 +36,20 @@ echo $key
 
 # 二、变量的引用
 
+## 1、基础使用
+
 ```bash
 $var
 ${var}
 ${var:defaultvalue}
+```
+
+## 2、用变量的值作为新的变量名
+
+```bash
+name=test
+test_p=123
+echo `eval echo '$'"$name""_p"`
 ```
 
 # 三、变量是否换行输出显示

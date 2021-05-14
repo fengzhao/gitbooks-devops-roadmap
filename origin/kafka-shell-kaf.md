@@ -139,3 +139,9 @@ kafa group describe dispatcher
 echo test | kaf produce test_topic
 ```
 
+### ⑨消费指定Topic中的消息
+
+```bash
+kaf consume test_topic -f
+```
+
