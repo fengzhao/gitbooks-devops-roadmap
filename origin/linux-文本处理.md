@@ -53,7 +53,15 @@ a="Location: https://allinone.okd311.curiouser.com:8443/oauth/token/implicit#acc
 awk -F”[@ /t]" '{print $1 $2}'
 ```
 
+## 5、为每行增加行号
 
+```bash
+awk '$0=NR":"$0' 文件名 > 新文件名
+
+# $0表示原来每行的内容，
+# NR表示行号，
+# 双引号之间表示行号与原来内容之间的delimiter
+```
 
 # 二、sed
 

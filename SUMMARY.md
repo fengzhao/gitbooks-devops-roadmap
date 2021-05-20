@@ -188,15 +188,21 @@
 * Metrics
     * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
         * [kube-prometheus](origin/kube-prometheus.md)
-    * Prometheus Exporters
+    * Prometheus
+        * [Prometheus基础概念](origin/prometheus-basic.md)
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
         * [Blackbox Exporter](origin/prometheus-blackbox-exporter.md)
+    * Grafana
+        * [Grafana的备份恢复](origin/grafana-backup-restore.md)
 * Tracing
     * SkyWalking
 * [Sentry日志聚合告警平台](origin/sentry.md)
     * [Logstash与Sentry对接](origin/sentry-logstash对接Sentry.md)
 
 ## Part Ⅵ：基础
+* FastDFS分布式文件系统
+    * 基础概念
+    * 安装部署
 * Docker
     * 基础知识
       * [Docker原理](origin/docker原理.md)
@@ -418,10 +424,11 @@
   - 安装部署
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
     - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
-  - [DM(Data Migration)数据增量全量同步至TiDB](origin/tidb-dm.md)
-  - [TiDB-Dumpling：从TiDB/MySQL导出数据](origin/tidb-dumpling-export.md)
-  - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
-  - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
+  - ELT工具
+    - [DM(Data Migration)数据增量全量同步至TiDB](origin/tidb-dm.md)
+    - [TiDB-Dumpling：从TiDB/MySQL导出数据](origin/tidb-dumpling-export.md)
+    - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
+    - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
   - [大数据的数据迁移](origin/bigdata-migrate-operation.md)
 - Apache Pulsar
   - [基础概念](origin/pulsar-basic.md)

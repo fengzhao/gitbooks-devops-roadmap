@@ -171,7 +171,7 @@ tiup update --self
 # 先查看当前版本的tiup支持安装的DM版本
 tiup list dm --verbose
 # 安装最新版本的DM
-tiup install dm:1.4.2
+tiup install dm:v1.4.2
 ```
 
 ## 3、配置DM主机拓扑配置
@@ -179,8 +179,8 @@ tiup install dm:1.4.2
 ### ①创建部署DM的主机拓扑模板配置文件
 
 ```bash
-mkdir tiup-dm-1.4.2
-tiup dm template > tiup-dm-1.4.2/topology.yaml
+mkdir tiup-dm
+tiup dm template > tiup-dm/topology.yaml
 ```
 
 ### ②编写修改DM主机拓扑配置
@@ -202,21 +202,29 @@ server_configs:
   worker:
     log-level: info
 master_servers:
-  - host: 192.168.190.201
+  - host: 192.168.1.6
     deploy_dir: "/data/tiup-dm/dm-master"
     data_dir: "/data/tiup-dm/dm-master/data"
     log_dir: "/data/tiup-dm/dm-master/log"
 worker_servers:
-  - host: 192.168.190.201
+  - host: 192.168.1.6
     deploy_dir: "/data/tiup-dm/dm-worker"
     log_dir: "/data/tiup-dm/dm-worker/log"
     config:
       log-level: info
 monitoring_servers:
-  - host: 192.168.190.201
+  - host: 192.168.1.6
     deploy_dir: "/data/tiup-dm/dm-prometheus"
     data_dir: "/data/tiup-dm/dm-prometheus/data"
     log_dir: "/data/tiup-dm/dm-prometheus/log"
+grafana_servers:
+  - host: 192.168.1.6
+    deploy_dir: "/data/tiup-dm/dm-grafana"
+alertmanager_servers:
+  - host: 192.168.1.6
+    deploy_dir: "/data/tiup-dm/dm-alertmanager"
+    data_dir: "/data/tiup-dm/dm-alertmanager/data"
+    log_dir: "/data/tiup-dm/dm-alertmanager/logs"    
 ```
 
 ### ③配置root用户SSH免密登录
@@ -225,16 +233,21 @@ monitoring_servers:
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 ```
 
-### ④修改目录权限
+### ④创建修改目录权限
 
 ```bash
-chown -R tidb:tidb /data/tiup-dm
+mkdir -p /data/tiup-dm/{dm-master/{data,logs},dm-worker/{data,logs},dm-prometheus/{data,logs},dm-grafana,dm-alertmanager/{data,logs}} && \
+useradd tidb && \
+chown -R tidb:tidb /data/tiup-dm && \
+tree -L 3 /data/tiup-dm
 ```
 
 ### ⑤执行安装部署dm
 
 ```bash
 tiup dm deploy <dm集群名字> <dm集群版本> <dm集群主机拓扑配置文件路径> --user root -i /root/.ssh/id_rsa
+
+# dm集群版本使用tiup list dm-master查看支持安装的DM版本
 ```
 
 ### ⑥启动DM集群
@@ -243,15 +256,18 @@ tiup dm deploy <dm集群名字> <dm集群版本> <dm集群主机拓扑配置文�
 tiup dm start dm集群名字
 ```
 
-### ⑦验证DM集群
+### ⑦访问验证DM集群服务
 
 ```bash
 # 查看集群列表
 tiup dm list
 # 检查集群状态
 tiup dm display dm集群名字
-
 ```
+
+- **访问Grafana**：http://192.168.1.6:3000/login （默认用户名密码为：admin / admin）
+- **访问Prometheus**：http://192.168.1.6:9090/graph
+- **访问Metric信息**：http://192.168.1.6:8262/metrics (Metrics数据使用dm-master自带暴露的)
 
 ### ⑧查看tiup操作日志
 
@@ -404,7 +420,7 @@ from:
 ## 3、数据源操作
 
 ```bash
-tiup dmctl --master-addr 192.168.190.201:8261 operate-source 操作动作 上游数据源配置文件路径(可传递多个文件路径)
+tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数据源配置文件路径(可传递多个文件路径)
 ```
 
 **操作动作如下：**
@@ -795,9 +811,15 @@ handle-error <任务名 | 任务配置文件> [-s source ...] [-b binlog-pos] <s
 
 # 七、DM监控
 
-使用TiUP部署DM组件时可以部署prometheus和各种porter
+- 使用TiUP部署DM组件时可以部署prometheus生态的监控组件。
 
-## Overview
+- DM的Metrics信息是由dm-master进行暴露的。
+
+- 如果已部署的有Grafana，想复用，可不部署Grafana，只需部署Prometheus即可。Grafana添加数据源，然后导入JSON格式的Dashboard定义文件（[见附件](../assets/dm-grafana-dashboard.json)）即可。
+
+## 可监控的指标
+
+### 1、Overview
 
 overview 下包含运行当前选定 task 的所有 DM-worker/master instance/source 的部分监控指标。当前默认告警规则只针对于单个 DM-worker/master instance/source。
 
@@ -811,7 +833,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | binlog file gap between master and syncer | 与上游 master 相比 binlog replication unit 落后的 binlog file 个数 | N/A      | N/A      |
 | shard lock resolving                      | 当前子任务是否正在等待 shard DDL 迁移，大于 0 表示正在等待迁移 | N/A      | N/A      |
 
-## Operate error
+### 2、Operate error
 
 | metric 名称              | 说明                     | 告警说明 | 告警级别 |
 | :----------------------- | :----------------------- | :------- | :------- |
@@ -824,7 +846,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | update error             | 子任务更新的出错次数     | N/A      | N/A      |
 | stop error               | 子任务停止的出错次数     | N/A      | N/A      |
 
-## HA 高可用
+### 3、HA 高可用
 
 | metric 名称                                             | 说明                                            | 告警说明                              | 告警级别 |
 | :------------------------------------------------------ | :---------------------------------------------- | :------------------------------------ | :------- |
@@ -835,13 +857,13 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | shard ddl error per minute                              | 每分钟内不同类型的 shard DDL 错误次数           | 发生 shard DDL 错误                   | critical |
 | number of pending shard ddl                             | 未完成的 shard DDL 数目                         | 存在未完成的 shard DDL 数目超过一小时 | critical |
 
-## Task 状态
+### 4、Task 状态
 
 | metric 名称 | 说明             | 告警说明                                 | 告警级别 |
 | :---------- | :--------------- | :--------------------------------------- | :------- |
 | task state  | 迁移子任务的状态 | 当子任务状态处于 `Paused` 超过 20 分钟时 | critical |
 
-## Dump/Load unit
+### 5、Dump/Load unit
 
 下面 metrics 仅在 `task-mode` 为 `full` 或者 `all` 模式下会有值。
 
@@ -856,7 +878,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | transaction execution latency | load unit 在执行事务的时延，单位：秒                         | N/A      | N/A      |
 | statement execution latency   | load unit 执行语句的耗时，单位：秒                           | N/A      | N/A      |
 
-## Binlog replication
+### 6、Binlog replication
 
 下面 metrics 仅在 `task-mode` 为 `incremental` 或者 `all` 模式下会有值。
 
@@ -884,7 +906,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | unsynced tables                           | 当前子任务内还未收到 shard DDL 的分表数量                    | N/A                                                         | N/A      |
 | shard lock resolving                      | 当前子任务是否正在等待 shard DDL 迁移，大于 0 表示正在等待迁移 | N/A                                                         | N/A      |
 
-## Relay log
+### 7、Relay log
 
 | metric 名称                              | 说明                                                         | 告警说明                                                    | 告警级别  |
 | :--------------------------------------- | :----------------------------------------------------------- | :---------------------------------------------------------- | :-------- |
@@ -901,11 +923,11 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | write relay log duration                 | relay log 每次写 binlog 到磁盘的时延，单位：秒               | N/A                                                         | N/A       |
 | binlog event size                        | relay log 写到磁盘的单条 binlog 的大小                       | N/A                                                         | N/A       |
 
-## Instance
+### 8、Instance
 
 在 Grafana dashboard 中，instance 的默认名称为 `DM-instance`。
 
-## Relay log
+### 9、Relay log
 
 | metric 名称                              | 说明                                                         | 告警说明                                                    | 告警级别  |
 | :--------------------------------------- | :----------------------------------------------------------- | :---------------------------------------------------------- | :-------- |
@@ -922,7 +944,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | write relay log duration                 | relay log 每次写 binlog 到磁盘的时延，单位：秒               | N/A                                                         | N/A       |
 | binlog size                              | relay log 写到磁盘的单条 binlog 的大小                       | N/A                                                         | N/A       |
 
-## task
+### 10、task
 
 | metric 名称                               | 说明                                                         | 告警说明                               | 告警级别 |
 | :---------------------------------------- | :----------------------------------------------------------- | :------------------------------------- | :------- |

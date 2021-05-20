@@ -160,7 +160,7 @@ SUCCESSFUL=1
 
 ## 2、访问属性值
 
-### ①输出变量的值
+### ①输出属性的值
 
 ```bash
 $ jq -r '.snapshots[].snapshot' test.json
@@ -169,6 +169,7 @@ $ jq -r '.snapshots[].snapshot,.snapshots[].end_time' test.json
 
 # 如果属性名中有空格，需要加双引号
 $ jq -r '."with space"' test.json
+$ jq -r '"\(."@timestamp") \(.end_time)"'  test.json
 ```
 
 ### ②批量访问属性值
@@ -248,6 +249,10 @@ $ jq -r '[.snapshots[].indices[0]] | max' test.json
 
 ```bash
 $ jq -r '.snapshots[] | select(.duration_in_millis < 400)' test.json
+
+# 如果属性值不是整型，而是字符型。例如 duration_in_millis: "300"
+$ jq -r '.snapshots[] | select(.duration_in_millis < "400") | .end_time , .version_id' test.json
+$ jq -r '.snapshots[] | select(.duration_in_millis < "400") | "\(.end_time) \(.version_id)"' test.json
 
 $ jq -r '.snapshots[] | select(.duration_in_millis < 400 and .state=="SUCCESS" )' test.json
 ```
