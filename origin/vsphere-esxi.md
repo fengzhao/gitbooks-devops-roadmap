@@ -1,7 +1,3 @@
-
-
-
-
 # 一、ESXI 管理常用命令
 
 ## 1、esxcli
@@ -217,6 +213,49 @@ vim-cmd vmsvc/get.summary 101
 
 ```bash
 esxcfg-vmknic -l
+```
+
+# 二、挂载本地磁盘上VMFS文件系统分区
+
+```bash
+esxcfg-volume -l |grep "VMFS UUID/label"
+# 会显示当前磁盘分区UUID
+
+esxcfg-volume -M UUID
+# 会将磁盘分区挂载到/vmfs/volumes/UUID下
+# -M 重启后依旧会挂载。-m 重启后不会再挂载
+```
+
+> **应用实例：**
+>
+> ​		四块SAAS硬盘做的raid5。其中一块出现坏块，导致其上的VMWare系统奔溃。将硬盘位置打乱换了以后在开机期间Crtl+ R进入raid工具界面，显示raid正在重建。等重建完成后，还是无法进入VMWare。随后找到一块临时SATA即可的SSD硬盘插入光驱位，然后下载6.7的ESXI刻录到U盘中，将VMWare安装到SSD中。开机进入新的VMWare后，可以看到旧硬盘，分区依旧在，说明数据也在。此时需要将旧硬盘上的VMFS文件系统分区挂载到新的VMWare即可显示VM的数据存储。之后就可以使用各种工具备份导出VM啦，推荐使用群晖上的ABB。
+
+# 三、ESXI网络抓包工具
+
+![](../assets/tcpdump-uw-vs-pktcap-uw.png)
+
+https://www.virten.net/2015/10/esxi-network-troubleshooting-with-tcpdump-uw-and-pktcap-uw/
+
+## 1、tcpdump-uw
+
+详细文档：https://kb.vmware.com/s/article/1031186
+
+```bash
+esxcfg-vmknic -l
+# 或者
+esxcli network ip interface list
+
+tcpdump-uw -i vmk0
+```
+
+## 2、pktcap-uw 
+
+详细文档：https://kb.vmware.com/s/article/2051814?lang=zh_CN
+
+```bash
+net-stats -l
+
+pktcap-uw --vmk vmk0
 ```
 
 

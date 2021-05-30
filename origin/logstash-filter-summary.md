@@ -12,3 +12,14 @@ filter{
 }
 ```
 
+# 2、删除json字段
+
+```bash
+filter{
+  mutate {
+      remove_field => [ "@timestamp" , "headers" , "response.data"]
+      gsub => ["message", "\\\", ""]
+    }
+}
+```
+

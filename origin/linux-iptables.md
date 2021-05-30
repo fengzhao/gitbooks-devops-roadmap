@@ -357,6 +357,19 @@ iptables -A INPUT -p tcp --dport 21 -s 192.168.1.0/24 -m time ! --weekdays 6,7 -
 # 在工作时间，即周一到周五的8:30-18:00，开放本机的ftp服务给 192.168.1.0网络中的主机访问；并且数据下载请求的次数每分钟不得超过 5 个；
 ```
 
+### ⑨set: 地址集合模块
+
+- 普通的iptables链是线性的存储和过滤，在进行规则匹配时，是从规则列表中从头到尾一条一条进行匹配。这像是在链表中搜索指定节点费力
+- ipset 提供了把这个 O(n) 的操作变成 O(1) 的方法：就是把要处理的 IP 放进一个集合，对这个集合设置一条 iptables 规则。存储在带索引的数据结构中,这种结构即使集合比较大也可以进行高效的查找
+
+- ipset是iptables的扩展，允许创建管理匹配整个地址集合的规则。命令详解参考附录第2章节
+
+`-m set –match-set 地址集合名称  ` 
+
+```bash
+iptables -I INPUT -m set –match-set 集合名称 src -p tcp -j DROP
+```
+
 # 五、iptables的内核调优
 
 ## 1、iptables的conntrack连接追踪优化
@@ -582,6 +595,86 @@ iptables -t nat -I PREROUTING  -d 公网IP -p tcp  -m tcp  --dport 公网port  -
 ## 1、TCP连接状态
 
 https://blog.mimvp.com/article/44678.html
+
+## 2、ipset命令
+
+- 官网：https://ipset.netfilter.org/
+- 文档：https://ipset.netfilter.org/ipset.man.html#lbBF
+- ipset默认可以存储65536个元素，使用maxelem指定数量
+- 不支持0.0.0.0/0 ，可以替换为 `0.0.0.0/1，128.0.0.0/1`
+- 需要内核版本高于2.6.32
+
+### ①安装ipset命令
+
+```bash
+yum install -y ipset
+apt install -y ipset
+apk add -y ipset
+```
+
+### ②ipset语法规则
+
+```bash
+# 创建集合
+ipset (create | -N) 集合名称 集合存储方法:记录类型1[,数据类型2[,数据类型3]] [ 集合存储方法:记录类型支持的参数 ]
+    # 支持的集合储存方法
+    - bitmap：仅支持ip、port、mac记录类型
+    - hash：仅支持net、iface、mac、ip、port、mark记录类型
+    - list: 仅支持集合间的继承关联关系
+
+    # 支持的记录类型
+    - ip：IP地址，例如1.2.3.4
+    - net：IP地址网络段，例如1.2.3.0/24
+    - mac：MAC地址，例如1A:2B:3C:4D:5E:6F
+    - port：协议类型:端口，例如[udp/tcp]:23、[udp/tcp]:21-23
+    - iface：网卡，例如eth0
+    - mark: 例如0x63，值在0~4294967295之间
+# 例如：ipset create whitelist hash:ip,port
+
+# 查看集合存储方法:记录类型支持的参数
+ipset help 集合存储方法:记录类型
+# 例如：ipset help hash:ip,port
+
+# 集合中添加记录
+ipset (add | -A) 集合名称 记录 
+# 例如：ipset add whitelist 192.168.1.7,tcp:21-22
+
+# 查看集合。不加集合名称是查看所有的集合
+ipset [list | -L) [集合名称]
+# 例如：ipset -L whitelist
+
+# 删除集合中的记录 
+ipset (del | -D) 集合名称 记录 [ DEL-OPTIONS ]
+# 例如：ipset del whitelist 192.168.1.7,tcp:21
+
+# 删除集合，不能有任何下游依赖 。不加集合名称是删除所有集合
+ipset (destroy | -X) [集合名称]
+# 例如：ipset destroy whitelist
+
+# 清空集合，不加集合名称是清空所有
+ipset (flush | -F) [集合名称]
+# 例如：ipset flush
+
+# 将ipset规则保存到文件，不加集合名词是保存所有集合，不加-f是输出记录到标准输出
+ipset (save | -S) [集合名称] [-f 文件名]
+# 例如：ipset save whitelist -f iptbales-whitelist-ip.txt
+
+# 导入ipset规则，不加-f是从标准输入读取规则
+ipset (restore | -R) [-f 文件名]
+# 例如：ipset restore -f iptbales-whitelist-ip.txt
+
+# 重命名集合
+ipset (rename | -E) 旧集合名称 新集合名称
+# 例如：ipset rename whitelist blacklist
+
+# 测试一个ip是不是在集合中（要是ip在集合中返回0，如果ip不在集合中则返回非0）
+ipset (test | -T) 集合名称 ip地址
+# 例如：ipset test blacklist 192.168.1.7,tcp:55
+```
+
+
+
+
 
 # 参考
 
