@@ -158,6 +158,12 @@ FAILED=0
 SUCCESSFUL=1
 ```
 
+### ⑥压缩输出
+
+```bash
+jq -c '.' test.json
+```
+
 ## 2、访问属性值
 
 ### ①输出属性的值
@@ -255,6 +261,13 @@ $ jq -r '.snapshots[] | select(.duration_in_millis < "400") | .end_time , .versi
 $ jq -r '.snapshots[] | select(.duration_in_millis < "400") | "\(.end_time) \(.version_id)"' test.json
 
 $ jq -r '.snapshots[] | select(.duration_in_millis < 400 and .state=="SUCCESS" )' test.json
+
+# 精准匹配
+$ jq -r ' .snapshots[] | .[] | select( .uuid == "Wp5MBOFWJA" )  ' test.json
+
+# 模糊匹配
+jq '.[] |= map(select(.source | contains("/log/app/stg/pressure-server/"))' filebeat-registry.json
+
 ```
 
 ### ⑤select：正则表达式筛选过滤
@@ -263,10 +276,13 @@ $ jq -r '.snapshots[] | select(.duration_in_millis < 400 and .state=="SUCCESS" )
 $ jq -r '.snapshots[] | select(.snapshot|test("^BBB.*") ) | .version_id' test.json
 ```
 
-### ⑥del：删除值
+### ⑥del：删除属性
 
 ```bash
 $ jq -r 'del(.snapshots[].version)' test.json
+
+# 删除匹配到的属性
+$ jq -r 'del( .snapshots[] | select(.uuid == "Wp5MBOFWJA"))'  test.json > test-deled.json
 ```
 
 ### ⑦map：map属性值进行操作
@@ -293,7 +309,6 @@ $ jq -r '.snapshots | map(.state) | unique' test.json
 
 ```bash
 $ jq -r '.snapshots | map(.) | .[] | {"快照名": .snapshot,"快照的索引": .indices}' test.json
-
 
 {
   "快照名": "AAA-api-frame-2019-02-08-2019.02.24",

@@ -187,7 +187,6 @@ alias k='kubectl'
   `wd add web`相当于给当前目录做了一个标识，标识名叫做 `web` ，我们下次如果再想进入这个目录，只需输入：`wd web`
 
 - **catimg**：将图片的内容输出到命令行
-  
 
 `catimg demo.jpg`
 
@@ -207,6 +206,8 @@ alias k='kubectl'
 - **git-open**：在终端里打开当前项目的远程仓库地址
 
   安装：`git clone https://github.com/paulirish/git-open.git $ZSH_CUSTOM/plugins/git-open`
+  
+- **history**：内置，快速搜索history
 
 # 六、oh-my-zsh常用主题
 

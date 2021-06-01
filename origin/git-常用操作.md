@@ -100,6 +100,30 @@ git tag -d 0.0.0_b3
 git push origin :tags/0.0.0_b1
 ```
 
+# 9、获取最近一次提交的commit id
+
+```bash
+# 获取完整commit id
+git rev-parse HEAD
+
+# 获取8位commit id
+git rev-parse --short HEAD
+```
+
+# 10、commit回退
+
+```bash
+# 进回退到最近一个的上一个commit
+git reset --hard HEAD^
+
+# 回退到指定commit。commit的ID可残缺地写
+git reset --hard <commit id>
+
+# 查看已回退commit的历史，并回复回退的commit
+git reflog
+git reset --hard <commit id>
+```
+
 
 
 # Git问题总结
