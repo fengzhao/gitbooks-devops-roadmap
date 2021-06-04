@@ -174,6 +174,7 @@
             * [Ingest节点](origin/elasticsearch-ingest节点.md)
             * [数据的路由分配](origin/elasticsearch-数据的分配路由.md)
             * [进程池](origin/es-thread-pool.md)
+            * [elasticsearch性能测试](origin/elasticsearch-benchmarks.md)
         * 管理
             * [Xpack](origin/elasticsearch-7.1的xpack权限控制.md)
             * [Snapshots](origin/elasticSearch-索引的快照备份与恢复.md)
@@ -182,7 +183,6 @@
             * [索引快照清理策略](origin/elasticsearch-index-clean-snapshots.md)
             * [官方示例数据集](origin/elasticsearch-sample-data.md)
         * 性能
-            * [测试](origin/elasticsearch-pressuretest.md)
             * [优化](origin/elasticsearch-optimizing.md)
         * [问题总结](origin/elasticsearch-问题总结.md)
 * Metrics
@@ -329,7 +329,6 @@
     
     * [僵尸进程与孤儿进程](origin/linux-zombie-orphaned-process.md)
     * [proc文件详解](origin/linux-proc.md)
-    
 - Linux排错优化
   - 硬件
     - [磁盘I/O：iostat]()
@@ -391,6 +390,8 @@
 * OpenVPN
   
     * [OpenVPN Server](origin/openvpn-server.md)
+* iDRAC
+    * [iDRAC](origin/idrac.md)
 * vSphere
     * [ESXI 管理常用命令](origin/vsphere-esxi.md)
     * [vCenter](origin/vSphere-vCenter.md)

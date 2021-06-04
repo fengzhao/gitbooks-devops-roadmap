@@ -423,3 +423,53 @@ Chrome控制台时间显示的耗时对应
 2. https://blog.cloudflare.com/a-question-of-timing/
 3. https://cizixs.com/2017/04/11/use-curl-to-analyze-request/
 4. https://blog.csdn.net/weifangan/article/details/80741981
+
+## 19、新版本Curl不支持旧的TLS版本
+
+创建`~/.openssl_allow_tls1.0.cnf`
+
+```bash
+openssl_conf = openssl_init
+
+[openssl_init]
+ssl_conf = ssl_sect
+
+[ssl_sect]
+system_default = system_default_sect
+
+[system_default_sect]
+CipherString = DEFAULT@SECLEVEL=1
+```
+
+生效
+
+```bash
+OPENSSL_CONF=~/.openssl_allow_tls1.0.cnf curl -v https://*****
+
+# 或者
+
+export OPENSSL_CONF=~/.openssl_allow_tls1.0.cnf
+curl -v https://*****
+unset OPENSSL_CONF
+```
+
+或者直接设置全局的OpenSSL配置文件 `/etc/ssl/openssl.cnf`
+
+```bash
+openssl_conf = openssl_init
+
+[openssl_init]
+ssl_conf = ssl_sect
+
+[ssl_sect]
+system_default = system_default_sect
+
+[system_default_sect]
+CipherString = DEFAULT@SECLEVEL=1
+```
+
+
+
+
+
+参考： https://askubuntu.com/questions/1250787/when-i-try-to-curl-a-website-i-get-ssl-error

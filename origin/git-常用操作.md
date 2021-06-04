@@ -124,6 +124,22 @@ git reflog
 git reset --hard <commit id>
 ```
 
+# 11、git代理设置
+
+```bash
+# 设置使用HTTP类型的代理
+git config --global https.proxy http://127.0.0.1:1080
+git config --global https.proxy https://127.0.0.1:1080
+
+# 取消代理的设置
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+# 设置使用socks5类型的代理
+git config --global http.proxy 'socks5://127.0.0.1:1081'
+git config --global https.proxy 'socks5://127.0.0.1:1081'
+```
+
 
 
 # Git问题总结
