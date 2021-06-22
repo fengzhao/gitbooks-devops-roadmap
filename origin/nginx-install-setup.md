@@ -11,7 +11,25 @@ nginx是一款自由的、开源的、高性能的HTTP服务器和反向代理�
 
 # 二、安装
 
-## 1. 二进制RPM安装
+## 1. 二进制安装
+
+### DEB(apt)
+
+```bash
+release_name=$(lsb_release -c | awk '{print $2}')
+echo -e "deb https://nginx.org/packages/ubuntu/ $release_name nginx" >> /etc/apt/sources.list.d/nginx.list
+echo -e "deb-src https://nginx.org/packages/ubuntu/ $release_name nginx" >> /etc/apt/sources.list.d/nginx.list
+curl -o /tmp/nginx_signing.key https://nginx.org/keys/nginx_signing.key
+gpg --dry-run --quiet --import --import-options import-show /tmp/nginx_signing.key
+mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc
+apt update
+apt install nginx
+nginx -V
+```
+
+
+
+### RPM(yum)
 
 - **以RPM方式安装的配置文件在/etc/nginx/目录下**
 - **二进制安装自带的模块**
@@ -445,11 +463,7 @@ $ nginx -? | -h  # print help for command-line parameters.
 $ nginx -g directives # set global configuration directives, for example,                            #nginx -g "pid /var/run/nginx.pid; worker_processes `sysctl -n hw.ncpu`;" 
 ```
 
-# 五、Nginx模块
-
-
-
-# 六、配置文件结构
+# 五、配置文件结构
 
 ![](../assets/nginx-2.png)
 
@@ -585,11 +599,7 @@ http {
 }
 ```
 
-
-
-
-
-# 七、nginx内置变量
+# 六、nginx内置变量
 
 ```bash
 $args                      请求中的参数;
@@ -624,7 +634,7 @@ $uri                       请求的URI，可能和最初的值有不同，比�
 
 
 
-# 八、问题
+# 七、问题
 
 ## 0. Nginx添加模块并不停服升级
 

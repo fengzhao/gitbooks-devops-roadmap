@@ -283,7 +283,6 @@ EOF' ;\
 ```bash
 yum install yum-plugin-downloadonly && 
 yum install --downloadonly --downloaddir=/root/httpd httpd
-
 ```
 
 ## 2、使用yum-utils的命令yumdownloader

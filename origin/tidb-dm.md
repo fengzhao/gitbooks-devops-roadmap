@@ -373,8 +373,6 @@ Flags:
       --sudo             use root permissions (default false)
 ```
 
-
-
 # 三、部署DM Portal
 
 DM Portal是一个方便用户图形化配置DM任务的Web页面。
@@ -393,8 +391,6 @@ nohup /opt/dm-portal/bin/dm-portal --port=8280 -task-file-path=/root/tiup-dm-1.4
 更多信息参考文档：https://docs.pingcap.com/zh/tidb-data-migration/v1.0/dm-portal
 
 # 四、管理上游数据源配置
-
-
 
 ## 1、加密数据库密码
 
@@ -452,7 +448,7 @@ tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数�
 
 
 
-### 功能配置集
+## 2、功能配置集
 
 全局配置主要包含下列功能配置集：
 
@@ -479,7 +475,7 @@ tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数�
 
 ### ⑧
 
-## 2、配置文件示例
+## 3、配置文件示例
 
 ```yaml
 ---
@@ -663,8 +659,7 @@ mysql-instances:
     # load 处理单元用于导入数据的线程数量，等同于 loaders 配置中的 `pool-size`，当同时指定它们时 `loader-thread` 优先级更高。当有多个实例同时向 TiDB 迁移数据时可根据负载情况适当调小该值
     loader-thread: 16              
     # sync 处理单元用于复制增量数据的线程数量，等同于 syncers 配置中的 `worker-count`，当同时指定它们时 `syncer-thread` 优先级更高。当有多个实例同时向 TiDB 迁移数据时可根据负载情况适当调小该值
-    syncer-thread: 16           
-    
+    syncer-thread: 16
 ```
 
 DM任务完整配置参考：https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full/#%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%A4%BA%E4%BE%8B
@@ -807,6 +802,12 @@ handle-error <任务名 | 任务配置文件> [-s source ...] [-b binlog-pos] <s
   -b, --binlog-pos string   .pos格式："mysql-bin|000001.000003:3270"
 全局参数:
   -s, --source strings   MySQL Source ID.
+```
+
+③跳过出错的SQL
+
+```bash
+handle-error 任务名 skip
 ```
 
 # 七、DM监控

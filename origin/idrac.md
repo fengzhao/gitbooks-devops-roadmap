@@ -2,11 +2,17 @@
 
 # 一、简介
 
-
+- iDRAC又称为Integrated Dell Remote Access Controller，也就是集成戴尔远程控制卡，这是戴尔服务器的独有功能
+- iDRAC卡相当于是附加在服务器上的一台独立运行的小型pc，通过与服务器主板上的管理芯片BMC进行通信，监控与管理服务器的硬件状态信息。它拥有自己的系统和IP地址，与服务器上的OS无关，是服务器管理员进行远程访问和管理的便利工具。
+- iDRAC分为 Express和Enterprise 两种版本，iDRAC Express 默认是用服务器1号网口来连接， iDRAC Enterprise默认使用专用网口连接。
 
 # 二、Web页面
 
+在Dell 的板载iDRAC控制
 
+![](../assets/dell-idrac-1.png)
+
+- 默认用户名密码：`root / calvin` （登录后最好修改密码）
 
 # 三、命令行CLI
 
@@ -79,7 +85,7 @@ dump -destination <URI> [<options>] [<target>]
 
 
 
-### 1、服务管理
+## 1、服务管理
 
 ```bash
 racadm getconfig -g cfgracTuning
@@ -87,12 +93,19 @@ racadm getconfig -g cfgracTuning
 racadm config -g cfgRacTuning -o cfgRacTuneWebServerEnable 1 服务开启成功
 ```
 
-### 2、会话管理
+## 2、会话管理
 
 ```bash
 # 获取当前活动的会话
-racadm help getssninfo
+racadm getssninfo 
 
+# 关闭所有会话。
+racadm closessn -a
+
+# 关闭特定用户的所有会话
+racadm closessn -u <username>
+
+# 或者在Web的"iDRAC设置" ---> "会话管理"中进行管理
 ```
 
 

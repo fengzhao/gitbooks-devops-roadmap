@@ -45,11 +45,13 @@
 
 # 4、查看网卡
 
-    # 方式一
-    ifconfig -a
-        
-    # 方式二
-    cat /proc/net/dev
+```bash
+# 方式一
+ifconfig -a
+    
+# 方式二
+cat /proc/net/dev
+```
 
 # 5、cp目录下的带隐藏文件的子目录
 
@@ -197,13 +199,14 @@ EOF' ;\
 # 14、nohup手动后台运行进程并记录进程号
 
 ```bash
-nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 && echo $! > /data/app/run.pid
+nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 &
+echo $! > /data/app/run.pid
 
 # 2>&1是把标准错误2重定向到标准输出1中，而标准输出又导入文件里面，所以标准错误和标准输出都会输出到文件。
 # 同时把启动的进程号pid输出到文件
 
 注意：
-	如果运行时的shell为zsh，将任务放置后台的命令由”&“变为”&!“。例如：nohup jar -jar jar包 </dev/null > /data/app/logs/app.log 2>&1 &! && echo $! > /data/app/run.pid
+	如果运行时的shell为zsh，将任务放置后台的命令由”&“变为”&!“。
 	参考：https://stackoverflow.com/questions/19302913/exit-zsh-but-leave-running-jobs-open
 ```
 
@@ -384,7 +387,8 @@ fi
 
 ```bash
 echo "安装ShadowSocks" && \
-yum -y install epel-release && yum -y install python-pip && pip install shadowsocks && \
+yum -y install epel-release && yum -y install python-pip && \
+pip install shadowsocks && \
 bash -c 'cat > /etc/shadowsocks.json <<EOF
 {
 "server": "***.***.***.***",
@@ -1865,7 +1869,54 @@ apt-get install -s 包
 echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian testing main contrib non-free " >> /etc/apt/sources.list apt-get update
 ```
 
+# 61、bash语法变更
 
+从Bash 4.4以后，break关键词不允许出现 `for`, `while` ,`until` 循环中，如果出现将报一下错误：
 
+```bash
+line 0: break: only meaningful in a `for', `while', or `until' loop
+```
 
+**参考**
+
+1. https://stackoverflow.com/questions/41532564/bash-function-that-breaks-loop
+
+# 62、SSH跳板登录
+
+```bash
+ssh username@目标机器ip -o ProxyCommand=’ssh username@跳板机ip -W %h:%p’
+```
+
+也可以在配置文件 `~/.ssh/config` (若没有则创建)中配置
+
+```bash
+Host test-ssh-forward
+  HostName 目标机器ip
+  User root
+  ProxyCommand ssh root@跳板机ip -W %h:%p
+```
+
+```bash
+ssh test-ssh-forward
+```
+
+# 63、OpenSSH客户端配置
+
+针对OpenSSH客户端ssh命令的配置有全局配置文件`/etc/ssh/ssh_config` ，用户级别配置文件`~/.ssh/config`。可在其中配置常用的SSH主机配置
+
+```bash
+Host 主机别名
+    HostName 主机IP地址 
+    User 登录用户
+    Port 端口										 # 默认为22
+    IdentityFile ssh私钥文件路径	# 默认为~/.ssh/identity 、~/.ssh/id_rsa 、~/.ssh/id_dsa
+    Compression yes							# 是否进行压缩
+    LogLevel INFO
+```
+
+可用参数：https://www.ssh.com/academy/ssh/config
+
+参考：
+
+- https://blog.csdn.net/MatrixGod/article/details/81905227
 

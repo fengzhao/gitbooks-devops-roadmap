@@ -90,7 +90,7 @@ ss -tnl | grep 80
 yum install -y dhcp
 ```
 
-配置服务/etc/dhcp/dhcpd.conf
+配置服务`/etc/dhcp/dhcpd.conf`
 
 ```bash
 default-lease-time 600;
@@ -126,7 +126,7 @@ ss -nulp | grep dhcpd
 yum install -y tftp-server tftp xinetd net-tools
 ```
 
-配置服务/etc/xinetd.d/tftp
+配置服务`/etc/xinetd.d/tftp`
 
 ```bash
 service tftp
@@ -397,7 +397,7 @@ ksvalidator  /var/www/html/CentOS7.5.1804.cfg
     kernel vmlinuz
     append initrd=initrd.img text ks=http://192.168.1.80/CentOS7.cfg
     EOF'
-
+    
     #然后上传kick start配置文件到/var/www/html/目录下
     ```
 

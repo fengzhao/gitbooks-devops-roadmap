@@ -15,9 +15,8 @@ kubectl github下载地址：https://github.com/kubernetes/kubectl/releases
 **Windows CMD**
 
   ```bash
-  mkdir %USERPROFILE%\.kube
-
-  # %USERPROFILE%  当前用户目录  
+mkdir %USERPROFILE%\.kube
+# %USERPROFILE%  当前用户目录  
   ```
 
 # 三. 创建编辑kubectl配置文件
@@ -101,44 +100,44 @@ kubectl config use-context k8s-uat
 kubectl config use-context k8s-pro
 ```
 
-# 五. kubectl命令的别名和快速切换集群上下文的别名
+# 五. kubectl命令快捷操作
 
-1. 设置别名快速使用kubectl命令
+## 1、设置别名快速使用kubectl命令
 
-    **Windows**
+**Windows**
 
-    ```bash
-    doskey  k=kubectl $*
-    # $*表示这个命令还可能有其他参数
-    ```
+```bash
+doskey  k=kubectl $*
+# $*表示这个命令还可能有其他参数
+```
 
-    **Linux**
+**Linux**
 
-    ```bash
-    alias k='kubectl'
-    ```
+```bash
+alias k='kubectl'
+```
 
-2. 设置别名快速切换Kubectl集群上下文
+## 2、设置别名快速切换集群上下文
 
-    **Windows**
+**Windows**
 
-    ```bash
-    doskey k2d=kubectl config use-context k8s-dev
-    doskey k2t=kubectl config use-context k8s-test
-    doskey k2u=kubectl config use-context k8s-uat
-    doskey k2p=kubectl config use-context k8s-pro
-    ```
+```bash
+doskey k2d=kubectl config use-context k8s-dev
+doskey k2t=kubectl config use-context k8s-test
+doskey k2u=kubectl config use-context k8s-uat
+doskey k2p=kubectl config use-context k8s-pro
+```
 
-    **Linux**
+**Linux**
 
-    ```bash
-    alias k2d='kubectl config use-context k8s-dev'
-    alias k2t='kubectl config use-context k8s-test'
-    alias k2u='kubectl config use-context k8s-uat'
-    alias k2p='kubectl config use-context k8s-pro'
-    ```
+```bash
+alias k2d='kubectl config use-context k8s-dev'
+alias k2t='kubectl config use-context k8s-test'
+alias k2u='kubectl config use-context k8s-uat'
+alias k2p='kubectl config use-context k8s-pro'
+```
 
-3. Windows和Linux下设置别名永久生效
+## 3、设置别名永久生效
 
 **Windows**
    - ①创建bat脚本cmdalias.cmd
@@ -157,12 +156,10 @@ kubectl config use-context k8s-pro
 
             Windows Registry Editor Version 5.00
             [HKEY_CURRENT_USER\Software\Microsoft\Command Processor]
-            "AutoRun"="%USERPROFILE%\\.kube\\cmdalias.cmd"
+            "AutoRun"="%USERPROFILE%\\.kube\\cmdalias.cmd"  
   
-       
-       
 
-  **Linux**
+**Linux**
 
 
     echo "alias k='kubectl'" >> /etc/profile && \
@@ -203,6 +200,9 @@ file in the list.
       view            Display merged kubeconfig settings or a specified kubeconfig file
    ```
 
+
+
 # 参考连接
+
 1. https://blog.csdn.net/u013360850/article/details/83315188
 2. https://www.awaimai.com/2445.html

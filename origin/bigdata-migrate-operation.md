@@ -36,7 +36,8 @@ curl -# https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | 
 ln -s /opt/tidb-toolkit-$version-linux-amd64 /opt/tidb-toolkit-$version && \
 echo "export PATH=/opt/tidb-toolkit-$version/bin:$PATH" >> /etc/profile && \
 mkdir -p /data/dumping-export/sql && \
-nohup /opt/tidb-toolkit-v4.0.5-linux-amd64/bin/dumpling \
+source /etc/profile && \
+nohup dumpling \
   -u 用于导出数据的用户 \    				# 用于导出数据的用户要拥有SELECT、RELOAD、LOCK TABLES、REPLICATION CLIENT服务器权限
   -p 用于导出数据的用户密码 \
   -P 3306 \

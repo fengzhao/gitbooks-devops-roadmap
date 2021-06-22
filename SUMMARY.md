@@ -109,7 +109,7 @@
         * [Pypi](origin/nexus-pypi.md)
         * Docker
         * [Helm](origin/nexus-helm.md)
-        * RAW
+        * [RAW](origin/nexus-raw.md)
     * [数据备份恢复](origin/nexus-数据的备份恢复.md)
     * [API](/origin/nexus-api.md)
     * [Jenkins相关插件](origin/nexus-使用jenkins插件上传CI流程制品到Nexus仓库.md)
@@ -290,43 +290,25 @@
     * [MacOS小技巧](origin/macos-tips.md)
 * Linux
     * [Linux小技巧](origin/linux-小技巧.md)
-    
     * [比较两个文件的不同](origin/linux-diff.md)
-    
     * [基础服务安装](origin/linux-baseserver.md)
-    
     * [后台启动进程](origin/linux-daemon.md)
-    
     * [文本处理](origin/linux-文本处理.md)
-    
     * [SSH私钥代理ssh-agent](origin/ssh-agent.md)
-    
     * [htpasswd](origin/linux-htpasswd.md)
-    
     * [YAML文本处理工具shyaml](origin/linux-shyaml.md)
-    
     * [JSON文本处理工具jq](origin/linux-jq.md)
-    
     * [yaml文本处理工具yq](origin/yaml-yq.md)
-    
+    * [XML文本处理工具xmllint](origin/linux-xmllint.md)
     * [Curl命令详解](origin/linux-curl.md)
-    
     * [rsync命令详解](origin/linux-rsync.md)
-    
     * [LVM原理及使用](origin/linux-lvm.md)
-    
     * [Linux交换分区](origin/linux-交换分区.md)
-    
     * [Linux硬盘读写性能测试](origin/linux-硬盘读写性能测试.md)
-    
     * [Vim小技巧](origin/vim-小技巧.md)
-    
     * [Yum-RPM包管理](origin/linux-yum.md)
-    
     * [ZSH](origin/linux-zsh.md)
-    
     * [Systemd-进程管理](origin/linux-进程管理工具SystemD.md)
-    
     * [僵尸进程与孤儿进程](origin/linux-zombie-orphaned-process.md)
     * [proc文件详解](origin/linux-proc.md)
 - Linux排错优化
@@ -364,9 +346,9 @@
         * [临时表](origin/mysql-temporary.md)
 * Redis
     * [基础概念](origin/redis-basic.md)
+    * [常用操作](origin/reids-common-opreations.md)
     * [安装部署](origin/reids-install-deploy.md)
     * [数据迁移备份恢复](origin/redis-backup-restore.md)
-    * [常用操作](origin/reids-common-opreations.md)
 * 负载均衡与代理
     * [Keepalived](origin/keepalived.md)
     * HAProxy
@@ -381,6 +363,7 @@
 * Nginx
     * [Nginx安装配置](origin/nginx-install-setup.md)
     * [Nginx配置优化](origin/nginx-config.md)
+    * [Nginx非常规配置](origin/nginx-config.md)
     * [Nginx日志写入kafka](origin/nginx-log-kafka.md)
 * iSCSI
   
@@ -408,7 +391,7 @@
 * [Aliyun CLI](origin/aliyun-cli.md)
 * [零散知识汇总](origin/others.md)
 * [音视频处理]()
-  
+
   * [fffmpeg](origin/audio-video-fffmpeg.md)
 * **Python**
     * [环境搭建：安装配置](origin/python-basic.md)
