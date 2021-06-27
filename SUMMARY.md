@@ -187,15 +187,18 @@
         * [问题总结](origin/elasticsearch-问题总结.md)
 * Metrics
     * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
-        * [kube-prometheus](origin/kube-prometheus.md)
     * Prometheus
         * [Prometheus基础概念](origin/prometheus-basic.md)
+        * [kube-prometheus: Prometheus Operator安装部署](origin/kube-prometheus.md)
+        * [二进制Docker部署Prometheus生态](origin/prometheus-binary-docker-deploy.md)
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
         * [Blackbox Exporter](origin/prometheus-blackbox-exporter.md)
     * Grafana
         * [Grafana的备份恢复](origin/grafana-backup-restore.md)
 * Tracing
     * SkyWalking
+    * Matomo
+      * []()
 * [Sentry日志聚合告警平台](origin/sentry.md)
     * [Logstash与Sentry对接](origin/sentry-logstash对接Sentry.md)
 

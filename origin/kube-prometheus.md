@@ -1,4 +1,4 @@
-# kube Prometheus
+# kube Prometheus：Prometheus Operator
 
 # 一、简介
 
@@ -256,7 +256,7 @@ local kp = (import 'kube-prometheus/kube-prometheus.libsonnet') +
 
 编译完成后，会在`manifests`目录下生产K8s资源声明文件。
 
-### ⑥生产的K8s资源对象
+### ⑥产生的K8s资源对象
 
 `manifests/setup/*.yaml`
 
@@ -513,7 +513,7 @@ spec:
 
 ### ①对应主机部署Node exporter
 
-省略
+参考：[二进制部署Prometheus生态组件](../origin/prometheus-binary-docker-deploy.md)
 
 ### ②创建对应的Endpoint、Service、ServiceMonitor
 

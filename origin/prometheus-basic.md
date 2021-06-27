@@ -66,3 +66,74 @@ Prometheus 中存储的数据为时间序列，是由 metric 的名字和一系�
   - 同时Summary和Histogram都可以计算和统计样本的分布情况，比如中位数，9分位数等等。其中 0.0<= 分位数Quantiles <= 1.0。
   - 不同在于Histogram可以通过histogram_quantile函数在服务器端计算分位数。 而Sumamry的分位数则是直接在客户端进行定义。
   - 因此对于分位数的计算。 Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。相对的对于客户端而言Histogram消耗的资源更少。
+
+# 五、重要配置
+
+## 1、配置Prometheus在运行时重载配置文件
+
+在启动prometheus时添加参数：
+
+```bash
+prometheus \
+    --config.file=/opt/prometheus/prometheus.yml \
+    --storage.tsdb.path=/data/prometheus/data \
+    --web.enable-lifecycle
+```
+
+然后通过Reastful接口触发重载配置文件
+
+```bash
+curl -XPOST http://localhost:9090/-/reload
+```
+
+或者给prometheus进程发送SIGHUP信号
+
+```bash
+kill -HUP prometheus进程号
+```
+
+如果变更后的配置文件语法有错误，则不会重载生效。
+
+触发重载前，可使用`promtool check`检查配置文件语法。
+
+参考：
+
+https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cscrape_config%3E
+
+## 2、配置node_exporter
+
+参考文档：https://prometheus.io/docs/guides/node-exporter/
+
+```yaml
+scrape_configs:
+  - job_name: 'node'
+    static_configs:
+    - targets:
+      - 部署node_exporter主机IP地址:9100
+      - 部署node_exporter主机IP地址:9100
+```
+
+## 3、配置blackbox_exporter
+
+参考文档：https://github.com/prometheus/blackbox_exporter#prometheus-configuration
+
+```yaml
+scrape_configs:
+  - job_name: "blackbox"
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+    - targets:
+      - http://代探测的/
+    relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 部署blackbox_exporter主机IP地址:9115
+```
+

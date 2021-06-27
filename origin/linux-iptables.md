@@ -192,6 +192,7 @@ iptables -L FORWARD --line-numbers
 
 # 查看POSTROUTING链nat表中的规则
 iptables -L POSTROUTING -t nat
+iptables -L PREROUTING -t nat --line-numbers
 ```
 
 ### ②删除规则
@@ -201,6 +202,8 @@ iptables -L POSTROUTING -t nat
 iptables -F
 # 删除链中指定的规则
 iptables -D FORWARD 1
+# 删除链中指定表的规则
+iptables -D POSTROUTING -t nat 1
 ```
 
 ### ③添加规则
@@ -584,9 +587,11 @@ route add 0.0.0.0 gw 192.168.1.2
 
 ```bash
 iptables -t nat -I PREROUTING  -d 公网IP -p tcp  -m tcp  --dport 公网port  -j DNAT  --to-destination  10.10.223.12-10.10.223.20:8080（内网）
-```
 
-## 3、PNAT端口重定向
+# 对于在云上绑定公网IP地址的ECS主机做DNAT，公网IP地址要写成ECS的内网地址。因为云厂商的公网IP也是使用SNAT实现的，通过公网IP访问ECS的所有流量请求，已经将目标地址改成ECS的内网地址啦。
+# 例如阿里云上一台ECS绑定弹性公网IP地址123.11.12.13，内网地址为192.168.1.8，还有一台ECS，内网地址为192.168.1.9，上面部署了MYSQL。想通过弹性公网IP地址访问MySQL。则在192.168.1.8这台ECS中做DNAT的时候，可以这样配置
+# iptables -t nat -I PREROUTING  -d 192.168.1.8 -p tcp --dport 33306  -j DNAT  --to-destination 192.168.1.9:3306
+```
 
 
 
@@ -596,7 +601,38 @@ iptables -t nat -I PREROUTING  -d 公网IP -p tcp  -m tcp  --dport 公网port  -
 
 https://blog.mimvp.com/article/44678.html
 
-## 2、ipset命令
+## 2、使用SystemD管理iptables规则
+
+```bash
+bash -c 'cat > /etc/systemd/system/iptables-nat.service << EOF
+[Unit]
+Before=network.target
+
+[Service]
+Type=oneshot
+
+# DNAT iterms
+ExecStart=/sbin/iptables -t nat -A PREROUTING -d 192.168.1.2 -p tcp --dport 3308  -j DNAT  --to-destination 192.168.1.6:3306
+# SNAT iterms
+ExecStart=/sbin/iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j SNAT --to 192.168.1.2
+
+# Delete DNAT and SNAT iterms
+ExecStop=/sbin/iptables -t nat -D PREROUTING -d 192.168.1.2 -p tcp --dport 3306  -j DNAT  --to-destination 192.168.1.6:3306
+ExecStop=/sbin/iptables -t nat -D POSTROUTING -s 192.168.1.0/24 -j SNAT --to 192.168.1.2
+
+[Install]
+WantedBy=multi-user.target
+EOF' && \
+systemctl daemon-reload && \
+systemctl start iptables-nat.service && \
+iptables -L PREROUTING -t nat --line-numbers && \
+iptables -L POSTROUTING -t nat --line-numbers && \
+systemctl enable iptables-nat.service
+```
+
+
+
+## 3、ipset命令
 
 - 官网：https://ipset.netfilter.org/
 - 文档：https://ipset.netfilter.org/ipset.man.html#lbBF

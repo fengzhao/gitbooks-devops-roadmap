@@ -48,7 +48,7 @@ b=${a%/*};echo $b
 # 结果：docker.io/openshift
 ```
 
-## 4. %% 号从右边开始，删除最后一次匹配到条件的右边内容，保留左边字符（不保留匹配条件）vi ~?
+## 4. %% 号从右边开始，删除最后一次匹配到条件的右边内容，保留左边字符（不保留匹配条件）
 
 ```bash
 # 样本: a="docker.io/openshift/origin-metrics-cassandra:v3.9"   

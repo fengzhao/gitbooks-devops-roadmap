@@ -154,7 +154,7 @@ vgextend VG_Name /dev/sdd
 
 ```bash
 lvresize -l +6399 LV_Path
-或者
+# 或者
 lvresize -L +50G LV_Path
 ```
 
@@ -168,9 +168,9 @@ e2fsck -f LV_Name
 ## 5、将扩容后的LV完整地扩充到文件系统中
 
 ```bash
-LV文件系统是ext4时
+# LV文件系统是ext4时
 resize2fs LV_Path
-LV文件系统是xfs时
+# LV文件系统是xfs时
 xfs_growfs LV_Path
 ```
 
@@ -182,7 +182,6 @@ fdisk -l
 
 # 查看lvm磁盘的lv
 lvdisplay 
-
 
 # 查看lv是否激活
 lvscan
