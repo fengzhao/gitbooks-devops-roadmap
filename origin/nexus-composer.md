@@ -135,11 +135,7 @@ composer require monolog/monolog
 
 ![](../assets/nexus-composer-5.png)
 
-## 4、查看Nexus仓库中是否已经缓存了依赖包
-
-![](../assets/nexus-composer-6.png)
-
-## 5、上传包到Hosted类型的仓库中
+## 4、上传包到Hosted类型的仓库中
 
 - 编辑composer.json，添加项目包的信息，像名字，描述，版本号，维护者等信息。
 

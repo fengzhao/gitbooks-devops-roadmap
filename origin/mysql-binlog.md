@@ -59,42 +59,51 @@ binlog是一个二进制文件集合，每个binlog文件以一个4字节的魔�
 
 binlog 事件的结构主要有3个版本：
 
-- v1: 在 MySQL 3.23 中使用
-- v3: 在 MySQL 4.0.2 到 4.1 中使用
-- v4: 在 MySQL 5.0 及以上版本中使用
+| Binlog 版本 | MySQL版本             |                                                              |
+| :---------- | :-------------------- | ------------------------------------------------------------ |
+| 1           | MySQL 3.23 - < 4.0.0  | 支持 "statement based replication events"                    |
+| 2           | MySQL 4.0.0 - 4.0.1   |                                                              |
+| 3           | MySQL 4.0.2 - < 5.0.0 | added the relay logs and changed the meaning of the log position |
+| 4           | MySQL 5.0.0+          | added the [FORMAT_DESCRIPTION_EVENT](https://dev.mysql.com/doc/internals/en/format-description-event.html) and made the protocol extensible |
 
-现在一般不会使用MySQL5.0以下版本，所以下面仅介绍v4版本的binlog事件类型。binlog 的事件类型较多，本文在此做一些简单的汇总
+- a [FORMAT_DESCRIPTION_EVENT](https://dev.mysql.com/doc/internals/en/format-description-event.html) version = 4
+- a [START_EVENT_V3](https://dev.mysql.com/doc/internals/en/start-event-v3.html)
+  - if `event-size` == 13 + 56: version = 1
+  - if `event-size` == 19 + 56: version = 3
+  - otherwise: invalid
 
-| 事件类型                 | 说明                                                         |
-| :----------------------- | :----------------------------------------------------------- |
-| UNKNOWN_EVENT            | 此事件从不会被触发，也不会被写入binlog中；发生在当读取binlog时，不能被识别其他任何事件，那被视为UNKNOWN_EVENT |
-| START_EVENT_V3           | 每个binlog文件开始的时候写入的事件，此事件被用在MySQL3.23 – 4.1，MYSQL5.0以后已经被 FORMAT_DESCRIPTION_EVENT 取代 |
-| QUERY_EVENT              | 执行更新语句时会生成此事件，包括：create，insert，update，delete； |
-| STOP_EVENT               | 当mysqld停止时生成此事件                                     |
-| ROTATE_EVENT             | 当mysqld切换到新的binlog文件生成此事件，切换到新的binlog文件可以通过执行flush logs命令或者binlog文件大于 `max_binlog_size` 参数配置的大小； |
-| INTVAR_EVENT             | 当sql语句中使用了AUTO_INCREMENT的字段或者LAST_INSERT_ID()函数；此事件没有被用在binlog_format为ROW模式的情况下 |
-| LOAD_EVENT               | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL 3.23版本中使用 |
-| SLAVE_EVENT              | 未使用                                                       |
-| CREATE_FILE_EVENT        | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
-| APPEND_BLOCK_EVENT       | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用  |
-| EXEC_LOAD_EVENT          | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
-| DELETE_FILE_EVENT        | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用  |
-| NEW_LOAD_EVENT           | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
-| RAND_EVENT               | 执行包含RAND()函数的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下 |
-| USER_VAR_EVENT           | 执行包含了用户变量的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下 |
-| FORMAT_DESCRIPTION_EVENT | 描述事件，被写在每个binlog文件的开始位置，用在MySQL5.0以后的版本中，代替了START_EVENT_V3 |
-| XID_EVENT                | 支持XA的存储引擎才有，本地测试的数据库存储引擎是innodb，所有上面出现了XID_EVENT；innodb事务提交产生了QUERY_EVENT的BEGIN声明，QUERY_EVENT以及COMMIT声明，如果是myIsam存储引擎也会有BEGIN和COMMIT声明，只是COMMIT类型不是XID_EVENT |
-| BEGIN_LOAD_QUERY_EVENT   | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用  |
-| EXECUTE_LOAD_QUERY_EVENT | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用  |
-| TABLE_MAP_EVENT          | 用在binlog_format为ROW模式下，将表的定义映射到一个数字，在行操作事件之前记录（包括：WRITE_ROWS_EVENT，UPDATE_ROWS_EVENT，DELETE_ROWS_EVENT） |
-| PRE_GA_WRITE_ROWS_EVENT  | 已过期，被 WRITE_ROWS_EVENT 代替                             |
-| PRE_GA_UPDATE_ROWS_EVENT | 已过期，被 UPDATE_ROWS_EVENT 代替                            |
-| PRE_GA_DELETE_ROWS_EVENT | 已过期，被 DELETE_ROWS_EVENT 代替                            |
-| WRITE_ROWS_EVENT         | 用在binlog_format为ROW模式下，对应 insert 操作               |
-| UPDATE_ROWS_EVENT        | 用在binlog_format为ROW模式下，对应 update 操作               |
-| DELETE_ROWS_EVENT        | 用在binlog_format为ROW模式下，对应 delete 操作               |
-| INCIDENT_EVENT           | 主服务器发生了不正常的事件，通知从服务器并告知可能会导致数据处于不一致的状态 |
-| HEARTBEAT_LOG_EVENT      | 主服务器告诉从服务器，主服务器还活着，不写入到日志文件中     |
+v4版本的binlog事件类型：
+
+| Hex| 事件类型                 | 说明                                                         |
+| :----------------------- | :----------------------------------------------------------- | :----------------------- |
+| 0x00 | UNKNOWN_EVENT            | 此事件从不会被触发，也不会被写入binlog中；发生在当读取binlog时，不能被识别其他任何事件，那被视为UNKNOWN_EVENT |
+| 0x01 | START_EVENT_V3           | 每个binlog文件开始的时候写入的事件，此事件被用在MySQL3.23 – 4.1，MYSQL5.0以后已经被 FORMAT_DESCRIPTION_EVENT 取代 |
+| 0x02 | QUERY_EVENT              | 执行更新语句时会生成此事件，包括：create，insert，update，delete； |
+| 0x03 | STOP_EVENT               | 当mysqld停止时生成此事件                                     |
+| 0x04 | ROTATE_EVENT             | 当mysqld切换到新的binlog文件生成此事件，切换到新的binlog文件可以通过执行flush logs命令或者binlog文件大于 `max_binlog_size` 参数配置的大小； |
+| 0x05 | INTVAR_EVENT             | 当sql语句中使用了AUTO_INCREMENT的字段或者LAST_INSERT_ID()函数；此事件没有被用在binlog_format为ROW模式的情况下 |
+| 0x06 | LOAD_EVENT               | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL 3.23版本中使用 |
+| 0x07 | SLAVE_EVENT              | 未使用                                                       |
+| 0x08 | CREATE_FILE_EVENT        | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
+| 0x09 | APPEND_BLOCK_EVENT       | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用  |
+| 0x0a | EXEC_LOAD_EVENT          | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
+| 0x0b | DELETE_FILE_EVENT        | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0版本中使用  |
+| 0x0c | NEW_LOAD_EVENT           | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL4.0和4.1版本中使用 |
+| 0x0d | RAND_EVENT               | 执行包含RAND()函数的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下 |
+| 0x0e | USER_VAR_EVENT           | 执行包含了用户变量的语句产生此事件，此事件没有被用在binlog_format为ROW模式的情况下 |
+| 0x0f | FORMAT_DESCRIPTION_EVENT | 描述事件，被写在每个binlog文件的开始位置，用在MySQL5.0以后的版本中，代替了START_EVENT_V3 |
+| 0x10 | XID_EVENT                | 支持XA的存储引擎才有，本地测试的数据库存储引擎是innodb，所有上面出现了XID_EVENT；innodb事务提交产生了QUERY_EVENT的BEGIN声明，QUERY_EVENT以及COMMIT声明，如果是myIsam存储引擎也会有BEGIN和COMMIT声明，只是COMMIT类型不是XID_EVENT |
+| 0x11 | BEGIN_LOAD_QUERY_EVENT   | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用  |
+| 0x12 | EXECUTE_LOAD_QUERY_EVENT | 执行LOAD DATA INFILE 语句时产生此事件，在MySQL5.0版本中使用  |
+| 0x13 | TABLE_MAP_EVENT          | 用在binlog_format为ROW模式下，将表的定义映射到一个数字，在行操作事件之前记录（包括：WRITE_ROWS_EVENT，UPDATE_ROWS_EVENT，DELETE_ROWS_EVENT） |
+|  | PRE_GA_WRITE_ROWS_EVENT  | 已过期，被 WRITE_ROWS_EVENT 代替                             |
+|  | PRE_GA_UPDATE_ROWS_EVENT | 已过期，被 UPDATE_ROWS_EVENT 代替                            |
+|  | PRE_GA_DELETE_ROWS_EVENT | 已过期，被 DELETE_ROWS_EVENT 代替                            |
+| 0x14 | WRITE_ROWS_EVENT         | 用在binlog_format为ROW模式下，对应 insert 操作               |
+| 0x15 | UPDATE_ROWS_EVENT        | 用在binlog_format为ROW模式下，对应 update 操作               |
+| 0x16 | DELETE_ROWS_EVENT        | 用在binlog_format为ROW模式下，对应 delete 操作               |
+| 0x1a | INCIDENT_EVENT           | 主服务器发生了不正常的事件，通知从服务器并告知可能会导致数据处于不一致的状态 |
+| 0x1b | HEARTBEAT_LOG_EVENT      | 主服务器告诉从服务器，主服务器还活着，不写入到日志文件中     |
 
 ## 4、Binlog事件结构
 

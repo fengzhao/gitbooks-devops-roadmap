@@ -98,6 +98,8 @@ TiDB Lightning 的[后端 ](https://docs.pingcap.com/zh/tidb/stable/tidb-lightni
 
 ## 1、下载安装
 
+### 二进制
+
 ```bash
 version=v4.0.5 && \
 curl -# https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt && \
@@ -106,6 +108,17 @@ echo -e "export TIDB_TOOLKIT_HOME=/opt/tidb-toolkit-$version\nexport PATH=\$PATH
 source /etc/profile && \ 
 tidb-lightning -V
 ```
+
+### Docker
+
+```bash
+docker pull pingcap/tidb-lightning:v5.0.1
+
+docker run -it -v 本地导出SQL文件路径:/data pingcap/tidb-lightning:v5.0.1 sh
+# tidb-lightning命令执行路径在根目录下,具体的导入任务可以在容器中执行
+```
+
+
 
 ## 2、tidb-lightning参数
 

@@ -5,8 +5,11 @@
 迁移全量MySQL数据到TIDB。情况如下：
 
 - **源库**：RDS备份文件启动的MySQL实例，一个DB，数据量大约800张表，数据大小500+GB
+
 - **目标库**：TIDB集群
-- 将源库中的数据
+
+
+将源库中的数据导入TiDB
 
 # 二、方案
 
@@ -73,15 +76,14 @@ nohup /opt/tidb-toolkit-v4.0.5-linux-amd64/bin/tidb-lightning \
   
 nohup tidb-lightning \
   -L info \
-  --log-file /data/dumping-export/import-task.log \
-  --backend local \
-  --status-addr 10080 \
-  --enable-checkpoint true \
+  -log-file /data/dumping-export/import-task.log \
+  -backend tidb \
+  -status-addr 10080 \
   -d /data/dumping-export/sql \
-  --tidb-host 192.168.1.4 \
-  --tidb-port 4000 \
-  --tidb-user root \
-  --tidb-password ***** > /data/dumping-export/lightning-nohupout.log 2>&1 &
+  -tidb-host 192.168.1.4 \
+  -tidb-port 4000 \
+  -tidb-user root \
+  -tidb-password ***** > /data/dumping-export/lightning-nohupout.log 2>&1 &
 ```
 
 

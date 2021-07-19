@@ -1009,6 +1009,21 @@
             
         </li>
     
+        <li class="chapter " data-level="3.4.3" data-path="k8s-install-sealos.html">
+            
+                <a href="k8s-install-sealos.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Sealos安装
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -1869,21 +1884,6 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.3.8" data-path="nexus-raw.md">
-            
-                <a href="nexus-raw.md">
-            
-                    
-                        <b>4.3.3.8.</b>
-                    
-                    RAW
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -2423,7 +2423,7 @@
                     
                         <b>6.1.3.</b>
                     
-                    Kafka
+                    Kafka/Zookeeper
             
                 </span>
             
@@ -2477,12 +2477,27 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.4" data-path="kafka-client-connect-procedure-tools.html">
+        <li class="chapter " data-level="6.1.3.4" data-path="zookeeper.html">
+            
+                <a href="zookeeper.html">
+            
+                    
+                        <b>6.1.3.4.</b>
+                    
+                    Zookeeper常用操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.3.5" data-path="kafka-client-connect-procedure-tools.html">
             
                 <a href="kafka-client-connect-procedure-tools.html">
             
                     
-                        <b>6.1.3.4.</b>
+                        <b>6.1.3.5.</b>
                     
                     kafka连接调试脚本
             
@@ -2492,12 +2507,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.5" data-path="zk-kafka-ui.html">
+        <li class="chapter " data-level="6.1.3.6" data-path="zk-kafka-ui.html">
             
                 <a href="zk-kafka-ui.html">
             
                     
-                        <b>6.1.3.5.</b>
+                        <b>6.1.3.6.</b>
                     
                     Zookeeper和kafka的WebUI工具
             
@@ -2507,12 +2522,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.6" data-path="kafka-shell-kaf.html">
+        <li class="chapter " data-level="6.1.3.7" data-path="kafka-shell-kaf.html">
             
                 <a href="kafka-shell-kaf.html">
             
                     
-                        <b>6.1.3.6.</b>
+                        <b>6.1.3.7.</b>
                     
                     命令行Kafka工具
             
@@ -3196,6 +3211,21 @@
                         <b>6.2.2.5.</b>
                     
                     Blackbox Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2.6" data-path="prometheus-nginx-exporter.html">
+            
+                <a href="prometheus-nginx-exporter.html">
+            
+                    
+                        <b>6.2.2.6.</b>
+                    
+                    收集Nginx的Metrics
             
                 </a>
             
@@ -5993,27 +6023,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.22.3" data-path="nginx-config.html">
-            
-                <a href="nginx-config.html">
-            
-                    
-                        <b>7.22.3.</b>
-                    
-                    Nginx非常规配置
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.22.4" data-path="nginx-log-kafka.html">
+        <li class="chapter " data-level="7.22.3" data-path="nginx-log-kafka.html">
             
                 <a href="nginx-log-kafka.html">
             
                     
-                        <b>7.22.4.</b>
+                        <b>7.22.3.</b>
                     
                     Nginx日志写入kafka
             
@@ -6725,6 +6740,21 @@
             
         </li>
     
+        <li class="chapter " data-level="7.37.4" data-path="tidb-management.html">
+            
+                <a href="tidb-management.html">
+            
+                    
+                        <b>7.37.4.</b>
+                    
+                    tidb管理
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -7084,8 +7114,16 @@ res <span class="token operator">:=</span> strings<span class="token punctuation
     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<h1 id="&#x516D;&#x3001;golang&#x7A0B;&#x5E8F;&#x521D;&#x59CB;&#x5316;">&#x516D;&#x3001;<strong>golang&#x7A0B;&#x5E8F;&#x521D;&#x59CB;&#x5316;</strong></h1>
+<p>golang&#x7A0B;&#x5E8F;&#x521D;&#x59CB;&#x5316;&#x5148;&#x4E8E;main&#x51FD;&#x6570;&#x6267;&#x884C;&#xFF0C;&#x7531;runtime&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x987A;&#x5E8F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ol>
+<li>&#x521D;&#x59CB;&#x5316;&#x5BFC;&#x5165;&#x7684;&#x5305;&#xFF08;&#x5305;&#x7684;&#x521D;&#x59CB;&#x5316;&#x987A;&#x5E8F;&#x5E76;&#x4E0D;&#x662F;&#x6309;&#x5BFC;&#x5165;&#x987A;&#x5E8F;&#xFF08;&#x201C;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x201D;&#xFF09;&#x6267;&#x884C;&#x7684;&#xFF0C;runtime&#x9700;&#x8981;&#x89E3;&#x6790;&#x5305;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x6CA1;&#x6709;&#x4F9D;&#x8D56;&#x7684;&#x5305;&#x6700;&#x5148;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x4E0E;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7C7B;&#x4F3C;&#xFF0C;&#x53C2;&#x89C1;<a href="https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/PGDzMaYznZVuDiO6V-zYDw" _target="blank">golang&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x5316;</a>&#xFF09;&#xFF1B;</li>
+<li>&#x521D;&#x59CB;&#x5316;&#x5305;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x53D8;&#x91CF;&#xFF08;&#x8BE5;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x5316;&#x4E5F;&#x5E76;&#x975E;&#x6309;&#x7167;&#x201C;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x3001;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#x201D;&#x7684;&#x987A;&#x5E8F;&#xFF0C;runtime&#x89E3;&#x6790;&#x53D8;&#x91CF;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x6CA1;&#x6709;&#x4F9D;&#x8D56;&#x7684;&#x53D8;&#x91CF;&#x6700;&#x5148;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x53C2;&#x89C1;<a href="https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/PGDzMaYznZVuDiO6V-zYDw" _target="blank">golang&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x5316;</a>&#xFF09;&#xFF1B;</li>
+<li>&#x6267;&#x884C;&#x5305;&#x7684;init&#x51FD;&#x6570;&#xFF1B;</li>
+</ol>
+<p>&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;-&gt;init()-&gt;main()</p>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-01-18 18:30:07
+2021-07-14 17:52:50
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7129,7 +7167,7 @@ res <span class="token operator">:=</span> strings<span class="token punctuation
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"基础语法","level":"8.1","depth":1,"next":{"title":"go的并发","level":"8.1.1","depth":2,"path":"origin/golang-concurrent-programming.md","ref":"origin/golang-concurrent-programming.md","articles":[]},"previous":{"title":"Pulsar的Kafka协议适配器KoP","level":"7.38.5","depth":2,"path":"origin/pulsar-kafka-kop.md","ref":"origin/pulsar-kafka-kop.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/golang-basic.md","mtime":"2021-01-18T10:30:07.733Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-06-27T09:49:10.166Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"基础语法","level":"8.1","depth":1,"next":{"title":"go的并发","level":"8.1.1","depth":2,"path":"origin/golang-concurrent-programming.md","ref":"origin/golang-concurrent-programming.md","articles":[]},"previous":{"title":"Pulsar的Kafka协议适配器KoP","level":"7.38.5","depth":2,"path":"origin/pulsar-kafka-kop.md","ref":"origin/pulsar-kafka-kop.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/golang-basic.md","mtime":"2021-07-14T09:52:50.247Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-07-19T02:07:59.783Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

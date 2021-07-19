@@ -231,7 +231,7 @@ brew install mas
 brew bundle --file="~/Desktop/Brewfile"
 ```
 
-### 参考：
+**参考：**
 
 1. https://wsgzao.github.io/post/homebrew-bundle/
 
@@ -239,6 +239,7 @@ brew bundle --file="~/Desktop/Brewfile"
 
 ### ①MySQL
 
+- 配置文件：`/usr/local/etc/my.cnf`
 - 日志和底层DB数据文件: `/usr/local/var/mysql`
 - bin文件路径：`/usr/local/Cellar/mysql@mysql版本/mysql版本`
 - brew 启动命令：`brew services restart mysql@mysql版本 `

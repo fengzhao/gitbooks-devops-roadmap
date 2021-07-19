@@ -221,6 +221,9 @@ esxcfg-vmknic -l
 esxcfg-volume -l |grep "VMFS UUID/label"
 # 会显示当前磁盘分区UUID
 
+esxcli storage filesystem list
+# 
+
 esxcfg-volume -M UUID
 # 会将磁盘分区挂载到/vmfs/volumes/UUID下
 # -M 重启后依旧会挂载。-m 重启后不会再挂载

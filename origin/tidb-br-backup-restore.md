@@ -110,7 +110,7 @@ br --help
 
 ```bash
 br backup full \
-    --pd "${PDIP}:2379" \
+    --pd "{PD1节点IP地址}:2379,{PD2节点IP地址}:2379" \
     --storage "local:///data/tidb-br-database-export" \
     --ratelimit 120 \
     --log-file backupfull.log

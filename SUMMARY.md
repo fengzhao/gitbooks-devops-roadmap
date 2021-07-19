@@ -54,6 +54,7 @@
 * 安装
   * [Kubeadm安装单机版Kubernetes](origin/kubernetes-使用Kubeadm安装单机版Kubernetes.md)
   * [Kubeasz二进制安装Kubernetes集群](origin/kubernetes-Kubeasz二进制安装集群.md)
+  * [Sealos安装](origin/k8s-install-sealos.md)
 * 集群管理
   * [kubernetes集群性能监控](origin/prometheus-Kubernetes或Openshift的Prometheus监控体系.md)
   * [kubernetes集群组件](origin/kubernetes-集群组件.md)
@@ -109,7 +110,6 @@
         * [Pypi](origin/nexus-pypi.md)
         * Docker
         * [Helm](origin/nexus-helm.md)
-        * [RAW](origin/nexus-raw.md)
     * [数据备份恢复](origin/nexus-数据的备份恢复.md)
     * [API](/origin/nexus-api.md)
     * [Jenkins相关插件](origin/nexus-使用jenkins插件上传CI流程制品到Nexus仓库.md)
@@ -145,10 +145,11 @@
 * Logging
     * [日志系统技术概览简介](origin/logging-日志系统技术概览简介.md)
     * [日志系统数据在个组件中的流转格式](origin/logging-日志系统数据在个组件中的流转格式.md)
-    * Kafka
+    * Kafka/Zookeeper
         * [原理](origin/kafka-origin.md)
         * [基础知识](origin/logging-kafka基础知识.md)
         * [kafka常用操作](origin/logging-kafka常用操作.md)
+        * [Zookeeper常用操作](origin/zookeeper.md)
         * [kafka连接调试脚本](origin/kafka-client-connect-procedure-tools.md)
         * [Zookeeper和kafka的WebUI工具](origin/zk-kafka-ui.md)
         * [命令行Kafka工具](origin/kafka-shell-kaf.md)
@@ -193,6 +194,7 @@
         * [二进制Docker部署Prometheus生态](origin/prometheus-binary-docker-deploy.md)
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
         * [Blackbox Exporter](origin/prometheus-blackbox-exporter.md)
+        * [收集Nginx的Metrics](origin/prometheus-nginx-exporter.md)
     * Grafana
         * [Grafana的备份恢复](origin/grafana-backup-restore.md)
 * Tracing
@@ -366,7 +368,6 @@
 * Nginx
     * [Nginx安装配置](origin/nginx-install-setup.md)
     * [Nginx配置优化](origin/nginx-config.md)
-    * [Nginx非常规配置](origin/nginx-config.md)
     * [Nginx日志写入kafka](origin/nginx-log-kafka.md)
 * iSCSI
   
@@ -418,6 +419,7 @@
     - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
     - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
   - [大数据的数据迁移](origin/bigdata-migrate-operation.md)
+  - [tidb管理](origin/tidb-management.md)
 - Apache Pulsar
   - [基础概念](origin/pulsar-basic.md)
   - [安装部署](origin/pulsar-install.md)

@@ -390,7 +390,21 @@ blkid | grep /dev/sdb5 | cut -d ' ' -f 2 >>/etc/fstab;sed -i '$ s/$/ data ext4 d
 find mapred/ -name "*.java" -print | xargs cat | wc -l
 ```
 
-# 七、dos2unix
+# 七、find
+
+## 1、显示指定路径的文件，排除文件夹
+
+```bash
+find . -name '*' -type f -print
+```
+
+## 2、显示指定路径的文件，排除指定文件夹
+
+```bash
+find . -name '*' ! -path "./.git/*" -type f -print
+```
+
+# 八、dos2unix
 
 dos2unix是将Windows格式文件转换为Unix、Linux格式的实用命令。Windows格式文件的换行符为\r\n ,而Unix&Linux文件的换行符为\n. dos2unix命令其实就是将文件中的\r\n 转换为\n。而unix2dos则是和dos2unix互为孪生的一个命令，它是将Linux&Unix格式文件转换为Windows格式文件的命令。
 

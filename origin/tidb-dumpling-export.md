@@ -39,14 +39,39 @@
 
 ## 2、安装及主要参数
 
+**二进制**
+
 ```bash
 version=v4.0.5 && \
 curl -# https://download.pingcap.org/tidb-toolkit-$version-linux-amd64.tar.gz | tar -zxC /opt && \
 ln -s /opt/tidb-toolkit-$version-linux-amd64 /opt/tidb-toolkit-$version && \
 echo "export PATH=/opt/tidb-toolkit-$version/bin:$PATH" >> /etc/profile && \
 source /etc/profile && \ 
-tidb-lightning -V
+dumpling -V
 ```
+
+**源码构建**
+
+```bash
+# MacOS源码构建（要求：golang>=1.6,二进制输出路径：bin/dumpling）
+git clone https://github.com/pingcap/dumpling.git && \
+cd dumpling && \
+git checkout v4.0.5 && \
+make build && \
+chmox +X ./bin/dumpling && \
+mv ./bin/dumpling /usr/local/bin/ && \
+dumpling --version
+```
+
+**Docker**
+
+```bash
+docker pull pingcap/dumpling:v5.1.0
+docker run -it -v 本地存储导出SQL文件的目录 pingcap/dumpling:v5.1.0 sh
+# dumpling命令执行路径在根目录下,具体的导出任务可以在容器中执行
+```
+
+
 
 | 主要选项                   | 用途                                                         | 默认值                                  |
 | :------------------------- | ------------------------------------------------------------ | --------------------------------------- |

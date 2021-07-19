@@ -132,7 +132,7 @@ yum install -y gcc gc++ perl gcc-c++
   sudo make install
   ```
 
-### ③下载解压Nginx源码包
+### ③下载解压源码包
 
 ```bash
 version=1.18.0 && \
