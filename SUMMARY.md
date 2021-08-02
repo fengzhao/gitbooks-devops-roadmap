@@ -141,7 +141,7 @@
 * Consul
 * Apollo
 
-## Part Ⅴ：日志、监控、告警
+## Part Ⅴ：日志/监控/告警
 * Logging
     * [日志系统技术概览简介](origin/logging-日志系统技术概览简介.md)
     * [日志系统数据在个组件中的流转格式](origin/logging-日志系统数据在个组件中的流转格式.md)
@@ -189,18 +189,17 @@
 * Metrics
     * [Kubernetes的监控体系](origin/kubernete-prometheus.md)
     * Prometheus
-        * [Prometheus基础概念](origin/prometheus-basic.md)
+        * [Prometheus基础概念及PromSQL](origin/prometheus-basic.md)
         * [kube-prometheus: Prometheus Operator安装部署](origin/kube-prometheus.md)
         * [二进制Docker部署Prometheus生态](origin/prometheus-binary-docker-deploy.md)
         * [Ceph Exporter](origin/prometheus-Ceph-Exporter对接Prometheus以监控ceph集群.md)
         * [Blackbox Exporter](origin/prometheus-blackbox-exporter.md)
-        * [收集Nginx的Metrics](origin/prometheus-nginx-exporter.md)
+        * [收集Nginx内置Metrics](origin/prometheus-nginx-exporter.md)
     * Grafana
         * [Grafana的备份恢复](origin/grafana-backup-restore.md)
 * Tracing
     * SkyWalking
     * Matomo
-      * []()
 * [Sentry日志聚合告警平台](origin/sentry.md)
     * [Logstash与Sentry对接](origin/sentry-logstash对接Sentry.md)
 
@@ -412,14 +411,14 @@
 - TiDB
   - 安装部署
     - [Ansible二进制部署管理](origin/tidb-ansible.md)
-    - [使用TIUP部署TiDB 4.0集群](origin/tiup-install-cluster.md)
+    - [使用TIUP部署TiDB集群](origin/tiup-install-cluster.md)
   - ELT工具
     - [DM(Data Migration)数据增量全量同步至TiDB](origin/tidb-dm.md)
     - [TiDB-Dumpling：从TiDB/MySQL导出数据](origin/tidb-dumpling-export.md)
     - [TiDB-Lightning：导入数据到TIDB](origin/tidb-lighting-import.md)
     - [TiDB-BR冷备份与恢复：分布式冷备份恢复数据](origin/tidb-br-backup-restore.md)
-  - [大数据的数据迁移](origin/bigdata-migrate-operation.md)
-  - [tidb管理](origin/tidb-management.md)
+  - [大数据量的迁移方案对比](origin/bigdata-migrate-operation.md)
+  - [TiDB管理](origin/tidb-management.md)
 - Apache Pulsar
   - [基础概念](origin/pulsar-basic.md)
   - [安装部署](origin/pulsar-install.md)

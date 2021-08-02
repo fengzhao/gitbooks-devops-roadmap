@@ -160,7 +160,7 @@ source /etc/profile
 
 # TiUP下载安装好的路径：~/.tiup/bin/tiup
 # 配置信息: ~/.tiup/bin/7b8e153f2e2d0928.root.json
-# 镜像信息配置到了: https://tiup-mirrors.pingcap.com success
+# 镜像信息配置到了: https://tiup-mirrors.pingcap.com
 ```
 
 ## 2、TiUP安装DM
@@ -382,8 +382,8 @@ curl -s -# https://download.pingcap.org/dm-portal-latest-linux-amd64.tar.gz | ta
 ln -s /opt/dm-portal-latest-linux-amd64 /opt/dm-portal && \
 echo -e "export DM_PORTAL_HOME=/opt/dm-portal\nexport PATH=\$PATH:\$DM_PORTAL_HOME/bin" >> /etc/profile && \
 source /etc/profile && \
-mkdir -p /root/tiup-dm-1.4.2/dm-portal/task-conf && \
-nohup /opt/dm-portal/bin/dm-portal --port=8280 -task-file-path=/root/tiup-dm-1.4.2/dm-portal/task-conf > /root/tiup-dm-1.4.2/dm-portal/dm-portal.log 2>&1 &
+mkdir -p /root/dm-portal/task-conf && \
+nohup /opt/dm-portal/bin/dm-portal --port=8280 -task-file-path=/root/dm-portal/task-conf > /root/dm-portal/dm-portal.log 2>&1 &
 ```
 
 访问：[http://DM_Portal服务器地址:8280]()，在Web页面上就可图形化配置DM同步任务。配置文件可通过浏览器直接下载，也可以在`/root/tiup-dm-1.4.2/dm-portal/task-conf`路径下找到。
@@ -428,6 +428,8 @@ tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数�
 
 # 五、同步任务配置
 
+[DM任务完整配置参考](https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full/#%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%A4%BA%E4%BE%8B)
+
 ## 1、配置文件基础结构
 
 ### ①配置信息及类型
@@ -463,19 +465,7 @@ tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数�
 
 各个功能配置集的参数及解释参见[完整配置文件示例](https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full#完整配置文件示例)中的注释说明。
 
-### ③
-
-### ④
-
-### ⑤
-
-### ⑥
-
-### ⑦
-
-### ⑧
-
-## 3、配置文件示例
+## 3、配置文件说明
 
 ```yaml
 ---
@@ -610,7 +600,6 @@ loaders:
     # dump 处理单元输出 SQL 文件的目录，同时也是 load 处理单元读取文件的目录。该配置项的默认值为 "./dumped_data"。同实例对应的不同任务必须配置不同的目录
     dir: "./dumped_data"             
 
-
 # sync 处理单元的运行配置参数
 syncers:                             
   # 配置名称
@@ -623,8 +612,7 @@ syncers:
     enable-ansi-quotes: true         
     # 设置为 true，则将来自上游的 `INSERT` 改写为 `REPLACE`，将 `UPDATE` 改写为 `DELETE` 与 `REPLACE`，保证在表结构中存在主键或唯一索引的条件下迁移数据时可以重复导入 DML。在启动或恢复增量复制任务的前 5 分钟内 TiDB DM 会自动启动 safe mode
     safe-mode: false   
-    
- 
+   
 # ----------- 实例配置 -----------
 mysql-instances:
   -
@@ -662,7 +650,55 @@ mysql-instances:
     syncer-thread: 16
 ```
 
-DM任务完整配置参考：https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full/#%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%A4%BA%E4%BE%8B
+## 4、实例配置文件
+
+```bash
+name: sync-test-mysql-to-tidb
+task-mode: all
+is-sharding: false
+target-database:
+  host: 192.168.1.8
+  port: 4000
+  user: root
+  password: *****参考第四章节第一节加密数据库密码******
+  session:
+    sql_mode: ""
+    tidb_skip_utf8_check: 1
+    tidb_constraint_check_in_place: 0
+    foreign_key_checks: OFF
+mysql-instances:
+- source-id: mysql-192-1-6
+  meta:
+    binlog-name: mysql-bin.0000001
+    binlog-pos: 4
+  filter-rules: []
+  route-rules:
+  - replica-1
+  black-white-list: replica-1.bw_list
+  mydumper-config-name: replica-1.dump
+routes:
+  replica-1:
+    schema-pattern: test_db
+    target-schema: stg_db
+
+filters: {}
+black-white-list:
+  replica-1.bw_list:
+    do-tables: []
+    do-dbs: ["test_db"]
+    ignore-tables:
+    - db-name: "~.*"
+      tbl-name: "test_1"
+    - db-name: "~.*"
+      tbl-name: "test_2"
+    ignore-dbs: []
+mydumpers:
+  replica-1.dump:
+    mydumper-path: bin/mydumper
+    threads: 4
+    chunk-filesize: 64
+    skip-tz-utc: true
+```
 
 # 六、dmctl集群控制
 
@@ -675,7 +711,7 @@ dmctl 是用来运维 DM 集群的命令行工具，支持交互模式和命令�
 ## 1、dmctl 
 
 ```bash
-tidb dmctl [global options] command [command options] [arguments...]
+tiup dmctl [global options] command [command options] [arguments...]
 
 特殊命令:
   --encrypt Encrypts plaintext to ciphertext.
@@ -765,7 +801,8 @@ query-status [-s source ...] [任务名 | 任务配置文件路径] [--more] [fl
 
 ```bash
 # 交互模式下
-stop-task [-s source ...] <任务名 | 任务配置文件路径> [flags]
+pause-task [-s source ...] <task-name | task-file> [flags]
+
 全局参数:
   -s, --source strings   MySQL Source ID.
 ```
@@ -776,6 +813,15 @@ stop-task [-s source ...] <任务名 | 任务配置文件路径> [flags]
 # 交互模式下
 resume-task [-s source ...] <任务名 | 任务配置文件路径> [flags]
 
+全局参数:
+  -s, --source strings   MySQL Source ID.
+```
+
+### ⑥删除任务
+
+```bash
+# 交互模式下
+stop-task [-s source ...] <任务名 | 任务配置文件路径> [flags]
 全局参数:
   -s, --source strings   MySQL Source ID.
 ```

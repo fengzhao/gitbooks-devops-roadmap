@@ -1198,9 +1198,9 @@ tr -dc '_A-Z#\-+=a-z(0-9%^>)]{<|' </dev/urandom | head -c 15; echo
 
 # 46、ssh目录的权限问题
 
-- `.ssh目录`的权限应为**700**
-
-- `.ssh目录下文件`的权限应为**600**
+- `home`目录的权限为**700**：`chmod 700 /home/用户`
+- `.ssh目录`的权限应为**700**：`chmod 700 ~/.ssh`
+- `.ssh目录下authorized_keys文件`的权限应为**600**：`chmod 600 ~/.ssh/authorized_keys`
 
 # 47、常见包管理器的阿里云镜像源设置
 

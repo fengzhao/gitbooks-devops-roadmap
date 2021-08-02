@@ -688,6 +688,9 @@ tapinstall.exe install <something.inf> <id>
 
 # 更新网络虚拟设备
 tapinstall.exe update <something.inf> <id>
+
+# <id> 指的是 OpenVPN 2.2+ 的 tap0901 驱动程序标识符，但在较旧/较新的 OpenVPN 版本中可能不同。
+# <something.inf> 通常是 OemWin2k.inf（旧的抽头驱动程序）或 OemVista.inf（新的抽头驱动程序）。您需要指定此文件的完整路径，例如 C:\Program Files\TAP-Windows\driver\OemVista.inf。
 ```
 
 参考：https://community.openvpn.net/openvpn/wiki/ManagingWindowsTAPDrivers

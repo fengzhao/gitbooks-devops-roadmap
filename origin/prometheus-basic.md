@@ -1,4 +1,4 @@
-# Prometheus基础概念
+# Prometheus基础概念及PromSQL
 
 # 一、简介
 
@@ -22,20 +22,20 @@ Github：https://github.com/prometheus/prometheus
 - **alertmanager是一个报警接口，接收prometheus推送的告警，并通过自己定义的一些规则去进行告警**
 - **Pushgateway 程序，主要是实现接收由Client push过来的指标数据，在指定的时间间隔，由主程序来抓取**
 
-# 三、数据模型
+# 三、Metrics数据模型
 
 Prometheus 中存储的数据为时间序列，是由 metric 的名字和一系列的标签（键值对）唯一标识的，不同的标签则代表不同的时间序列
 
 - **metric** ：该名字应该具有语义，一般用于表示 metric 的功能，例如：http_requests_total, 表示 http 请求的总数。
 
   ```
-  metric 名字由 ASCII 字符，数字，下划线，以及冒号组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*
+  metric 名字由 ASCII字符，数字，下划线，以及冒号组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*
   ```
 
 - **标   签**：使同一个时间序列有了不同维度的识别。例如 http_requests_total{method="Get"} 表示所有 http 请求中的 Get 请求。当 method="post" 时，则为新的一个 metric。
 
   ```
-  标签中的键由 ASCII 字符，数字，以及下划线组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。
+  标签中的键由 ASCII字符，数字，以及下划线组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。
   ```
 
 - **样  本**：实际的时间序列，每个序列包括一个 float64 的值和一个毫秒级的时间戳。
@@ -67,9 +67,62 @@ Prometheus 中存储的数据为时间序列，是由 metric 的名字和一系�
   - 不同在于Histogram可以通过histogram_quantile函数在服务器端计算分位数。 而Sumamry的分位数则是直接在客户端进行定义。
   - 因此对于分位数的计算。 Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。相对的对于客户端而言Histogram消耗的资源更少。
 
-# 五、重要配置
+# 五、PromSQL查询语法
 
-## 1、配置Prometheus在运行时重载配置文件
+## 1、查询语法规则
+
+```bash
+```
+
+
+
+## 2、时间范围查询
+
+- **查询瞬时向量**
+
+  ```bash
+  # 瞬时向量表达式，选择当前最新的数据
+  node_uname_info
+  # 瞬时向量表达式，选择当前最新的数据
+  node_uname_info{}
+  ```
+
+- **查询范围向量**
+
+  ```bash
+  # 查询以当前时间为基准，5分钟内的数据
+  node_uname_info [5m]
+  ```
+
+- **查询位移时间的向量**
+
+  ```bash
+  # 查询以当前时间为基准，1小时前的瞬时样本数据
+  node_uname_info offset 1h
+  ```
+  
+- **综合查询**
+
+  ```bash
+  # 查询以当前时间为基准，1小时前1小时内的数据
+  node_uname_info [1h] offset 1h
+  ```
+
+时间范围查询支持的时间单位：
+
+- `ms` ： 毫秒
+- `s` ：秒
+- `m` ：分支
+- `h` ：小时
+- `d`： 天（24小时）
+- `w` ：周（7天）
+- `y` ：年（365天）
+
+# 六、要配置
+
+## 1、配置Prometheus
+
+### ①在运行时重载配置文件
 
 在启动prometheus时添加参数：
 
@@ -92,13 +145,9 @@ curl -XPOST http://localhost:9090/-/reload
 kill -HUP prometheus进程号
 ```
 
-如果变更后的配置文件语法有错误，则不会重载生效。
+如果变更后的配置文件语法有错误，则不会重载生效。触发重载前，可使用`promtool check`检查配置文件语法。
 
-触发重载前，可使用`promtool check`检查配置文件语法。
-
-参考：
-
-https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cscrape_config%3E
+参考：https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cscrape_config%3E
 
 ## 2、配置node_exporter
 

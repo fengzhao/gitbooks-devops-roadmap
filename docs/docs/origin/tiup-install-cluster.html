@@ -1007,6 +1007,21 @@
             
         </li>
     
+        <li class="chapter " data-level="3.4.3" data-path="k8s-install-sealos.html">
+            
+                <a href="k8s-install-sealos.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Sealos安装
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -1867,21 +1882,6 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.3.8" data-path="nexus-raw.md">
-            
-                <a href="nexus-raw.md">
-            
-                    
-                        <b>4.3.3.8.</b>
-                    
-                    RAW
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -2421,7 +2421,7 @@
                     
                         <b>6.1.3.</b>
                     
-                    Kafka
+                    Kafka/Zookeeper
             
                 </span>
             
@@ -2475,12 +2475,27 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.4" data-path="kafka-client-connect-procedure-tools.html">
+        <li class="chapter " data-level="6.1.3.4" data-path="zookeeper.html">
+            
+                <a href="zookeeper.html">
+            
+                    
+                        <b>6.1.3.4.</b>
+                    
+                    Zookeeper常用操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.3.5" data-path="kafka-client-connect-procedure-tools.html">
             
                 <a href="kafka-client-connect-procedure-tools.html">
             
                     
-                        <b>6.1.3.4.</b>
+                        <b>6.1.3.5.</b>
                     
                     kafka连接调试脚本
             
@@ -2490,12 +2505,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.5" data-path="zk-kafka-ui.html">
+        <li class="chapter " data-level="6.1.3.6" data-path="zk-kafka-ui.html">
             
                 <a href="zk-kafka-ui.html">
             
                     
-                        <b>6.1.3.5.</b>
+                        <b>6.1.3.6.</b>
                     
                     Zookeeper和kafka的WebUI工具
             
@@ -2505,12 +2520,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.6" data-path="kafka-shell-kaf.html">
+        <li class="chapter " data-level="6.1.3.7" data-path="kafka-shell-kaf.html">
             
                 <a href="kafka-shell-kaf.html">
             
                     
-                        <b>6.1.3.6.</b>
+                        <b>6.1.3.7.</b>
                     
                     命令行Kafka工具
             
@@ -3194,6 +3209,21 @@
                         <b>6.2.2.5.</b>
                     
                     Blackbox Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2.6" data-path="prometheus-nginx-exporter.html">
+            
+                <a href="prometheus-nginx-exporter.html">
+            
+                    
+                        <b>6.2.2.6.</b>
+                    
+                    收集Nginx的Metrics
             
                 </a>
             
@@ -5991,27 +6021,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.22.3" data-path="nginx-config.html">
-            
-                <a href="nginx-config.html">
-            
-                    
-                        <b>7.22.3.</b>
-                    
-                    Nginx非常规配置
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.22.4" data-path="nginx-log-kafka.html">
+        <li class="chapter " data-level="7.22.3" data-path="nginx-log-kafka.html">
             
                 <a href="nginx-log-kafka.html">
             
                     
-                        <b>7.22.4.</b>
+                        <b>7.22.3.</b>
                     
                     Nginx日志写入kafka
             
@@ -6716,6 +6731,21 @@
                         <b>7.37.3.</b>
                     
                     大数据的数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.37.4" data-path="tidb-management.html">
+            
+                <a href="tidb-management.html">
+            
+                    
+                        <b>7.37.4.</b>
+                    
+                    tidb管理
             
                 </a>
             
@@ -7709,8 +7739,148 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 <p>&#x793A;&#x4F8B;&#x4E09;&#xFF1A;&#x5378;&#x8F7D;&#x6240;&#x6709;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x7EC4;&#x4EF6;</p>
 <pre class="language-"><code class="lang-shell">tiup uninstall --all
 </code></pre>
+<h1 id="&#x4E94;&#x3001;tiup&#x547D;&#x4EE4;">&#x4E94;&#x3001;tiup&#x547D;&#x4EE4;</h1>
+<h2 id="1&#x3001;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x5065;&#x5EB7;&#x68C0;&#x67E5;">1&#x3001;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x5065;&#x5EB7;&#x68C0;&#x67E5;</h2>
+<h3 id="&#x2460;&#x68C0;&#x67E5;&#x547D;&#x4EE4;&#x8BED;&#x6CD5;">&#x2460;&#x68C0;&#x67E5;&#x547D;&#x4EE4;&#x8BED;&#x6CD5;</h3>
+<pre class="language-"><code class="lang-bash">tiup cluster check <span class="token operator">&lt;</span>&#x96C6;&#x7FA4;&#x62D3;&#x6251;&#x6587;&#x4EF6;&#x8DEF;&#x5F84; <span class="token operator">|</span> &#x96C6;&#x7FA4;&#x540D;<span class="token operator">&gt;</span> <span class="token punctuation">[</span>&#x53C2;&#x6570;<span class="token punctuation">]</span>
+
+<span class="token comment"># &#x82E5;&#x96C6;&#x7FA4;&#x5C1A;&#x672A;&#x90E8;&#x7F72;&#xFF0C;&#x9700;&#x8981;&#x4F20;&#x9012;&#x5C06;&#x7528;&#x4E8E;&#x90E8;&#x7F72;&#x96C6;&#x7FA4;&#x7684;topology.yml&#x6587;&#x4EF6;&#xFF0C;tiup-cluster &#x4F1A;&#x6839;&#x636E;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x8FDE;&#x63A5;&#x5230;&#x5BF9;&#x5E94;&#x673A;&#x5668;&#x53BB;&#x68C0;&#x67E5;&#x3002;&#x82E5;&#x96C6;&#x7FA4;&#x5DF2;&#x7ECF;&#x90E8;&#x7F72;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x96C6;&#x7FA4;&#x7684;&#x540D;&#x5B57; `&lt;cluster-name&gt;` &#x4F5C;&#x4E3A;&#x68C0;&#x67E5;&#x5BF9;&#x8C61;&#x3002;&#x82E5;&#x4F20;&#x9012;&#x7684;&#x662F;&#x96C6;&#x7FA4;&#x540D;&#x5B57;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x914D;&#x5408; `--cluster` &#x9009;&#x9879;&#x4F7F;&#x7528;&#x3002;</span>
+
+--apply BOOLEAN  
+<span class="token comment">#                &#x5C1D;&#x8BD5;&#x81EA;&#x52A8;&#x4FEE;&#x590D;&#x5931;&#x8D25;&#x7684;&#x68C0;&#x67E5;&#x9879;&#x3002;&#x8BE5;&#x9009;&#x9879;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; `false`&#x3002;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x6DFB;&#x52A0;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x5E76;&#x4F20;&#x5165; `true` &#x503C;&#x6216;&#x4E0D;&#x4F20;&#x503C;&#xFF0C;&#x5747;&#x53EF;&#x5F00;&#x542F;&#x6B64;&#x529F;&#x80FD;&#x76EE;&#x524D;&#x4EC5;&#x4F1A;&#x5C1D;&#x8BD5;&#x4FEE;&#x590D;&#x4EE5;&#x4E0B;&#x9879;&#x76EE;&#xFF1A;</span>
+<span class="token comment">#              - SELinux</span>
+<span class="token comment">#              - &#x9632;&#x706B;&#x5899;</span>
+<span class="token comment">#              - irqbalance</span>
+<span class="token comment">#              - &#x5185;&#x6838;&#x53C2;&#x6570;</span>
+<span class="token comment">#              - &#x7CFB;&#x7EDF; Limits</span>
+<span class="token comment">#              - THP&#xFF08;&#x900F;&#x660E;&#x5927;&#x9875;&#xFF09;</span>
+--cluster  BOOLEAN 
+<span class="token comment">#                &#x652F;&#x6301;&#x5BF9;&#x672A;&#x90E8;&#x7F72;&#x7684;&#x96C6;&#x7FA4;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#xFF0C;&#x4E5F;&#x652F;&#x6301;&#x5BF9;&#x5DF2;&#x90E8;&#x7F72;&#x7684;&#x96C6;&#x7FA4;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;&#x82E5;&#x9009;&#x62E9;&#x7684;&#x683C;&#x5F0F;&#x4E3A; `tiup cluster check &lt;cluster-name&gt;` &#x5219;&#x5FC5;&#x987B;&#x52A0;&#x4E0A;&#x8BE5;&#x9009;&#x9879;&#xFF1A;`tiup cluster check &lt;cluster-name&gt; --cluster`&#x3002;&#x8BE5;&#x9009;&#x9879;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; `false`&#x3002;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x6DFB;&#x52A0;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x5E76;&#x4F20;&#x5165; `true` &#x503C;&#x6216;&#x4E0D;&#x4F20;&#x503C;&#xFF0C;&#x5747;&#x53EF;&#x5F00;&#x542F;&#x6B64;&#x529F;&#x80FD;&#x3002;</span>
+
+-N, --node STRINGS 
+<span class="token comment">#             &#x6307;&#x5B9A;&#x8981;&#x68C0;&#x67E5;&#x7684;&#x8282;&#x70B9;&#x3002;&#x8BE5;&#x9009;&#x9879;&#x7684;&#x503C;&#x4E3A;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x5272;&#x7684;&#x8282;&#x70B9; ID &#x5217;&#x8868;&#xFF0C;&#x8282;&#x70B9;ID&#x4E3A;tiup-component-cluster-display &#x547D;&#x4EE4;&#x8FD4;&#x56DE;&#x7684;&#x96C6;&#x7FA4;&#x72B6;&#x6001;&#x8868;&#x683C;&#x7684;&#x7B2C;&#x4E00;&#x5217;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x9ED8;&#x8BA4;&#x68C0;&#x67E5;&#x6240;&#x6709;&#x8282;&#x70B9;&#xFF0C;&#x5373; `[]`&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x82E5;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x4E86; `-R, --role`&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x68C0;&#x67E5;&#x5B83;&#x4EEC;&#x7684;&#x4EA4;&#x96C6;&#x4E2D;&#x7684;&#x670D;&#x52A1;&#x3002;</span>
+-R, --role STRINGS
+<span class="token comment">#             &#x6307;&#x5B9A;&#x8981;&#x68C0;&#x67E5;&#x7684;&#x89D2;&#x8272;&#x3002;&#x8BE5;&#x9009;&#x9879;&#x7684;&#x503C;&#x4E3A;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x5272;&#x7684;&#x8282;&#x70B9;&#x89D2;&#x8272;&#x5217;&#x8868;&#xFF0C;&#x89D2;&#x8272;&#x4E3A;tiup-component-cluster-display&#x547D;&#x4EE4;&#x8FD4;&#x56DE;&#x7684;&#x96C6;&#x7FA4;&#x72B6;&#x6001;&#x8868;&#x683C;&#x7684;&#x7B2C;&#x4E8C;&#x5217;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x9ED8;&#x8BA4;&#x68C0;&#x67E5;&#x6240;&#x6709;&#x89D2;&#x8272;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x82E5;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x4E86; `-N, --node`&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x68C0;&#x67E5;&#x5B83;&#x4EEC;&#x7684;&#x4EA4;&#x96C6;&#x4E2D;&#x7684;&#x670D;&#x52A1;&#x3002;</span>
+--enable-cpu BOOLEAN
+<span class="token comment">#             &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B; tiup-cluster &#x4E0D;&#x68C0;&#x67E5; CPU &#x6838;&#x5FC3;&#x6570;&#xFF0C;&#x8BE5;&#x9009;&#x9879;&#x7528;&#x4E8E;&#x542F;&#x7528; CPU &#x6838;&#x5FC3;&#x6570;&#x68C0;&#x67E5;&#x3002; &#x8BE5;&#x9009;&#x9879;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; `false`&#x3002;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x6DFB;&#x52A0;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x5E76;&#x4F20;&#x5165; `true` &#x503C;&#x6216;&#x4E0D;&#x4F20;&#x503C;&#xFF0C;&#x5747;&#x53EF;&#x5F00;&#x542F;&#x6B64;&#x529F;&#x80FD;&#x3002;</span>
+--enable-disk BOOLEAN
+<span class="token comment">#             &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B; tiup-cluster &#x4E0D;&#x8FDB;&#x884C; fio &#x78C1;&#x76D8;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;&#xFF0C;&#x8BE5;&#x9009;&#x9879;&#x7528;&#x4E8E;&#x542F;&#x7528; fio &#x78C1;&#x76D8;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;&#x3002;&#x8BE5;&#x9009;&#x9879;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; `false`&#x3002;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x6DFB;&#x52A0;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x5E76;&#x4F20;&#x5165; `true` &#x503C;&#x6216;&#x4E0D;&#x4F20;&#x503C;&#xFF0C;&#x5747;&#x53EF;&#x5F00;&#x542F;&#x6B64;&#x529F;&#x80FD;&#x3002;</span>
+--enable-mem
+<span class="token comment">#                &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B; tiup-cluster &#x4E0D;&#x68C0;&#x67E5;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x8BE5;&#x9009;&#x9879;&#x7528;&#x4E8E;&#x542F;&#x7528;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x68C0;&#x67E5;&#x3002;</span>
+-u, --user string 
+<span class="token comment">#                &#x6307;&#x5B9A;&#x8FDE;&#x63A5;&#x76EE;&#x6807;&#x673A;&#x5668;&#x7684;&#x7528;&#x6237;&#x540D;&#xFF0C;&#x8BE5;&#x7528;&#x6237;&#x5728;&#x76EE;&#x6807;&#x673A;&#x5668;&#x4E0A;&#x9700;&#x8981;&#x6709;&#x514D;&#x5BC6; sudo root &#x7684;&#x6743;&#x9650;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x7684;&#x7528;&#x6237;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4EC5;&#x5F53;--cluster&#x9009;&#x9879;&#x4E3A; false &#x65F6;&#x8BE5;&#x9009;&#x9879;&#x6709;&#x6548;&#xFF0C;&#x5426;&#x5219;&#x8BE5;&#x503C;&#x56FA;&#x5B9A;&#x4E3A;&#x90E8;&#x7F72;&#x96C6;&#x7FA4;&#x65F6;&#x62D3;&#x6251;&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x540D;&#x3002;</span>
+-i, --identity_file  string&#xFF0C;
+<span class="token comment">#                &#x6307;&#x5B9A;&#x8FDE;&#x63A5;&#x76EE;&#x6807;&#x673A;&#x5668;&#x7684;&#x5BC6;&#x94A5;&#x6587;&#x4EF6;&#x3002;&#x9ED8;&#x8BA4; ~/.ssh/id_rsa&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4EC5;&#x5F53; `--cluster` &#x9009;&#x9879;&#x4E3A; false &#x65F6;&#x8BE5;&#x9009;&#x9879;&#x6709;&#x6548;&#xFF0C;&#x5426;&#x5219;&#x8BE5;&#x503C;&#x56FA;&#x5B9A;&#x4E3A; `${TIUP_HOME}/storage/cluster/clusters/&lt;cluster-name&gt;/ssh/id_rsa`</span>
+-p, --password BOOLEAN
+<span class="token comment">#                &#x5728;&#x8FDE;&#x63A5;&#x76EE;&#x6807;&#x673A;&#x5668;&#x65F6;&#x4F7F;&#x7528;&#x5BC6;&#x7801;&#x767B;&#x5F55;&#xFF0C;&#x8BE5;&#x9009;&#x9879;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; `false`&#x3002;&#x5728;&#x547D;&#x4EE4;&#x4E2D;&#x6DFB;&#x52A0;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x5E76;&#x4F20;&#x5165; `true` &#x503C;&#x6216;&#x4E0D;&#x4F20;&#x503C;&#xFF0C;&#x5747;&#x53EF;&#x5F00;&#x542F;&#x6B64;&#x529F;&#x80FD;&#xFF0C;&#xFF1A;</span>
+<span class="token comment">#                    - &#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x4E86; `--cluster` &#x7684;&#x96C6;&#x7FA4;&#xFF0C;&#x5BC6;&#x7801;&#x4E3A;&#x90E8;&#x7F72;&#x96C6;&#x7FA4;&#x65F6;&#x62D3;&#x6251;&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;</span>
+<span class="token comment">#                  - &#x5BF9;&#x4E8E;&#x672A;&#x6307;&#x5B9A; `--cluster` &#x7684;&#x96C6;&#x7FA4;&#xFF0C;&#x5BC6;&#x7801;&#x4E3A; `-u/--user` &#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;</span>
+</code></pre>
+<h3 id="&#x2461;&#x8282;&#x70B9;&#x68C0;&#x67E5;&#x9879;">&#x2461;&#x8282;&#x70B9;&#x68C0;&#x67E5;&#x9879;</h3>
+<ul>
+<li><p><strong>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7248;&#x672C;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x53D1;&#x884C;&#x7248;&#x548C;&#x7248;&#x672C;&#xFF1A;&#x76EE;&#x524D;&#x4EC5;&#x652F;&#x6301;&#x90E8;&#x7F72;&#x5728; CentOS 7 &#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;&#x4E4B;&#x540E;&#x968F;&#x517C;&#x5BB9;&#x6027;&#x6539;&#x8FDB;&#x53EF;&#x80FD;&#x652F;&#x6301;&#x66F4;&#x591A;&#x7CFB;&#x7EDF;&#x7248;&#x672C;&#x3002;</p>
+</li>
+<li><p><strong>CPU EPOLLEXCLUSIVE</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A; CPU &#x662F;&#x5426;&#x652F;&#x6301; EPOLLEXCLUSIVE&#x3002;</p>
+</li>
+<li><p><strong>numactl</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x662F;&#x5426;&#x5B89;&#x88C5; numactl&#xFF0C;&#x82E5;&#x7528;&#x6237;&#x914D;&#x7F6E;&#x7ED1;&#x6838;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5B89;&#x88C5; numactl&#x3002;</p>
+</li>
+<li><p><strong>&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x5668;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;&#x662F;&#x5426;&#x540C;&#x6B65;&#xFF1A;&#x5C06;&#x90E8;&#x7F72;&#x673A;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;&#x4E0E;&#x4E2D;&#x63A7;&#x673A;&#x5BF9;&#x6BD4;&#xFF0C;&#x504F;&#x5DEE;&#x8D85;&#x51FA;&#x67D0;&#x4E00;&#x9608;&#x503C;&#xFF08;500ms&#xFF09;&#x540E;&#x62A5;&#x9519;&#x3002;</p>
+</li>
+<li><p><strong>&#x65F6;&#x95F4;&#x540C;&#x6B65;&#x670D;&#x52A1;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x662F;&#x5426;&#x914D;&#x7F6E;&#x4E86;&#x65F6;&#x95F4;&#x540C;&#x6B65;&#x670D;&#x52A1;&#xFF1A;&#x5373; ntpd &#x662F;&#x5426;&#x5728;&#x8FD0;&#x884C;</p>
+</li>
+<li><p><strong>Swap &#x5206;&#x533A;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x662F;&#x5426;&#x542F;&#x7528; Swap &#x5206;&#x533A;&#xFF1A;&#x5EFA;&#x8BAE;&#x7981;&#x7528; Swap &#x5206;&#x533A;</p>
+</li>
+<li><p><strong>&#x5185;&#x6838;&#x53C2;&#x6570;</strong></p>
+<p>&#x68C0;&#x67E5;&#x5404;&#x9879;&#x5185;&#x6838;&#x53C2;&#x6570;&#x7684;&#x503C;&#xFF1A;</p>
+<ul>
+<li>net.ipv4.tcp_tw_recycle: 0</li>
+<li>net.ipv4.tcp_syncookies: 0</li>
+<li>net.core.somaxconn: 32768</li>
+<li>vm.swappiness: 0</li>
+<li>vm.overcommit_memory: 0 &#x6216; 1</li>
+<li>fs.file-max: 1000000</li>
+</ul>
+</li>
+<li><p><strong>THP&#xFF08;&#x900F;&#x660E;&#x5927;&#x9875;&#xFF09;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x662F;&#x5426;&#x542F;&#x7528;&#x900F;&#x660E;&#x5927;&#x9875;&#xFF1A;&#x5EFA;&#x8BAE;&#x7981;&#x7528;&#x900F;&#x660E;&#x5927;&#x9875;&#x3002;</p>
+</li>
+<li><p><strong>&#x7CFB;&#x7EDF;&#x9650;&#x5236;</strong></p>
+<p>&#x68C0;&#x67E5; /etc/security/limits.conf &#x4E2D;&#x5404;&#x9879; limit &#x503C;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token operator">&lt;</span>deploy-user<span class="token operator">&gt;</span>    soft   nofile    <span class="token number">1000000</span>
+<span class="token operator">&lt;</span>deploy-user<span class="token operator">&gt;</span>    hard   nofile    <span class="token number">1000000</span>
+<span class="token operator">&lt;</span>deploy-user<span class="token operator">&gt;</span>    soft   stack     <span class="token number">10240</span>
+</code></pre>
+<p>&#x5176;&#x4E2D; <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>deploy-user</span><span class="token punctuation">&gt;</span></span></code> &#x4E3A;&#x90E8;&#x7F72;&#x3001;&#x8FD0;&#x884C; TiDB &#x96C6;&#x7FA4;&#x7684;&#x7528;&#x6237;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5217;&#x7684;&#x6570;&#x503C;&#x4E3A;&#x8981;&#x6C42;&#x8FBE;&#x5230;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x3002;</p>
+</li>
+<li><p><strong>SELinux</strong></p>
+<p>&#x68C0;&#x67E5; SELinux &#x662F;&#x5426;&#x542F;&#x7528;&#xFF1A;&#x5EFA;&#x8BAE;&#x7528;&#x6237;&#x7981;&#x7528; SELinux&#x3002;</p>
+</li>
+<li><p><strong>&#x9632;&#x706B;&#x5899;</strong></p>
+<p>&#x68C0;&#x67E5; FirewallD &#x670D;&#x52A1;&#x662F;&#x5426;&#x542F;&#x7528;&#xFF1A;&#x5EFA;&#x8BAE;&#x7528;&#x6237;&#x7981;&#x7528; FirewallD &#x6216;&#x4E3A; TiDB &#x96C6;&#x7FA4;&#x5404;&#x670D;&#x52A1;&#x6DFB;&#x52A0;&#x5141;&#x8BB8;&#x89C4;&#x5219;&#x3002;</p>
+</li>
+<li><p><strong>irqbalance</strong></p>
+<p>&#x68C0;&#x67E5; irqbalance &#x670D;&#x52A1;&#x662F;&#x5426;&#x542F;&#x7528;&#xFF1A;&#x5EFA;&#x8BAE;&#x7528;&#x6237;&#x542F;&#x7528; irqbalance &#x670D;&#x52A1;&#x3002;</p>
+</li>
+<li><p><strong>&#x78C1;&#x76D8;&#x6302;&#x8F7D;&#x53C2;&#x6570;</strong></p>
+<p>&#x68C0;&#x67E5; ext4 &#x5206;&#x533A;&#x7684;&#x6302;&#x8F7D;&#x53C2;&#x6570;&#xFF1A;&#x786E;&#x4FDD;&#x6302;&#x8F7D;&#x53C2;&#x6570;&#x5305;&#x542B; nodelalloc,noatime &#x9009;&#x9879;&#x3002;</p>
+</li>
+<li><p><strong>&#x7AEF;&#x53E3;&#x5360;&#x7528;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x4E0A;&#x662F;&#x5426;&#x5DF2;&#x6709;&#x8FDB;&#x7A0B;&#x5360;&#x7528;&#x4E86;&#x7AEF;&#x53E3;&#xFF1A;&#x68C0;&#x67E5;&#x62D3;&#x6251;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x7AEF;&#x53E3;&#xFF08;&#x5305;&#x62EC;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x7684;&#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;&#xFF09;&#x5728;&#x90E8;&#x7F72;&#x673A;&#x4E0A;&#x662F;&#x5426;&#x5DF2;&#x88AB;&#x5360;&#x7528;&#x3002;</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x7AEF;&#x53E3;&#x5360;&#x7528;&#x68C0;&#x67E5;&#x5047;&#x8BBE;&#x96C6;&#x7FA4;&#x5C1A;&#x672A;&#x542F;&#x52A8;&#xFF0C;&#x5982;&#x679C;&#x68C0;&#x67E5;&#x7684;&#x662F;&#x5DF2;&#x7ECF;&#x90E8;&#x7F72;&#x5E76;&#x542F;&#x52A8;&#x7684;&#x96C6;&#x7FA4;&#xFF0C;&#x90A3;&#x4E48;&#x7AEF;&#x53E3;&#x5360;&#x7528;&#x68C0;&#x67E5;&#x4E00;&#x5B9A;&#x4F1A;&#x5931;&#x8D25;&#xFF0C;&#x56E0;&#x4E3A;&#x7AEF;&#x53E3;&#x786E;&#x5B9E;&#x88AB;&#x5360;&#x7528;&#x4E86;&#x3002;</p>
+</blockquote>
+</li>
+<li><p><strong>CPU &#x6838;&#x5FC3;&#x6570;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A; CPU &#x4FE1;&#x606F;&#xFF1A;&#x5EFA;&#x8BAE;&#x751F;&#x4EA7;&#x96C6;&#x7FA4; CPU &#x903B;&#x8F91;&#x6838;&#x5FC3;&#x6570; &gt;= 16</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x9ED8;&#x8BA4;&#x4E0D;&#x68C0;&#x67E5; CPU &#x6838;&#x5FC3;&#x6570;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x9009;&#x9879; <code>--enable-cpu</code> &#x542F;&#x7528;&#x3002;</p>
+</blockquote>
+</li>
+<li><p><strong>&#x5185;&#x5B58;&#x5927;&#x5C0F;</strong></p>
+<p>&#x68C0;&#x67E5;&#x90E8;&#x7F72;&#x673A;&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF1A;&#x5EFA;&#x8BAE;&#x751F;&#x4EA7;&#x96C6;&#x7FA4;&#x603B;&#x5185;&#x5B58;&#x5BB9;&#x91CF; &gt;= 32Gb&#x3002;</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x9ED8;&#x8BA4;&#x4E0D;&#x68C0;&#x67E5;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x9009;&#x9879; <code>--enable-mem</code> &#x542F;&#x7528;&#x3002;</p>
+</blockquote>
+</li>
+<li><p><strong>fio &#x78C1;&#x76D8;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;</strong></p>
+<p>&#x4F7F;&#x7528; fio &#x6D4B;&#x8BD5; data_dir &#x6240;&#x5728;&#x78C1;&#x76D8;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x5305;&#x62EC;&#x4E09;&#x4E2A;&#x6D4B;&#x8BD5;&#x9879;&#x76EE;&#xFF1A;</p>
+<ul>
+<li>fio_randread_write_latency</li>
+<li>fio_randread_write</li>
+<li>fio_randread</li>
+</ul>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x9ED8;&#x8BA4;&#x4E0D;&#x8FDB;&#x884C; fio &#x78C1;&#x76D8;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x9009;&#x9879; <code>--enable-disk</code> &#x542F;&#x7528;&#x3002;</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="&#x2462;&#x68C0;&#x67E5;&#x8F93;&#x51FA;">&#x2462;&#x68C0;&#x67E5;&#x8F93;&#x51FA;</h3>
+<p>&#x8F93;&#x51FA;&#x542B;&#x6709;&#x4EE5;&#x4E0B;&#x4FE1;&#x606F;&#xFF1A;</p>
+<ul>
+<li>Node&#xFF1A;&#x76EE;&#x6807;&#x8282;&#x70B9;</li>
+<li>Check&#xFF1A;&#x68C0;&#x67E5;&#x9879;</li>
+<li>Result&#xFF1A;&#x68C0;&#x67E5;&#x7ED3;&#x679C;&#xFF08;Pass | Warn | Fail&#xFF09;</li>
+<li>Message&#xFF1A;&#x7ED3;&#x679C;&#x63CF;&#x8FF0;</li>
+</ul>
+<h1 id="&#x516D;&#x3001;&#x95EE;&#x9898;&#x603B;&#x7ED3;">&#x516D;&#x3001;&#x95EE;&#x9898;&#x603B;&#x7ED3;</h1>
+<h2 id="1&#x3001;tiup&#x547D;&#x4EE4;&#x5347;&#x7EA7;">1&#x3001;tiup&#x547D;&#x4EE4;&#x5347;&#x7EA7;</h2>
+<p>&#x5982;&#x679C;&#x4F7F;&#x7528;<code>tiup update --self</code>&#x547D;&#x4EE4;&#x65E0;&#x6CD5;&#x81EA;&#x52A8;&#x5347;&#x7EA7;tiup&#x547D;&#x4EE4;&#x672C;&#x8EAB;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x5907;&#x4EFD;<code>~/.tiup</code>&#x76EE;&#x5F55;&#x540E;&#x76F4;&#x63A5;&#x91CD;&#x88C5;tiup&#x547D;&#x4EE4;&#xFF0C;&#x91CD;&#x88C5;&#x540E;&#x68C0;&#x67E5;&#x65B0;&#x88C5;&#x547D;&#x4EE4;&#x662F;&#x5426;&#x80FD;&#x6B63;&#x5E38;&#x83B7;&#x53D6;TIDB&#x96C6;&#x7FA4;&#x4FE1;&#x606F;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">cp</span> -r ~/.tiup ~/.tiup-bak
+<span class="token function">curl</span> --proto <span class="token string">&apos;=https&apos;</span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span>
+tiup cluster display &#x96C6;&#x7FA4;&#x540D;&#x79F0;
+</code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-11-19 15:23:05
+2021-07-12 20:13:30
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7750,7 +7920,7 @@ tiup cluster start &#x96C6;&#x7FA4;&#x540D;&#x5B57; -R &#x7EC4;&#x4EF6;1,&#x7EC4
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.37.1.2","depth":3,"next":{"title":"ELT工具","level":"7.37.2","depth":2,"ref":"","articles":[{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"path":"origin/tidb-dm.md","ref":"origin/tidb-dm.md","articles":[]},{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},{"title":"TiDB-Lightning：导入数据到TIDB","level":"7.37.2.3","depth":3,"path":"origin/tidb-lighting-import.md","ref":"origin/tidb-lighting-import.md","articles":[]},{"title":"TiDB-BR冷备份与恢复：分布式冷备份恢复数据","level":"7.37.2.4","depth":3,"path":"origin/tidb-br-backup-restore.md","ref":"origin/tidb-br-backup-restore.md","articles":[]}]},"previous":{"title":"Ansible二进制部署管理","level":"7.37.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2020-11-19T07:23:05.992Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-06-27T09:49:10.166Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"使用TIUP部署TiDB 4.0集群","level":"7.37.1.2","depth":3,"next":{"title":"ELT工具","level":"7.37.2","depth":2,"ref":"","articles":[{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"path":"origin/tidb-dm.md","ref":"origin/tidb-dm.md","articles":[]},{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},{"title":"TiDB-Lightning：导入数据到TIDB","level":"7.37.2.3","depth":3,"path":"origin/tidb-lighting-import.md","ref":"origin/tidb-lighting-import.md","articles":[]},{"title":"TiDB-BR冷备份与恢复：分布式冷备份恢复数据","level":"7.37.2.4","depth":3,"path":"origin/tidb-br-backup-restore.md","ref":"origin/tidb-br-backup-restore.md","articles":[]}]},"previous":{"title":"Ansible二进制部署管理","level":"7.37.1.1","depth":3,"path":"origin/tidb-ansible.md","ref":"origin/tidb-ansible.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tiup-install-cluster.md","mtime":"2021-07-12T12:13:30.650Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-07-19T02:07:59.783Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

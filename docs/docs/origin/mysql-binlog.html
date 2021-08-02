@@ -1007,6 +1007,21 @@
             
         </li>
     
+        <li class="chapter " data-level="3.4.3" data-path="k8s-install-sealos.html">
+            
+                <a href="k8s-install-sealos.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Sealos安装
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -1867,21 +1882,6 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.3.8" data-path="nexus-raw.md">
-            
-                <a href="nexus-raw.md">
-            
-                    
-                        <b>4.3.3.8.</b>
-                    
-                    RAW
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -2421,7 +2421,7 @@
                     
                         <b>6.1.3.</b>
                     
-                    Kafka
+                    Kafka/Zookeeper
             
                 </span>
             
@@ -2475,12 +2475,27 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.4" data-path="kafka-client-connect-procedure-tools.html">
+        <li class="chapter " data-level="6.1.3.4" data-path="zookeeper.html">
+            
+                <a href="zookeeper.html">
+            
+                    
+                        <b>6.1.3.4.</b>
+                    
+                    Zookeeper常用操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.3.5" data-path="kafka-client-connect-procedure-tools.html">
             
                 <a href="kafka-client-connect-procedure-tools.html">
             
                     
-                        <b>6.1.3.4.</b>
+                        <b>6.1.3.5.</b>
                     
                     kafka连接调试脚本
             
@@ -2490,12 +2505,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.5" data-path="zk-kafka-ui.html">
+        <li class="chapter " data-level="6.1.3.6" data-path="zk-kafka-ui.html">
             
                 <a href="zk-kafka-ui.html">
             
                     
-                        <b>6.1.3.5.</b>
+                        <b>6.1.3.6.</b>
                     
                     Zookeeper和kafka的WebUI工具
             
@@ -2505,12 +2520,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3.6" data-path="kafka-shell-kaf.html">
+        <li class="chapter " data-level="6.1.3.7" data-path="kafka-shell-kaf.html">
             
                 <a href="kafka-shell-kaf.html">
             
                     
-                        <b>6.1.3.6.</b>
+                        <b>6.1.3.7.</b>
                     
                     命令行Kafka工具
             
@@ -3194,6 +3209,21 @@
                         <b>6.2.2.5.</b>
                     
                     Blackbox Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2.6" data-path="prometheus-nginx-exporter.html">
+            
+                <a href="prometheus-nginx-exporter.html">
+            
+                    
+                        <b>6.2.2.6.</b>
+                    
+                    收集Nginx的Metrics
             
                 </a>
             
@@ -5991,27 +6021,12 @@
             
         </li>
     
-        <li class="chapter " data-level="7.22.3" data-path="nginx-config.html">
-            
-                <a href="nginx-config.html">
-            
-                    
-                        <b>7.22.3.</b>
-                    
-                    Nginx非常规配置
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.22.4" data-path="nginx-log-kafka.html">
+        <li class="chapter " data-level="7.22.3" data-path="nginx-log-kafka.html">
             
                 <a href="nginx-log-kafka.html">
             
                     
-                        <b>7.22.4.</b>
+                        <b>7.22.3.</b>
                     
                     Nginx日志写入kafka
             
@@ -6723,6 +6738,21 @@
             
         </li>
     
+        <li class="chapter " data-level="7.37.4" data-path="tidb-management.html">
+            
+                <a href="tidb-management.html">
+            
+                    
+                        <b>7.37.4.</b>
+                    
+                    tidb管理
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -7047,129 +7077,193 @@
 </ul>
 <h2 id="3&#x3001;binlog&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;">3&#x3001;Binlog&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;</h2>
 <p>binlog &#x4E8B;&#x4EF6;&#x7684;&#x7ED3;&#x6784;&#x4E3B;&#x8981;&#x6709;3&#x4E2A;&#x7248;&#x672C;&#xFF1A;</p>
-<ul>
-<li>v1: &#x5728; MySQL 3.23 &#x4E2D;&#x4F7F;&#x7528;</li>
-<li>v3: &#x5728; MySQL 4.0.2 &#x5230; 4.1 &#x4E2D;&#x4F7F;&#x7528;</li>
-<li>v4: &#x5728; MySQL 5.0 &#x53CA;&#x4EE5;&#x4E0A;&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</li>
-</ul>
-<p>&#x73B0;&#x5728;&#x4E00;&#x822C;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;MySQL5.0&#x4EE5;&#x4E0B;&#x7248;&#x672C;&#xFF0C;&#x6240;&#x4EE5;&#x4E0B;&#x9762;&#x4EC5;&#x4ECB;&#x7ECD;v4&#x7248;&#x672C;&#x7684;binlog&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x3002;binlog &#x7684;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x8F83;&#x591A;&#xFF0C;&#x672C;&#x6587;&#x5728;&#x6B64;&#x505A;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x6C47;&#x603B;</p>
 <table>
 <thead>
 <tr>
+<th style="text-align:left">Binlog &#x7248;&#x672C;</th>
+<th style="text-align:left">MySQL&#x7248;&#x672C;</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">MySQL 3.23 - &lt; 4.0.0</td>
+<td>&#x652F;&#x6301; &quot;statement based replication events&quot;</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">MySQL 4.0.0 - 4.0.1</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">MySQL 4.0.2 - &lt; 5.0.0</td>
+<td>added the relay logs and changed the meaning of the log position</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">MySQL 5.0.0+</td>
+<td>added the <a href="https://dev.mysql.com/doc/internals/en/format-description-event.html" _target="blank">FORMAT_DESCRIPTION_EVENT</a> and made the protocol extensible</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>a <a href="https://dev.mysql.com/doc/internals/en/format-description-event.html" _target="blank">FORMAT_DESCRIPTION_EVENT</a> version = 4</li>
+<li>a <a href="https://dev.mysql.com/doc/internals/en/start-event-v3.html" _target="blank">START_EVENT_V3</a><ul>
+<li>if <code>event-size</code> == 13 + 56: version = 1</li>
+<li>if <code>event-size</code> == 19 + 56: version = 3</li>
+<li>otherwise: invalid</li>
+</ul>
+</li>
+</ul>
+<p>v4&#x7248;&#x672C;&#x7684;binlog&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Hex</th>
 <th style="text-align:left">&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;</th>
 <th style="text-align:left">&#x8BF4;&#x660E;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align:left">0x00</td>
 <td style="text-align:left">UNKNOWN_EVENT</td>
 <td style="text-align:left">&#x6B64;&#x4E8B;&#x4EF6;&#x4ECE;&#x4E0D;&#x4F1A;&#x88AB;&#x89E6;&#x53D1;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x88AB;&#x5199;&#x5165;binlog&#x4E2D;&#xFF1B;&#x53D1;&#x751F;&#x5728;&#x5F53;&#x8BFB;&#x53D6;binlog&#x65F6;&#xFF0C;&#x4E0D;&#x80FD;&#x88AB;&#x8BC6;&#x522B;&#x5176;&#x4ED6;&#x4EFB;&#x4F55;&#x4E8B;&#x4EF6;&#xFF0C;&#x90A3;&#x88AB;&#x89C6;&#x4E3A;UNKNOWN_EVENT</td>
 </tr>
 <tr>
+<td style="text-align:left">0x01</td>
 <td style="text-align:left">START_EVENT_V3</td>
 <td style="text-align:left">&#x6BCF;&#x4E2A;binlog&#x6587;&#x4EF6;&#x5F00;&#x59CB;&#x7684;&#x65F6;&#x5019;&#x5199;&#x5165;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x6B64;&#x4E8B;&#x4EF6;&#x88AB;&#x7528;&#x5728;MySQL3.23 &#x2013; 4.1&#xFF0C;MYSQL5.0&#x4EE5;&#x540E;&#x5DF2;&#x7ECF;&#x88AB; FORMAT_DESCRIPTION_EVENT &#x53D6;&#x4EE3;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x02</td>
 <td style="text-align:left">QUERY_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;&#x66F4;&#x65B0;&#x8BED;&#x53E5;&#x65F6;&#x4F1A;&#x751F;&#x6210;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;create&#xFF0C;insert&#xFF0C;update&#xFF0C;delete&#xFF1B;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x03</td>
 <td style="text-align:left">STOP_EVENT</td>
 <td style="text-align:left">&#x5F53;mysqld&#x505C;&#x6B62;&#x65F6;&#x751F;&#x6210;&#x6B64;&#x4E8B;&#x4EF6;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x04</td>
 <td style="text-align:left">ROTATE_EVENT</td>
 <td style="text-align:left">&#x5F53;mysqld&#x5207;&#x6362;&#x5230;&#x65B0;&#x7684;binlog&#x6587;&#x4EF6;&#x751F;&#x6210;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5207;&#x6362;&#x5230;&#x65B0;&#x7684;binlog&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6267;&#x884C;flush logs&#x547D;&#x4EE4;&#x6216;&#x8005;binlog&#x6587;&#x4EF6;&#x5927;&#x4E8E; <code>max_binlog_size</code> &#x53C2;&#x6570;&#x914D;&#x7F6E;&#x7684;&#x5927;&#x5C0F;&#xFF1B;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x05</td>
 <td style="text-align:left">INTVAR_EVENT</td>
 <td style="text-align:left">&#x5F53;sql&#x8BED;&#x53E5;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;AUTO_INCREMENT&#x7684;&#x5B57;&#x6BB5;&#x6216;&#x8005;LAST_INSERT_ID()&#x51FD;&#x6570;&#xFF1B;&#x6B64;&#x4E8B;&#x4EF6;&#x6CA1;&#x6709;&#x88AB;&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x06</td>
 <td style="text-align:left">LOAD_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL 3.23&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x07</td>
 <td style="text-align:left">SLAVE_EVENT</td>
 <td style="text-align:left">&#x672A;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x08</td>
 <td style="text-align:left">CREATE_FILE_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL4.0&#x548C;4.1&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x09</td>
 <td style="text-align:left">APPEND_BLOCK_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL4.0&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0a</td>
 <td style="text-align:left">EXEC_LOAD_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL4.0&#x548C;4.1&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0b</td>
 <td style="text-align:left">DELETE_FILE_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL4.0&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0c</td>
 <td style="text-align:left">NEW_LOAD_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL4.0&#x548C;4.1&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0d</td>
 <td style="text-align:left">RAND_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;&#x5305;&#x542B;RAND()&#x51FD;&#x6570;&#x7684;&#x8BED;&#x53E5;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x6B64;&#x4E8B;&#x4EF6;&#x6CA1;&#x6709;&#x88AB;&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0e</td>
 <td style="text-align:left">USER_VAR_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;&#x5305;&#x542B;&#x4E86;&#x7528;&#x6237;&#x53D8;&#x91CF;&#x7684;&#x8BED;&#x53E5;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x6B64;&#x4E8B;&#x4EF6;&#x6CA1;&#x6709;&#x88AB;&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x0f</td>
 <td style="text-align:left">FORMAT_DESCRIPTION_EVENT</td>
 <td style="text-align:left">&#x63CF;&#x8FF0;&#x4E8B;&#x4EF6;&#xFF0C;&#x88AB;&#x5199;&#x5728;&#x6BCF;&#x4E2A;binlog&#x6587;&#x4EF6;&#x7684;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#xFF0C;&#x7528;&#x5728;MySQL5.0&#x4EE5;&#x540E;&#x7684;&#x7248;&#x672C;&#x4E2D;&#xFF0C;&#x4EE3;&#x66FF;&#x4E86;START_EVENT_V3</td>
 </tr>
 <tr>
+<td style="text-align:left">0x10</td>
 <td style="text-align:left">XID_EVENT</td>
 <td style="text-align:left">&#x652F;&#x6301;XA&#x7684;&#x5B58;&#x50A8;&#x5F15;&#x64CE;&#x624D;&#x6709;&#xFF0C;&#x672C;&#x5730;&#x6D4B;&#x8BD5;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5B58;&#x50A8;&#x5F15;&#x64CE;&#x662F;innodb&#xFF0C;&#x6240;&#x6709;&#x4E0A;&#x9762;&#x51FA;&#x73B0;&#x4E86;XID_EVENT&#xFF1B;innodb&#x4E8B;&#x52A1;&#x63D0;&#x4EA4;&#x4EA7;&#x751F;&#x4E86;QUERY_EVENT&#x7684;BEGIN&#x58F0;&#x660E;&#xFF0C;QUERY_EVENT&#x4EE5;&#x53CA;COMMIT&#x58F0;&#x660E;&#xFF0C;&#x5982;&#x679C;&#x662F;myIsam&#x5B58;&#x50A8;&#x5F15;&#x64CE;&#x4E5F;&#x4F1A;&#x6709;BEGIN&#x548C;COMMIT&#x58F0;&#x660E;&#xFF0C;&#x53EA;&#x662F;COMMIT&#x7C7B;&#x578B;&#x4E0D;&#x662F;XID_EVENT</td>
 </tr>
 <tr>
+<td style="text-align:left">0x11</td>
 <td style="text-align:left">BEGIN_LOAD_QUERY_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL5.0&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x12</td>
 <td style="text-align:left">EXECUTE_LOAD_QUERY_EVENT</td>
 <td style="text-align:left">&#x6267;&#x884C;LOAD DATA INFILE &#x8BED;&#x53E5;&#x65F6;&#x4EA7;&#x751F;&#x6B64;&#x4E8B;&#x4EF6;&#xFF0C;&#x5728;MySQL5.0&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x13</td>
 <td style="text-align:left">TABLE_MAP_EVENT</td>
 <td style="text-align:left">&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x5C06;&#x8868;&#x7684;&#x5B9A;&#x4E49;&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#xFF0C;&#x5728;&#x884C;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6;&#x4E4B;&#x524D;&#x8BB0;&#x5F55;&#xFF08;&#x5305;&#x62EC;&#xFF1A;WRITE_ROWS_EVENT&#xFF0C;UPDATE_ROWS_EVENT&#xFF0C;DELETE_ROWS_EVENT&#xFF09;</td>
 </tr>
 <tr>
+<td style="text-align:left"></td>
 <td style="text-align:left">PRE_GA_WRITE_ROWS_EVENT</td>
 <td style="text-align:left">&#x5DF2;&#x8FC7;&#x671F;&#xFF0C;&#x88AB; WRITE_ROWS_EVENT &#x4EE3;&#x66FF;</td>
 </tr>
 <tr>
+<td style="text-align:left"></td>
 <td style="text-align:left">PRE_GA_UPDATE_ROWS_EVENT</td>
 <td style="text-align:left">&#x5DF2;&#x8FC7;&#x671F;&#xFF0C;&#x88AB; UPDATE_ROWS_EVENT &#x4EE3;&#x66FF;</td>
 </tr>
 <tr>
+<td style="text-align:left"></td>
 <td style="text-align:left">PRE_GA_DELETE_ROWS_EVENT</td>
 <td style="text-align:left">&#x5DF2;&#x8FC7;&#x671F;&#xFF0C;&#x88AB; DELETE_ROWS_EVENT &#x4EE3;&#x66FF;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x14</td>
 <td style="text-align:left">WRITE_ROWS_EVENT</td>
 <td style="text-align:left">&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x5BF9;&#x5E94; insert &#x64CD;&#x4F5C;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x15</td>
 <td style="text-align:left">UPDATE_ROWS_EVENT</td>
 <td style="text-align:left">&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x5BF9;&#x5E94; update &#x64CD;&#x4F5C;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x16</td>
 <td style="text-align:left">DELETE_ROWS_EVENT</td>
 <td style="text-align:left">&#x7528;&#x5728;binlog_format&#x4E3A;ROW&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x5BF9;&#x5E94; delete &#x64CD;&#x4F5C;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x1a</td>
 <td style="text-align:left">INCIDENT_EVENT</td>
 <td style="text-align:left">&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x751F;&#x4E86;&#x4E0D;&#x6B63;&#x5E38;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x901A;&#x77E5;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x5E76;&#x544A;&#x77E5;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x5904;&#x4E8E;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x72B6;&#x6001;</td>
 </tr>
 <tr>
+<td style="text-align:left">0x1b</td>
 <td style="text-align:left">HEARTBEAT_LOG_EVENT</td>
 <td style="text-align:left">&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x544A;&#x8BC9;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x8FD8;&#x6D3B;&#x7740;&#xFF0C;&#x4E0D;&#x5199;&#x5165;&#x5230;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x4E2D;</td>
 </tr>
@@ -7422,7 +7516,7 @@ exclude-gtids                     (No default value)
 <li><a href="https://blog.csdn.net/ouyang111222/article/details/50300851" _target="blank">https://blog.csdn.net/ouyang111222/article/details/50300851</a> </li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-05-14 22:24:56
+2021-06-30 11:04:55
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7462,7 +7556,7 @@ exclude-gtids                     (No default value)
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Binglog","level":"7.18.1.4","depth":3,"next":{"title":"备份与恢复","level":"7.18.1.4.1","depth":4,"ref":"","articles":[{"title":"MySQL的数据备份与恢复","level":"7.18.1.4.1.1","depth":5,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},{"title":"MysqlDump详解","level":"7.18.1.4.1.2","depth":5,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]}]},"previous":{"title":"MySQL SQL Mode : ONLY_FULL_GROUP_BY","level":"7.18.1.3","depth":3,"path":"origin/mysql-mode-only-full-groupby.md","ref":"origin/mysql-mode-only-full-groupby.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-binlog.md","mtime":"2021-05-14T14:24:56.356Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-06-27T09:49:10.166Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Binglog","level":"7.18.1.4","depth":3,"next":{"title":"备份与恢复","level":"7.18.1.4.1","depth":4,"ref":"","articles":[{"title":"MySQL的数据备份与恢复","level":"7.18.1.4.1.1","depth":5,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},{"title":"MysqlDump详解","level":"7.18.1.4.1.2","depth":5,"path":"origin/mysql-dumper.md","ref":"origin/mysql-dumper.md","articles":[]}]},"previous":{"title":"MySQL SQL Mode : ONLY_FULL_GROUP_BY","level":"7.18.1.3","depth":3,"path":"origin/mysql-mode-only-full-groupby.md","ref":"origin/mysql-mode-only-full-groupby.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-binlog.md","mtime":"2021-06-30T03:04:55.631Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-07-19T02:07:59.783Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

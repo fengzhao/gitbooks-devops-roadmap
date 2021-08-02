@@ -106,13 +106,21 @@ tiup cluster
 tiup --binary cluster
 ```
 
-## 2、查看目前的tiup命令支持安装的tidb版本
+## 2、下载离线安装包
+
+```bash
+tidb_version=5.1.0
+wget ttps://download.pingcap.org/tidb-community-server-v$tidb_version-linux-amd64.tar.gz
+tiup mirror clone /opt/tidb-community-server-v$tidb_version-linux-amd64.tar.gz ${tidb_version} --os=linux --arch=amd64
+```
+
+## 3、查看目前tiup命令支持安装的tidb版本
 
 ```bash
 tiup list tidb
 ```
 
-## 3、创建集群组件的拓扑配置文件
+## 4、创建集群组件的拓扑配置文件
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -332,19 +340,19 @@ grafana_servers:
 #     log_dir: "/data/tidb/alertmanager-9093/logs"
 ```
 
-## 4、查集群拓扑配置文件语法
+## 5、查集群拓扑配置文件语法
 
 ```bash
 tiup cluster check 集群拓扑配置文件
 ```
 
-## 5、分发组件文件到各节点
+## 6、分发组件文件到各节点
 
 ```bash
 tiup cluster deploy 集群名字 tidb版本 ./集群拓扑配置.yaml --user tidb -y
 ```
 
-## 6、所有节点安装`numactl`
+## 7、所有节点安装`numactl`
 
 在生产环境中，因为硬件机器配置往往高于需求，为了更合理规划资源，会考虑单机多实例部署 TiDB 或者 TiKV。NUMA 绑核工具的使用，主要为了防止 CPU 资源的争抢，引发性能衰退。NUMA 绑核是用来隔离 CPU 资源的一种方法，适合高配置物理机环境部署多实例使用。
 
@@ -360,7 +368,7 @@ tiup cluster exec 集群名字 --sudo --command "yum install -y numactl" -R PD
 tiup cluster exec 集群名字 --sudo --command "yum install -y numactl" -N node1
 ```
 
-## 7、启动当前集群各组件
+## 8、启动当前集群各组件
 
 ```bash
 tiup cluster start 集群名字
@@ -369,7 +377,7 @@ tiup cluster start 集群名字 -R 组件1,组件2
 
 启动集群操作会按 PD -> TiKV -> Pump -> TiDB -> TiFlash -> Drainer 的顺序启动整个 TiDB 集群所有组件（同时也会启动监控组件）
 
-## 8、验证
+## 9、验证
 
 ①查看当前集群的状态
 
@@ -383,13 +391,13 @@ tiup cluster display 集群名字
 tiup cluster display 集群名字 --dashboard
 ```
 
-## 9、其他信息
+## 10、其他信息
 
 ### ①Grafana默认用户名密码
 
 `admin/admin`
 
-### ②监控Dashboard默认用户名密码
+### ②TiDB Dashboard默认用户名密码
 
 `root 密码为空`
 
@@ -751,12 +759,12 @@ tiup cluster check <集群拓扑文件路径 | 集群名> [参数]
 - **内核参数**
 
   检查各项内核参数的值：
-  - net.ipv4.tcp_tw_recycle: 0
-  - net.ipv4.tcp_syncookies: 0
-  - net.core.somaxconn: 32768
-  - vm.swappiness: 0
-  - vm.overcommit_memory: 0 或 1
-  - fs.file-max: 1000000
+  - **net.ipv4.tcp_tw_recycle**: 0
+  - **net.ipv4.tcp_syncookies**: 0
+  - **net.core.somaxconn**: 32768
+  - **vm.swappiness**: 0
+  - **vm.overcommit_memory**: 0 或 1
+  - **fs.file-max**: 1000000
 
 - **THP（透明大页）**
 
@@ -846,14 +854,5 @@ cp -r ~/.tiup ~/.tiup-bak
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 tiup cluster display 集群名称
 ```
-
-
-
-
-
-
-
-
-
 
 

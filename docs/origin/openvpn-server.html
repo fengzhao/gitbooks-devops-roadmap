@@ -2362,7 +2362,7 @@
 
     
         
-        <li class="header">Part Ⅴ：日志、监控、告警</li>
+        <li class="header">Part Ⅴ：日志/监控/告警</li>
         
         
     
@@ -3146,7 +3146,7 @@
                     
                         <b>6.2.2.1.</b>
                     
-                    Prometheus基础概念
+                    Prometheus基础概念及PromSQL
             
                 </a>
             
@@ -3221,7 +3221,7 @@
                     
                         <b>6.2.2.6.</b>
                     
-                    收集Nginx的Metrics
+                    收集Nginx内置Metrics
             
                 </a>
             
@@ -6627,7 +6627,7 @@
                     
                         <b>7.37.1.2.</b>
                     
-                    使用TIUP部署TiDB 4.0集群
+                    使用TIUP部署TiDB集群
             
                 </a>
             
@@ -6728,7 +6728,7 @@
                     
                         <b>7.37.3.</b>
                     
-                    大数据的数据迁移
+                    大数据量的迁移方案对比
             
                 </a>
             
@@ -6743,7 +6743,7 @@
                     
                         <b>7.37.4.</b>
                     
-                    tidb管理
+                    TiDB管理
             
                 </a>
             
@@ -7508,6 +7508,9 @@ tapinstall.exe <span class="token function">install</span> <span class="token op
 
 <span class="token comment"># &#x66F4;&#x65B0;&#x7F51;&#x7EDC;&#x865A;&#x62DF;&#x8BBE;&#x5907;</span>
 tapinstall.exe update <span class="token operator">&lt;</span>something.inf<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>id<span class="token operator">&gt;</span>
+
+<span class="token comment"># &lt;id&gt; &#x6307;&#x7684;&#x662F; OpenVPN 2.2+ &#x7684; tap0901 &#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x4F46;&#x5728;&#x8F83;&#x65E7;/&#x8F83;&#x65B0;&#x7684; OpenVPN &#x7248;&#x672C;&#x4E2D;&#x53EF;&#x80FD;&#x4E0D;&#x540C;&#x3002;</span>
+<span class="token comment"># &lt;something.inf&gt; &#x901A;&#x5E38;&#x662F; OemWin2k.inf&#xFF08;&#x65E7;&#x7684;&#x62BD;&#x5934;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF09;&#x6216; OemVista.inf&#xFF08;&#x65B0;&#x7684;&#x62BD;&#x5934;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF09;&#x3002;&#x60A8;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x6B64;&#x6587;&#x4EF6;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;&#xFF0C;&#x4F8B;&#x5982; C:\Program Files\TAP-Windows\driver\OemVista.inf&#x3002;</span>
 </code></pre>
 <p>&#x53C2;&#x8003;&#xFF1A;<a href="https://community.openvpn.net/openvpn/wiki/ManagingWindowsTAPDrivers" _target="blank">https://community.openvpn.net/openvpn/wiki/ManagingWindowsTAPDrivers</a></p>
 <h1 id="&#x9644;&#x5F55;">&#x9644;&#x5F55;</h1>
@@ -7539,7 +7542,7 @@ tapinstall.exe update <span class="token operator">&lt;</span>something.inf<span
 <li><a href="https://lesca.me/archives/iptables-examples.html" _target="blank">https://lesca.me/archives/iptables-examples.html</a></li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-09 18:14:06
+2021-07-27 11:10:24
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7575,7 +7578,7 @@ tapinstall.exe update <span class="token operator">&lt;</span>something.inf<span
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"OpenVPN Server","level":"7.26.1","depth":2,"next":{"title":"iDRAC","level":"7.27","depth":1,"ref":"","articles":[{"title":"iDRAC","level":"7.27.1","depth":2,"path":"origin/idrac.md","ref":"origin/idrac.md","articles":[]}]},"previous":{"title":"OpenVPN","level":"7.26","depth":1,"ref":"","articles":[{"title":"OpenVPN Server","level":"7.26.1","depth":2,"path":"origin/openvpn-server.md","ref":"origin/openvpn-server.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/openvpn-server.md","mtime":"2021-06-09T10:14:06.477Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-07-19T02:07:59.783Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"OpenVPN Server","level":"7.26.1","depth":2,"next":{"title":"iDRAC","level":"7.27","depth":1,"ref":"","articles":[{"title":"iDRAC","level":"7.27.1","depth":2,"path":"origin/idrac.md","ref":"origin/idrac.md","articles":[]}]},"previous":{"title":"OpenVPN","level":"7.26","depth":1,"ref":"","articles":[{"title":"OpenVPN Server","level":"7.26.1","depth":2,"path":"origin/openvpn-server.md","ref":"origin/openvpn-server.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/openvpn-server.md","mtime":"2021-07-27T03:10:24.256Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-02T01:48:18.807Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

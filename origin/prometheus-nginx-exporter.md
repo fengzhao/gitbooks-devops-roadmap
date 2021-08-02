@@ -1,4 +1,4 @@
-# 收集Nginx信息到Prometheus
+# 收集Nginx内置Metrics到Prometheus
 
 # 一、简介
 

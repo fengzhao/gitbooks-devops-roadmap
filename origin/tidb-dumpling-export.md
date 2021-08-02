@@ -1,6 +1,8 @@
 ## Dumpling全量备份或导出
 
-# 一、Dumpling 简介
+# 一、Dumpling 
+
+## 1、简介
 
 `Dumpling` 是使用 go 开发的数据备份工具，项目地址可以参考 [`Dumpling`](https://github.com/pingcap/dumpling)。
 
@@ -14,21 +16,20 @@
 - 如果后续使用 TiDB Lightning 对备份文件进行恢复，建议把 `dumpling` -F 选项的值设置为 `256m`。
 - 如果导出的表中有些表的行数非常多，可以通过设置选项 `-r` 来开启表内并发。
 
-# 二、对比Mydumper
+## 2、对比Mydumper
 
-1. 支持导出多种数据形式，包括 SQL/CSV
+- 支持导出多种数据形式，包括 SQL/CSV
 
-2. 支持全新的 [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)，筛选数据更加方便
+- 支持全新的 [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)，筛选数据更加方便
 
-3. 针对 TiDB 进行了更多优化：
+- 针对 TiDB 进行了更多优化：
+  - 支持配置 TiDB 单条 SQL 内存限制
 
-   - 支持配置 TiDB 单条 SQL 内存限制
+  - 针对 TiDB v4.0.0 以上版本支持自动调整 TiDB GC 时间
+  - 使用 TiDB 的隐藏列 `_tidb_rowid` 优化了单表内数据的并发导出性能
+  - 对于 TiDB 可以设置 [tidb_snapshot](https://docs.pingcap.com/zh/tidb/stable/read-historical-data#操作流程) 的值指定备份数据的时间点，从而保证备份的一致性，而不是通过 `FLUSH TABLES WITH READ LOCK` 来保证备份一致性。
 
-   - 针对 TiDB v4.0.0 以上版本支持自动调整 TiDB GC 时间
-   - 使用 TiDB 的隐藏列 `_tidb_rowid` 优化了单表内数据的并发导出性能
-   - 对于 TiDB 可以设置 [tidb_snapshot](https://docs.pingcap.com/zh/tidb/stable/read-historical-data#操作流程) 的值指定备份数据的时间点，从而保证备份的一致性，而不是通过 `FLUSH TABLES WITH READ LOCK` 来保证备份一致性。
-
-# 三、从TiDB/MySQL 导出数据
+# 二、从TiDB/MySQL 导出数据
 
 ## 1、源库导出账号所需权限
 
@@ -39,7 +40,7 @@
 
 ## 2、安装及主要参数
 
-**二进制**
+### ①二进制
 
 ```bash
 version=v4.0.5 && \
@@ -50,7 +51,7 @@ source /etc/profile && \
 dumpling -V
 ```
 
-**源码构建**
+### ②源码构建
 
 ```bash
 # MacOS源码构建（要求：golang>=1.6,二进制输出路径：bin/dumpling）
@@ -63,7 +64,7 @@ mv ./bin/dumpling /usr/local/bin/ && \
 dumpling --version
 ```
 
-**Docker**
+### ③Docker
 
 ```bash
 docker pull pingcap/dumpling:v5.1.0
@@ -71,7 +72,7 @@ docker run -it -v 本地存储导出SQL文件的目录 pingcap/dumpling:v5.1.0 s
 # dumpling命令执行路径在根目录下,具体的导出任务可以在容器中执行
 ```
 
-
+### ④命令参数
 
 | 主要选项                   | 用途                                                         | 默认值                                  |
 | :------------------------- | ------------------------------------------------------------ | --------------------------------------- |
@@ -225,8 +226,6 @@ mv ${old_database_name}-schema-create.sql ${new_database_name}-schema-create.sql
 echo "" > ${new_database_name}-schema-create.sql
 ```
 
-
-
 ## 8、导出 TiDB 的历史数据快照
 
 Dumpling 可以通过 `--snapshot` 指定导出某个 [tidb_snapshot](https://docs.pingcap.com/zh/tidb/stable/read-historical-data#操作流程) 时的数据。
@@ -248,30 +247,55 @@ dumpling --snapshot "2020-07-02 17:12:45"
 Could not read data from testSchema.testTable: GC life time is shorter than transaction duration, transaction starts at 2019-08-05 21:10:01.451 +0800 CST, GC safe point is 2019-08-05 21:14:53.801 +0800 CST
 ```
 
-### 手动调整 GC 时间的步骤：
+**手动调整 GC 时间的步骤：**
 
 1. 执行 `dumpling` 命令前，查询 TiDB 集群的 [GC](https://docs.pingcap.com/zh/tidb/stable/garbage-collection-overview) 值并在 MySQL 客户端执行下列语句将其调整为合适的值：
 
    ```bash
    SELECT * FROM mysql.tidb WHERE VARIABLE_NAME = 'tikv_gc_life_time';
-   ```
-
-   ```bash
-   +-----------------------+---------------------------------------------------------------------------------+
-   | VARIABLE_NAME         | VARIABLE_VALUE                                                                  
-   +-----------------------+---------------------------------------------------------------------------------+
-   | tikv_gc_life_time     | 10m0s                                                                           
-   +-----------------------+---------------------------------------------------------------------------------+
-   1 rows in set (0.02 sec)
-   ```
-
-   ```bash
+   +-----------------------+--------------------+
+   | VARIABLE_NAME         | VARIABLE_VALUE     |                                                       
+   +-----------------------+--------------------+
+   | tikv_gc_life_time     | 10m0s              |                                                        
+   +-----------------------+--------------------+
+   
    update mysql.tidb set VARIABLE_VALUE = '720h' where VARIABLE_NAME = 'tikv_gc_life_time';
    ```
-
+   
 2. 执行 `dumpling` 命令后，将 TiDB 集群的 GC 值恢复到第 1 步中的初始值：
 
    ```bash
    update mysql.tidb set VARIABLE_VALUE = '10m' where VARIABLE_NAME = 'tikv_gc_life_time';
    ```
+
+# 三、常用操作
+
+## 1、导出指定Database
+
+```bash
+#!/bin/bash
+
+source_db_host=
+source_db_port=
+source_db_user=
+source_db_password=
+# 要导出的库名以逗号分割
+databases=db1,db2,db3
+
+databases_array=(${databases//,/ })
+for database in ${databases_array[@]}; do
+    mkdir -p dumpling-export-sql/sql/$database &&
+        nohup dumpling \
+            -u $source_db_user \
+            -p $source_db_password \
+            -P $source_db_port \
+            -h $source_db_host \
+            -B $database \
+            --filetype sql \
+            --threads 4 \
+            -o dumpling-export-sql/sql/$database \
+            -F 256MiB \
+            --logfile dumpling-export-sql/$database-export-task.log >dumpling-export-sql/$database-dumpling-nohupout.log 2>&1 &
+done
+```
 

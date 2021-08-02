@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>收集Nginx的Metrics · Devops Roadmap</title>
+        <title>收集Nginx内置Metrics · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -2364,7 +2364,7 @@
 
     
         
-        <li class="header">Part Ⅴ：日志、监控、告警</li>
+        <li class="header">Part Ⅴ：日志/监控/告警</li>
         
         
     
@@ -3148,7 +3148,7 @@
                     
                         <b>6.2.2.1.</b>
                     
-                    Prometheus基础概念
+                    Prometheus基础概念及PromSQL
             
                 </a>
             
@@ -3223,7 +3223,7 @@
                     
                         <b>6.2.2.6.</b>
                     
-                    收集Nginx的Metrics
+                    收集Nginx内置Metrics
             
                 </a>
             
@@ -6629,7 +6629,7 @@
                     
                         <b>7.37.1.2.</b>
                     
-                    使用TIUP部署TiDB 4.0集群
+                    使用TIUP部署TiDB集群
             
                 </a>
             
@@ -6730,7 +6730,7 @@
                     
                         <b>7.37.3.</b>
                     
-                    大数据的数据迁移
+                    大数据量的迁移方案对比
             
                 </a>
             
@@ -6745,7 +6745,7 @@
                     
                         <b>7.37.4.</b>
                     
-                    tidb管理
+                    TiDB管理
             
                 </a>
             
@@ -7008,7 +7008,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >收集Nginx的Metrics</a>
+        <a href=".." >收集Nginx内置Metrics</a>
     </h1>
 </div>
 
@@ -7023,7 +7023,7 @@
     
 					<section class="normal markdown-section">
 						
-						<h1 id="&#x6536;&#x96C6;nginx&#x4FE1;&#x606F;&#x5230;prometheus">&#x6536;&#x96C6;Nginx&#x4FE1;&#x606F;&#x5230;Prometheus</h1>
+						<h1 id="&#x6536;&#x96C6;nginx&#x5185;&#x7F6E;metrics&#x5230;prometheus">&#x6536;&#x96C6;Nginx&#x5185;&#x7F6E;Metrics&#x5230;Prometheus</h1>
 <h1 id="&#x4E00;&#x3001;&#x7B80;&#x4ECB;">&#x4E00;&#x3001;&#x7B80;&#x4ECB;</h1>
 <p>Nginx&#x7684;ngx_http_stub_status_module&#x6A21;&#x5757;&#x53EF;&#x4EE5;&#x66B4;&#x9732;&#x51FA;&#x6765;nginx&#x7684;&#x4E00;&#x4E9B;&#x6027;&#x80FD;&#x4FE1;&#x606F;&#x3002;&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x4E0D;&#x662F;prometheus&#x7684;metrics&#x4FE1;&#x606F;&#x683C;&#x5F0F;&#x3002;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;&#x7528;&#x4E8E;&#x8F6C;&#x6362;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x624D;&#x80FD;&#x8BA9;prometheus&#x62C9;&#x53D6;&#x4FE1;&#x606F;&#x3002;</p>
 <h1 id="&#x4E8C;&#x3001;&#x914D;&#x7F6E;">&#x4E8C;&#x3001;&#x914D;&#x7F6E;</h1>
@@ -7097,7 +7097,7 @@ scrape_configs:
 <li><a href="https://cloud.tencent.com/document/product/1416/56039" _target="blank">https://cloud.tencent.com/document/product/1416/56039</a></li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-07-15 12:38:47
+2021-07-19 14:26:44
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7137,7 +7137,7 @@ scrape_configs:
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"收集Nginx的Metrics","level":"6.2.2.6","depth":3,"next":{"title":"Grafana","level":"6.2.3","depth":2,"ref":"","articles":[{"title":"Grafana的备份恢复","level":"6.2.3.1","depth":3,"path":"origin/grafana-backup-restore.md","ref":"origin/grafana-backup-restore.md","articles":[]}]},"previous":{"title":"Blackbox Exporter","level":"6.2.2.5","depth":3,"path":"origin/prometheus-blackbox-exporter.md","ref":"origin/prometheus-blackbox-exporter.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/prometheus-nginx-exporter.md","mtime":"2021-07-15T04:38:47.416Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-07-19T02:07:59.783Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"收集Nginx内置Metrics","level":"6.2.2.6","depth":3,"next":{"title":"Grafana","level":"6.2.3","depth":2,"ref":"","articles":[{"title":"Grafana的备份恢复","level":"6.2.3.1","depth":3,"path":"origin/grafana-backup-restore.md","ref":"origin/grafana-backup-restore.md","articles":[]}]},"previous":{"title":"Blackbox Exporter","level":"6.2.2.5","depth":3,"path":"origin/prometheus-blackbox-exporter.md","ref":"origin/prometheus-blackbox-exporter.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/prometheus-nginx-exporter.md","mtime":"2021-07-19T06:26:44.945Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-02T01:48:18.807Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>
