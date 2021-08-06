@@ -1,4 +1,4 @@
-# DM(Data Migration)数据全量及增量同步
+DM(Data Migration)数据全量及增量同步
 
 # 一、简介
 
@@ -465,7 +465,16 @@ tiup dmctl --master-addr 192.168.1.6:8261 operate-source 操作动作 上游数�
 
 各个功能配置集的参数及解释参见[完整配置文件示例](https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full#完整配置文件示例)中的注释说明。
 
-## 3、配置文件说明
+## 3、同步任务进度元信息
+
+创建的同步任务会将元信息保存在下游TIDB的dm_meta库中的`"任务名_load_checkpoint"`、`"任务名_sync_checkpoint"`表中。
+
+- **任务名_load_checkpoint**：保存了load单元从上游数据库dump数据到SQL文件的元信息。
+- **任务名_sync_checkpoint**：保存了sync单元已从SQL文件同步数据到下游数据库的元信息。
+
+
+
+## 4、配置文件说明
 
 ```yaml
 ---
@@ -650,7 +659,7 @@ mysql-instances:
     syncer-thread: 16
 ```
 
-## 4、实例配置文件
+## 5、实例配置文件
 
 ```bash
 name: sync-test-mysql-to-tidb
@@ -700,7 +709,7 @@ mydumpers:
     skip-tz-utc: true
 ```
 
-# 六、dmctl集群控制
+# 六、dmctl集群与任务控制
 
 > **注意：**
 >
@@ -1000,9 +1009,7 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | binlog file gap between master and syncer | 与上游 master 相比 binlog replication unit 落后的 binlog file 个数 | N/A                                    | N/A      |
 | shard lock resolving                      | 当前子任务是否正在等待 shard DDL 迁移，大于 0 表示正在等待迁移 | N/A                                    | N/A      |
 
-# 八、DM任务优化
-
-# 九、DM任务问题汇总
+# 八、DM任务问题汇总
 
 ## 1、上游MySQL的DDL语句不支持同步执行到TiDB
 

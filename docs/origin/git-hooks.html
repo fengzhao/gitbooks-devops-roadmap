@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Ceph FileSystem单节点安装 · Devops Roadmap</title>
+        <title>git hook钩子 · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -106,8 +106,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="git-standard-commit-message.html" />
     
-    <link rel="prev" href="ceph-rbd单节点安装.html" />
+    
+    <link rel="prev" href="git-workflow.md" />
     
 
     <style>
@@ -4086,7 +4088,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5.7" data-path="git-hooks.html">
+        <li class="chapter active" data-level="7.5.7" data-path="git-hooks.html">
             
                 <a href="git-hooks.html">
             
@@ -4219,7 +4221,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="7.8.1.2" data-path="ceph-filesystem单节点安装.html">
+        <li class="chapter " data-level="7.8.1.2" data-path="ceph-filesystem单节点安装.html">
             
                 <a href="ceph-filesystem单节点安装.html">
             
@@ -7008,7 +7010,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Ceph FileSystem单节点安装</a>
+        <a href=".." >git hook钩子</a>
     </h1>
 </div>
 
@@ -7023,88 +7025,198 @@
     
 					<section class="normal markdown-section">
 						
-						<h1 id="context">Context</h1>
+						<h1 id="git-hook&#x94A9;&#x5B50;">Git Hook&#x94A9;&#x5B50;</h1>
+<h1 id="&#x4E00;&#x3001;&#x7B80;&#x4ECB;">&#x4E00;&#x3001;&#x7B80;&#x4ECB;</h1>
+<p>&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1A;<a href="https://git-scm.com/docs/githooks/en" _target="blank">https://git-scm.com/docs/githooks/en</a></p>
+<p>&#x5B98;&#x65B9;&#x4E2D;&#x6587;&#x6587;&#x6863;&#xFF1A;<a href="https://git-scm.com/book/zh/v2" _target="blank">https://git-scm.com/book/zh/v2</a></p>
+<p>Hooks(&#x94A9;&#x5B50;),&#x662F;&#x4E00;&#x4E9B;&#x5B58;&#x653E;&#x4E8E;<code>$GIT_DIR/hooks</code>&#x6587;&#x4EF6;&#x5939;&#x7684;&#x5C0F;&#x811A;&#x672C;,&#x5728;&#x7279;&#x5B9A;&#x6761;&#x4EF6;&#x4E0B;&#x89E6;&#x53D1;&#x52A8;&#x4F5C;&#x3002;&#x5F53;&#x6267;&#x884C;<code>git init</code>&#xFF0C;&#x51E0;&#x4E2A;&#x793A;&#x4F8B;hook&#x5C06;&#x590D;&#x5236;&#x5230;&#x65B0;&#x8D44;&#x6E90;&#x5E93;&#x7684;hooks&#x6587;&#x4EF6;&#x5939;, &#x4F46;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x4ED6;&#x4EEC;&#x90FD;&#x662F;&#x7981;&#x7528;&#x72B6;&#x6001;&#xFF0C;&#x8981;&#x542F;&#x7528;&#x4E00;&#x4E2A;hook(&#x94A9;&#x5B50;),&#x8BF7;&#x79FB;&#x9664;&#x5176;<code>.sample</code>&#x540E;&#x7F00;.</p>
+<h1 id="&#x4E8C;&#x3001;hook&#x7C7B;&#x578B;">&#x4E8C;&#x3001;Hook&#x7C7B;&#x578B;</h1>
+<p><a href="https://imweb.io/topic/5b13aa38d4c96b9b1b4c4e9d" _target="blank">https://imweb.io/topic/5b13aa38d4c96b9b1b4c4e9d</a></p>
+<p><a href="http://www.360doc.com/content/16/1014/18/10058718_598431211.shtml" _target="blank">http://www.360doc.com/content/16/1014/18/10058718_598431211.shtml</a></p>
+<p><a href="https://blog.51cto.com/u_13187574/2083938" _target="blank">https://blog.51cto.com/u_13187574/2083938</a></p>
+<ul>
+<li><strong>applypatch-msg</strong><ul>
+<li>&#x89E6;&#x53D1;&#x65F6;&#x673A;&#xFF1A;&#x7531;<code>git am</code>&#x89E6;&#x53D1;</li>
+<li>&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#xFF1A;<ul>
+<li>&#x63D0;&#x4EA4;&#x7684;commit msg&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</li>
+</ul>
+</li>
+<li>&#x53EF;&#x901A;&#x8FC7;<code>--no-verify</code> &#x7565;&#x8FC7;</li>
+<li>&#x5982;&#x679C;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#xFF0C;&#x90A3;&#x4E48;<code>git am</code>&#x5C06;&#x5728;patch(&#x8865;&#x4E01;)&#x5E94;&#x7528;&#x4E4B;&#x524D;&#x53D6;&#x6D88;.</li>
+</ul>
+</li>
+<li><strong>pre-commit</strong><ul>
+<li>&#x89E6;&#x53D1;&#x65F6;&#x673A;&#xFF1A;&#x7531;<code>git commit</code>&#x89E6;&#x53D1;, &#x5728;<code>commit msg</code>&#x88AB;&#x521B;&#x5EFA;&#x4E4B;&#x524D;&#x6267;&#x884C;. </li>
+<li>&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;</li>
+<li>&#x53EF;&#x901A;&#x8FC7;<code>--no-verify</code> &#x7565;&#x8FC7;</li>
+<li>&#x5982;&#x679C;&#x4EE5;&#x975E;0&#x72B6;&#x6001;&#x9000;&#x51FA;&#xFF0C;&#x5C06;&#x5BFC;&#x81F4;<code>git commit</code>&#x88AB;&#x53D6;&#x6D88;</li>
+</ul>
+</li>
+<li><strong>post-commit</strong><ul>
+<li>&#x89E6;&#x53D1;&#x65F6;&#x673A;&#xFF1A;&#x7531;<code>git commit</code>&#x89E6;&#x53D1;, &#x5F53;commit&#x5B8C;&#x6210;&#x540E;&#x6267;&#x884C;</li>
+<li>&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;</li>
+</ul>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Hostname</th>
-<th style="text-align:left">OS</th>
-<th style="text-align:left">Ceph&#x7248;&#x672C;</th>
+<th>&#x89E6;&#x53D1;&#x7AEF;</th>
+<th>&#x7C7B;&#x578B;</th>
+<th>&#x89E6;&#x53D1;&#x65F6;&#x673A;</th>
+<th>&#x63A5;&#x53D7;&#x53C2;&#x6570;</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">allinone.curiouser.com</td>
-<td style="text-align:left">CentOS 7.4.1708</td>
-<td style="text-align:left">10.2.10&#xFF08;Jewel&#xFF09;</td>
+<td>Client&#x7AEF;</td>
+<td>pre-merge-commit</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Client&#x7AEF;</td>
+<td>prepare-commit-msg</td>
+<td>&#x7531;&apos;git commit&apos;,&#x5728;&#x51C6;&#x5907;&#x597D;&#x9ED8;&#x8BA4;log&#x4FE1;&#x606F;&#x540E;&#x89E6;&#x53D1;,&#x4F46;&#x6B64;&#x65F6;,&#x7F16;&#x8F91;&#x5668;&#x5C1A;&#x672A;&#x542F;&#x52A8;</td>
+<td>&#x5B83;&#x53EF;&#x80FD;&#x63A5;&#x53D7;1&#x5230;3&#x4E2A;&#x53C2;&#x6570;. &#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x5305;&#x542B;commit msg&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;. &#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;commit msg&#x7684;&#x6765;&#x6E90;, &#x53EF;&#x80FD;&#x7684;&#x503C;&#x6709;:   <code>message</code> (&#x5F53;&#x4F7F;&#x7528;<code>-m</code> &#x6216;<code>-F</code> &#x9009;&#x9879;);  <code>template</code> (&#x5F53;&#x4F7F;&#x7528;<code>-t</code> &#x9009;&#x9879;,&#x6216;<code>commit.template</code>&#x914D;&#x7F6E;&#x9879;&#x5DF2;&#x7ECF;&#x88AB;&#x8BBE;&#x7F6E;);  <code>merge</code> (&#x5F53;commit&#x662F;&#x4E00;&#x4E2A;merge&#x6216;&#x8005;<code>.git/MERGE_MSG</code>&#x5B58;&#x5728;);   <code>squash</code>(&#x5F53;<code>.git/SQUASH_MSG</code>&#x6587;&#x4EF6;&#x5B58;&#x5728;);  <code>commit</code>, &#x4E14;&#x9644;&#x5E26;&#x8BE5;commit&#x7684;SHA1 (&#x5F53;&#x4F7F;&#x7528;<code>-c</code>, <code>-C</code> &#x6216; <code>--amend</code>).</td>
+<td>&#x662F;</td>
+</tr>
+<tr>
+<td>Client&#x7AEF;</td>
+<td>commit-msg</td>
+<td></td>
+<td></td>
+<td>&#x662F;</td>
+</tr>
+<tr>
+<td>Client&#x7AEF;</td>
+<td>post-commit</td>
+<td>&#x7531;<code>git commit</code>&#x89E6;&#x53D1;.  &#x5F53;commit&#x5B8C;&#x6210;&#x540E;&#x6267;&#x884C;</td>
+<td>&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;</td>
+<td></td>
+</tr>
+<tr>
+<td>Client&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td>pre-receive</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td>update</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td>post-receive</td>
+<td></td>
+<td>&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;</td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Server&#x7AEF;</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>&#x4E00;&#x4E2A;cephfs&#x81F3;&#x5C11;&#x8981;&#x6C42;&#x4E24;&#x4E2A;librados&#x5B58;&#x50A8;&#x6C60;&#xFF0C;&#x4E00;&#x4E2A;&#x4E3A;data&#xFF0C;&#x4E00;&#x4E2A;&#x4E3A;metadata&#x3002;&#x5F53;&#x914D;&#x7F6E;&#x8FD9;&#x4E24;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#x65F6;&#xFF0C;&#x6CE8;&#x610F;&#xFF1A;</p>
-<ul>
-<li><p>&#x4E3A;metadata pool&#x8BBE;&#x7F6E;&#x8F83;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x526F;&#x672C;&#x7EA7;&#x522B;&#xFF0C;&#x56E0;&#x4E3A;metadata&#x7684;&#x635F;&#x574F;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6574;&#x4E2A;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E0D;&#x7528;</p>
-</li>
-<li><p>&#x5EFA;&#x8BAE;metadata pool&#x4F7F;&#x7528;&#x4F4E;&#x5EF6;&#x65F6;&#x5B58;&#x50A8;&#xFF0C;&#x6BD4;&#x5982;SSD&#xFF0C;&#x56E0;&#x4E3A;metadata&#x4F1A;&#x76F4;&#x63A5;&#x5F71;&#x54CD;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x54CD;&#x5E94;&#x901F;&#x5EA6;</p>
-</li>
-</ul>
-<h1 id="preflight">Preflight</h1>
-<ol>
-<li>&#x4E00;&#x4E2A; clean+active &#x7684;cluster&#xFF08;<a href="../infrastructure/install/ceph-rbddan-jie-dian-an-zhuang.md" title="Ceph&#x5355;&#x8282;&#x70B9;&#x5B89;&#x88C5;">Ceph RBD&#x5355;&#x8282;&#x70B9;&#x5B89;&#x88C5;</a>&#xFF09;</li>
-</ol>
-<pre class="language-"><code class="lang-bash">cluster fb506b4e-43b8-4634-acb9-ea3ee5a97b91
-     health HEALTH_OK
-     monmap e1: <span class="token number">1</span> mons at <span class="token punctuation">{</span>allinone<span class="token operator">=</span><span class="token number">192.168</span>.1.96:6789/0<span class="token punctuation">}</span>
-            election epoch <span class="token number">29</span>, quorum <span class="token number">0</span> allinone
-      fsmap e4: <span class="token number">1</span>/1/1 up <span class="token punctuation">{</span><span class="token number">0</span><span class="token operator">=</span>allinone.okd311.curiouser.com<span class="token operator">=</span>up:active<span class="token punctuation">}</span>
-     osdmap e113: <span class="token number">1</span> osds: <span class="token number">1</span> up, <span class="token number">1</span> <span class="token keyword">in</span>
-            flags sortbitwise,require_jewel_osds
-      pgmap v61453: <span class="token number">192</span> pgs, <span class="token number">3</span> pools, <span class="token number">2639</span> MB data, <span class="token number">985</span> objects
-            <span class="token number">2730</span> MB used, <span class="token number">94500</span> MB / <span class="token number">97231</span> MB avail
-                 <span class="token number">192</span> active+clean
+<h1 id="&#x4E09;&#x3001;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x96C6;&#x6210;">&#x4E09;&#x3001;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x96C6;&#x6210;</h1>
+<h2 id="1&#x3001;npm--husky">1&#x3001;NPM  Husky</h2>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> <span class="token function">install</span> -g husky
 </code></pre>
-<h1 id="&#x4E00;&#x3001;&#x64CD;&#x4F5C;">&#x4E00;&#x3001;&#x64CD;&#x4F5C;</h1>
-<ol>
-<li>&#x90E8;&#x7F72;&#x5143;&#x6570;&#x636E;&#x670D;&#x52A1;&#x5668;MDS<pre class="language-"><code class="lang-bash">ceph-deploy mds create <span class="token environment constant">$HOSTNAME</span>
+<h2 id="2&#x3001;maven">2&#x3001;Maven</h2>
+<p>&#x6587;&#x6863;&#xFF1A;<a href="https://blog.csdn.net/leandzgc/article/details/107974276" _target="blank">https://blog.csdn.net/leandzgc/article/details/107974276</a></p>
+<h2 id="3&#x3001;composer-composer-git-hooks">3&#x3001;Composer composer-git-hooks</h2>
+<p>&#x6587;&#x6863;&#xFF1A;<a href="https://packagist.org/packages/brainmaestro/composer-git-hooks" _target="blank">https://packagist.org/packages/brainmaestro/composer-git-hooks</a></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">composer</span> global require brainmaestro/composer-git-hooks
 </code></pre>
-</li>
-<li>&#x521B;&#x5EFA;cephfs&#x9700;&#x8981;&#x7684;&#x4E24;&#x4E2A;&#x5B58;&#x50A8;&#x6C60;&#xFF1A;&#x4E00;&#x4E2A;pool&#x7528;&#x6765;&#x5B58;&#x50A8;&#x6570;&#x636E;&#xFF0C;&#x4E00;&#x4E2A;pool&#x7528;&#x6765;&#x5B58;&#x50A8;&#x5143;&#x6570;&#x636E;<pre class="language-"><code class="lang-bash">ceph osd pool create cephfs_data <span class="token number">64</span>
-ceph osd pool create cephfs_metadata <span class="token number">64</span>
-</code></pre>
-</li>
-<li><p>&#x521B;&#x5EFA;CephFS</p>
-<pre class="language-"><code class="lang-bash">ceph fs new cephfs cephfs_metadata cephfs_data
-ceph fs <span class="token function">ls</span>
-</code></pre>
-</li>
-</ol>
-<h1 id="&#x4E8C;&#x3001;&#x9A8C;&#x8BC1;">&#x4E8C;&#x3001;&#x9A8C;&#x8BC1;</h1>
-<pre class="language-"><code class="lang-bash">$ ceph mds <span class="token function">stat</span>
-e4: <span class="token number">1</span>/1/1 up <span class="token punctuation">{</span><span class="token number">0</span><span class="token operator">=</span>allinone.okd311.curiouser.com<span class="token operator">=</span>up:active<span class="token punctuation">}</span>
-</code></pre>
-<h1 id="&#x4E09;&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x6302;&#x8F7D;">&#x4E09;&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x6302;&#x8F7D;</h1>
-<p><strong>Kernel&#x65B9;&#x5F0F;</strong></p>
-<pre class="language-"><code class="lang-bash"><span class="token comment">#&#x52A0;&#x8F7D;rbd&#x5185;&#x6838;&#x6A21;&#x5757;</span>
-modprobe rbd
-lsmod <span class="token operator">|</span> <span class="token function">grep</span> rbd
-
-<span class="token comment"># &#x83B7;&#x53D6;client.admin&#x7528;&#x6237;&#x7684;&#x79D8;&#x94A5;</span>
-ceph auth get client.admin
-<span class="token comment"># [client.admin]</span>
-<span class="token comment">#        key = AQCinINcLykNLhAA7Xr6o+Q2jYeyc5j58JeQeQ==</span>
-<span class="token comment">#        caps mds = &quot;allow *&quot;</span>
-<span class="token comment">#        caps mon = &quot;allow *&quot;</span>
-<span class="token comment">#        caps osd = &quot;allow *&quot;</span>
-
-
-<span class="token function">mkdir</span>  /mnt/mycephfs
-<span class="token function">mount</span> -t ceph allinone.okd311.curiouser.com:/ /mnt/mycephfs -o <span class="token assign-left variable">name</span><span class="token operator">=</span>admin,secret<span class="token operator">=</span>AQCinINcLykNLhAA7Xr6o+Q2jYeyc5j58JeQeQ<span class="token operator">==</span>
-</code></pre>
-<p><strong>FUSE&#x65B9;&#x5F0F;</strong></p>
-<pre class="language-"><code class="lang-bash">yum -y <span class="token function">install</span> ceph-fuse
-ceph-fuse -k /etc/ceph/ceph.client.admin.keyring -m <span class="token number">192.168</span>.197.154:6789 ~/mycephfs/
+<p><code>composer.json</code></p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">{</span>
+      <span class="token string">&quot;.....&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;extra&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;hooks&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                        <span class="token property">&quot;config&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                  <span class="token comment">// &#x914D;&#x7F6E;&#x6267;&#x884C;&#x5931;&#x8D25;&#x65F6;&#x505C;&#x6B62;&#xFF08;&#x5F53;&#x94A9;&#x5B50;&#x662F;&#x4E00;&#x7CFB;&#x5217;&#x547D;&#x4EE4;&#x65F6;&#xFF0C;&#x5F53;&#x547D;&#x4EE4;&#x5931;&#x8D25;&#x65F6;&#x505C;&#x6B62;&#x6267;&#x884C;&#x4F1A;&#x5F88;&#x6709;&#x7528;&#xFF09;</span>
+                <span class="token property">&quot;stop-on-failure&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;pre-push&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token comment">// &#x914D;&#x7F6E;&#x81EA;&#x5B9A;&#x4E49;hook</span>
+                   <span class="token property">&quot;custom-hooks&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;pre-flow-feature-start&quot;</span><span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token property">&quot;pre-commit&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">&quot;echo committing as $(git config user.name)&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;php-cs-fixer fix .&quot;</span> <span class="token comment">// fix style</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;pre-flow-feature-start&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">&quot;echo &apos;Starting a new feature...&apos;&quot;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token comment">// verify commit message. ex: ABC-123: Fix everything</span>
+            <span class="token property">&quot;commit-msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;grep -q &apos;[A-Z]+-[0-9]+.*&apos; $1&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;pre-push&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">&quot;php-cs-fixer fix --dry-run .&quot;</span> <span class="token comment">// check style</span>
+                <span class="token string">&quot;phpunit&quot;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;post-merge&quot;</span><span class="token operator">:</span> <span class="token string">&quot;composer install&quot;</span>
+            <span class="token property">&quot;...&quot;</span><span class="token operator">:</span> <span class="token string">&quot;...&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-06-16 21:35:29
+2021-08-05 09:50:19
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7133,10 +7245,14 @@ ceph-fuse -k /etc/ceph/ceph.client.admin.keyring -m <span class="token number">1
 
 		
 		
-		<a href="ceph-rbd单节点安装.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Ceph RBD单节点安装">
+		<a href="git-workflow.md" class="navigation navigation-prev " aria-label="Previous page: git flow工作流">
 			<i class="fa fa-angle-left"></i>
 		</a>
 		
+		
+		<a href="git-standard-commit-message.html" class="navigation navigation-next " aria-label="Next page: git提交规范">
+			<i class="fa fa-angle-right"></i>
+		</a>
 		
 		
 		
@@ -7144,7 +7260,7 @@ ceph-fuse -k /etc/ceph/ceph.client.admin.keyring -m <span class="token number">1
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Ceph FileSystem单节点安装","level":"7.8.1.2","depth":3,"next":{"title":"基础知识","level":"7.8.2","depth":2,"ref":"","articles":[]},"previous":{"title":"Ceph RBD单节点安装","level":"7.8.1.1","depth":3,"path":"origin/ceph-rbd单节点安装.md","ref":"origin/ceph-rbd单节点安装.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/ceph-filesystem单节点安装.md","mtime":"2020-06-16T13:35:29.478Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-06T06:02:58.066Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"git hook钩子","level":"7.5.7","depth":2,"next":{"title":"git提交规范","level":"7.5.8","depth":2,"path":"origin/git-standard-commit-message.md","ref":"origin/git-standard-commit-message.md","articles":[]},"previous":{"title":"git flow工作流","level":"7.5.6","depth":2,"path":"origin/git-workflow.md","ref":"origin/git-workflow.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/git-hooks.md","mtime":"2021-08-05T01:50:19.281Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-06T06:02:58.066Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

@@ -4086,9 +4086,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5.7" data-path="git-hook.md">
+        <li class="chapter " data-level="7.5.7" data-path="git-hooks.html">
             
-                <a href="git-hook.md">
+                <a href="git-hooks.html">
             
                     
                         <b>7.5.7.</b>
@@ -7023,7 +7023,7 @@
     
 					<section class="normal markdown-section">
 						
-						<h1 id="dmdata-migration&#x6570;&#x636E;&#x5168;&#x91CF;&#x53CA;&#x589E;&#x91CF;&#x540C;&#x6B65;">DM(Data Migration)&#x6570;&#x636E;&#x5168;&#x91CF;&#x53CA;&#x589E;&#x91CF;&#x540C;&#x6B65;</h1>
+						<p>DM(Data Migration)&#x6570;&#x636E;&#x5168;&#x91CF;&#x53CA;&#x589E;&#x91CF;&#x540C;&#x6B65;</p>
 <h1 id="&#x4E00;&#x3001;&#x7B80;&#x4ECB;">&#x4E00;&#x3001;&#x7B80;&#x4ECB;</h1>
 <p><a href="https://github.com/pingcap/dm" _target="blank">DM</a> (Data Migration) &#x662F;&#x4E00;&#x4F53;&#x5316;&#x7684;&#x6570;&#x636E;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x5E73;&#x53F0;&#xFF0C;&#x652F;&#x6301;&#x4ECE; MySQL &#x6216; MariaDB &#x5230; TiDB &#x7684;&#x5168;&#x91CF;&#x6570;&#x636E;&#x8FC1;&#x79FB;&#x548C;&#x589E;&#x91CF;&#x6570;&#x636E;&#x540C;&#x6B65;&#x3002;&#x4F7F;&#x7528; DM &#x5DE5;&#x5177;&#x6709;&#x5229;&#x4E8E;&#x7B80;&#x5316;&#x9519;&#x8BEF;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#xFF0C;&#x964D;&#x4F4E;&#x8FD0;&#x7EF4;&#x6210;&#x672C;&#x3002;</p>
 <p><img src="../assets/dm-core-features.png" alt=""></p>
@@ -7509,7 +7509,13 @@ Flags:
 </tbody>
 </table>
 <p>&#x5404;&#x4E2A;&#x529F;&#x80FD;&#x914D;&#x7F6E;&#x96C6;&#x7684;&#x53C2;&#x6570;&#x53CA;&#x89E3;&#x91CA;&#x53C2;&#x89C1;<a href="https://docs.pingcap.com/zh/tidb-data-migration/stable/task-configuration-file-full#&#x5B8C;&#x6574;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x793A;&#x4F8B;" _target="blank">&#x5B8C;&#x6574;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x793A;&#x4F8B;</a>&#x4E2D;&#x7684;&#x6CE8;&#x91CA;&#x8BF4;&#x660E;&#x3002;</p>
-<h2 id="3&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BF4;&#x660E;">3&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BF4;&#x660E;</h2>
+<h2 id="3&#x3001;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x8FDB;&#x5EA6;&#x5143;&#x4FE1;&#x606F;">3&#x3001;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x8FDB;&#x5EA6;&#x5143;&#x4FE1;&#x606F;</h2>
+<p>&#x521B;&#x5EFA;&#x7684;&#x540C;&#x6B65;&#x4EFB;&#x52A1;&#x4F1A;&#x5C06;&#x5143;&#x4FE1;&#x606F;&#x4FDD;&#x5B58;&#x5728;&#x4E0B;&#x6E38;TIDB&#x7684;dm_meta&#x5E93;&#x4E2D;&#x7684;<code>&quot;&#x4EFB;&#x52A1;&#x540D;_load_checkpoint&quot;</code>&#x3001;<code>&quot;&#x4EFB;&#x52A1;&#x540D;_sync_checkpoint&quot;</code>&#x8868;&#x4E2D;&#x3002;</p>
+<ul>
+<li><strong>&#x4EFB;&#x52A1;&#x540D;_load_checkpoint</strong>&#xFF1A;&#x4FDD;&#x5B58;&#x4E86;load&#x5355;&#x5143;&#x4ECE;&#x4E0A;&#x6E38;&#x6570;&#x636E;&#x5E93;dump&#x6570;&#x636E;&#x5230;SQL&#x6587;&#x4EF6;&#x7684;&#x5143;&#x4FE1;&#x606F;&#x3002;</li>
+<li><strong>&#x4EFB;&#x52A1;&#x540D;_sync_checkpoint</strong>&#xFF1A;&#x4FDD;&#x5B58;&#x4E86;sync&#x5355;&#x5143;&#x5DF2;&#x4ECE;SQL&#x6587;&#x4EF6;&#x540C;&#x6B65;&#x6570;&#x636E;&#x5230;&#x4E0B;&#x6E38;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5143;&#x4FE1;&#x606F;&#x3002;</li>
+</ul>
+<h2 id="4&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BF4;&#x660E;">4&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BF4;&#x660E;</h2>
 <pre class="language-"><code class="lang-yaml"><span class="token punctuation">---</span>
 <span class="token comment"># ----------- &#x5168;&#x5C40;&#x914D;&#x7F6E; -----------</span>
 <span class="token comment"># ********* &#x57FA;&#x672C;&#x4FE1;&#x606F;&#x914D;&#x7F6E; *********</span>
@@ -7691,7 +7697,7 @@ Flags:
     <span class="token comment"># sync &#x5904;&#x7406;&#x5355;&#x5143;&#x7528;&#x4E8E;&#x590D;&#x5236;&#x589E;&#x91CF;&#x6570;&#x636E;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#xFF0C;&#x7B49;&#x540C;&#x4E8E; syncers &#x914D;&#x7F6E;&#x4E2D;&#x7684; `worker-count`&#xFF0C;&#x5F53;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x5B83;&#x4EEC;&#x65F6; `syncer-thread` &#x4F18;&#x5148;&#x7EA7;&#x66F4;&#x9AD8;&#x3002;&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x5B9E;&#x4F8B;&#x540C;&#x65F6;&#x5411; TiDB &#x8FC1;&#x79FB;&#x6570;&#x636E;&#x65F6;&#x53EF;&#x6839;&#x636E;&#x8D1F;&#x8F7D;&#x60C5;&#x51B5;&#x9002;&#x5F53;&#x8C03;&#x5C0F;&#x8BE5;&#x503C;</span>
     <span class="token key atrule">syncer-thread</span><span class="token punctuation">:</span> <span class="token number">16</span>
 </code></pre>
-<h2 id="4&#x3001;&#x5B9E;&#x4F8B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">4&#x3001;&#x5B9E;&#x4F8B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
+<h2 id="5&#x3001;&#x5B9E;&#x4F8B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">5&#x3001;&#x5B9E;&#x4F8B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
 <pre class="language-"><code class="lang-bash">name: sync-test-mysql-to-tidb
 task-mode: all
 is-sharding: <span class="token boolean">false</span>
@@ -7738,7 +7744,7 @@ mydumpers:
     chunk-filesize: <span class="token number">64</span>
     skip-tz-utc: <span class="token boolean">true</span>
 </code></pre>
-<h1 id="&#x516D;&#x3001;dmctl&#x96C6;&#x7FA4;&#x63A7;&#x5236;">&#x516D;&#x3001;dmctl&#x96C6;&#x7FA4;&#x63A7;&#x5236;</h1>
+<h1 id="&#x516D;&#x3001;dmctl&#x96C6;&#x7FA4;&#x4E0E;&#x4EFB;&#x52A1;&#x63A7;&#x5236;">&#x516D;&#x3001;dmctl&#x96C6;&#x7FA4;&#x4E0E;&#x4EFB;&#x52A1;&#x63A7;&#x5236;</h1>
 <blockquote>
 <p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
 <p>&#x5BF9;&#x4E8E;&#x7528; TiUP &#x90E8;&#x7F72;&#x7684; DM &#x96C6;&#x7FA4;&#xFF0C;&#x63A8;&#x8350;&#x76F4;&#x63A5;&#x4F7F;&#x7528; <a href="https://docs.pingcap.com/zh/tidb-data-migration/stable/dmctl-introduction/maintain-dm-using-tiup.md#&#x96C6;&#x7FA4;&#x63A7;&#x5236;&#x5DE5;&#x5177;-dmctl" _target="blank"><code>tiup dmctl</code> &#x547D;&#x4EE4;</a>&#x3002;</p>
@@ -8466,8 +8472,7 @@ handle-error <span class="token operator">&lt;</span>&#x4EFB;&#x52A1;&#x540D; <s
 </tr>
 </tbody>
 </table>
-<h1 id="&#x516B;&#x3001;dm&#x4EFB;&#x52A1;&#x4F18;&#x5316;">&#x516B;&#x3001;DM&#x4EFB;&#x52A1;&#x4F18;&#x5316;</h1>
-<h1 id="&#x4E5D;&#x3001;dm&#x4EFB;&#x52A1;&#x95EE;&#x9898;&#x6C47;&#x603B;">&#x4E5D;&#x3001;DM&#x4EFB;&#x52A1;&#x95EE;&#x9898;&#x6C47;&#x603B;</h1>
+<h1 id="&#x516B;&#x3001;dm&#x4EFB;&#x52A1;&#x95EE;&#x9898;&#x6C47;&#x603B;">&#x516B;&#x3001;DM&#x4EFB;&#x52A1;&#x95EE;&#x9898;&#x6C47;&#x603B;</h1>
 <h2 id="1&#x3001;&#x4E0A;&#x6E38;mysql&#x7684;ddl&#x8BED;&#x53E5;&#x4E0D;&#x652F;&#x6301;&#x540C;&#x6B65;&#x6267;&#x884C;&#x5230;tidb">1&#x3001;&#x4E0A;&#x6E38;MySQL&#x7684;DDL&#x8BED;&#x53E5;&#x4E0D;&#x652F;&#x6301;&#x540C;&#x6B65;&#x6267;&#x884C;&#x5230;TiDB</h2>
 <h2 id="2&#x3001;&#x4E0A;&#x6E38;mysql&#x7684;dml&#x8BED;&#x53E5;&#x4E0D;&#x652F;&#x6301;&#x540C;&#x6B65;&#x6267;&#x884C;&#x5230;tidb">2&#x3001;&#x4E0A;&#x6E38;MySQL&#x7684;DML&#x8BED;&#x53E5;&#x4E0D;&#x652F;&#x6301;&#x540C;&#x6B65;&#x6267;&#x884C;&#x5230;TiDB</h2>
 <h2 id="3&#x3001;&#x4E0A;&#x6E38;mysql&#x8868;&#x4E2D;&#x6709;&#x5916;&#x952E;&#x9020;&#x6210;&#x65E0;&#x6CD5;&#x540C;&#x6B65;">3&#x3001;&#x4E0A;&#x6E38;MySQL&#x8868;&#x4E2D;&#x6709;&#x5916;&#x952E;&#x9020;&#x6210;&#x65E0;&#x6CD5;&#x540C;&#x6B65;</h2>
@@ -8495,7 +8500,7 @@ handle-error <span class="token operator">&lt;</span>&#x4EFB;&#x52A1;&#x540D; <s
 <li><a href="https://asktug.com/t/topic/33397" _target="blank">https://asktug.com/t/topic/33397</a></li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-07-30 18:10:00
+2021-08-02 14:34:07
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -8535,7 +8540,7 @@ handle-error <span class="token operator">&lt;</span>&#x4EFB;&#x52A1;&#x540D; <s
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"next":{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},"previous":{"title":"ELT工具","level":"7.37.2","depth":2,"ref":"","articles":[{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"path":"origin/tidb-dm.md","ref":"origin/tidb-dm.md","articles":[]},{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},{"title":"TiDB-Lightning：导入数据到TIDB","level":"7.37.2.3","depth":3,"path":"origin/tidb-lighting-import.md","ref":"origin/tidb-lighting-import.md","articles":[]},{"title":"TiDB-BR冷备份与恢复：分布式冷备份恢复数据","level":"7.37.2.4","depth":3,"path":"origin/tidb-br-backup-restore.md","ref":"origin/tidb-br-backup-restore.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-dm.md","mtime":"2021-07-30T10:10:00.955Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-02T01:48:18.807Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"next":{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},"previous":{"title":"ELT工具","level":"7.37.2","depth":2,"ref":"","articles":[{"title":"DM(Data Migration)数据增量全量同步至TiDB","level":"7.37.2.1","depth":3,"path":"origin/tidb-dm.md","ref":"origin/tidb-dm.md","articles":[]},{"title":"TiDB-Dumpling：从TiDB/MySQL导出数据","level":"7.37.2.2","depth":3,"path":"origin/tidb-dumpling-export.md","ref":"origin/tidb-dumpling-export.md","articles":[]},{"title":"TiDB-Lightning：导入数据到TIDB","level":"7.37.2.3","depth":3,"path":"origin/tidb-lighting-import.md","ref":"origin/tidb-lighting-import.md","articles":[]},{"title":"TiDB-BR冷备份与恢复：分布式冷备份恢复数据","level":"7.37.2.4","depth":3,"path":"origin/tidb-br-backup-restore.md","ref":"origin/tidb-br-backup-restore.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/tidb-dm.md","mtime":"2021-08-02T06:34:07.915Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-06T06:02:58.066Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

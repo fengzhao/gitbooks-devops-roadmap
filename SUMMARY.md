@@ -248,7 +248,7 @@
     * [git merge与git rebase](origin/origin-git-merge-git-rebase.md)
     * [git submodule](origin/git-submodule.md)
     * [git flow工作流](origin/git-workflow.md)
-    * [git hook钩子](origin/git-hook.md)
+    * [git hook钩子](origin/git-hooks.md)
     * [git提交规范](origin/git-standard-commit-message.md)
 * [正则表达式](origin/regular-expression详解.md)
 * [SSL/TLS](origin/ssl-tls.md)

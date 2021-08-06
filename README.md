@@ -1,6 +1,6 @@
 # **Curiouser's Devops Roadmap**
 
-This gitbook records the technical roadmap of Devops Curiouser.
+This gitbook record the technical roadmap of Devops Curiouser.
 
 ## **Link**
 

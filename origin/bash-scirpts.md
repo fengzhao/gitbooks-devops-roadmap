@@ -271,3 +271,23 @@ check_network() {
     fi
 }
 ```
+
+# 11、发送钉钉通知
+
+```bash
+Ding_Webhook_Token='钉钉机器人的WebHook Token'
+curl -s https://oapi.dingtalk.com/robot/send?access_token="$Ding_Webhook_Token" \
+     -H 'Content-Type: application/json' \
+     -d '
+     {
+         "msgtype": "markdown",
+         "markdown": {
+             "title": "消息标题",
+             "text": "消息，'$引用变量'"
+         },
+         "at": {
+             "isAtAll": true
+         }
+     }'
+```
+
