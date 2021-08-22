@@ -89,10 +89,11 @@
     * [安装配置](origin/gitlab-install.md)
     * 管理
         * [配置SMTP邮件服务](origin/gitlab-配置SMTP邮件服务.md)
-        * [代码仓库配置事件触发器Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
         * [代码仓库的备份与恢复](origin/gitlab-backuprestore.md)
         * [版本升级](origin/gitlab-upgrade.md)
         * [Gitlab的制品仓库](origin/gitlab-package-registry.md)
+        * [Gitlab的Webhook](origin/gitlab-配置代码仓库事件触发器Webhook.md)
+        * [Gitlab的服务端git hook](origin/gitlab-server-hook.md)
     * Gitlab CI/CD
         * [Gitlab Runner](origin/gitlab-runner.md)
         * [Gitlab Pipeline](origin/gitlab-pipeline.md)
@@ -251,9 +252,9 @@
     * [git hook钩子](origin/git-hooks.md)
     * [git提交规范](origin/git-standard-commit-message.md)
 * [正则表达式](origin/regular-expression详解.md)
-* [SSL/TLS](origin/ssl-tls.md)
-  
-    - [CFSSL](origin/ssl-tls-cfssl.md)
+* SSL/TLS
+  - [SSL/TLS基础概念](origin/ssl-tls.md)
+    - [证书生成工具](origin/ssl-tls-tools.md)
 * Ceph
     * 安装
         * [Ceph RBD单节点安装](origin/ceph-rbd单节点安装.md)
@@ -342,7 +343,7 @@
          * [Binglog](origin/mysql-binlog.md)
      * 备份与恢复
             * [MySQL的数据备份与恢复](origin/mysql-backup-restore.md)
-            * [MysqlDump详解](origin/mysql-dumper.md)
+            * [MysqlDump常用操作](origin/mysql-dumper.md)
       * 基础概念
         * [存储过程语法](origin/mysql-procedure-grammar.md)
         * [常用存储过程](origin/mysql-procedure.md)
@@ -357,7 +358,6 @@
     * [Keepalived](origin/keepalived.md)
     * HAProxy
     * LVS
-    * Squid
     * Varnish
 * [代理服务器](origin/正反向代理服务的区别.md)
     * [正向代理](origin/常见正向代理服务软件之间的区别.md)

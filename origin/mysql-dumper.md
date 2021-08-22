@@ -3,40 +3,53 @@
 # 1、备份所有数据库
 
 ```
-$> mysqldump -uroot -proot --all-databases >/tmp/all.sql
+$> mysqldump -uroot -proot --all-databases > /data/mysql-backup/all.sql
 ```
 
 # 2、备份db1、db2两个数据库的所有数据
 
 ```
-$> mysqldump -uroot -proot --databases db1 db2 >/tmp/user.sql
+$> mysqldump -uroot -proot --databases db1 db2 > /data/mysql-backup/user.sql
 ```
 
 # 3、备份db1中的a1、a2表
 
 ```
-$> mysqldump -uroot -proot --databases db1 --tables a1 a2  >/tmp/db1.sql
+$> mysqldump -uroot -proot --databases db1 --tables a1 a2  > /data/mysql-backup/db1.sql
 ```
 
 PS:导出指定表只能针对一个数据库进行导出，且导出的内容中和导出数据库也不一样，导出指定表的导出文本中没有创建数据库的判断语句，只有删除表-创建表-导入数据
 
-# 4、只导出表结构不导出数据，--no-data 
+# 4、筛选导出表
+
+```bash
+mysqldump -u user -proot --databases db1 db2 --ignore-table=db1.tbl --ignore-table=db2.tb2  > /data/mysql-backup/db.sql
+```
+
+# 5、只导出表结构不导出数据，--no-data 
 
 ```
 $> mysqldump -uroot -proot --no-data --databases db1 >/tmp/db1.sql
 ```
 
-# 5、跨服务区导出导入数据库
+# 6、跨服务区导出导入数据库
 
 **PS：远程数据库必须存在**
 
 ```bash
 # 将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中
-mysqldump --host=192.168.80.137 -uroot -proot -C --databases test | mysql --host=192.168.80.133 -uroot -proot test 
+mysqldump --host=192.168.1.8 -uroot -proot -C --databases test | mysql --host=192.168.1.9 -uroot -proot test 
 # PS：远程数据库必须存在
 ```
 
-# 6、MysqlDump的参数说明
+# 7、定时备份任务
+
+```bash
+# 每天早上1点定时备份MySQL数据
+0 1 * * * mysqldump -u user -proot --databases db1 db2 --ignore-table=db1.tb1 --ignore-table=db2.tbl1  > /data/mysql-backup/db-$(date +"\%Y\%m\%d\%H\%M").sql
+```
+
+# 8、MysqlDump的参数说明
 
 ```
 --all-databases  , -A  导出全部数据库。

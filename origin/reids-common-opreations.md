@@ -445,8 +445,6 @@ lrem key count value
 # 当index超出范围时会返回一个error。
 ```
 
-
-
 ## 2、DQL
 
 ### ①根据索引获取一个元素

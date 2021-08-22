@@ -133,10 +133,6 @@ helm update
 
 编写`helm charts values.yaml`配置文件
 
-```yaml
-
-```
-
 ```bash
 helm install gitab-runner --namespace gitlab -f values.yaml gitlab/gitlab-runner
 ```

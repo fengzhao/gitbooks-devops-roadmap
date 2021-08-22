@@ -1382,25 +1382,20 @@ journalctl --since 09:00 --until"1 hour ago"
 journalctl --since"15:15" --until now
 ```
 
-## ⑤显示尾部的最新10行日志
+## ⑤日志显示设置
 
 ```bash
+# 显示尾部的最新10行日志
 journalctl -n
-```
-
-## ⑥显示尾部指定行数的日志
-
-```bash
+# 显示尾部指定行数的日志
 journalctl -n 20
-```
-
-## ⑦实时滚动显示最新日志
-
-```bash
+# 实时滚动显示最新日志
 journalctl -f
+# 在标准输出中显示日志（默认情况下，journalctl 会在 pager 内显示输出结果）
+journalctl -b -0 --no-pager
 ```
 
-## ⑧查看某个Unit的日志
+## ⑥查看某个Unit的日志
 
 ```bash
 journalctl -u nginx.service
@@ -1412,21 +1407,40 @@ journalctl -u nginx.service  -f
 journalctl -u nginx.service  -u php-fpm.service  --since today
 ```
 
-## ⑨指定用户的日志
+## ⑦指定用户的日志
 
 ```bash
 journalctl _UID=33  --since today
 ```
 
-## ⑩设置/显示日志文件配置
+## ⑧显示/清理日志存储设置
 
 ```bash
-# 显示日志占据的硬盘空间
+# 显示日志当前占用的硬盘空间
 journalctl --disk-usage
-# 指定日志文件占据的最大空间
+
+# 可以按照日期清理，或者按照允许保留的容量清理
 journalctl --vacuum-size=1G
-# 指定日志文件保存多久
 journalctl --vacuum-time=1years
+```
+
+## ⑨指定日志输出格式
+
+journalctl 能够以多种格式进行显示，只须添加 -o 选项即可。-o 选项支持的类型如下：
+
+- **short**：这是默认的格式，即经典的 syslog 输出格式。
+- **short-iso**： 与 short 类似，强调 ISO 8601 时间戳。
+- **short-precise**：与 short 类似，提供微秒级精度。
+- **short-monotonic**：与 short 类似，强调普通时间戳。
+- **verbose**：全部字段，包括通常被内部隐藏的字段。
+- **export**：传输或备份的二进制格式。
+-  **json**：json 格式，每行一条记录。
+-  **json-pretty**：阅读的 json 格式。
+-  **json-sse**：经过包装可以兼容 server-sent 事件的 json 格式。
+- **cat**：只显示信息字段本身。
+
+```bash
+journalctl -u cron -n 1 --no-pager -o json-pretty
 ```
 
 # 51、read提示字符中的换行
@@ -1920,3 +1934,127 @@ Host 主机别名
 
 - https://blog.csdn.net/MatrixGod/article/details/81905227
 
+# 64、echo显示带颜色的内容
+
+```bash
+echo -e "\033[文字背景颜色;文字颜色m字符串\033[控制选项" 
+```
+
+- **文字背景颜色**![](../assets/linux-echo-color-background.png)
+
+  
+  
+- **文字颜色** ![](../assets/linux-echo-color-word.png)
+
+  
+  
+- **控制选项**
+
+  ```bash
+  [0m 关闭所有属性 
+  [1m 设置高亮度 
+  [4m 下划线 
+  [5m 闪烁 
+  [7m 反显 
+  [8m 消隐 
+  [30m — \33[37m 设置前景色 
+  [40m — \33[47m 设置背景色 
+  [nA 光标上移n行 
+  [nB 光标下移n行 
+  [nC 光标右移n行 
+  [nD 光标左移n行 
+  [y;xH设置光标位置 
+  [2J 清屏 
+  [K 清除从光标到行尾的内容 
+  [s 保存光标位置 
+  [u 恢复光标位置 
+  [?25l 隐藏光标 
+  [?25h 显示光标
+  ```
+
+
+# 65、sha256sum、文件内容自动添加隐形换行转义字节
+
+计算文件中字符串的SHA256值时，发现和在在线计算网站中计算字符串的值不一样。是因为在向文件写入字符串时，会自动添加换行字符。如果直接使用sha256sum命令计算文件的hash时，换行字符也算进字符串的一部分。
+
+```bash
+$ echo "8" > test
+$ hexdump test
+0000000 38 0a
+0000002
+# 0a 为"\n"换行符
+
+$ cat test # zsh下显示带有隐藏换行转义字符的文本内容时
+8
+$ cat test # zsh下显示不带有隐藏换行转义字符的文本内容时
+8% 
+```
+
+所以有三种方法解决
+
+- Vim 设置禁止自定换行
+
+  ```bash
+  echo -e 'set noeol\nset nofixendofline' >> ~/.vimrc
+  # 只有新建文件时才有用，打开已有文件时仍然不能显示出多加的那个空行。
+  ```
+
+- echo显示字符串到文件时添加`-n`参数不自定添加换行字符
+
+  ```bash
+  echo -n "8" > test
+  ```
+
+- sha256sum直接计算字符串
+
+  ```bash
+  echo -n "8" | sha256sum
+  ```
+
+在线计算加密工具网站：https://crypot.51strive.com/sha256.html
+
+# 66、wget使用SSL证书访问HTTPS网站
+
+```bash
+wget https://www.test.com --ca-certificate=mycertfile.pem
+```
+
+# 67、crontab下使用date和sudo命令
+
+- crontab下使用date命令需要转义`%`，例如： `date +"\%Y\%m\%d_\%H:\%M"` 和 `$(date +"\%Y\%m\%d_\%H:\%M")`
+
+- 直接在crontab里以sudo执行命令无效，会提示 `sudo: sorry, you must have a tty to run sudo` .需要修改`/etc/sudoers`，执行visudo或者`vim /etc/sudoers` 将`Defaults  requiretty`这一行注释掉。因为sudo默认需要tty终端，而crontab里的命令实际是以无tty形式执行的。注释掉"Defaults  requiretty"即允许以无终端方式执行sudo
+
+  ```bash
+  但是，这里关于安全性方面有一点需要注意。关于该配置项，说明如下Disable "`ssh hostname sudo <cmd>`", because it will show the password in clear.You have to run "ssh -t hostname sudo <cmd>".该配置的作用是禁止执行"ssh hostname sudo <cmd>"，因为这种方式会将sudo密码以明文显示，你可以运行"ssh -t hostname sudo <cmd>"来替代。开启的情况下，"ssh hostname sudo <cmd>"无法执行成功，关闭了之后，就没有这一层的检查了。
+  ```
+
+参考：https://blog.csdn.net/kai404/article/details/52169122
+
+# 68、/etc/crontab文件和crontab -e命令区别
+
+## 1、格式不同
+
+`/etc/crontab`
+
+```
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed 
+```
+
+`crontab -e`命令中
+
+```bash
+50 1 * * *  command
+```
+
+## 2、使用范围
+
+- 修改`/etc/crontab`只有root用户能用，可以直接给其他用户设置计划任务，而且还可以指定执行shell等等
+
+- `crontab -e`所有用户都可以使用，普通用户也能设置计划任务，自动写入`/var/spool/cron/usename`

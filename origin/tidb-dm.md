@@ -919,6 +919,17 @@ overview 下包含运行当前选定 task 的所有 DM-worker/master instance/so
 | :---------- | :--------------- | :--------------------------------------- | :------- |
 | task state  | 迁移子任务的状态 | 当子任务状态处于 `Paused` 超过 20 分钟时 | critical |
 
+
+
+| Task任务Metric信息状态 | 状态含义     |
+| ---------------------- | ------------ |
+| 0                      | invalidStage |
+| 1                      | New          |
+| 2                      | Running      |
+| 3                      | Paused       |
+| 4                      | Stopped      |
+| 5                      | Stopped      |
+
 ### 5、Dump/Load unit
 
 下面 metrics 仅在 `task-mode` 为 `full` 或者 `all` 模式下会有值。

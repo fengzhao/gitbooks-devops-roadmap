@@ -468,8 +468,14 @@ system_default = system_default_sect
 CipherString = DEFAULT@SECLEVEL=1
 ```
 
-
-
-
-
 参考： https://askubuntu.com/questions/1250787/when-i-try-to-curl-a-website-i-get-ssl-error
+
+## 20、使用SSL证书文件
+
+```bash
+# 使用client.pem+key.pem
+curl -k --cert client.pem --key key.pem https://www.xxxx.com
+# 使用all.pem
+curl -k --cert all.pem  https://www.xxxx.com
+```
+

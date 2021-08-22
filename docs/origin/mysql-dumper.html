@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>MysqlDump详解 · Devops Roadmap</title>
+        <title>MysqlDump常用操作 · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -1543,27 +1543,12 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.2" data-path="gitlab-配置代码仓库事件触发器Webhook.html">
-            
-                <a href="gitlab-配置代码仓库事件触发器Webhook.html">
-            
-                    
-                        <b>4.2.2.2.</b>
-                    
-                    代码仓库配置事件触发器Webhook
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="4.2.2.3" data-path="gitlab-backuprestore.html">
+        <li class="chapter " data-level="4.2.2.2" data-path="gitlab-backuprestore.html">
             
                 <a href="gitlab-backuprestore.html">
             
                     
-                        <b>4.2.2.3.</b>
+                        <b>4.2.2.2.</b>
                     
                     代码仓库的备份与恢复
             
@@ -1573,12 +1558,12 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.4" data-path="gitlab-upgrade.html">
+        <li class="chapter " data-level="4.2.2.3" data-path="gitlab-upgrade.html">
             
                 <a href="gitlab-upgrade.html">
             
                     
-                        <b>4.2.2.4.</b>
+                        <b>4.2.2.3.</b>
                     
                     版本升级
             
@@ -1588,14 +1573,44 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.5" data-path="gitlab-package-registry.html">
+        <li class="chapter " data-level="4.2.2.4" data-path="gitlab-package-registry.html">
             
                 <a href="gitlab-package-registry.html">
             
                     
-                        <b>4.2.2.5.</b>
+                        <b>4.2.2.4.</b>
                     
                     Gitlab的制品仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2.5" data-path="gitlab-配置代码仓库事件触发器Webhook.html">
+            
+                <a href="gitlab-配置代码仓库事件触发器Webhook.html">
+            
+                    
+                        <b>4.2.2.5.</b>
+                    
+                    Gitlab的Webhook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2.6" data-path="gitlab-server-hook.html">
+            
+                <a href="gitlab-server-hook.html">
+            
+                    
+                        <b>4.2.2.6.</b>
+                    
+                    Gitlab的服务端git hook
             
                 </a>
             
@@ -4136,14 +4151,30 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="ssl-tls.html">
+        <li class="chapter " data-level="7.7" >
             
-                <a href="ssl-tls.html">
+                <span>
             
                     
                         <b>7.7.</b>
                     
                     SSL/TLS
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.7.1" data-path="ssl-tls.html">
+            
+                <a href="ssl-tls.html">
+            
+                    
+                        <b>7.7.1.</b>
+                    
+                    SSL/TLS基础概念
             
                 </a>
             
@@ -4152,18 +4183,23 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="7.7.1" data-path="ssl-tls-cfssl.html">
+        <li class="chapter " data-level="7.7.1.1" data-path="ssl-tls-tools.html">
             
-                <a href="ssl-tls-cfssl.html">
+                <a href="ssl-tls-tools.html">
             
                     
-                        <b>7.7.1.</b>
+                        <b>7.7.1.1.</b>
                     
-                    CFSSL
+                    证书生成工具
             
                 </a>
             
 
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -5602,7 +5638,7 @@
                     
                         <b>7.18.1.4.1.2.</b>
                     
-                    MysqlDump详解
+                    MysqlDump常用操作
             
                 </a>
             
@@ -5853,21 +5889,6 @@
             
                     
                         <b>7.20.4.</b>
-                    
-                    Squid
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.20.5" >
-            
-                <span>
-            
-                    
-                        <b>7.20.5.</b>
                     
                     Varnish
             
@@ -7008,7 +7029,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >MysqlDump详解</a>
+        <a href=".." >MysqlDump常用操作</a>
     </h1>
 </div>
 
@@ -7025,21 +7046,28 @@
 						
 						<h1 id="mysqldump&#x5E38;&#x7528;&#x64CD;&#x4F5C;">MysqlDump&#x5E38;&#x7528;&#x64CD;&#x4F5C;</h1>
 <h1 id="1&#x3001;&#x5907;&#x4EFD;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;">1&#x3001;&#x5907;&#x4EFD;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;</h1>
-<pre class="language-"><code>$&gt; mysqldump -uroot -proot --all-databases &gt;/tmp/all.sql
+<pre class="language-"><code>$&gt; mysqldump -uroot -proot --all-databases &gt; /data/mysql-backup/all.sql
 </code></pre><h1 id="2&#x3001;&#x5907;&#x4EFD;db1&#x3001;db2&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;">2&#x3001;&#x5907;&#x4EFD;db1&#x3001;db2&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;</h1>
-<pre class="language-"><code>$&gt; mysqldump -uroot -proot --databases db1 db2 &gt;/tmp/user.sql
+<pre class="language-"><code>$&gt; mysqldump -uroot -proot --databases db1 db2 &gt; /data/mysql-backup/user.sql
 </code></pre><h1 id="3&#x3001;&#x5907;&#x4EFD;db1&#x4E2D;&#x7684;a1&#x3001;a2&#x8868;">3&#x3001;&#x5907;&#x4EFD;db1&#x4E2D;&#x7684;a1&#x3001;a2&#x8868;</h1>
-<pre class="language-"><code>$&gt; mysqldump -uroot -proot --databases db1 --tables a1 a2  &gt;/tmp/db1.sql
+<pre class="language-"><code>$&gt; mysqldump -uroot -proot --databases db1 --tables a1 a2  &gt; /data/mysql-backup/db1.sql
 </code></pre><p>PS:&#x5BFC;&#x51FA;&#x6307;&#x5B9A;&#x8868;&#x53EA;&#x80FD;&#x9488;&#x5BF9;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x5BFC;&#x51FA;&#xFF0C;&#x4E14;&#x5BFC;&#x51FA;&#x7684;&#x5185;&#x5BB9;&#x4E2D;&#x548C;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x4E5F;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x5BFC;&#x51FA;&#x6307;&#x5B9A;&#x8868;&#x7684;&#x5BFC;&#x51FA;&#x6587;&#x672C;&#x4E2D;&#x6CA1;&#x6709;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5224;&#x65AD;&#x8BED;&#x53E5;&#xFF0C;&#x53EA;&#x6709;&#x5220;&#x9664;&#x8868;-&#x521B;&#x5EFA;&#x8868;-&#x5BFC;&#x5165;&#x6570;&#x636E;</p>
-<h1 id="4&#x3001;&#x53EA;&#x5BFC;&#x51FA;&#x8868;&#x7ED3;&#x6784;&#x4E0D;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#xFF0C;--no-data">4&#x3001;&#x53EA;&#x5BFC;&#x51FA;&#x8868;&#x7ED3;&#x6784;&#x4E0D;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#xFF0C;--no-data</h1>
+<h1 id="4&#x3001;&#x7B5B;&#x9009;&#x5BFC;&#x51FA;&#x8868;">4&#x3001;&#x7B5B;&#x9009;&#x5BFC;&#x51FA;&#x8868;</h1>
+<pre class="language-"><code class="lang-bash">mysqldump -u user -proot --databases db1 db2 --ignore-table<span class="token operator">=</span>db1.tbl --ignore-table<span class="token operator">=</span>db2.tb2  <span class="token operator">&gt;</span> /data/mysql-backup/db.sql
+</code></pre>
+<h1 id="5&#x3001;&#x53EA;&#x5BFC;&#x51FA;&#x8868;&#x7ED3;&#x6784;&#x4E0D;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#xFF0C;--no-data">5&#x3001;&#x53EA;&#x5BFC;&#x51FA;&#x8868;&#x7ED3;&#x6784;&#x4E0D;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#xFF0C;--no-data</h1>
 <pre class="language-"><code>$&gt; mysqldump -uroot -proot --no-data --databases db1 &gt;/tmp/db1.sql
-</code></pre><h1 id="5&#x3001;&#x8DE8;&#x670D;&#x52A1;&#x533A;&#x5BFC;&#x51FA;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5E93;">5&#x3001;&#x8DE8;&#x670D;&#x52A1;&#x533A;&#x5BFC;&#x51FA;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5E93;</h1>
+</code></pre><h1 id="6&#x3001;&#x8DE8;&#x670D;&#x52A1;&#x533A;&#x5BFC;&#x51FA;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5E93;">6&#x3001;&#x8DE8;&#x670D;&#x52A1;&#x533A;&#x5BFC;&#x51FA;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5E93;</h1>
 <p><strong>PS&#xFF1A;&#x8FDC;&#x7A0B;&#x6570;&#x636E;&#x5E93;&#x5FC5;&#x987B;&#x5B58;&#x5728;</strong></p>
 <pre class="language-"><code class="lang-bash"><span class="token comment"># &#x5C06;h1&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684;db1&#x6570;&#x636E;&#x5E93;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x5230;h2&#x4E2D;&#x7684;db2&#x6570;&#x636E;&#x5E93;&#x4E2D;</span>
-mysqldump --host<span class="token operator">=</span><span class="token number">192.168</span>.80.137 -uroot -proot -C --databases <span class="token builtin class-name">test</span> <span class="token operator">|</span> mysql --host<span class="token operator">=</span><span class="token number">192.168</span>.80.133 -uroot -proot <span class="token builtin class-name">test</span> 
+mysqldump --host<span class="token operator">=</span><span class="token number">192.168</span>.1.8 -uroot -proot -C --databases <span class="token builtin class-name">test</span> <span class="token operator">|</span> mysql --host<span class="token operator">=</span><span class="token number">192.168</span>.1.9 -uroot -proot <span class="token builtin class-name">test</span> 
 <span class="token comment"># PS&#xFF1A;&#x8FDC;&#x7A0B;&#x6570;&#x636E;&#x5E93;&#x5FC5;&#x987B;&#x5B58;&#x5728;</span>
 </code></pre>
-<h1 id="6&#x3001;mysqldump&#x7684;&#x53C2;&#x6570;&#x8BF4;&#x660E;">6&#x3001;MysqlDump&#x7684;&#x53C2;&#x6570;&#x8BF4;&#x660E;</h1>
+<h1 id="7&#x3001;&#x5B9A;&#x65F6;&#x5907;&#x4EFD;&#x4EFB;&#x52A1;">7&#x3001;&#x5B9A;&#x65F6;&#x5907;&#x4EFD;&#x4EFB;&#x52A1;</h1>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># &#x6BCF;&#x5929;&#x65E9;&#x4E0A;1&#x70B9;&#x5B9A;&#x65F6;&#x5907;&#x4EFD;MySQL&#x6570;&#x636E;</span>
+<span class="token number">0</span> <span class="token number">1</span> * * * mysqldump -u user -proot --databases db1 db2 --ignore-table<span class="token operator">=</span>db1.tb1 --ignore-table<span class="token operator">=</span>db2.tbl1  <span class="token operator">&gt;</span> /data/mysql-backup/db-<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +<span class="token string">&quot;\%Y\%m\%d\%H\%M&quot;</span><span class="token variable">)</span></span>.sql
+</code></pre>
+<h1 id="8&#x3001;mysqldump&#x7684;&#x53C2;&#x6570;&#x8BF4;&#x660E;">8&#x3001;MysqlDump&#x7684;&#x53C2;&#x6570;&#x8BF4;&#x660E;</h1>
 <pre class="language-"><code>--all-databases  , -A  &#x5BFC;&#x51FA;&#x5168;&#x90E8;&#x6570;&#x636E;&#x5E93;&#x3002;
 mysqldump  -uroot -p --all-databases
 --all-tablespaces  , -Y &#x5BFC;&#x51FA;&#x5168;&#x90E8;&#x8868;&#x7A7A;&#x95F4;&#x3002;
@@ -7246,7 +7274,7 @@ mysqldump  -uroot -p --host=localhost --all-databases --plugin_dir=&#x201D;/usr/
 mysqldump  -uroot -p --host=localhost --all-databases --default-auth=&#x201D;/usr/local/lib/plugin/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PLUGIN</span><span class="token punctuation">&gt;</span></span>&#x201D;
 </code></pre><h1 id=""> </h1>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-07-21 12:58:02
+2021-08-22 23:10:09
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7286,7 +7314,7 @@ mysqldump  -uroot -p --host=localhost --all-databases --default-auth=&#x201D;/us
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"MysqlDump详解","level":"7.18.1.4.1.2","depth":5,"next":{"title":"基础概念","level":"7.18.1.4.2","depth":4,"ref":"","articles":[]},"previous":{"title":"MySQL的数据备份与恢复","level":"7.18.1.4.1.1","depth":5,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-dumper.md","mtime":"2021-07-21T04:58:02.139Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-06T06:02:58.066Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"MysqlDump常用操作","level":"7.18.1.4.1.2","depth":5,"next":{"title":"基础概念","level":"7.18.1.4.2","depth":4,"ref":"","articles":[]},"previous":{"title":"MySQL的数据备份与恢复","level":"7.18.1.4.1.1","depth":5,"path":"origin/mysql-backup-restore.md","ref":"origin/mysql-backup-restore.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/mysql-dumper.md","mtime":"2021-08-22T15:10:09.692Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-22T15:26:02.488Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

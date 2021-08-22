@@ -248,3 +248,25 @@ brew bundle --file="~/Desktop/Brewfile"
 
 - 主配置文件路径：`/usr/local/etc/nginx/nginx.conf`
 - bin文件路径: `/usr/local/Cellar/nginx/nginx版本号/`
+
+## 7、stat命令格式化输出
+
+```bash
+$ echo "stat -f "文件: %N%n%n  大小: %Z 字节  类型: %HT%n  所在磁盘分区: %Sd Block编号: %b  Inode: %i %n  权限: %Sp(%Mp%Lp) / %Su(%u)-%Sg(%g)%n%n  最近访问时间  :  %Sa%n  内容修改时间  :  %Sm%n  inode修改时间 :  %Sc%n  创建时间      :  %SB" -t "%Y-%m-%d %H:%M:%m"" >> ~/.zshrc
+$ source ~/.zshrc
+$ stat test.txt
+
+文件: test.txt
+
+  大小: 124875 字节  类型: Regular File
+  所在磁盘分区: disk1s2 Block编号: 256  Inode: 55342799 
+  权限: -rw-r--r--(0644) / curiouser(501)-staff(20)
+
+  最近访问时间  :  2021-08-12 19:18:08
+  内容修改时间  :  2021-08-12 18:47:08
+  inode修改时间 :  2021-08-12 18:47:08
+  创建时间      :  2021-07-15 10:19:0721
+```
+
+
+

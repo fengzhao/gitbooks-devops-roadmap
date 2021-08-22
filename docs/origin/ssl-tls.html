@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>SSL/TLS · Devops Roadmap</title>
+        <title>SSL/TLS基础概念 · Devops Roadmap</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -106,10 +106,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="ssl-tls-cfssl.html" />
+    <link rel="next" href="ssl-tls-tools.html" />
     
-    
-    <link rel="prev" href="regular-expression详解.html" />
     
 
     <style>
@@ -1545,27 +1543,12 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.2" data-path="gitlab-配置代码仓库事件触发器Webhook.html">
-            
-                <a href="gitlab-配置代码仓库事件触发器Webhook.html">
-            
-                    
-                        <b>4.2.2.2.</b>
-                    
-                    代码仓库配置事件触发器Webhook
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="4.2.2.3" data-path="gitlab-backuprestore.html">
+        <li class="chapter " data-level="4.2.2.2" data-path="gitlab-backuprestore.html">
             
                 <a href="gitlab-backuprestore.html">
             
                     
-                        <b>4.2.2.3.</b>
+                        <b>4.2.2.2.</b>
                     
                     代码仓库的备份与恢复
             
@@ -1575,12 +1558,12 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.4" data-path="gitlab-upgrade.html">
+        <li class="chapter " data-level="4.2.2.3" data-path="gitlab-upgrade.html">
             
                 <a href="gitlab-upgrade.html">
             
                     
-                        <b>4.2.2.4.</b>
+                        <b>4.2.2.3.</b>
                     
                     版本升级
             
@@ -1590,14 +1573,44 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.2.5" data-path="gitlab-package-registry.html">
+        <li class="chapter " data-level="4.2.2.4" data-path="gitlab-package-registry.html">
             
                 <a href="gitlab-package-registry.html">
             
                     
-                        <b>4.2.2.5.</b>
+                        <b>4.2.2.4.</b>
                     
                     Gitlab的制品仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2.5" data-path="gitlab-配置代码仓库事件触发器Webhook.html">
+            
+                <a href="gitlab-配置代码仓库事件触发器Webhook.html">
+            
+                    
+                        <b>4.2.2.5.</b>
+                    
+                    Gitlab的Webhook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2.6" data-path="gitlab-server-hook.html">
+            
+                <a href="gitlab-server-hook.html">
+            
+                    
+                        <b>4.2.2.6.</b>
+                    
+                    Gitlab的服务端git hook
             
                 </a>
             
@@ -4138,14 +4151,30 @@
             
         </li>
     
-        <li class="chapter active" data-level="7.7" data-path="ssl-tls.html">
+        <li class="chapter " data-level="7.7" >
             
-                <a href="ssl-tls.html">
+                <span>
             
                     
                         <b>7.7.</b>
                     
                     SSL/TLS
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="7.7.1" data-path="ssl-tls.html">
+            
+                <a href="ssl-tls.html">
+            
+                    
+                        <b>7.7.1.</b>
+                    
+                    SSL/TLS基础概念
             
                 </a>
             
@@ -4154,18 +4183,23 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="7.7.1" data-path="ssl-tls-cfssl.html">
+        <li class="chapter " data-level="7.7.1.1" data-path="ssl-tls-tools.html">
             
-                <a href="ssl-tls-cfssl.html">
+                <a href="ssl-tls-tools.html">
             
                     
-                        <b>7.7.1.</b>
+                        <b>7.7.1.1.</b>
                     
-                    CFSSL
+                    证书生成工具
             
                 </a>
             
 
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -5604,7 +5638,7 @@
                     
                         <b>7.18.1.4.1.2.</b>
                     
-                    MysqlDump详解
+                    MysqlDump常用操作
             
                 </a>
             
@@ -5855,21 +5889,6 @@
             
                     
                         <b>7.20.4.</b>
-                    
-                    Squid
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.20.5" >
-            
-                <span>
-            
-                    
-                        <b>7.20.5.</b>
                     
                     Varnish
             
@@ -7010,7 +7029,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >SSL/TLS</a>
+        <a href=".." >SSL/TLS基础概念</a>
     </h1>
 </div>
 
@@ -7033,11 +7052,12 @@
 <p>&#x8D77;&#x521D;&#x662F;&#x56E0;&#x4E3A;HTTP&#x5728;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x660E;&#x6587;&#xFF08;&#x867D;&#x7136;&#x8BF4;POST&#x63D0;&#x4EA4;&#x7684;&#x6570;&#x636E;&#x65F6;&#x653E;&#x5728;&#x62A5;&#x4F53;&#x91CC;&#x770B;&#x4E0D;&#x5230;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6293;&#x5305;&#x5DE5;&#x5177;&#x7A83;&#x53D6;&#x5230;&#xFF09;&#x662F;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x9690;&#x60A3;&#x7F51;&#x666F;&#x516C;&#x53F8;&#x63A8;&#x51FA;&#x4E86;SSL&#x5B89;&#x5168;&#x5957;&#x63A5;&#x5B57;&#x534F;&#x8BAE;&#x5C42;&#xFF0C;SSL&#x534F;&#x8BAE;&#x4F4D;&#x4E8E;TCP/IP&#x534F;&#x8BAE;&#x4E0E;&#x5404;&#x79CD;&#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#x4E4B;&#x95F4;&#xFF0C;&#x4E3A;&#x6570;&#x636E;&#x901A;&#x8BAF;&#x63D0;&#x4F9B;&#x5B89;&#x5168;&#x652F;&#x6301;&#x3002;SSL&#x534F;&#x8BAE;&#x53EF;&#x5206;&#x4E3A;&#x4E24;&#x5C42;&#xFF1A; SSL&#x8BB0;&#x5F55;&#x534F;&#x8BAE;&#xFF08;SSL Record Protocol&#xFF09;&#xFF1A;&#x5B83;&#x5EFA;&#x7ACB;&#x5728;&#x53EF;&#x9760;&#x7684;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#xFF08;&#x5982;TCP&#xFF09;&#x4E4B;&#x4E0A;&#xFF0C;&#x4E3A;&#x9AD8;&#x5C42;&#x534F;&#x8BAE;&#x63D0;&#x4F9B;&#x6570;&#x636E;&#x5C01;&#x88C5;&#x3001;&#x538B;&#x7F29;&#x3001;&#x52A0;&#x5BC6;&#x7B49;&#x57FA;&#x672C;&#x529F;&#x80FD;&#x7684;&#x652F;&#x6301;&#x3002; SSL&#x63E1;&#x624B;&#x534F;&#x8BAE;&#xFF08;SSL Handshake Protocol&#xFF09;&#xFF1A;&#x5B83;&#x5EFA;&#x7ACB;&#x5728;SSL&#x8BB0;&#x5F55;&#x534F;&#x8BAE;&#x4E4B;&#x4E0A;&#xFF0C;&#x7528;&#x4E8E;&#x5728;&#x5B9E;&#x9645;&#x7684;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x5F00;&#x59CB;&#x524D;&#xFF0C;&#x901A;&#x8BAF;&#x53CC;&#x65B9;&#x8FDB;&#x884C;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x3001;&#x534F;&#x5546;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#x3001;&#x4EA4;&#x6362;&#x52A0;&#x5BC6;&#x5BC6;&#x94A5;&#x7B49;&#x3002;</p>
 </li>
 <li><p><strong>TLS(Transport Layer Security&#x5B89;&#x5168;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;)</strong></p>
-<p>&#x7531;&#x4E8E;HTTPS&#x7684;&#x63A8;&#x51FA;&#x53D7;&#x5230;&#x4E86;&#x5F88;&#x591A;&#x4EBA;&#x7684;&#x6B22;&#x8FCE;&#xFF0C;&#x5728;SSL&#x66F4;&#x65B0;&#x5230;3.0&#x65F6;&#xFF0C;IETF&#x5BF9;SSL3.0&#x8FDB;&#x884C;&#x4E86;&#x6807;&#x51C6;&#x5316;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x4E86;&#x5C11;&#x6570;&#x673A;&#x5236;(&#x4F46;&#x662F;&#x51E0;&#x4E4E;&#x548C;SSL3.0&#x65E0;&#x5DEE;&#x5F02;)&#xFF0C;&#x6807;&#x51C6;&#x5316;&#x540E;&#x7684;IETF&#x66F4;&#x540D;&#x4E3A;TLS1.0(Transport Layer Security &#x5B89;&#x5168;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;)&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;TLS&#x5C31;&#x662F;SSL&#x7684;&#x65B0;&#x7248;&#x672C;3.1&#xFF0C;&#x5E76;&#x540C;&#x65F6;&#x53D1;&#x5E03;&#x201C;RFC2246-TLS&#x52A0;&#x5BC6;&#x534F;&#x8BAE;&#x8BE6;&#x89E3;&#x201D; </p>
+<p>&#x7531;&#x4E8E;HTTPS&#x7684;&#x63A8;&#x51FA;&#x53D7;&#x5230;&#x4E86;&#x5F88;&#x591A;&#x4EBA;&#x7684;&#x6B22;&#x8FCE;&#xFF0C;&#x5728;SSL&#x66F4;&#x65B0;&#x5230;3.0&#x65F6;&#xFF0C;IETF&#x5BF9;SSL3.0&#x8FDB;&#x884C;&#x4E86;&#x6807;&#x51C6;&#x5316;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x4E86;&#x5C11;&#x6570;&#x673A;&#x5236;(&#x4F46;&#x662F;&#x51E0;&#x4E4E;&#x548C;SSL3.0&#x65E0;&#x5DEE;&#x5F02;)&#xFF0C;&#x6807;&#x51C6;&#x5316;&#x540E;&#x7684;IETF&#x66F4;&#x540D;&#x4E3A;TLS1.0(Transport Layer Security &#x5B89;&#x5168;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;)&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;TLS&#x5C31;&#x662F;SSL&#x7684;&#x65B0;&#x7248;&#x672C;3.1&#xFF0C;&#x5E76;&#x540C;&#x65F6;&#x53D1;&#x5E03;&#x201C;RFC2246-TLS&#x52A0;&#x5BC6;&#x534F;&#x8BAE;&#x8BE6;&#x89E3;&#x201D;</p>
 </li>
 </ul>
+<h1 id="&#x4E8C;&#x3001;http&#x8BF7;&#x6C42;&#x8BC1;&#x4E66;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;">&#x4E8C;&#x3001;HTTP&#x8BF7;&#x6C42;&#x8BC1;&#x4E66;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;</h1>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2020-06-16 21:35:29
+2021-08-20 09:41:05
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7066,12 +7086,8 @@
 
 		
 		
-		<a href="regular-expression详解.html" class="navigation navigation-prev " aria-label="Previous page: 正则表达式">
-			<i class="fa fa-angle-left"></i>
-		</a>
 		
-		
-		<a href="ssl-tls-cfssl.html" class="navigation navigation-next " aria-label="Next page: CFSSL">
+		<a href="ssl-tls-tools.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 证书生成工具">
 			<i class="fa fa-angle-right"></i>
 		</a>
 		
@@ -7081,7 +7097,7 @@
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"SSL/TLS","level":"7.7","depth":1,"next":{"title":"CFSSL","level":"7.7.1","depth":2,"path":"origin/ssl-tls-cfssl.md","ref":"origin/ssl-tls-cfssl.md","articles":[]},"previous":{"title":"正则表达式","level":"7.6","depth":1,"path":"origin/regular-expression详解.md","ref":"origin/regular-expression详解.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/ssl-tls.md","mtime":"2020-06-16T13:35:29.542Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-06T06:02:58.066Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"SSL/TLS基础概念","level":"7.7.1","depth":2,"next":{"title":"证书生成工具","level":"7.7.1.1","depth":3,"path":"origin/ssl-tls-tools.md","ref":"origin/ssl-tls-tools.md","articles":[]},"previous":{"title":"SSL/TLS","level":"7.7","depth":1,"ref":"","articles":[{"title":"SSL/TLS基础概念","level":"7.7.1","depth":2,"path":"origin/ssl-tls.md","ref":"origin/ssl-tls.md","articles":[{"title":"证书生成工具","level":"7.7.1.1","depth":3,"path":"origin/ssl-tls-tools.md","ref":"origin/ssl-tls-tools.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/ssl-tls.md","mtime":"2021-08-20T01:41:05.123Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-22T15:26:02.488Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

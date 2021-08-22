@@ -11,3 +11,8 @@
 - **TLS(Transport Layer Security安全传输层协议)**
 
   由于HTTPS的推出受到了很多人的欢迎，在SSL更新到3.0时，IETF对SSL3.0进行了标准化，并添加了少数机制(但是几乎和SSL3.0无差异)，标准化后的IETF更名为TLS1.0(Transport Layer Security 安全传输层协议)，可以说TLS就是SSL的新版本3.1，并同时发布“RFC2246-TLS加密协议详解”
+
+
+
+# 二、HTTP请求证书认证流程
+

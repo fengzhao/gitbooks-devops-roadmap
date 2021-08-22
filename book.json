@@ -2,6 +2,7 @@
     "author": "Curiouser <rationalmonster@163.com>",
     "title": "Devops Roadmap",
     "root": ".",
+    "output": "docs",
 	"plugins": [
 		"-search",
 		"-lunr",
@@ -82,7 +83,7 @@
                 "eval-js"
             ]
         },
-         "donate": {
+        "donate": {
             "wechat": "/assets/wechat-donate.jpg",
             "title": "",
             "button": "赏",

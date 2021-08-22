@@ -1292,15 +1292,7 @@ ansible-playbook /etc/ansible/24.restore.yml
 
   - 如果可以接受短暂业务中断，执行 `ansible-playbook -t upgrade_docker 03.docker.yml`
 
-  - 如果要求零中断升级，执行
-
-     
-
-    ```
-    ansible-playbook -t download_docker 03.docker.yml
-    ```
-
-    ，然后手动执行如下
+  - 如果要求零中断升级，执行`ansible-playbook -t download_docker 03.docker.yml` ，然后手动执行如下
 
     - 待升级节点，先应用`kubectl cordon`和`kubectl drain`命令迁移业务pod
     - 待升级节点执行 `systemctl restart docker`
