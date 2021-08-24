@@ -1,12 +1,12 @@
-# Gitlab的服务端钩子Hook
+# Gitlab的服务端git钩子
 
 # 一、简介
 
 官方文档：https://docs.gitlab.com/ee/administration/server_hooks.html
 
-Git除了客户端有各种钩子进行配置使用，远程存储库，例如gitlab也支持服务端的钩子。比如本地git客户端推送代码到远程仓库时，可以指定执行钩子脚本。
+Git除了客户端有各种钩子进行配置使用，远程存储库，例如gitlab也支持服务端的钩子。本地git客户端推送代码到远程仓库时，可以触发执行钩子脚本。
 
-**Gitlab支持的服务端钩子**
+## **服务端git钩子类型**
 
 - **pre-receive**：`git push`向仓库推送代码时被执行
 - **post-receive**：在成功推送后被调用，适合用于发送通知。这个脚本没有参数，但和pre-receive一样通过标准输入读取
@@ -15,113 +15,136 @@ Git除了客户端有各种钩子进行配置使用，远程存储库，例如gi
   - 引用中存放的旧的对象名称
   - 引用中存放的新的对象名称
 
-**Gitlab服务端钩子支持配置的范围**
+## **支持配置的范围**
 
 - **单个仓库**
 - **全局所有的仓库**
 
+## 应用场景
+
+- 保护仓库CICD脚本(例如：`.gitlab-ci.yaml`，`Dockerfile`)等非业务代码不被开发人员修改
+- 检查MergeRequest的变更，或者触发其他动作
 
 
 
+# 二、配置
 
-# 二、单个仓库钩子
+## 1、创建钩子脚本
 
+- **单个仓库钩子脚本**
 
+  根据钩子类型需要在仓库存储路径下的custom_hooks(不存在就自行创建)文件下创建对应钩子类型名称的脚本文件
 
-## 1、
+  > 在项目经过Hashed过的项目路径下创建钩子脚本文件（项目hashed的路径参考[附录一](#附录)）
 
-## 2、创建钩子脚本文件夹
+  ```bash
+  mkdir /var/opt/gitlab/git-data/repositories/@hashed/项目hashed路径/custom_hooks
+  touch /var/opt/gitlab/git-data/repositories/@hashed/项目hashed路径.git/custom_hooks/pre-receive
+  chmod +x /var/opt/gitlab/git-data/repositories/@hashed/项目hashed路径.git/custom_hooks/pre-receive
+  ```
 
-在项目经过Hashed过的项目路径下创建钩子脚本文件（项目hashed的路径参考[附录一](#附录)）
+- **全局仓库钩子脚本**
 
-```bash
-mkdir /var/opt/gitlab/git-data/repositories/@hashed/项目hashed路径/custom_hooks
-```
+  - 全局构建脚本默认配置路径：Omnibus安装模式下是在 `/opt/gitlab/embedded/service/gitlab-shell/hooks`，源码安装模式下是在`/home/git/gitlab-shell/hooks`
 
-## 3、创建`pre-receive`脚本
+  - 根据钩子类型需要在钩子默认配置路径下创建对应钩子类型名称的文件夹(其他名字的会被忽略)。例如：`pre-receive.d,post-receive.d,update.d`
+
+  ```bash
+  mkdir -p /opt/gitlab/embedded/service/gitlab-shell/hooks/{pre-receive.d,post-receive.d,update.d}
+  touch detect-modify-cicd-scripts-files.sh
+  chmod +x detect-modify-cicd-scripts-files.sh
+  ```
+
+  
+
+## 2、编写钩子脚本
+
+**脚本生效顺序：**
+
+- 内置的钩子脚本
+- `单个仓库.git/custom_hooks/以钩子类型名称命名的脚本文件`
+- `单个仓库.git/custom_hooks/钩子类型名称.d/*`
+- `<custom_hooks_dir>/钩子类型名称.d/*`
+- 对于文件夹下的多个脚本则按字母顺序执行，以脚本非零值退出时中断执行。
+
+**脚本语言支持：**
+
+- shell
+- ruby
+
+**脚本逻辑：**
+
+- 使用git diff对比commit与当前仓库commit有变更的文件
+
+- 判读变更文件是否是预设受保护的文件？是的话，追加到预置变量中进行记录
+
+- 判断预置变量是否为空？不为空，代表本次commit有修改受保护文件。
+
+- 再次判断当前commit的用户是否为预设允许修改受保护文件的用户？是的话，允许提交。不是的话，
+
+  - git push显示警告，然后发送钉钉通知
+  - 判断提交协议是否是web？是的话，则表示触发执行当前脚本的是Web界面上创建的MergeRequest请求，然后显示告警信息。
+  - 最后脚本返回状态1，然后gitlab就会拒绝当前commit的推送
+
+  
 
 ```bash
 #!/bin/bash
-z40=0000000000000000000000000000000000000000
-echo $GL_USERNAME
+
+protected_files=".gitlab-ci.yml docker/Dockerfile docker/config.sh docker/k8s-application.tpl.yaml docker/k8s-cronjob.tpl.yaml"
+approval_users="root curiouser"
+DINGDING_ROBOT_TOKEN="钉钉机器人的Token"
+changed_file=""
+
 while read oldrev newrev refname; do
-   if [ $oldrev == $z40 ]; then
-     # Commit being pushed is for a new branch
-     oldrev=4b825dc642cb6eb9a060e54bf8d69288fbee4904
-   fi
-   yaml_file_name=".test.yml"
-   approval_user="root"
-   file_name=$(git diff --name-only $oldrev $newrev)
-   if [ "$yaml_file_name" == "$file_name" ] && [ $GL_USERNAME != "$approval_user" ]; then
-           echo -e "\033[31m####################################\033[0m"
-           echo -e "\033[31m###                              ###\033[0m"
-           echo -e "\033[31m###   请不要修改${yaml_file_name}文件!   ###\033[0m"
-           echo -e "\033[31m###                              ###\033[0m"
-           echo -e "\033[31m####################################\033[0m"
-           exit 1
-   fi
+    commit_changed_file_name=$(git diff --name-only $oldrev $newrev)
+    for i in $commit_changed_file_name; do
+        if $(echo $protected_files | grep -q $i); then
+            changed_file+="   $i\n"
+        fi
+    done
+    if [[ ! $changed_file == "" ]] && [[ ${approval_users/$GL_USERNAME//} == $approval_users ]]; then
+        echo -e "\033[31m########################################\033[0m"
+        if [[ $GL_PROTOCOL == 'web' ]] ;then
+            echo "GL-HOOK-ERR: 本次MergeRequest修改了受保护文件:"
+            echo -e "GL-HOOK-ERR: ${changed_file//\\n/  }"
+            echo "GL-HOOK-ERR: 无法完成合并，请检查修改！"
+        fi
+        echo -n -e "\033[31m${GL_USERNAME}, 请不要修改以下仓库保护文件: \n${changed_file}本次推送${newrev:0:8}将被拒绝推送至远程仓库\n########################################\033[0m"
+        curl -s -H 'Content-Type: application/json' -d '{"msgtype": "markdown","markdown": {"title": "Gitlab","text": "# Gitlab仓库保护文件修改通知\n'$GL_USERNAME'正在尝试将以下保护文件修改推送至'$GL_PROJECT_PATH'仓库中: \n >  '"$changed_file"'\n#### 推送'"${newrev:0:8}"'已拒绝 "},"at": {"isAtAll": true}}' https://oapi.dingtalk.com/robot/send?access_token=$DINGDING_ROBOT_TOKEN >/dev/null
+        exit 1
+    fi
 done
-echo "I'm a hooked file on server"
 ```
 
-```bash
-chmod +x /var/opt/gitlab/git-data/repositories/@hashed/项目hashed路径/custom_hooks/pre-receive
-```
+## 3、验证测试
 
+①当在git本地修改了受保护文件推送至远程仓库时，会显示提示信息，并拒绝推送
 
+![](../assets/gitlab-server-git-hook-verification.gif)
 
-## 4、验证测试
+②当Web界面创建MergeRequest合并某个分支到目标分支时，修改了目标分支，会显示提示信息，并拒绝合并
 
-```bash
-echo "test" >> .test.yaml
-git commit -am "测试"
-git push origin
-```
+![](../assets/gitlab-server-git-hook-verification-2.png)
 
-![](../assets/image-20210813141326213.png)
+# 三、脚本可引用的环境变量
 
-# 三、全局仓库钩子
+| 环境变量          | 描述                                         |
+| :---------------- | :------------------------------------------- |
+| `GL_ID`           | 用户ID。格式：key-ID                         |
+| `GL_PROJECT_PATH` | 仓库路径，GitLab版本 >= 13.2                 |
+| `GL_PROTOCOL`     | 推送协议（http/ssh/web），GitLab版本 >= 13.2 |
+| `GL_REPOSITORY`   | 仓库ID，`project-<id>`                       |
+| `GL_USERNAME`     | 用户名称                                     |
 
-```bash
-cd /opt/gitlab/embedded/service/gitlab-shell/
-mkdir -p hooks/{pre-receive.d,post-receive.d,update.d}
-```
+`pre-receive` 和 `post-receive server` 钩子脚本可引用的变量
 
-`detect-modify-cicd-scripts-files.sh`
-
-```bash
-#!/bin/bash
-z40=0000000000000000000000000000000000000000
-echo $GL_USERNAME
-while read oldrev newrev refname; do
-   if [ $oldrev == $z40 ]; then
-     # Commit being pushed is for a new branch
-     oldrev=4b825dc642cb6eb9a060e54bf8d69288fbee4904
-   fi
-   yaml_file_name=".test.yml"
-   approval_user="root"
-   d=$(git diff --name-only $oldrev $newrev)
-   if [ "$yaml_file_name" == "$file_name" ] && [ $GL_USERNAME != "$approval_user" ]; then
-           echo -e "\033[31m####################################\033[0m"
-           echo -e "\033[31m###                              ###\033[0m"
-           echo -e "\033[31m###   请不要修改${yaml_file_name}文件!   ###\033[0m"
-           echo -e "\033[31m###                              ###\033[0m"
-           echo -e "\033[31m####################################\033[0m"
-           exit 1
-   fi
-done
-echo "I'm a hooked file on server"
-```
-
-# 四、应用场景
-
-## 1、检查推送代码是否修改某些文件
-
-
-
-## 2、
-
-
+| 环境变量                           | 描述                                                         |
+| :--------------------------------- | :----------------------------------------------------------- |
+| `GIT_ALTERNATE_OBJECT_DIRECTORIES` | 仓库底层存储文件路径。（可选，路径包含Hash过的路径）         |
+| `GIT_OBJECT_DIRECTORY`             | 仓库底层存储文件路径。（路径包含Hash过的路径）               |
+| `GIT_PUSH_OPTION_COUNT`            | Number of push options. See [Git `pre-receive` documentation](https://git-scm.com/docs/githooks#pre-receive). |
+| `GIT_PUSH_OPTION_<i>`              | Value of push options where `i` is from `0` to `GIT_PUSH_OPTION_COUNT - 1`. See [Git `pre-receive` documentation](https://git-scm.com/docs/githooks#pre-receive). |
 
 
 

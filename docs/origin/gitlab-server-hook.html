@@ -7044,11 +7044,11 @@
     
 					<section class="normal markdown-section">
 						
-						<h1 id="gitlab&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;hook">Gitlab&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;Hook</h1>
+						<h1 id="gitlab&#x7684;&#x670D;&#x52A1;&#x7AEF;git&#x94A9;&#x5B50;">Gitlab&#x7684;&#x670D;&#x52A1;&#x7AEF;git&#x94A9;&#x5B50;</h1>
 <h1 id="&#x4E00;&#x3001;&#x7B80;&#x4ECB;">&#x4E00;&#x3001;&#x7B80;&#x4ECB;</h1>
 <p>&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1A;<a href="https://docs.gitlab.com/ee/administration/server_hooks.html" _target="blank">https://docs.gitlab.com/ee/administration/server_hooks.html</a></p>
-<p>Git&#x9664;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x5404;&#x79CD;&#x94A9;&#x5B50;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x4F7F;&#x7528;&#xFF0C;&#x8FDC;&#x7A0B;&#x5B58;&#x50A8;&#x5E93;&#xFF0C;&#x4F8B;&#x5982;gitlab&#x4E5F;&#x652F;&#x6301;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x94A9;&#x5B50;&#x3002;&#x6BD4;&#x5982;&#x672C;&#x5730;git&#x5BA2;&#x6237;&#x7AEF;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x6267;&#x884C;&#x94A9;&#x5B50;&#x811A;&#x672C;&#x3002;</p>
-<p><strong>Gitlab&#x652F;&#x6301;&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;</strong></p>
+<p>Git&#x9664;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x5404;&#x79CD;&#x94A9;&#x5B50;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x4F7F;&#x7528;&#xFF0C;&#x8FDC;&#x7A0B;&#x5B58;&#x50A8;&#x5E93;&#xFF0C;&#x4F8B;&#x5982;gitlab&#x4E5F;&#x652F;&#x6301;&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x94A9;&#x5B50;&#x3002;&#x672C;&#x5730;git&#x5BA2;&#x6237;&#x7AEF;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x89E6;&#x53D1;&#x6267;&#x884C;&#x94A9;&#x5B50;&#x811A;&#x672C;&#x3002;</p>
+<h2 id="&#x670D;&#x52A1;&#x7AEF;git&#x94A9;&#x5B50;&#x7C7B;&#x578B;"><strong>&#x670D;&#x52A1;&#x7AEF;git&#x94A9;&#x5B50;&#x7C7B;&#x578B;</strong></h2>
 <ul>
 <li><strong>pre-receive</strong>&#xFF1A;<code>git push</code>&#x5411;&#x4ED3;&#x5E93;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x65F6;&#x88AB;&#x6267;&#x884C;</li>
 <li><strong>post-receive</strong>&#xFF1A;&#x5728;&#x6210;&#x529F;&#x63A8;&#x9001;&#x540E;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x9002;&#x5408;&#x7528;&#x4E8E;&#x53D1;&#x9001;&#x901A;&#x77E5;&#x3002;&#x8FD9;&#x4E2A;&#x811A;&#x672C;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x548C;pre-receive&#x4E00;&#x6837;&#x901A;&#x8FC7;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8BFB;&#x53D6;</li>
@@ -7059,78 +7059,162 @@
 </ul>
 </li>
 </ul>
-<p><strong>Gitlab&#x670D;&#x52A1;&#x7AEF;&#x94A9;&#x5B50;&#x652F;&#x6301;&#x914D;&#x7F6E;&#x7684;&#x8303;&#x56F4;</strong></p>
+<h2 id="&#x652F;&#x6301;&#x914D;&#x7F6E;&#x7684;&#x8303;&#x56F4;"><strong>&#x652F;&#x6301;&#x914D;&#x7F6E;&#x7684;&#x8303;&#x56F4;</strong></h2>
 <ul>
 <li><strong>&#x5355;&#x4E2A;&#x4ED3;&#x5E93;</strong></li>
 <li><strong>&#x5168;&#x5C40;&#x6240;&#x6709;&#x7684;&#x4ED3;&#x5E93;</strong></li>
 </ul>
-<h1 id="&#x4E8C;&#x3001;&#x5355;&#x4E2A;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;">&#x4E8C;&#x3001;&#x5355;&#x4E2A;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;</h1>
-<h2 id="1&#x3001;">1&#x3001;</h2>
-<h2 id="2&#x3001;&#x521B;&#x5EFA;&#x94A9;&#x5B50;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x5939;">2&#x3001;&#x521B;&#x5EFA;&#x94A9;&#x5B50;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x5939;</h2>
+<h2 id="&#x5E94;&#x7528;&#x573A;&#x666F;">&#x5E94;&#x7528;&#x573A;&#x666F;</h2>
+<ul>
+<li>&#x4FDD;&#x62A4;&#x4ED3;&#x5E93;CICD&#x811A;&#x672C;(&#x4F8B;&#x5982;&#xFF1A;<code>.gitlab-ci.yaml</code>&#xFF0C;<code>Dockerfile</code>)&#x7B49;&#x975E;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E0D;&#x88AB;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x4FEE;&#x6539;</li>
+<li>&#x68C0;&#x67E5;MergeRequest&#x7684;&#x53D8;&#x66F4;&#xFF0C;&#x6216;&#x8005;&#x89E6;&#x53D1;&#x5176;&#x4ED6;&#x52A8;&#x4F5C;</li>
+</ul>
+<h1 id="&#x4E8C;&#x3001;&#x914D;&#x7F6E;">&#x4E8C;&#x3001;&#x914D;&#x7F6E;</h1>
+<h2 id="1&#x3001;&#x521B;&#x5EFA;&#x94A9;&#x5B50;&#x811A;&#x672C;">1&#x3001;&#x521B;&#x5EFA;&#x94A9;&#x5B50;&#x811A;&#x672C;</h2>
+<ul>
+<li><p><strong>&#x5355;&#x4E2A;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;&#x811A;&#x672C;</strong></p>
+<p>&#x6839;&#x636E;&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x9700;&#x8981;&#x5728;&#x4ED3;&#x5E93;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;&#x4E0B;&#x7684;custom_hooks(&#x4E0D;&#x5B58;&#x5728;&#x5C31;&#x81EA;&#x884C;&#x521B;&#x5EFA;)&#x6587;&#x4EF6;&#x4E0B;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x540D;&#x79F0;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;</p>
+<blockquote>
 <p>&#x5728;&#x9879;&#x76EE;&#x7ECF;&#x8FC7;Hashed&#x8FC7;&#x7684;&#x9879;&#x76EE;&#x8DEF;&#x5F84;&#x4E0B;&#x521B;&#x5EFA;&#x94A9;&#x5B50;&#x811A;&#x672C;&#x6587;&#x4EF6;&#xFF08;&#x9879;&#x76EE;hashed&#x7684;&#x8DEF;&#x5F84;&#x53C2;&#x8003;<a href="#&#x9644;&#x5F55;">&#x9644;&#x5F55;&#x4E00;</a>&#xFF09;</p>
+</blockquote>
 <pre class="language-"><code class="lang-bash"><span class="token function">mkdir</span> /var/opt/gitlab/git-data/repositories/@hashed/&#x9879;&#x76EE;hashed&#x8DEF;&#x5F84;/custom_hooks
+<span class="token function">touch</span> /var/opt/gitlab/git-data/repositories/@hashed/&#x9879;&#x76EE;hashed&#x8DEF;&#x5F84;.git/custom_hooks/pre-receive
+<span class="token function">chmod</span> +x /var/opt/gitlab/git-data/repositories/@hashed/&#x9879;&#x76EE;hashed&#x8DEF;&#x5F84;.git/custom_hooks/pre-receive
 </code></pre>
-<h2 id="3&#x3001;&#x521B;&#x5EFA;pre-receive&#x811A;&#x672C;">3&#x3001;&#x521B;&#x5EFA;<code>pre-receive</code>&#x811A;&#x672C;</h2>
+</li>
+<li><p><strong>&#x5168;&#x5C40;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;&#x811A;&#x672C;</strong></p>
+<ul>
+<li><p>&#x5168;&#x5C40;&#x6784;&#x5EFA;&#x811A;&#x672C;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x8DEF;&#x5F84;&#xFF1A;Omnibus&#x5B89;&#x88C5;&#x6A21;&#x5F0F;&#x4E0B;&#x662F;&#x5728; <code>/opt/gitlab/embedded/service/gitlab-shell/hooks</code>&#xFF0C;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x6A21;&#x5F0F;&#x4E0B;&#x662F;&#x5728;<code>/home/git/gitlab-shell/hooks</code></p>
+</li>
+<li><p>&#x6839;&#x636E;&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x9700;&#x8981;&#x5728;&#x94A9;&#x5B50;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x8DEF;&#x5F84;&#x4E0B;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x540D;&#x79F0;&#x7684;&#x6587;&#x4EF6;&#x5939;(&#x5176;&#x4ED6;&#x540D;&#x5B57;&#x7684;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;)&#x3002;&#x4F8B;&#x5982;&#xFF1A;<code>pre-receive.d,post-receive.d,update.d</code></p>
+</li>
+</ul>
+<pre class="language-"><code class="lang-bash"><span class="token function">mkdir</span> -p /opt/gitlab/embedded/service/gitlab-shell/hooks/<span class="token punctuation">{</span>pre-receive.d,post-receive.d,update.d<span class="token punctuation">}</span>
+<span class="token function">touch</span> detect-modify-cicd-scripts-files.sh
+<span class="token function">chmod</span> +x detect-modify-cicd-scripts-files.sh
+</code></pre>
+</li>
+</ul>
+<h2 id="2&#x3001;&#x7F16;&#x5199;&#x94A9;&#x5B50;&#x811A;&#x672C;">2&#x3001;&#x7F16;&#x5199;&#x94A9;&#x5B50;&#x811A;&#x672C;</h2>
+<p><strong>&#x811A;&#x672C;&#x751F;&#x6548;&#x987A;&#x5E8F;&#xFF1A;</strong></p>
+<ul>
+<li>&#x5185;&#x7F6E;&#x7684;&#x94A9;&#x5B50;&#x811A;&#x672C;</li>
+<li><code>&#x5355;&#x4E2A;&#x4ED3;&#x5E93;.git/custom_hooks/&#x4EE5;&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x540D;&#x79F0;&#x547D;&#x540D;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;</code></li>
+<li><code>&#x5355;&#x4E2A;&#x4ED3;&#x5E93;.git/custom_hooks/&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x540D;&#x79F0;.d/*</code></li>
+<li><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>custom_hooks_dir</span><span class="token punctuation">&gt;</span></span>/&#x94A9;&#x5B50;&#x7C7B;&#x578B;&#x540D;&#x79F0;.d/*</code></li>
+<li>&#x5BF9;&#x4E8E;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684;&#x591A;&#x4E2A;&#x811A;&#x672C;&#x5219;&#x6309;&#x5B57;&#x6BCD;&#x987A;&#x5E8F;&#x6267;&#x884C;&#xFF0C;&#x4EE5;&#x811A;&#x672C;&#x975E;&#x96F6;&#x503C;&#x9000;&#x51FA;&#x65F6;&#x4E2D;&#x65AD;&#x6267;&#x884C;&#x3002;</li>
+</ul>
+<p><strong>&#x811A;&#x672C;&#x8BED;&#x8A00;&#x652F;&#x6301;&#xFF1A;</strong></p>
+<ul>
+<li>shell</li>
+<li>ruby</li>
+</ul>
+<p><strong>&#x811A;&#x672C;&#x903B;&#x8F91;&#xFF1A;</strong></p>
+<ul>
+<li><p>&#x4F7F;&#x7528;git diff&#x5BF9;&#x6BD4;commit&#x4E0E;&#x5F53;&#x524D;&#x4ED3;&#x5E93;commit&#x6709;&#x53D8;&#x66F4;&#x7684;&#x6587;&#x4EF6;</p>
+</li>
+<li><p>&#x5224;&#x8BFB;&#x53D8;&#x66F4;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x662F;&#x9884;&#x8BBE;&#x53D7;&#x4FDD;&#x62A4;&#x7684;&#x6587;&#x4EF6;&#xFF1F;&#x662F;&#x7684;&#x8BDD;&#xFF0C;&#x8FFD;&#x52A0;&#x5230;&#x9884;&#x7F6E;&#x53D8;&#x91CF;&#x4E2D;&#x8FDB;&#x884C;&#x8BB0;&#x5F55;</p>
+</li>
+<li><p>&#x5224;&#x65AD;&#x9884;&#x7F6E;&#x53D8;&#x91CF;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF1F;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x4EE3;&#x8868;&#x672C;&#x6B21;commit&#x6709;&#x4FEE;&#x6539;&#x53D7;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;&#x3002;</p>
+</li>
+<li><p>&#x518D;&#x6B21;&#x5224;&#x65AD;&#x5F53;&#x524D;commit&#x7684;&#x7528;&#x6237;&#x662F;&#x5426;&#x4E3A;&#x9884;&#x8BBE;&#x5141;&#x8BB8;&#x4FEE;&#x6539;&#x53D7;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;&#x7684;&#x7528;&#x6237;&#xFF1F;&#x662F;&#x7684;&#x8BDD;&#xFF0C;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x3002;&#x4E0D;&#x662F;&#x7684;&#x8BDD;&#xFF0C;</p>
+<ul>
+<li>git push&#x663E;&#x793A;&#x8B66;&#x544A;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x9001;&#x9489;&#x9489;&#x901A;&#x77E5;</li>
+<li>&#x5224;&#x65AD;&#x63D0;&#x4EA4;&#x534F;&#x8BAE;&#x662F;&#x5426;&#x662F;web&#xFF1F;&#x662F;&#x7684;&#x8BDD;&#xFF0C;&#x5219;&#x8868;&#x793A;&#x89E6;&#x53D1;&#x6267;&#x884C;&#x5F53;&#x524D;&#x811A;&#x672C;&#x7684;&#x662F;Web&#x754C;&#x9762;&#x4E0A;&#x521B;&#x5EFA;&#x7684;MergeRequest&#x8BF7;&#x6C42;&#xFF0C;&#x7136;&#x540E;&#x663E;&#x793A;&#x544A;&#x8B66;&#x4FE1;&#x606F;&#x3002;</li>
+<li>&#x6700;&#x540E;&#x811A;&#x672C;&#x8FD4;&#x56DE;&#x72B6;&#x6001;1&#xFF0C;&#x7136;&#x540E;gitlab&#x5C31;&#x4F1A;&#x62D2;&#x7EDD;&#x5F53;&#x524D;commit&#x7684;&#x63A8;&#x9001;</li>
+</ul>
+</li>
+</ul>
 <pre class="language-"><code class="lang-bash"><span class="token shebang important">#!/bin/bash</span>
-<span class="token assign-left variable">z40</span><span class="token operator">=</span>0000000000000000000000000000000000000000
-<span class="token builtin class-name">echo</span> <span class="token variable">$GL_USERNAME</span>
+
+<span class="token assign-left variable">protected_files</span><span class="token operator">=</span><span class="token string">&quot;.gitlab-ci.yml docker/Dockerfile docker/config.sh docker/k8s-application.tpl.yaml docker/k8s-cronjob.tpl.yaml&quot;</span>
+<span class="token assign-left variable">approval_users</span><span class="token operator">=</span><span class="token string">&quot;root curiouser&quot;</span>
+<span class="token assign-left variable">DINGDING_ROBOT_TOKEN</span><span class="token operator">=</span><span class="token string">&quot;&#x9489;&#x9489;&#x673A;&#x5668;&#x4EBA;&#x7684;Token&quot;</span>
+<span class="token assign-left variable">changed_file</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+
 <span class="token keyword">while</span> <span class="token builtin class-name">read</span> oldrev newrev refname<span class="token punctuation">;</span> <span class="token keyword">do</span>
-   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$oldrev</span> <span class="token operator">==</span> <span class="token variable">$z40</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-     <span class="token comment"># Commit being pushed is for a new branch</span>
-     <span class="token assign-left variable">oldrev</span><span class="token operator">=</span>4b825dc642cb6eb9a060e54bf8d69288fbee4904
-   <span class="token keyword">fi</span>
-   <span class="token assign-left variable">yaml_file_name</span><span class="token operator">=</span><span class="token string">&quot;.test.yml&quot;</span>
-   <span class="token assign-left variable">approval_user</span><span class="token operator">=</span><span class="token string">&quot;root&quot;</span>
-   <span class="token assign-left variable">file_name</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> <span class="token function">diff</span> --name-only $oldrev $newrev<span class="token variable">)</span></span>
-   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$yaml_file_name</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;<span class="token variable">$file_name</span>&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token variable">$GL_USERNAME</span> <span class="token operator">!=</span> <span class="token string">&quot;<span class="token variable">$approval_user</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m####################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###                              ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###   &#x8BF7;&#x4E0D;&#x8981;&#x4FEE;&#x6539;<span class="token variable">${yaml_file_name}</span>&#x6587;&#x4EF6;!   ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###                              ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m####################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">exit</span> <span class="token number">1</span>
-   <span class="token keyword">fi</span>
+    <span class="token assign-left variable">commit_changed_file_name</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> <span class="token function">diff</span> --name-only $oldrev $newrev<span class="token variable">)</span></span>
+    <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable">$commit_changed_file_name</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+        <span class="token keyword">if</span> <span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $protected_files <span class="token operator">|</span> <span class="token function">grep</span> -q $i<span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            <span class="token assign-left variable">changed_file</span><span class="token operator">+=</span><span class="token string">&quot;   <span class="token variable">$i</span><span class="token entity" title="\n">\n</span>&quot;</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">done</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token variable">$changed_file</span> <span class="token operator">==</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">${approval_users<span class="token operator">/</span>$GL_USERNAME<span class="token operator">/</span><span class="token operator">/</span>}</span> <span class="token operator">==</span> <span class="token variable">$approval_users</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m########################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$GL_PROTOCOL</span> <span class="token operator">==</span> <span class="token string">&apos;web&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">;</span><span class="token keyword">then</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">&quot;GL-HOOK-ERR: &#x672C;&#x6B21;MergeRequest&#x4FEE;&#x6539;&#x4E86;&#x53D7;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;:&quot;</span>
+            <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;GL-HOOK-ERR: <span class="token variable">${changed_file<span class="token operator">/</span><span class="token operator">/</span>\\n<span class="token operator">/</span>  }</span>&quot;</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">&quot;GL-HOOK-ERR: &#x65E0;&#x6CD5;&#x5B8C;&#x6210;&#x5408;&#x5E76;&#xFF0C;&#x8BF7;&#x68C0;&#x67E5;&#x4FEE;&#x6539;&#xFF01;&quot;</span>
+        <span class="token keyword">fi</span>
+        <span class="token builtin class-name">echo</span> -n -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m<span class="token variable">${GL_USERNAME}</span>, &#x8BF7;&#x4E0D;&#x8981;&#x4FEE;&#x6539;&#x4EE5;&#x4E0B;&#x4ED3;&#x5E93;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;: <span class="token entity" title="\n">\n</span><span class="token variable">${changed_file}</span>&#x672C;&#x6B21;&#x63A8;&#x9001;<span class="token variable">${newrev<span class="token operator">:</span>0<span class="token operator">:</span>8}</span>&#x5C06;&#x88AB;&#x62D2;&#x7EDD;&#x63A8;&#x9001;&#x81F3;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;<span class="token entity" title="\n">\n</span>########################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
+        <span class="token function">curl</span> -s -H <span class="token string">&apos;Content-Type: application/json&apos;</span> -d <span class="token string">&apos;{&quot;msgtype&quot;: &quot;markdown&quot;,&quot;markdown&quot;: {&quot;title&quot;: &quot;Gitlab&quot;,&quot;text&quot;: &quot;# Gitlab&#x4ED3;&#x5E93;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x901A;&#x77E5;<span class="token entity" title="\n">\n</span>&apos;</span><span class="token variable">$GL_USERNAME</span><span class="token string">&apos;&#x6B63;&#x5728;&#x5C1D;&#x8BD5;&#x5C06;&#x4EE5;&#x4E0B;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x63A8;&#x9001;&#x81F3;&apos;</span><span class="token variable">$GL_PROJECT_PATH</span><span class="token string">&apos;&#x4ED3;&#x5E93;&#x4E2D;: <span class="token entity" title="\n">\n</span> &gt;  &apos;</span>&quot;<span class="token variable">$changed_file</span><span class="token string">&quot;&apos;<span class="token entity" title="\n">\n</span>#### &#x63A8;&#x9001;&apos;&quot;</span><span class="token variable">${newrev<span class="token operator">:</span>0<span class="token operator">:</span>8}</span><span class="token string">&quot;&apos;&#x5DF2;&#x62D2;&#x7EDD; &quot;</span><span class="token punctuation">}</span>,<span class="token string">&quot;at&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token string">&quot;isAtAll&quot;</span><span class="token builtin class-name">:</span> true<span class="token punctuation">}</span><span class="token punctuation">}</span>&apos; https://oapi.dingtalk.com/robot/send?access_token<span class="token operator">=</span><span class="token variable">$DINGDING_ROBOT_TOKEN</span> <span class="token operator">&gt;</span>/dev/null
+        <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+    <span class="token keyword">fi</span>
 <span class="token keyword">done</span>
-<span class="token builtin class-name">echo</span> <span class="token string">&quot;I&apos;m a hooked file on server&quot;</span>
 </code></pre>
-<pre class="language-"><code class="lang-bash"><span class="token function">chmod</span> +x /var/opt/gitlab/git-data/repositories/@hashed/&#x9879;&#x76EE;hashed&#x8DEF;&#x5F84;/custom_hooks/pre-receive
-</code></pre>
-<h2 id="4&#x3001;&#x9A8C;&#x8BC1;&#x6D4B;&#x8BD5;">4&#x3001;&#x9A8C;&#x8BC1;&#x6D4B;&#x8BD5;</h2>
-<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">echo</span> <span class="token string">&quot;test&quot;</span> <span class="token operator">&gt;&gt;</span> .test.yaml
-<span class="token function">git</span> commit -am <span class="token string">&quot;&#x6D4B;&#x8BD5;&quot;</span>
-<span class="token function">git</span> push origin
-</code></pre>
-<p><img src="../assets/image-20210813141326213.png" alt=""></p>
-<h1 id="&#x4E09;&#x3001;&#x5168;&#x5C40;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;">&#x4E09;&#x3001;&#x5168;&#x5C40;&#x4ED3;&#x5E93;&#x94A9;&#x5B50;</h1>
-<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">cd</span> /opt/gitlab/embedded/service/gitlab-shell/
-<span class="token function">mkdir</span> -p hooks/<span class="token punctuation">{</span>pre-receive.d,post-receive.d,update.d<span class="token punctuation">}</span>
-</code></pre>
-<p><code>detect-modify-cicd-scripts-files.sh</code></p>
-<pre class="language-"><code class="lang-bash"><span class="token shebang important">#!/bin/bash</span>
-<span class="token assign-left variable">z40</span><span class="token operator">=</span>0000000000000000000000000000000000000000
-<span class="token builtin class-name">echo</span> <span class="token variable">$GL_USERNAME</span>
-<span class="token keyword">while</span> <span class="token builtin class-name">read</span> oldrev newrev refname<span class="token punctuation">;</span> <span class="token keyword">do</span>
-   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$oldrev</span> <span class="token operator">==</span> <span class="token variable">$z40</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-     <span class="token comment"># Commit being pushed is for a new branch</span>
-     <span class="token assign-left variable">oldrev</span><span class="token operator">=</span>4b825dc642cb6eb9a060e54bf8d69288fbee4904
-   <span class="token keyword">fi</span>
-   <span class="token assign-left variable">yaml_file_name</span><span class="token operator">=</span><span class="token string">&quot;.test.yml&quot;</span>
-   <span class="token assign-left variable">approval_user</span><span class="token operator">=</span><span class="token string">&quot;root&quot;</span>
-   <span class="token assign-left variable">d</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> <span class="token function">diff</span> --name-only $oldrev $newrev<span class="token variable">)</span></span>
-   <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$yaml_file_name</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;<span class="token variable">$file_name</span>&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token variable">$GL_USERNAME</span> <span class="token operator">!=</span> <span class="token string">&quot;<span class="token variable">$approval_user</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m####################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###                              ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###   &#x8BF7;&#x4E0D;&#x8981;&#x4FEE;&#x6539;<span class="token variable">${yaml_file_name}</span>&#x6587;&#x4EF6;!   ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m###                              ###<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[31m####################################<span class="token entity" title="\033">\033</span>[0m&quot;</span>
-           <span class="token builtin class-name">exit</span> <span class="token number">1</span>
-   <span class="token keyword">fi</span>
-<span class="token keyword">done</span>
-<span class="token builtin class-name">echo</span> <span class="token string">&quot;I&apos;m a hooked file on server&quot;</span>
-</code></pre>
-<h1 id="&#x56DB;&#x3001;&#x5E94;&#x7528;&#x573A;&#x666F;">&#x56DB;&#x3001;&#x5E94;&#x7528;&#x573A;&#x666F;</h1>
-<h2 id="1&#x3001;&#x68C0;&#x67E5;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x662F;&#x5426;&#x4FEE;&#x6539;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;">1&#x3001;&#x68C0;&#x67E5;&#x63A8;&#x9001;&#x4EE3;&#x7801;&#x662F;&#x5426;&#x4FEE;&#x6539;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;</h2>
-<h2 id="2&#x3001;">2&#x3001;</h2>
+<h2 id="3&#x3001;&#x9A8C;&#x8BC1;&#x6D4B;&#x8BD5;">3&#x3001;&#x9A8C;&#x8BC1;&#x6D4B;&#x8BD5;</h2>
+<p>&#x2460;&#x5F53;&#x5728;git&#x672C;&#x5730;&#x4FEE;&#x6539;&#x4E86;&#x53D7;&#x4FDD;&#x62A4;&#x6587;&#x4EF6;&#x63A8;&#x9001;&#x81F3;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x65F6;&#xFF0C;&#x4F1A;&#x663E;&#x793A;&#x63D0;&#x793A;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x62D2;&#x7EDD;&#x63A8;&#x9001;</p>
+<p><img src="../assets/gitlab-server-git-hook-verification.gif" alt=""></p>
+<p>&#x2461;&#x5F53;Web&#x754C;&#x9762;&#x521B;&#x5EFA;MergeRequest&#x5408;&#x5E76;&#x67D0;&#x4E2A;&#x5206;&#x652F;&#x5230;&#x76EE;&#x6807;&#x5206;&#x652F;&#x65F6;&#xFF0C;&#x4FEE;&#x6539;&#x4E86;&#x76EE;&#x6807;&#x5206;&#x652F;&#xFF0C;&#x4F1A;&#x663E;&#x793A;&#x63D0;&#x793A;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x62D2;&#x7EDD;&#x5408;&#x5E76;</p>
+<p><img src="../assets/gitlab-server-git-hook-verification-2.png" alt=""></p>
+<h1 id="&#x4E09;&#x3001;&#x811A;&#x672C;&#x53EF;&#x5F15;&#x7528;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;">&#x4E09;&#x3001;&#x811A;&#x672C;&#x53EF;&#x5F15;&#x7528;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x73AF;&#x5883;&#x53D8;&#x91CF;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>GL_ID</code></td>
+<td style="text-align:left">&#x7528;&#x6237;ID&#x3002;&#x683C;&#x5F0F;&#xFF1A;key-ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GL_PROJECT_PATH</code></td>
+<td style="text-align:left">&#x4ED3;&#x5E93;&#x8DEF;&#x5F84;&#xFF0C;GitLab&#x7248;&#x672C; &gt;= 13.2</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GL_PROTOCOL</code></td>
+<td style="text-align:left">&#x63A8;&#x9001;&#x534F;&#x8BAE;&#xFF08;http/ssh/web&#xFF09;&#xFF0C;GitLab&#x7248;&#x672C; &gt;= 13.2</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GL_REPOSITORY</code></td>
+<td style="text-align:left">&#x4ED3;&#x5E93;ID&#xFF0C;<code>project-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span></code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GL_USERNAME</code></td>
+<td style="text-align:left">&#x7528;&#x6237;&#x540D;&#x79F0;</td>
+</tr>
+</tbody>
+</table>
+<p><code>pre-receive</code> &#x548C; <code>post-receive server</code> &#x94A9;&#x5B50;&#x811A;&#x672C;&#x53EF;&#x5F15;&#x7528;&#x7684;&#x53D8;&#x91CF;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x73AF;&#x5883;&#x53D8;&#x91CF;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>GIT_ALTERNATE_OBJECT_DIRECTORIES</code></td>
+<td style="text-align:left">&#x4ED3;&#x5E93;&#x5E95;&#x5C42;&#x5B58;&#x50A8;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;&#xFF08;&#x53EF;&#x9009;&#xFF0C;&#x8DEF;&#x5F84;&#x5305;&#x542B;Hash&#x8FC7;&#x7684;&#x8DEF;&#x5F84;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GIT_OBJECT_DIRECTORY</code></td>
+<td style="text-align:left">&#x4ED3;&#x5E93;&#x5E95;&#x5C42;&#x5B58;&#x50A8;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;&#xFF08;&#x8DEF;&#x5F84;&#x5305;&#x542B;Hash&#x8FC7;&#x7684;&#x8DEF;&#x5F84;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GIT_PUSH_OPTION_COUNT</code></td>
+<td style="text-align:left">Number of push options. See <a href="https://git-scm.com/docs/githooks#pre-receive" _target="blank">Git <code>pre-receive</code> documentation</a>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GIT_PUSH_OPTION_<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span><span class="token punctuation">&gt;</span></span></code></td>
+<td style="text-align:left">Value of push options where <code>i</code> is from <code>0</code> to <code>GIT_PUSH_OPTION_COUNT - 1</code>. See <a href="https://git-scm.com/docs/githooks#pre-receive" _target="blank">Git <code>pre-receive</code> documentation</a>.</td>
+</tr>
+</tbody>
+</table>
 <h1 id="&#x9644;&#x5F55;">&#x9644;&#x5F55;</h1>
 <h2 id="1&#x3001;&#x663E;&#x793A;&#x4ED3;&#x5E93;&#x6587;&#x4EF6;hash&#x4E4B;&#x540E;&#x7684;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;">1&#x3001;&#x663E;&#x793A;&#x4ED3;&#x5E93;&#x6587;&#x4EF6;Hash&#x4E4B;&#x540E;&#x7684;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;</h2>
 <ul>
@@ -7161,7 +7245,7 @@ gitlab-rails console
 <li><a href="https://blog.csdn.net/ygdlx521/article/details/115751703" _target="blank">https://blog.csdn.net/ygdlx521/article/details/115751703</a> </li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-08-18 15:38:18
+2021-08-24 23:08:08
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7201,7 +7285,7 @@ gitlab-rails console
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"Gitlab的服务端git hook","level":"4.2.2.6","depth":3,"next":{"title":"Gitlab CI/CD","level":"4.2.3","depth":2,"ref":"","articles":[{"title":"Gitlab Runner","level":"4.2.3.1","depth":3,"path":"origin/gitlab-runner.md","ref":"origin/gitlab-runner.md","articles":[]},{"title":"Gitlab Pipeline","level":"4.2.3.2","depth":3,"path":"origin/gitlab-pipeline.md","ref":"origin/gitlab-pipeline.md","articles":[]}]},"previous":{"title":"Gitlab的Webhook","level":"4.2.2.5","depth":3,"path":"origin/gitlab-配置代码仓库事件触发器Webhook.md","ref":"origin/gitlab-配置代码仓库事件触发器Webhook.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/gitlab-server-hook.md","mtime":"2021-08-18T07:38:18.115Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-22T15:26:02.488Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"Gitlab的服务端git hook","level":"4.2.2.6","depth":3,"next":{"title":"Gitlab CI/CD","level":"4.2.3","depth":2,"ref":"","articles":[{"title":"Gitlab Runner","level":"4.2.3.1","depth":3,"path":"origin/gitlab-runner.md","ref":"origin/gitlab-runner.md","articles":[]},{"title":"Gitlab Pipeline","level":"4.2.3.2","depth":3,"path":"origin/gitlab-pipeline.md","ref":"origin/gitlab-pipeline.md","articles":[]}]},"previous":{"title":"Gitlab的Webhook","level":"4.2.2.5","depth":3,"path":"origin/gitlab-配置代码仓库事件触发器Webhook.md","ref":"origin/gitlab-配置代码仓库事件触发器Webhook.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/gitlab-server-hook.md","mtime":"2021-08-24T15:08:08.141Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-24T15:10:52.502Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>
