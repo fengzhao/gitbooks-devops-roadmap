@@ -4088,14 +4088,14 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5.6" data-path="git-workflow.md">
+        <li class="chapter " data-level="7.5.6" data-path="git-workflows.html">
             
-                <a href="git-workflow.md">
+                <a href="git-workflows.html">
             
                     
                         <b>7.5.6.</b>
                     
-                    git flow工作流
+                    git workflow工作流
             
                 </a>
             
@@ -7061,13 +7061,17 @@
 <span class="token comment">#&#x4F7F;&#x7528;&#x8BE5;&#x65B9;&#x5F0F;&#x4F1A;&#x5728;&#x672C;&#x5730;&#x65B0;&#x5EFA;&#x5206;&#x652F;&#xFF0C;&#x5E76;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x5230;&#x8BE5;&#x672C;&#x5730;&#x5206;&#x652F;&#x3002;&#x91C7;&#x7528;&#x6B64;&#x79CD;&#x65B9;&#x6CD5;&#x5EFA;&#x7ACB;&#x7684;&#x672C;&#x5730;&#x5206;&#x652F;&#x4F1A;&#x548C;&#x8FDC;&#x7A0B;&#x5206;&#x652F;&#x5EFA;&#x7ACB;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x3002;</span>
 </code></pre>
 <h1 id="4&#x3001;git&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;">4&#x3001;Git&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;</h1>
-<pre class="language-"><code class="lang-bash"><span class="token comment"># &#x8BBE;&#x7F6E;&#x4EE3;&#x7406;</span>
-<span class="token function">git</span> config --global http.proxy &#x4EE3;&#x7406;&#x5730;&#x5740;
-<span class="token function">git</span> config --global https.proxy &#x4EE3;&#x7406;&#x5730;&#x5740;
+<pre class="language-"><code class="lang-bash"><span class="token comment"># &#x8BBE;&#x7F6E;&#x4F7F;&#x7528;HTTP&#x7C7B;&#x578B;&#x7684;&#x4EE3;&#x7406;</span>
+<span class="token function">git</span> config --global https.proxy http://127.0.0.1:1080
+<span class="token function">git</span> config --global https.proxy https://127.0.0.1:1080
 
-<span class="token comment"># &#x53D6;&#x6D88;&#x4EE3;&#x7406;</span>
+<span class="token comment"># &#x53D6;&#x6D88;&#x4EE3;&#x7406;&#x7684;&#x8BBE;&#x7F6E;</span>
 <span class="token function">git</span> config --global --unset http.proxy
 <span class="token function">git</span> config --global --unset https.proxy
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x4F7F;&#x7528;socks5&#x7C7B;&#x578B;&#x7684;&#x4EE3;&#x7406;</span>
+<span class="token function">git</span> config --global http.proxy <span class="token string">&apos;socks5://127.0.0.1:1081&apos;</span>
+<span class="token function">git</span> config --global https.proxy <span class="token string">&apos;socks5://127.0.0.1:1081&apos;</span>
 
 <span class="token comment"># &#x67E5;&#x770B;&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;</span>
 <span class="token function">git</span> config --global --get http.proxy
@@ -7123,22 +7127,21 @@
 <span class="token comment"># &#x56DE;&#x9000;&#x5230;&#x6307;&#x5B9A;commit&#x3002;commit&#x7684;ID&#x53EF;&#x6B8B;&#x7F3A;&#x5730;&#x5199;</span>
 <span class="token function">git</span> reset --hard <span class="token operator">&lt;</span>commit id<span class="token operator">&gt;</span>
 
-<span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x56DE;&#x9000;commit&#x7684;&#x5386;&#x53F2;&#xFF0C;&#x5E76;&#x56DE;&#x590D;&#x56DE;&#x9000;&#x7684;commit</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x56DE;&#x9000;commit&#x7684;&#x5386;&#x53F2;&#xFF0C;&#x5E76;&#x6062;&#x590D;&#x56DE;&#x9000;&#x7684;commit</span>
 <span class="token function">git</span> reflog
 <span class="token function">git</span> reset --hard <span class="token operator">&lt;</span>commit id<span class="token operator">&gt;</span>
 </code></pre>
-<h1 id="11&#x3001;git&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;">11&#x3001;git&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;</h1>
-<pre class="language-"><code class="lang-bash"><span class="token comment"># &#x8BBE;&#x7F6E;&#x4F7F;&#x7528;HTTP&#x7C7B;&#x578B;&#x7684;&#x4EE3;&#x7406;</span>
-<span class="token function">git</span> config --global https.proxy http://127.0.0.1:1080
-<span class="token function">git</span> config --global https.proxy https://127.0.0.1:1080
-
-<span class="token comment"># &#x53D6;&#x6D88;&#x4EE3;&#x7406;&#x7684;&#x8BBE;&#x7F6E;</span>
-<span class="token function">git</span> config --global --unset http.proxy
-<span class="token function">git</span> config --global --unset https.proxy
-
-<span class="token comment"># &#x8BBE;&#x7F6E;&#x4F7F;&#x7528;socks5&#x7C7B;&#x578B;&#x7684;&#x4EE3;&#x7406;</span>
-<span class="token function">git</span> config --global http.proxy <span class="token string">&apos;socks5://127.0.0.1:1081&apos;</span>
-<span class="token function">git</span> config --global https.proxy <span class="token string">&apos;socks5://127.0.0.1:1081&apos;</span>
+<h1 id="11&#x3001;&#x672C;&#x5730;&#x5206;&#x652F;merge">11&#x3001;&#x672C;&#x5730;&#x5206;&#x652F;Merge</h1>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> checkout master
+<span class="token comment"># &#x5F53;&#x524D;&#x6240;&#x5904;master&#x5206;&#x652F;&#xFF0C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x662F;&#x5C06;develop&#x5206;&#x652F;&#x5408;&#x5E76;&#x5230;master&#x5206;&#x652F;</span>
+<span class="token function">git</span> merge develop
+</code></pre>
+<h1 id="12&#x3001;&#x5408;&#x5E76;&#x51B2;&#x7A81;&#x7684;&#x89E3;&#x51B3;">12&#x3001;&#x5408;&#x5E76;&#x51B2;&#x7A81;&#x7684;&#x89E3;&#x51B3;</h1>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> <span class="token function">diff</span> --name-only --diff-filter<span class="token operator">=</span>U
+</code></pre>
+<h1 id="13&#x3001;&#x5BF9;&#x6BD4;&#x5DEE;&#x5F02;">13&#x3001;&#x5BF9;&#x6BD4;&#x5DEE;&#x5F02;</h1>
+<pre class="language-"><code class="lang-bash"><span class="token function">git</span> <span class="token function">diff</span> master<span class="token punctuation">..</span>develop
+<span class="token function">git</span> <span class="token function">diff</span> master<span class="token punctuation">..</span>.develop
 </code></pre>
 <h1 id="git&#x95EE;&#x9898;&#x603B;&#x7ED3;">Git&#x95EE;&#x9898;&#x603B;&#x7ED3;</h1>
 <ul>
@@ -7148,7 +7151,7 @@
 </li>
 </ul>
 <footer class="page-footer"><span class="copyright">Copyright Curiouser all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF1A;
-2021-08-17 15:15:18
+2021-08-27 16:29:17
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
 						
@@ -7192,7 +7195,7 @@
 	<script>
 		var gitbook = gitbook || [];
 		gitbook.push(function() {
-			gitbook.page.hasChanged({"page":{"title":"git常用操作","level":"7.5.2","depth":2,"next":{"title":"git .gitignore文件","level":"7.5.3","depth":2,"path":"origin/git-gitignore文件.md","ref":"origin/git-gitignore文件.md","articles":[]},"previous":{"title":"git原理","level":"7.5.1","depth":2,"path":"origin/git-原理.md","ref":"origin/git-原理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/git-常用操作.md","mtime":"2021-08-17T07:15:18.211Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-24T15:10:52.502Z"},"basePath":"..","book":{"language":""}});
+			gitbook.page.hasChanged({"page":{"title":"git常用操作","level":"7.5.2","depth":2,"next":{"title":"git .gitignore文件","level":"7.5.3","depth":2,"path":"origin/git-gitignore文件.md","ref":"origin/git-gitignore文件.md","articles":[]},"previous":{"title":"git原理","level":"7.5.1","depth":2,"path":"origin/git-原理.md","ref":"origin/git-原理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","-sharing","-highlight","search-pro","splitter","github","popup","sectionx","expandable-chapters","sharing-plus","code","auto-scroll-table","theme-fexa","tbfed-pagefooter","back-to-top-button","emphasize","edit-link","prism","donate","theme-comscore","github-buttons","github-issue-feedback"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright Curiouser","modify_label":"该文件最后修改时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-tomorrow.css"],"lang":{"flow":"typescript"},"ignore":["mermaid","eval-js"]},"emphasize":{},"github-issue-feedback":{"repo":"RationalMonster/rationalmonster.github.io"},"github":{"url":"https://github.com/RationalMonster"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"auto-scroll-table":{},"popup":{},"theme-fexa":{"search-placeholder":"搜索文章","logo":"./assets/logo.png"},"code":{"copybuttons":"true","copyButtons":true},"donate":{"wechat":"/assets/wechat-donate.jpg","title":"","button":"赏","wechatText":"微信打赏","alipay":"","alipayText":"支付宝打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{},"theme-comscore":{},"back-to-top-button":{},"github-buttons":{"buttons":[{"user":"RationalMonster","repo":"gitbooks-devops-roadmap","type":"star","size":"small","count":"true"}]},"sharing":{"weibo":true,"qq":"true","google":true,"all":["facebook","twitter"]},"edit-link":{"base":"https://raw.githubusercontent.com/RationalMonster/gitbooks-devops-roadmap/master/","label":"查看源MD文件"},"theme-default":{"showLevel":true,"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"expandable-chapters":{}},"theme":"default","author":"Curiouser <rationalmonster@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Devops Roadmap","gitbook":"*"},"file":{"path":"origin/git-常用操作.md","mtime":"2021-08-27T08:29:17.577Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2021-08-30T06:10:24.487Z"},"basePath":"..","book":{"language":""}});
 		});
 	</script>
 </div>

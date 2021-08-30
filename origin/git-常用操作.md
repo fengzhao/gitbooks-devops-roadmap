@@ -25,13 +25,17 @@ git checkout -b local_branch <remote_repo_shortname>/<remote_branch>
 # 4、Git代理设置
 
 ```bash
-# 设置代理
-git config --global http.proxy 代理地址
-git config --global https.proxy 代理地址
+# 设置使用HTTP类型的代理
+git config --global https.proxy http://127.0.0.1:1080
+git config --global https.proxy https://127.0.0.1:1080
 
-# 取消代理
+# 取消代理的设置
 git config --global --unset http.proxy
 git config --global --unset https.proxy
+
+# 设置使用socks5类型的代理
+git config --global http.proxy 'socks5://127.0.0.1:1081'
+git config --global https.proxy 'socks5://127.0.0.1:1081'
 
 # 查看代理设置
 git config --global --get http.proxy
@@ -119,26 +123,33 @@ git reset --hard HEAD^
 # 回退到指定commit。commit的ID可残缺地写
 git reset --hard <commit id>
 
-# 查看已回退commit的历史，并回复回退的commit
+# 查看已回退commit的历史，并恢复回退的commit
 git reflog
 git reset --hard <commit id>
 ```
 
-# 11、git代理设置
+# 11、本地分支Merge
 
 ```bash
-# 设置使用HTTP类型的代理
-git config --global https.proxy http://127.0.0.1:1080
-git config --global https.proxy https://127.0.0.1:1080
-
-# 取消代理的设置
-git config --global --unset http.proxy
-git config --global --unset https.proxy
-
-# 设置使用socks5类型的代理
-git config --global http.proxy 'socks5://127.0.0.1:1081'
-git config --global https.proxy 'socks5://127.0.0.1:1081'
+git checkout master
+# 当前所处master分支，以下命令是将develop分支合并到master分支
+git merge develop
 ```
+
+# 12、合并冲突的解决
+
+```bash
+git diff --name-only --diff-filter=U
+```
+
+# 13、对比差异
+
+```bash
+git diff master..develop
+git diff master...develop
+```
+
+
 
 
 

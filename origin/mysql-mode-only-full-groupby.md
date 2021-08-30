@@ -126,3 +126,10 @@ mysql> select id+count from tt group by id,count;
 **总结一下：**
 
 > **MySQL对于ONLY_FULL_GROUP_BY语义的判断规则是，如果group by list中的表达式是basic column，那么target list中允许出现表达式是group by list中basic column或者alias column的组合结果，如果group by list中的表达式是复杂表达式(非basic column或者alias column)，那么要求target list中的表达式必须能够严格和group by list中的表达式进行匹配，否者这条查询会被认为不合法。**
+
+```sql
+# 查看当前SQL MOD
+SHOW VARIABLES LIKE 'sql_mode';
+# 设置临时会话级别的SQL MOD。会话结束后会自动恢复
+set session sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+```
